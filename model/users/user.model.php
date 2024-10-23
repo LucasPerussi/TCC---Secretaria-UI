@@ -13,7 +13,7 @@ class UserModel
     {
         if (isset($_SESSION["user_id"])) {
             $this->user = $_SESSION["user_id"];
-            $this->username = $_SESSION["username"];
+            // $this->username = $_SESSION["username"];
         }
     }
 

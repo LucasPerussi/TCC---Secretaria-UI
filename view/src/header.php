@@ -113,7 +113,7 @@ use API\enum\Notification_enum;
                                                                                                                                                                                                                         } else {
                                                                                                                                                                                                                             echo Config::BASE_URL . 'dashboard';
                                                                                                                                                                                                                         } ?>">
-                        <img  style="width:140px !important;height:auto !important; margin-top: 0px;" src="<?= Config::BASE_URL ?>src/img/logo/logo-<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>branco<?php else : ?>preto<?php endif; ?>.png" alt="logo"></a> </li>
+                        <img  style="width:140px !important;height:auto !important; margin-top: 0px;" src="<?= Config::BASE_URL ?>src/img/logo/sept-<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>branco.webp<?php else : ?>azul.png<?php endif; ?>" alt="logo"></a> </li>
             </ul>
 
         </div>
@@ -150,44 +150,8 @@ use API\enum\Notification_enum;
             </li> -->
             <!-- <li class="nav-item nav-search"><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Sistema em Manutenção. Retorno estimado para 16 horas"  class="badge rounded-pill bg-danger ">Sistema Offline</i></a>
             </li> -->
-            <?php if ((isset($_SESSION["heroeAction"])) && ($_SESSION["heroeAction"])) : ?>
-                <li class="nav-item nav-search" style="margin-top: -5px !important;"><a onclick="Voltar()" class="nav-link nav-link-search"><?= __("header.master") ?></i></a>
-                </li>
-                <script>
-                    function Voltar() {
-                        Swal.fire({
-                            title: '<?= __("Voltar a ser Master? 🦸🦸‍♀️") ?>',
-                            text: "Deseja retornar a sua conta master?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#B22222',
-                            cancelButtonColor: '#1f8cd4',
-                            confirmButtonText: 'Confirmar'
-                        }).then((result) => {
-                            if (result.value) {
-                                axios.post(`<?= Config::BASE_ACTION_URL ?>/heroe/returns`)
-                                    .then(function(response) {
-                                        window.location.href = "<?= Config::BASE_URL . "dashboard" ?>"
-                                    })
-                                    .catch(function(error) {
-                                        Swal.fire({
-                                            title: '<?= __("Error!") ?>',
-                                            text: error.message,
-                                            icon: 'error',
-                                            showCancelButton: false,
-                                            confirmButtonColor: '#1f8cd4',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: '<?= __("OK") ?>'
-                                        })
-                                    });
-                            }
-                        })
-                        // })
-                    }
-                </script>
-            <?php endif; ?>
+          
             <div id="timer" hidden style="padding:5px; border-radius:20px; background-color:#ff2551; color:#fff; "></div>
-            <?php if ((isset($_SESSION["user_role"])) && ($_SESSION["user_role"] != 5)) : ?>
                 <li class="nav-item nav-search" style="margin-top: -5px !important;"><a href="#" class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                     <div class="search-input" style="border-radius:20px; height:55px; margin-top: -5px !important;">
                         <div class="search-input-icon" style="margin-top: -3px !important;"><i data-feather="search"></i></div>
@@ -196,7 +160,7 @@ use API\enum\Notification_enum;
                         <ul class="search-list search-list-main"></ul>
                     </div>
                 </li>
-            <?php endif; ?>
+          
             <?php if (((isset($_SESSION["user_role"])) && (($_SESSION["user_role"] == 2) && ((isset($_SESSION["pending-users"])) && ($_SESSION["pending-users"] == "true")))) || ((isset($_SESSION["notifications"])) && ($_SESSION["notifications"] != ""))) : ?>
                 <li class="nav-item dropdown dropdown-notification me-25" style="margin-top: -5px;">
 
@@ -650,9 +614,11 @@ use API\enum\Notification_enum;
             <?php if (isset($_SESSION["user_id"])) : ?>
                 <li class="nav-item dropdown dropdown-user" style="margin-top: -5px !important;"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="user-nav d-sm-flex d-none" style="color: white !important;"><span class="user-name fw-bolder"> <?php
-                                                                                                                                    $sobrenomes = explode(" ", $_SESSION['user_last_name']);
-                                                                                                                                    $ultimoSobrenome = end($sobrenomes);
-                                                                                                                                    echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome ?>
+                                                                                                                                    // $sobrenomes = explode(" ", $_SESSION['user_lastName']);
+                                                                                                                                    // $ultimoSobrenome = end($sobrenomes);
+                                                                                                                                    // echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome
+                                                                                                                                    echo $_SESSION['user_name'] 
+                                                                                                                                     ?>
                             </span><span class="user-status"><?php if ($_SESSION['user_role'] == 1) {
                                                                     echo ("Member");
                                                                 } else if ($_SESSION['user_role'] == 5) {
@@ -667,14 +633,7 @@ use API\enum\Notification_enum;
                         </div><span class="avatar"><img class="round" height="45" alt="profile pic" src="<?= $_SESSION["user_picture"] ?>"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                        <?php if ($_SESSION["user_role"] != 5) : ?>
-                            <a class="dropdown-item" href="<?= Config::BASE_URL . 'profile' ?>" style="border-radius:8px;"><i style="margin-right:10px;" class="bi bi-person-fill"></i> <span><?= __("header.profile.perfil") ?></span></a>
-                            <?php if ($_SESSION["allowBC"] == 1) : ?>
-                                <a class="dropdown-item" style="border-radius:8px;" href="<?= Config::BASE_URL . 'business-card/' . $_SESSION["username"] ?>" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
-                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
-                                    </svg> <span style="margin-left:10px;"><?= __("header.profile.business_card") ?></span> </a>
-                            <?php endif; ?>
-                        <?php endif; ?>
+                        
                         <a class="dropdown-item" style="border-radius:8px;" href="<?= Config::BASE_URL . 'settings' ?>"><i style="margin-right:10px;" class="bi bi-toggles"></i> <span><?= __("header.profile.config") ?></span></a>
                         <a class="dropdown-item" style="border-radius:8px;" data-toggle="modal" data-target="#myModal" id="openModalButton"><i style="margin-right:10px;" class="bi bi-bug"></i> <span>Report Bug</span></a>
                         <a class="dropdown-item" style="border-radius:8px;" href="<?= Config::BASE_URL . 'logout' ?>"><svg style="margin-right:10px;border-radius:" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">

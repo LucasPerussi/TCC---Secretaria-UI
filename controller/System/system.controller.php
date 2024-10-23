@@ -33,30 +33,30 @@ class System extends DefaultController
         $this->systemModel = new SystemModel();
         if (isset($_SESSION["user_id"])) {
             $this->sessionUserId = $_SESSION["user_id"];
-            $this->sessionUserCompany = $_SESSION["company_id"];
+            // $this->sessionUserCompany = $_SESSION["company_id"];
         }
     }
 
-    public function apikey($type, $valid, $apiKeyName, $company)
-    {
-        if (!isset($_SESSION["user_id"])) {
-            Logger::log(0, "TENTATIVA DE ACESSO EXTERNO", "apikey", "ERRO");
-            return "You must introduce yourself first!";
-        }
-        $allow = PropertyVerifier::check($this->sessionUserId);
-        if ((($allow["master"] != true))) {
-            Logger::log($_SESSION["user_id"], "NEGADO", "CONTROLLER - SYSTEM - apikey", "ERRO EM VERIFICAÇÃO DE PROPRIEDADE");
-            return "Você não tem permissão para isso.";
-        };
-        Logger::log($_SESSION["user_id"], "APROVADO", "CONTROLLER - SYSTEM - apikey", "PROPRIEDADE VERIFICADA");
-        $key = RandomStrGenerator::generate(40);
+    // public function apikey($type, $valid, $apiKeyName, $company)
+    // {
+    //     if (!isset($_SESSION["user_id"])) {
+    //         Logger::log(0, "TENTATIVA DE ACESSO EXTERNO", "apikey", "ERRO");
+    //         return "You must introduce yourself first!";
+    //     }
+    //     $allow = PropertyVerifier::check($this->sessionUserId);
+    //     if ((($allow["master"] != true))) {
+    //         Logger::log($_SESSION["user_id"], "NEGADO", "CONTROLLER - SYSTEM - apikey", "ERRO EM VERIFICAÇÃO DE PROPRIEDADE");
+    //         return "Você não tem permissão para isso.";
+    //     };
+    //     Logger::log($_SESSION["user_id"], "APROVADO", "CONTROLLER - SYSTEM - apikey", "PROPRIEDADE VERIFICADA");
+    //     $key = RandomStrGenerator::generate(40);
 
-        if ($this->systemModel->apikey($type, $valid, $apiKeyName, $company, $key)) {
-            return "sucesso!";
-        } else {
-            return "error";
-        }
-    }
+    //     if ($this->systemModel->apikey($type, $valid, $apiKeyName, $company, $key)) {
+    //         return "sucesso!";
+    //     } else {
+    //         return "error";
+    //     }
+    // }
 
 
 }

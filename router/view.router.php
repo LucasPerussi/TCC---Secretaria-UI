@@ -49,13 +49,22 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             require __DIR__ . "/../view/register/register.view.php";
         });
+        $this->addRoute("get", "/logout", function ($args) use ($obj) {
+            // $obj->destroySession();
+            $obj->deleteCookies();
+            require __DIR__ . "/../view/auth/logout.view.php";
+        });
+        $this->addRoute("get", "/closing-session", function ($args) use ($obj) {
+            unset($_COOKIE['vr_session']);
+            setcookie('vr_session', '', time() - 3600, '/'); // empty value and old timestamp
+            require __DIR__ . "/../view/auth/logout.php";
+        });
         $this->addRoute("get", "/dashboard", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            $obj->completedProfile();
-            require __DIR__ . "/../view/general/dashboard.php";
+            require __DIR__ . "/../view/admin/dashboard-admin.php";
         });
         
      
@@ -73,23 +82,11 @@ class Route extends \API\Router\DefaultRouter
         if (!isset($_SESSION["user_id"])) {
             header('Location: ' . Config::BASE_URL . "login");
         };
-        if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == 0)) {
-            header('Location: ' . Config::BASE_URL . "verify-email");
-        };
+        // if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == 0)) {
+        //     header('Location: ' . Config::BASE_URL . "verify-email");
+        // };
         if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == 9)) {
             header('Location: ' . Config::BASE_URL . "deactivated");
-        };
-        return;
-    }
-
-    public function completedProfile()
-    {
-        if ($_SESSION["user_profile_completed"] != 1) {
-            if ($_SESSION["user_role"] == 5) {
-                header('Location: ' . Config::BASE_URL . "complete-your-profile-partner");
-            } else {
-                header('Location: ' . Config::BASE_URL . "complete-your-profile");
-            }
         };
         return;
     }

@@ -22,25 +22,24 @@ class CompanyModel
     {
         if (isset($_SESSION["user_id"])) {
             $this->user = $_SESSION["user_id"];
-            $this->company = $_SESSION["company_id"];
         }
         $this->dbConnection = Database::connect();
     }
 
 
 
-    public function allowBcRoute($id)
-    {
-        $id = Sanitize::clean($id, "id", "allowBcRoute");
+    // public function allowBcRoute($id)
+    // {
+    //     $id = Sanitize::clean($id, "id", "allowBcRoute");
 
-        if ($id == "on") {
-            $value = 1;
-        } else {
-            $value = 0;
-        }
+    //     if ($id == "on") {
+    //         $value = 1;
+    //     } else {
+    //         $value = 0;
+    //     }
 
-        return CompanyDAO::Update("com_allowBC", $value, "allowBcRoute", $this->company);
-    }
+    //     return CompanyDAO::Update("com_allowBC", $value, "allowBcRoute", $this->company);
+    // }
 
    
 }

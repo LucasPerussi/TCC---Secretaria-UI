@@ -42,7 +42,10 @@ class APIRequest
             $_SESSION['user_name'] = $responseData['user']['name'];
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
-            $_SESSION['user_picture'] = $responseData['user']['picture'];
+            $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
+            if ( $_SESSION['user_picture'] == ""){
+                $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
+            }
 
             if (isset($responseData['token'])) {
                 return [
@@ -62,7 +65,10 @@ class APIRequest
             $_SESSION['user_name'] = $responseData['user']['name'];
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
-            $_SESSION['user_picture'] = $responseData['user']['picture'];
+            $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
+            if ( $_SESSION['user_picture'] == ""){
+                $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
+            }
 
             if (isset($responseData['token'])) {
                 return [

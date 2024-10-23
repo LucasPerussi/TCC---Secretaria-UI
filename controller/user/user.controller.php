@@ -25,7 +25,7 @@ class User extends DefaultController
         $this->userModel = new UserModel();
         if (isset($_SESSION["user_id"])) {
             $this->sessionUserId = $_SESSION["user_id"];
-            $this->sessionUserCompany = $_SESSION["company_id"];
+            // $this->sessionUserCompany = $_SESSION["company_id"];
         }
     }
 

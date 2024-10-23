@@ -37,26 +37,26 @@ class Tickets extends DefaultController
         }
     }
 
-    function newComment($picture, $description, $id, $whisper)
-    {
+    // function newComment($picture, $description, $id, $whisper)
+    // {
 
-        if (!isset ($_SESSION["user_id"])) {
-            Logger::log(0, "TENTATIVA DE ACESSO EXTERNO", "newRequestComment", "ERRO");
-            return "You must introduce yourself first!";
-        }
+    //     if (!isset ($_SESSION["user_id"])) {
+    //         Logger::log(0, "TENTATIVA DE ACESSO EXTERNO", "newRequestComment", "ERRO");
+    //         return "You must introduce yourself first!";
+    //     }
 
-        $allow = PropertyVerifier::check($_SESSION["user_id"]);
-        if ((($allow["company"] != true) && ($allow["master"] != true)) && ($_SESSION["user_role"] != 5) && ($_SESSION["user_role"] != 4)) {
-            Logger::log($_SESSION["user_id"] ?? 9999, "NEGADO", "newRequestComment", "ERRO EM VERIFICAÇÃO DE PROPRIEDADE");
-            return "Você não tem permissão para isso.";
-        };
+    //     $allow = PropertyVerifier::check($_SESSION["user_id"]);
+    //     if ((($allow["company"] != true) && ($allow["master"] != true)) && ($_SESSION["user_role"] != 5) && ($_SESSION["user_role"] != 4)) {
+    //         Logger::log($_SESSION["user_id"] ?? 9999, "NEGADO", "newRequestComment", "ERRO EM VERIFICAÇÃO DE PROPRIEDADE");
+    //         return "Você não tem permissão para isso.";
+    //     };
 
-        if ($this->ticketsModel->newComment($picture, $description, $id, $whisper)) {
-            return "sucesso!";
-        } else {
-            return "error";
-        }
-    }
+    //     if ($this->ticketsModel->newComment($picture, $description, $id, $whisper)) {
+    //         return "sucesso!";
+    //     } else {
+    //         return "error";
+    //     }
+    // }
 
    
 
