@@ -65,7 +65,7 @@ use const Siler\Config\CONFIG; ?>
                 </div>
                 <style>
                     .background-div {
-                        height: 600px;
+                        height: 400px;
                         width: 100%;
                         /* display: ruby-text !important;            */
                         align-items: center;
@@ -130,13 +130,11 @@ use const Siler\Config\CONFIG; ?>
             </div>
         </nav>
 
-       
-
         <main>
             <div class="background-div">
-                <img id="wjLogo" src="<?= Config::BASE_URL ?>src/img/logo/SEPT logo_branco.webp" alt="logo">
+                <img id="wjLogo" src="<?= Config::BASE_URL ?>src/img/logo/SEPTlogo_branco.webp" alt="logo">
                 <br />
-                <h1 id="title-banner">Sua nova <span style="color:#D3D439;">secretaria online <br /></span> mais <span style="color:#D3D439;">segura </span> e <span style="color:#D3D439;">eficiente</h1>
+                <h1 id="title-banner">Sua nova <span style="color:#00518b;">secretaria online <br /></span> mais <span style="color:#00518b;">segura </span> e <span style="color:#00518b;">eficiente</h1>
                 <br />
             </div>
 
@@ -206,11 +204,11 @@ use const Siler\Config\CONFIG; ?>
           
             <div class="footer">
                 <div class="row" style="text-align:center !important; justify-content:center !important;">
-                    <h6 class="footerText" style="max-width:500px;text-align:center !important;"><span class="footerTextStrong">WeJourney</span> é um <span class="footerTextStrong">Portal de Relacionamento</span> inovador e personalizado para atender as necessidades dos clientes da <span class="footerTextStrong">Wetalk.it.</span></h6>
+                    <h6 class="footerText" style="max-width:500px;text-align:center !important;"><span class="footerTextStrong">Secretaria Online</span> é um <span class="footerTextStrong">Portal do aluno</span> desenvolvido no projeto de TCC do curso de TADS.</h6>
                 </div>
                 <div class="row">
                     <img class="logoWetalkFooter" src="<?= Config::BASE_URL . 'src/img/logo/ufpr_logo_branca.png' ?>" alt="logoWetalk" srcset="">
-                    <img class="logoWeJourneyFooter" src="<?= Config::BASE_URL . 'src/img/logo/SEPT logo_branco.webp' ?>" alt="logoWetalk" srcset="">
+                    <img class="logoWeJourneyFooter" src="<?= Config::BASE_URL . 'src/img/logo/SEPTlogo_branco.webp' ?>" alt="logoWetalk" srcset="">
                 </div>
                 <div class="row">
                     <a href="https://wetalkit.com.br/" class="cta-btn" style="margin-left:auto !important; margin-right:auto !important; margin-top:40px;">Conheça as soluções da Wetalk.it <img src="<?= Config::BASE_URL ?>src/img/arrow-access.svg" id="float:right;text-align:right; align-self:right;" height="15" alt="logo"></a>

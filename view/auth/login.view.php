@@ -16,10 +16,7 @@ use API\Controller\Config;
     </html>
 <?php else : ?>
 
-    <?php
-    require_once('config.php');
-    require_once('controller/controller.Class.php');
-    ?>
+   
 
     <!DOCTYPE html>
     <html class="loading" lang="en" data-textdirection="ltr">
@@ -93,13 +90,8 @@ use API\Controller\Config;
                 function toggleTheme() {
                     if (darkThemeQuery.matches) {
                         toggleLogo("dark");
-                        // lightThemeLink.removeAttribute('media');
-                        // darkThemeLink.setAttribute('media', '(prefers-color-scheme: dark)');
                     } else {
-                        // document.getElementById("logo").removeAttribute('src');
                         toggleLogo("Light");
-                        // darkThemeLink.removeAttribute('media');
-                        // lightThemeLink.setAttribute('media', '(prefers-color-scheme: light)');
                     }
                 }
 
@@ -122,7 +114,7 @@ use API\Controller\Config;
 
     <body class="horizontal-layout horizontal-menu blank-page navbar-floating footer-static   " style="overflow:hidden; " data-open="hover" data-menu="horizontal-menu" data-col="blank-page">
         <!-- BEGIN: Content-->
-        <div class="app-content content " style="background-color: #3aafc8 !important;">
+        <div class="app-content content " style="background-color: #101011 !important;">
             <div class="content-overlay"></div>
             <div class="header-navbar-shadow"></div>
             <div class="content-wrapper">
@@ -131,33 +123,11 @@ use API\Controller\Config;
                 <div class="content-body">
                     <div class="auth-wrapper auth-cover">
                         <div class="auth-inner row m-0">
-                            <!-- Brand logo-->
-                            <!-- /Brand logo-->
-                            <!-- Left Text-->
                             <div class="d-none d-lg-flex col-lg-8 align-items-center p-0">
                                 <div class="w-100 d-lg-flex align-items-center justify-content-center px-0">
-                                    <!-- <img
-                                    class="img-fluid"
-                                    src="<?= Config::BASE_URL ?>src/img/sofa.png"
-                                    alt="Login V2" /> -->
-
-                                    <!-- <script
-                                    src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
-                                    type="module"></script>
-
-                                <dotlottie-player
-                                    src="https://lottie.host/ce1c8551-f9cb-4079-8627-06a4c93aa6fb/7WO5MrQDPN.json"
-                                    background="transparent" speed="1" style="width: 60%; margin-left:20%;" loop
-                                    autoplay></dotlottie-player> -->
-                                    <video playsinline class="auth-sidebar-video" autoplay loop muted style="height:100vh;position:absolute;top:0px !important; z-index:0 !important" src="<?= Config::BASE_URL ?>src/img/banner-login.mp4">
-                                    </video>
-                                    <!-- src="https://dribbble.s3.amazonaws.com/direct-uploads/ceb7e343-9c55-4af0-b81a-61b7510e3f05/My%20Movie.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIJUPYEOE5MYHCRCQ%2F20231124%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231124T125529Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=e3c4adeeeecc26696b113315ad2cdeaa73b0ff8be2308ba6295af423331eab57" normal -->
-                                    <!-- src="https://dribbble.s3.amazonaws.com/direct-uploads/053dbb20-0492-40e9-b9fb-462046ed73ac/aaaaaa.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIJUPYEOE5MYHCRCQ%2F20231124%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231124T130011Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=94eec9d171c67954dcdaa0a8a4af08c13be85d291176e2e604f03d7e9b32f50e" slower normal -->
-                                    <!-- src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949" -->
+                                    <img src="<?=Config::BASE_URL?>src/img/ufpr.png" style="height:100vh;position:absolute;top:0px !important; z-index:0 !important" alt="ufpr" >
                                 </div>
                             </div>
-                            <!-- /Left Text-->
-                            <!-- Login-->
                             <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5 p-2" id="login-form" style="z-index:1 !important;">
                                 <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" id="login-form">
 
@@ -201,8 +171,8 @@ use API\Controller\Config;
                                     </div>
                                     <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-github" href="<?= Config::BASE_URL . "sign-in-microsoft" ?>"><i class="bi bi-microsoft"></i></a><a class="btn btn-github white" href="<?php echo $login_url; ?>"><i class="bi bi-google"></i></a></div>
                                     <a  href="<?=Config::BASE_URL?>">
-                                    <img src="https://wetalkit.com.br/suporte/src/img/logo/logo-preto.svg"  id="logoParaBranco" style="margin-top:20%; margin-left:33%; width:33%  " >
-                                    <img src="https://wetalkit.com.br/suporte/src/img/logo/logo-branco.svg"  id="logoParaDark" hidden style="margin-top:20%; margin-left:33%; width:33%  " >
+                                    <img src="<?=Config::BASE_URL?>src/img/logo/sept.png"  id="logoParaBranco" style="margin-top:20%; margin-left:33%; width:33%  " >
+                                    <img src="<?=Config::BASE_URL?>src/img/logo/SEPTlogo_branco.webp"  id="logoParaDark" hidden style="margin-top:20%; margin-left:33%; width:33%  " >
                                 </a>
                                 </div>
 
@@ -225,18 +195,12 @@ use API\Controller\Config;
                                         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
                                         <div class="loader">
                                             <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_4towirms.json" background="transparent" speed="1" style="width: 70px; height: 70px; margin-top:30px" loop autoplay></lottie-player>
-                                            <!-- <div class="bar1"></div>
-                                        <div class="bar2"></div>
-                                        <div class="bar3"></div>
-                                        <div class="bar4"></div>
-                                        <div class="bar5"></div>
-                                        <div class="bar6"></div> -->
+                                    
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <!-- /Login-->
                         </div>
                     </div>
                 </div>

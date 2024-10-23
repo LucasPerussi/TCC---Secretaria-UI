@@ -1,1 +1,0 @@
-Essa pessoa eh noob e ainda não completou o cadastro dela.
