@@ -45,8 +45,11 @@ class Route extends \API\Router\DefaultRouter
 
         $obj = $this;
     
-        $this->addRoute("post", "/logn", function ($args) use ($obj) {
+        $this->addRoute("post", "/login", function ($args) use ($obj) {
             $obj->login();
+        });
+        $this->addRoute("post", "/signup", function ($args) use ($obj) {
+            $obj->signup();
         });
       
     }
@@ -55,12 +58,31 @@ class Route extends \API\Router\DefaultRouter
     public function login()
     {
         $body = $this->getBody();
+        fields(["email", "password"], $body, false);
+
+        echo json_encode($this->userController->login($body["email"], $body["password"]));
+    }
+
+    public function signup()
+    {
+
+        $body = $this->getBody();
+        fields(["name", "lastName", "birth", "registro", "email", "password", "password-confirmation"], $body, false);
+        
+        echo json_encode($this->userController->signup($body["name"],$body["lastName"],$body["birth"],$body["registro"],$body["email"],$body["password"], $body["password-confirmation"]));
+
+    }
+
+    public function outro()
+    {
+        $body = $this->getBody();
         fields(["email", "password", "csrf_token"], $body, false);
 
         $clientSynced = CSRFToken::validate($body["csrf_token"], "ACTION - newContentRoute");
         if (!$clientSynced) {
             return "Erro, algo não parece certo!";
         }
+
         echo json_encode($this->userController->login($body["email"], $body["password"]));
     }
 

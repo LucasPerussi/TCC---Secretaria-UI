@@ -17,6 +17,12 @@
 .main-menu {
   border-radius: 0px !important;
 }
+.toast-error {
+  background-color: #ec2424 !important;
+}
+.toast-success {
+  background-color: #17996e !important;
+}
 
 .select2-container--classic .select2-dropdown,
 .select2-container--default .select2-dropdown {

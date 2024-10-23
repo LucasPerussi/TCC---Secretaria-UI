@@ -44,6 +44,8 @@ use API\Controller\Config;
         <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/app-assets/css/plugins/forms/form-validation.css">
         <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/app-assets/css/pages/authentication.css">
         <!-- END: Page CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+
 
         <!-- BEGIN: Custom CSS-->
         <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/assets/css/style.css">
@@ -166,10 +168,10 @@ use API\Controller\Config;
                                         </div>
                                     </form>
                                     <p class="text-center mt-2"><span>Novo por aqui? </span><a href="<?=Config::BASE_URL?>register" ><span style="text-decoration:underline;">Crie uma conta</span></a></p>
-                                    <div class="divider my-2">
+                                    <!-- <div class="divider my-2">
                                         <div class="divider-text">ou</div>
-                                    </div>
-                                    <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-github" href="<?= Config::BASE_URL . "sign-in-microsoft" ?>"><i class="bi bi-microsoft"></i></a><a class="btn btn-github white" href="<?php echo $login_url; ?>"><i class="bi bi-google"></i></a></div>
+                                    </div> -->
+                                    <!-- <div class="auth-footer-btn d-flex justify-content-center"><a class="btn btn-github" href="<?= Config::BASE_URL . "sign-in-microsoft" ?>"><i class="bi bi-microsoft"></i></a><a class="btn btn-github white" href="<?php echo $login_url; ?>"><i class="bi bi-google"></i></a></div> -->
                                     <a  href="<?=Config::BASE_URL?>">
                                     <img src="<?=Config::BASE_URL?>src/img/logo/sept.png"  id="logoParaBranco" style="margin-top:20%; margin-left:33%; width:33%  " >
                                     <img src="<?=Config::BASE_URL?>src/img/logo/SEPTlogo_branco.webp"  id="logoParaDark" hidden style="margin-top:20%; margin-left:33%; width:33%  " >
@@ -240,6 +242,8 @@ use API\Controller\Config;
                 }
             })
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
         <?php
         require __DIR__ . "/../default.js.php";
         ?>

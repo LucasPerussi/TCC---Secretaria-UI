@@ -36,6 +36,23 @@ class User extends DefaultController
         return $this->userModel->login($email, $password);
     }
 
+    function signup ($name,$lastName,$birth,$registro,$email,$password, $passwordConfirmation)
+    {
+     
+        if ($password == $passwordConfirmation) {
+            return $this->userModel->signup($name,$lastName,$birth,$registro,$email,$password);
+        } else {
+            return array(
+                "status" => "error",
+                "message" => "As senhas não conferem, tente novamente!"
+            );
+        }
+
+    }
+
+
+
+    
     public function updateUserPicture($url)
     {
         if ($this->userModel->updateUserPicture($url)) {

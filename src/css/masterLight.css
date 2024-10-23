@@ -24,14 +24,19 @@
   background-color: #00bcd5 !important;
 } */
 
-.popover-header{
+.popover-header {
   background-color: #151618 !important;
   color: rgba(255, 255, 255, 0.76) !important;
   font-size: 14px !important;
-  border:#151618 !important;
+  border: #151618 !important;
 }
 
-
+.toast-error {
+  background-color: #ec2424 !important;
+}
+.toast-success {
+  background-color: #17996e !important;
+}
 
 h1 {
   color: #27282b !important;
@@ -181,10 +186,9 @@ button {
   padding: 20px;
   margin: 5px 0;
   /* border: 1px solid #ccc; */
-  border-radius:20px;
+  border-radius: 20px;
   cursor: move;
 }
-
 
 span {
   color: #27282b;
@@ -700,8 +704,8 @@ svg {
 
 .secondaryButton {
   border-radius: 31px;
-  background: #F9FBFD !important;
-  border-color: #E5E8EC !important;
+  background: #f9fbfd !important;
+  border-color: #e5e8ec !important;
   color: #001011 !important;
   padding: 10px;
   border-radius: 20px;
@@ -709,18 +713,22 @@ svg {
 .secondaryForm {
   border-radius: 31px;
   border: 1px solid !important;
-  background: #F9FBFD !important;
-  border-color: #E5E8EC !important;
+  background: #f9fbfd !important;
+  border-color: #e5e8ec !important;
   color: #001011 !important;
   padding: 20px;
   border-radius: 20px;
 }
 
-.ps .ps__rail-x.ps--clicking, .ps .ps__rail-x:focus, .ps .ps__rail-x:hover, .ps .ps__rail-y.ps--clicking, .ps .ps__rail-y:focus, .ps .ps__rail-y:hover {
+.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-x:hover,
+.ps .ps__rail-y.ps--clicking,
+.ps .ps__rail-y:focus,
+.ps .ps__rail-y:hover {
   background-color: #ffffff !important;
-  opacity: .9;
+  opacity: 0.9;
 }
-
 
 .neomorfismoBtnSub:hover {
   box-shadow: 20px 20px 25px #bebebe, -20px -20px 25px #ffffff !important;
@@ -755,38 +763,38 @@ svg {
   background-color: transparent !important;
 }
 
-.kanban-board{
+.kanban-board {
   background-color: #f0f0f0 !important;
-  padding:10px;
+  padding: 10px;
   border-radius: 20px;
-  padding-top:0px;
+  padding-top: 0px;
   margin-left: 0px !important;
 }
 
-.kanban-item{
+.kanban-item {
   background-color: #ffffff !important;
   border-radius: 20px !important;
   box-shadow: none !important;
 }
 
 .kanban-title-board {
-  background-color: #f0f0f0 !important; 
+  background-color: #f0f0f0 !important;
   font-size: 19px !important;
   font-weight: 700 !important;
 }
 .kanban-title-board:hover {
   background-color: #f0f0f0 !important;
- 
 }
 
-.avatar-group .avatar img, .avatar-group .avatar .avatar-content {
+.avatar-group .avatar img,
+.avatar-group .avatar .avatar-content {
   box-shadow: 0 0 0 1px #fff, inset 0 0 0 1px rgba(255, 255, 255, 0.07) !important;
 }
 
 @media (min-width: 576px) {
   .modal-dialog {
-      max-width: 1000px !important;
-      margin: 1.75rem auto;
+    max-width: 1000px !important;
+    margin: 1.75rem auto;
   }
 }
 
