@@ -1,0 +1,296 @@
+.carousel-item::before {
+    position: absolute;
+    content: '';
+    width: 33%;
+    height: 100%;
+    background: -webkit-linear-gradient(rgba(0, 103, 244, 0.3) 0%, rgba(43, 219, 220, 0.3) 100%);
+    background: -o-linear-gradient(rgba(0, 103, 244, 0.3) 0%, rgba(43, 219, 220, 0.3) 100%);
+    background: linear-gradient(rgba(0, 103, 244, 0.3) 0%, rgba(43, 219, 220, 0.3) 100%);
+    top: 0;
+    right: 15%;
+    display: none;
+    -webkit-transform: skewX(20deg);
+    -moz-transform: skewX(20deg);
+    -ms-transform: skewX(20deg);
+    -o-transform: skewX(20deg);
+    transform: skewX(20deg);
+}
+
+
+#hero {
+    background: linear-gradient(-45deg, #43c7d0, #D0D128, #43c7d0, #0067f4, #D0D128);
+    background-size: 400% 400%;
+    animation: Gradient 50s ease infinite;
+    color: #fff !important;
+}
+
+#pesquisa:focus {
+    box-shadow: -5px -3px 20px 4px #b3b3b387;
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+#cadastroo::before {
+    /* background: -webkit-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+    background: -o-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+    background: linear-gradient(to right, rgba(18, 18, 18, 0) 0%, #121212 100%); */
+    background: none;
+}
+
+#cadastroo:hover {
+    /* background: -webkit-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+    background: -o-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+    background: linear-gradient(to right, rgba(18, 18, 18, 0) 0%, #121212 100%); */
+    background-color: #1cbfb4 !important;
+}
+
+.carousel-item {
+    background-color: #0067f4;
+    background: linear-gradient(to bottom right, #1cbfb4, #1f8cd4);
+    /* background: linear-gradient(to bottom right, #004A7B, #1f8cd4); */
+    position: relative;
+}
+
+.zoom-image {
+    width: 100%;
+    height: 100%;
+    padding-left: 1%;
+    overflow: hidden;
+    position: relative;
+
+}
+
+#card_grande {
+    height: 500px;
+    padding: 15px;
+    border-radius: 25px;
+
+}
+
+#card_grande:hover {
+    height: 500px;
+    padding: 15px;
+    border-radius: 25px;
+
+}
+
+#card_pequeno {
+    height: 300px;
+    padding: 5px;
+    border-radius: 25px;
+}
+
+#texto {
+    z-index: 2;
+    width: 90%;
+    margin: 5%;
+    margin-left: 1.5%;
+    bottom: 1px;
+    padding: 10px;
+    margin-top: 25%;
+    position: absolute;
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: white;
+    color: #000;
+}
+
+/* Fallback para dispositivos que não suportam backdrop-filter */
+@media not all and (prefers-reduced-motion: reduce) {
+
+    #texto,
+    #textoPequeno {
+        background-color: white;
+        color: #000;
+        /* cor semi-transparente */
+    }
+}
+
+#textoPequeno {
+    z-index: 2;
+    width: 90%;
+    margin: 5%;
+    margin-left: 1.5%;
+    bottom: 1px;
+    padding: 10px;
+    margin-top: 25%;
+    position: absolute;
+    font-size: 15px;
+    border-radius: 25px;
+    background-color: white;
+    color: #000;
+    /* backdrop-filter: blur(10px);
+    color: white;
+    text-shadow: 1px 2px 7px #000000; */
+}
+
+.zoom-image {
+    height: 400px !important;
+}
+
+.zoom-image:hover img {
+    transform: scale(0.98);
+    filter: unset;
+}
+
+.zoom-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+    /* filter: grayscale(100%) brightness(0.7) sepia(5) hue-rotate(162deg); */
+
+}
+
+#conteudos {
+    margin-top: 10px;
+}
+
+.section-title .title {
+    font-size: 44px;
+    font-weight: 600;
+    color: #6b6b6b;
+    line-height: 55px;
+}
+
+/* .oi:hover {
+    transform: scale(1.1);
+} */
+
+@media (max-width: 767px) {
+    #login {
+        background-color: #85bdc8a3;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .nav-item {
+        text-align: center;
+        padding: 5px;
+        font-size: 20px !important;
+    }
+
+    .navbar-area .navbar .navbar-collapse {
+        position: absolute;
+        top: 115%;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        z-index: 8;
+        padding: 20px;
+        border-radius: 20px;
+        -webkit-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        -moz-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        box-shadow: 3px 20px 25px 9px rgb(46 46 46 / 54%);
+    }
+}
+
+.card {
+    position: relative;
+}
+
+.pic-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    /* background: linear-gradient(#c389ff96, #68d4e780); */
+    /* background-color: #6dafd89c; */
+    /* background-color: #51c2d19e; */
+    /* background-color: #8B1ED4a6; */
+    /* background: linear-gradient(-45deg, #43c7d0b5, #0067f4c4, #43c7d0cc, #8B1ED4c2, #ff6347b8); */
+    background: linear-gradient(-45deg, #43c7d0a3, #0067f499, #43c7d08f, #0067f4a6, #ff63478f);
+    background-size: 400% 400%;
+    animation: Gradient 50s ease infinite;
+    transition: background 0.6s;
+    /* transition: background-color 0.3s; */
+    transition: height 0.6s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.apareceBotao {
+    height: 50px;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 40px;
+    font-weight: 500;
+    color: #71ADDA;
+    font-size:15px;
+    text-align: left;
+    display:none;
+    transition: display 0.6s;
+}
+
+.pic {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    width: 100%;
+    filter: grayscale(1);
+    transition: filter 0.6s;
+
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+    z-index: 1;
+}
+
+.card:hover .pic-overlay {
+    background: rgba(0, 0, 0, 0);
+    /* background-color: rgba(0, 0, 0, 0); */
+    height: 220px;
+    transition: background 0.6s;
+    transition: height 0.6s;
+
+}
+.card:hover .apareceBotao {
+   display:flex;
+   transition: display 0.6s;
+
+}
+
+.tituloCard {
+    height: 110px;
+    transition: height 0.6s;
+
+}
+
+.picCard {
+    height: 250px;
+    transition: height 0.6s;
+
+}
+
+.card:hover .tituloCard {
+    height: 140px;
+    transition: height 0.6s;
+
+}
+
+.card:hover .picCard {
+    height: 220px;
+    transition: height 0.6s;
+
+}
+
+.card:hover .pic {
+    transition: filter 0.6s;
+    transition: transform 0.2s;
+    filter: grayscale(0);
+    transform: scale(1.2);
+
+}

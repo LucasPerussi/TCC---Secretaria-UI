@@ -1,0 +1,13 @@
+sendgrid.env
+controller/Config.controller.php
+*.lock
+testes/log.html
+testes/output.xml
+testes/report.html
+testes/selenium-screenshot-1.png
+testes/selenium-screenshot-2.png
+layout/app-assets/data/search.json
+src/files
+uploads
+layout/package-lock.json
+vendor/

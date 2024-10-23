@@ -1,0 +1,268 @@
+
+    .clock {
+    width: 15rem;
+    height: 15rem;
+    position: relative;
+    padding: 1rem;
+    border: 9px solid #7367f0;
+    box-shadow: 5px -5px 5px 0px rgb(153 122 239 / 50%), -5px 8px 8px 0px rgb(81 40 170 / 50%), inset -3.5px 5.5px 6px 0px rgb(73 38 238 / 50%), inset 3px -3px 1px 0px rgb(255 255 255 / 15%);
+    border-radius: 50%;
+    margin: 50px auto;
+    }
+
+    .outer-clock-face {
+    position: relative;
+    background: #7367f0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    }
+
+    .outer-clock-face::after {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    transform: rotate(90deg);
+    }
+
+    .outer-clock-face::after,
+    .outer-clock-face::before,
+    .outer-clock-face .marking {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background: #84c566;
+    z-index: 0;
+    left: 49%;
+    }
+
+    .outer-clock-face .marking {
+    background: #84c566;
+    width: 2px;
+    }
+
+    .outer-clock-face .marking.marking-one {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    transform: rotate(30deg);
+    }
+
+    .outer-clock-face .marking.marking-two {
+    -webkit-transform: rotate(60deg);
+    -moz-transform: rotate(60deg);
+    transform: rotate(60deg);
+    }
+
+    .outer-clock-face .marking.marking-three {
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    transform: rotate(120deg);
+    }
+
+    .outer-clock-face .marking.marking-four {
+    -webkit-transform: rotate(150deg);
+    -moz-transform: rotate(150deg);
+    transform: rotate(150deg);
+    }
+
+    .inner-clock-face {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: #7367f0;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    z-index: 1;
+    }
+
+    .inner-clock-face::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 18px;
+    margin-left: -9px;
+    margin-top: -6px;
+    background: #84c566;
+    z-index: 11;
+    }
+
+    .hand {
+    width: 50%;
+    right: 50%;
+    height: 4px;
+    background: #84c566;
+    position: absolute;
+    top: 50%;
+    border-radius: 6px;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+
+    .hand.hour-hand {
+    width: 30%;
+    z-index: 3;
+    }
+
+    .hand.min-hand {
+    height: 3px;
+    z-index: 10;
+    width: 48%;
+    }
+
+    .hand.second-hand {
+    background: #4F4F4F;
+    width: 51%;
+    height: 2px;
+    z-index: 1;
+    }
+
+    #timedate {
+  font: small-caps lighter 16px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  text-align:left;
+  width: 50%;
+  margin: 10px auto;
+  color:#fff;
+  border-left: 3px solid #84c566;
+  padding: 20px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic);
+
+
+
+#cake {
+  display: block;
+  position: relative;
+  margin: -25.7em auto 0 auto;
+}
+
+/* ============================================== Candle
+*/
+.velas {
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  margin-left: -2.4px;
+  margin-top: -10.33333333px;
+  width: 5px;
+  height: 35px;
+  transform: translateY(-300px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-animation: in 500ms 6s ease-out forwards;
+          animation: in 500ms 6s ease-out forwards;
+}
+
+.velas:after,
+.velas:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.22222222px;
+}
+
+.velas:after {
+  top: 5%;
+  left: 0;
+}
+
+.velas:before {
+  top: 10%;
+  left: 0;
+}
+
+/* ============================================== Fire
+*/
+.fuego {
+  border-radius: 100%;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -2.6px;
+  width: 6.66666667px;
+  height: 18px;
+}
+
+.fuego:nth-child(1) {
+  -webkit-animation: fuego 2s 6.5s infinite;
+          animation: fuego 2s 6.5s infinite;
+}
+
+.fuego:nth-child(2) {
+  -webkit-animation: fuego 1.5s 6.5s infinite;
+          animation: fuego 1.5s 6.5s infinite;
+}
+
+.fuego:nth-child(3) {
+  -webkit-animation: fuego 1s 6.5s infinite;
+          animation: fuego 1s 6.5s infinite;
+}
+
+.fuego:nth-child(4) {
+  -webkit-animation: fuego 0.5s 6.5s infinite;
+          animation: fuego 0.5s 6.5s infinite;
+}
+
+.fuego:nth-child(5) {
+  -webkit-animation: fuego 0.2s 6.5s infinite;
+          animation: fuego 0.2s 6.5s infinite;
+}
+
+/* ============================================== Animation Fire
+*/
+
+@-webkit-keyframes fuego {
+  0%, 100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@keyframes fuego {
+  0%, 100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+@-webkit-keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+.text {
+  color: #8b6a60;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+}
+.text h1 {
+  font-size: 1.4em;
+}

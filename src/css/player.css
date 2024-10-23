@@ -1,0 +1,77 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&display=swap');
+
+.capa{
+    background-color: white;
+    border-radius: 20px;
+    padding: 2%;
+    
+}
+
+
+
+@media (min-width: 801px)
+{
+
+    .capa{
+        width: 98%;
+        height: 650px;
+        margin: 1%; 
+        
+       
+    }
+    #playerHeight {
+        margin-top: 2%;
+        height:500px;
+        
+    }
+
+  
+   
+}
+
+
+@media (min-width: 601px) and (max-width: 800px)
+{
+
+    .capa{
+        width: 98%;
+        height: 550px;
+        margin: 1%;
+        padding:5%;
+       
+    }
+    #playerHeight {
+        margin-top: 2%;
+        height:400px;
+        
+        
+    }
+
+
+}
+
+@media (max-width: 600px)
+{
+  
+    .capa{
+        width: 95%;
+        height: 450px;
+        margin: 2.5%;
+        padding: 5%;
+       
+    }
+    #playerHeight {
+        height:250px;
+    }
+
+   
+   
+}
+
+
+
+
+
+
+

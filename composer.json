@@ -1,0 +1,21 @@
+{
+    "name": "wetalk/support",
+    "authors": [
+        {
+            "name": "lucasperussi",
+            "email": "perussilucas@hotmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "^8.0",
+        "leocavalcante/siler": "^1.7",
+        "overblog/dataloader-php": "^0.6.0",
+        "guzzlehttp/promises": "^1.4",
+        "guzzlehttp/guzzle": "^7.3",
+        "sendgrid/sendgrid": "~7",
+        "adnanhussainturki/microsoft-api-php": "^0.03.0",
+        "google/apiclient": "^2.0",
+        "firebase/php-jwt": "^6.9",
+        "paragonie/sodium_compat": "^1.20"
+    }
+}
