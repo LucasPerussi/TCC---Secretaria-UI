@@ -66,6 +66,27 @@ $url = $_SERVER['REQUEST_URI'];
 
             <?php if (isset($_SESSION["user_id"])) : ?>
        
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-people"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.admin_menu.entidades-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.entidades-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.admin_menu.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.formativas-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.admin_menu.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.estagio-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.admin_menu.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.mural-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-file-earmark-plus"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.admin_menu.cadastro-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.cadastro-desc") ?></span></span></a>
+                </li>
+
+                <!--
                 <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "blog") {
                                                                                 echo "active ";
                                                                             } ?>" href="<?= Config::BASE_URL ?>blog"><i style="margin-top:-8px;" class="bi bi-columns"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.artigos") ?></span></a>
@@ -83,7 +104,8 @@ $url = $_SERVER['REQUEST_URI'];
                                                                                 echo "active";
                                                                             } ?>" href="<?= Config::BASE_URL . 'business-card-management' ?>"><i style="margin-top:-10px;" class="bi bi-person-badge"></i><span class="menu-title text-truncate" data-i18n="Calendar">Meu Business Card</span></a>
                 </li>
-              
+                -->
+
                 <li class=" nav-item "><a href="#" class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
                                                                                         echo "active";
                                                                                     } ?> "><i style="margin-top:-6px;" class="bi bi-toggles"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.menu_configuracoes.titulo") ?></span></a>

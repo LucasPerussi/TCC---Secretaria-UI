@@ -3,7 +3,6 @@
 namespace API\Model;
 
 use API\Controller\Company;
-use API\Model\Database;
 use API\Model\Logger;
 use API\Model\CompanyDAO;
 use const Siler\Config\CONFIG;
@@ -23,7 +22,7 @@ class CompanyModel
         if (isset($_SESSION["user_id"])) {
             $this->user = $_SESSION["user_id"];
         }
-        $this->dbConnection = Database::connect();
+       
     }
 
 

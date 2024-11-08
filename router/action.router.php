@@ -59,6 +59,7 @@ class Route extends \API\Router\DefaultRouter
     {
         $body = $this->getBody();
         fields(["email", "password"], $body, false);
+        
 
         echo json_encode($this->userController->login($body["email"], $body["password"]));
     }
