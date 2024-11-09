@@ -73,6 +73,15 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/student/dashboard-student.php";
         });
+        $this->addRoute("get", "/entity-list", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/entity-list.php";
+        });
+        
+        
         
      
     }
