@@ -64,27 +64,47 @@ $url = $_SERVER['REQUEST_URI'];
                 <!--                                                                MEMBROS NORMAIS                                                              -->
             </li>
 
-            <?php if (isset($_SESSION["user_id"])) : ?>
-       
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-people"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.admin_menu.entidades-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.entidades-desc") ?></span></span></a>
+            <!-- Dashboard para membros (alunos) -->
+            <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Member")) : ?>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-plus-circle-fill"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.member.solicitacao-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.solicitacao-desc") ?></span></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.admin_menu.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.formativas-desc") ?></span></span></a>
+                    <strong><?= __("main_menu.member.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.formativas-desc") ?></span></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.admin_menu.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.estagio-desc") ?></span></span></a>
+                    <strong><?= __("main_menu.member.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.estagio-desc") ?></span></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.admin_menu.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.mural-desc") ?></span></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.member.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.mural-desc") ?></span></span></a>
+                </li>
+            <?php endif; ?>
+
+            <!-- Dashboard para servidores / professores / administradores -->
+            <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Servidor" || $_SESSION["user_role"] == "Professor" || $_SESSION["user_role"] == "Admin")) : ?>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-pencil"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.server.entidades-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.entidades-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.server.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.formativas-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.server.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.estagio-desc") ?></span></span></a>
+                </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
+                    <strong><?= __("main_menu.server.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.mural-desc") ?></span></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-file-earmark-plus"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.admin_menu.cadastro-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.admin_menu.cadastro-desc") ?></span></span></a>
+                    <strong><?= __("main_menu.server.cadastro-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.cadastro-desc") ?></span></span></a>
                 </li>
+            <?php endif; ?>
 
                 <!--
                 <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "blog") {
@@ -144,7 +164,6 @@ $url = $_SERVER['REQUEST_URI'];
                                                                                 } ?>" href="<?= Config::BASE_URL . 'painel' ?>"><i class="bi bi-bar-chart" style="margin-top:-10px;"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.admin.relatorios") ?></span></a>
                     </li>
                 
-            <?php endif; ?>
             <?php endif; ?>
             <br />
             <br />

@@ -1,0 +1,38 @@
+.main-content{
+    margin-left: 225px;
+    padding-top: 90px;
+}
+
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.content-body{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-right: 145px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bi-person {
+    font-size: 3rem;
+    color: #666;
+}
+
+.board {
+    flex: 1;
+}
+
+.board h3 {
+    font-weight: bold !important;
+}
+
+.board-text {
+    margin-top: 30px;
+}

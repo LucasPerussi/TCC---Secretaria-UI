@@ -78,6 +78,13 @@ return [
         "titulo" => "Business Card Settings"
     
     ],
+
+    //news-board
+    "news_board" => [
+        "title" => "Aviso de fim do período de ajustes de matrícula",
+        "another_title" => "Tutorial de alguma coisa",
+        "button" => "Ler Publicação",
+    ],
  
     //profile-preview
     "profile_preview" => [
@@ -156,7 +163,17 @@ return [
                 "historico" => "Histórico de Acessos",
             ],
         ],
-        "admin_menu" => [
+        "member" => [
+            "solicitacao-titulo" => "Nova Solicitação",
+            "solicitacao-desc" => "Abra uma nova solicitação para a secretaria do SEPT.",
+            "formativas-titulo" => "Gerenciar Horas Formativas",
+            "formativas-desc" => "Verifique e atualize as suas horas formativas.",
+            "estagio-titulo" => "Gerenciamento de Estágio",
+            "estagio-desc" => "Solicite e acompanhe seu processo de estágio.",
+            "mural-titulo" => "Mural UFPR",
+            "mural-desc" => "Aqui você encontra as últimas novidades do SEPT.",
+        ],
+        "server" => [
             "entidades-titulo" => "Entidades",
             "entidades-desc" => "Liste e gerencie alunos, professores e disciplinas.",
             "formativas-titulo" => "Gerenciar Horas Formativas",
