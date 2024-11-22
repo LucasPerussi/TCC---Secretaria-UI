@@ -87,6 +87,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
+        $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/member/formative-member.view.php";
+        });
         $this->addRoute("get", "/entity-list", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();

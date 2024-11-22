@@ -89,8 +89,9 @@
     font-weight: bold;
 }
 
-.card-link hover {
-    text-decoration: underline;  
+.card-link:hover {
+    text-decoration: underline;
+    background-color: rgb(11, 92, 65) !important;
 }
 
 @media (max-width: 768px) {

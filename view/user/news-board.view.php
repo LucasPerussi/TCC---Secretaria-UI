@@ -20,7 +20,7 @@ date_default_timezone_set('America/Sao_Paulo');
         <head>
             <?php include "view/src/head.php"; ?>
             <link rel="stylesheet" href="src/css/news-board.css">
-            <title>Exemplo de Título</title>
+            <title>Mural UFPR</title>
         </head>
 
         <body class="snippet-body vertical-layout vertical-menu-modern  navbar-floating footer-static dark-layout  <?php if ($_SESSION["user_id"]) {

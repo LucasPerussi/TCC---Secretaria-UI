@@ -85,6 +85,15 @@ return [
         "another_title" => "Tutorial de alguma coisa",
         "button" => "Ler Publicação",
     ],
+
+    //formative-member
+    "formative_member" => [
+        "title-left" => "Atividades Formativas",
+        "button" => "Visualizar",
+        "total-hours" => "Total de horas formativas necessárias em seu curso",
+        "progress" => "Seu andamento",
+        "tasks" => "Seus tipos de atividades",
+    ],
  
     //profile-preview
     "profile_preview" => [

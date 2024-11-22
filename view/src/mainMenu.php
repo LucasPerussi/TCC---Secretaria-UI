@@ -70,7 +70,7 @@ $url = $_SERVER['REQUEST_URI'];
                     <strong><?= __("main_menu.member.solicitacao-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.solicitacao-desc") ?></span></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'formative-member' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
                     <strong><?= __("main_menu.member.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.formativas-desc") ?></span></span></a>
                 </li>
 
