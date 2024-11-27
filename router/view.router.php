@@ -94,6 +94,27 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
+        $this->addRoute("get", "/formative-member-new", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/member/formative-member-new.view.php";
+        });
+        $this->addRoute("get", "/formative-member-details", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/member/formative-member-details.view.php";
+        });
+        $this->addRoute("get", "/member-request", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/member/member-request.view.php";
+        });
         $this->addRoute("get", "/entity-list", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
@@ -101,9 +122,6 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/admin/entity-list.php";
         });
-        
-        
-     
     }
 
     public function createSolicitation() {}

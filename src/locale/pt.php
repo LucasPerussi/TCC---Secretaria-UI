@@ -1236,7 +1236,7 @@ return [
     ],
 
     //dashboard (aluno)
-    "dashboard_aluno" => [
+    "dashboard_member" => [
         "titulo" => "Painel do Aluno",
         "titulo2" => "Suas Solicitações",
         "top_cards" => [

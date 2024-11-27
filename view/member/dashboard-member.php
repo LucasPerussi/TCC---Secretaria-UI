@@ -101,7 +101,7 @@ use const Siler\Config\CONFIG; ?>
                                      <div class="card-container">
                                         <div class="col-12 kb-search-content">
                                             <div class="gray">
-                                                <a href="<?= Config::BASE_URL .  "company-tickets" ?>">
+                                                <a href="<?= Config::BASE_URL .  "member-request" ?>">
 
                                                     <div class="card-body text-left">
                                                         <h4><b><?= __("dashboard_member.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
@@ -116,7 +116,7 @@ use const Siler\Config\CONFIG; ?>
                                         <br />
                                         <div class="col-12 kb-search-content">
                                             <div class="gray">
-                                                <a href="<?= Config::BASE_URL .  "admin-request" ?>">
+                                                <a href="<?= Config::BASE_URL .  "member-request" ?>">
                                                     
                                                     <div class="card-body text-left">
                                                         <h4><b><?= __("dashboard_member.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
@@ -132,7 +132,7 @@ use const Siler\Config\CONFIG; ?>
                                         <!-- personalization -->
                                         <div class="col-12 kb-search-content">
                                             <div class="gray">
-                                                <a href="#">
+                                                <a href="<?= Config::BASE_URL . "member-request" ?>">
 
                                                     <div class="card-body text-left">
                                                         <h4><b><?= __("dashboard_member.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
@@ -146,7 +146,7 @@ use const Siler\Config\CONFIG; ?>
                                         <br />
                                         <div class="col-12 kb-search-content">
                                             <div class="gray">
-                                                <a href="#">
+                                                <a href="<?= Config::BASE_URL . "member-request" ?>">
 
                                                     <div class="card-body text-left">
                                                         <h4><b><?= __("dashboard_member.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>

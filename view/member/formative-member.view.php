@@ -39,7 +39,7 @@ date_default_timezone_set('America/Sao_Paulo');
                             <div class="left-content">
                                 <div class="title-container">
                                     <h3><?= __("formative_member.title-left") ?></h3>
-                                    <a href="teste" class="btn btn-primary" style="margin-left: 10px;">Nova</a>
+                                    <a href="formative-member-new" class="btn btn-primary" style="margin-left: 10px;">Nova</a>
                                 </div>
 
                                 <div class="cards-container">
@@ -49,7 +49,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                         <div class="card-icons">
                                             <div class="icon red">Inválido</div>
                                             <div class="icon green">10 horas</div>
-                                            <a href="teste"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
+                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
                                         </div>
                                     </div>
 
@@ -59,7 +59,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                         <div class="card-icons">
                                             <div class="icon green">Válido</div>
                                             <div class="icon green">5 horas</div>
-                                            <a href="teste"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
+                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
                                         </div>
                                     </div>
 
@@ -69,7 +69,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                         <div class="card-icons">
                                             <div class="icon red">Válido</div>
                                             <div class="icon green">5 horas</div>
-                                            <a href="teste"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
+                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
                                         </div>
                                     </div>
                                 </div>
@@ -81,12 +81,12 @@ date_default_timezone_set('America/Sao_Paulo');
 
                                 <div class="large-cards-container">
                                     <div class="large-card">
-                                        <h4>Gráfico de horas concluídas</h4>
+                                        <h4><?= __("formative_member.progress") ?></h4>
                                         <canvas id="pie-chart-1"></canvas>
                                     </div>
 
                                     <div class="large-card">
-                                        <h4>Gráfico de horas concluídas</h4>
+                                        <h4><?= __("formative_member.tasks") ?></h4>
                                         <canvas id="pie-chart-2"></canvas>
                                     </div>
                                 </div>
