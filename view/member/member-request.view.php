@@ -60,7 +60,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                             <div class="comment-info">
                                                 <img src="https://via.placeholder.com/40" alt="Foto de perfil" class="profile-pic">
                                                 <div class="comment-text">
-                                                    <p><strong>Seu Nome</strong></p>
+                                                    <p><strong>Outra pessoa</strong></p>
                                                     <p class="date">24/11/2024</p>
                                                     <p class="message">Este é um comentário de exemplo.</p>
                                                 </div>
@@ -71,7 +71,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                             <div class="comment-info">
                                                 <img src="https://via.placeholder.com/40" alt="Foto de perfil" class="profile-pic">
                                                 <div class="comment-text">
-                                                    <p><strong>Outro Usuário</strong>
+                                                    <p><strong>Eu</strong>
                                                     <p class="date">24/11/2024</p>
                                                     <p class="message">Este é outro comentário de exemplo.</p>
                                                 </div>
@@ -86,7 +86,53 @@ date_default_timezone_set('America/Sao_Paulo');
                                 </div>
 
                                 <div id="timeline" class="tab">
-                                    <p>Conteúdo da aba "Timeline".</p>
+                                    <h2 class="timeline-title">Linha do Tempo</h2>
+
+                                    <div class="timeline">
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker">
+                                                <div class="timeline-content">
+                                                    <div class="timeline-header">
+                                                        <span class="notification-title">Chamado Criado</span>
+                                                        <span class="notification-date">24/11/2024 10:30</span>
+                                                    </div>
+                                                    <p class="notification-description">
+                                                        O chamado foi criado pelo usuário Ciclano.
+                                                    </p>
+                                                    <div class="notification-status open">Aberto</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker"></div>
+                                            <div class="timeline-content">
+                                                <div class="timeline-header">
+                                                    <span class="notification-title">Atualização</span>
+                                                    <span class="notification-date">24/11/2024 12:45</span>
+                                                </div>
+                                                <p class="notification-description">
+                                                    O responsável alterou o status do chamado para "Em Andamento".
+                                                </p>
+                                                <div class="notification-status in-progress">Em Andamento</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="timeline-item">
+                                            <div class="timeline-marker">
+                                                <div class="timeline-content">
+                                                    <div class="timeline-header">
+                                                        <span class="notification-title">Chamado Fechado</span>
+                                                        <span class="notification-date">25/11/2024 09:15</span>
+                                                    </div>
+                                                    <p class="notification-description">
+                                                        O chamado foi concluído com sucesso.
+                                                    </p>
+                                                    <div class="notification-status closed">Fechado</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div id="details" class="tab">

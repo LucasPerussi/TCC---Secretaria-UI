@@ -1,0 +1,56 @@
+.main-content {
+    margin-left: 225px;
+    padding-top: 90px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.content-body {
+    padding: 15px;
+    margin-right: 145px;
+    border-radius: 20px;
+}
+
+.request-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.main-title {
+    font-size: 28px;
+    font-weight: bold !important;
+    margin-bottom: 1px;
+    color: #333;
+}
+
+.main-title.align-left {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.request-card {
+    background-color: white;
+    padding: 80px;
+    width: 100%;
+    min-height: 600px;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: bold !important;
+    margin-bottom: 10px;
+    color: #333;
+}
