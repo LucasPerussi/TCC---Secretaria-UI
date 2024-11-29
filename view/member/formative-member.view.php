@@ -39,7 +39,7 @@ date_default_timezone_set('America/Sao_Paulo');
                             <div class="left-content">
                                 <div class="title-container">
                                     <h3><?= __("formative_member.title-left") ?></h3>
-                                    <a href="formative-member-new" class="btn btn-primary" style="margin-left: 10px;">Nova</a>
+                                    <a href="new-formative-member" class="btn btn-primary" style="margin-left: 10px;">Nova</a>
                                 </div>
 
                                 <div class="cards-container">

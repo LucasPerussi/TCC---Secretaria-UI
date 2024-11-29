@@ -106,6 +106,16 @@ return [
         ]
     ],
 
+    //request
+    "request_request" => [
+        "progress-button" => "Andamento",
+        "progress-title" => "Comentários",
+        "timeline-button" => "Timeline",
+        "timeline-title" => "Linha do Tempo",
+        "details" => "Detalhes",
+        "settings" => "Definições",
+    ],
+
     //new-request
     "new_request" => [
         "title" => "Nova Solicitação",

@@ -94,12 +94,12 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
-        $this->addRoute("get", "/formative-member-new", function ($args) use ($obj) {
+        $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/member/formative-member-new.view.php";
+            require __DIR__ . "/../view/member/new-formative-member.view.php";
         });
         $this->addRoute("get", "/formative-member-details", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -108,12 +108,19 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/formative-member-details.view.php";
         });
-        $this->addRoute("get", "/member-request", function ($args) use ($obj) {
+        $this->addRoute("get", "/request-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/member/member-request.view.php";
+            require __DIR__ . "/../view/member/request-member.view.php";
+        });
+        $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/request-admin.view.php";
         });
         $this->addRoute("get", "/new-request", function ($args) use ($obj) {
             // $obj->verifyCookies();
