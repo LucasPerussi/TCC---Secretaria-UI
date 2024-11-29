@@ -93,6 +93,25 @@ return [
         "total-hours" => "Total de horas formativas necessárias em seu curso",
         "progress" => "Seu andamento",
         "tasks" => "Seus tipos de atividades",
+        "details" => [
+            "task" => "Atividade",
+            "description" => "Descrição",
+            "hours" => "Quantidade Horas",
+            "situation" => "Situação",
+            "post-date" => "Data Postagem",
+            "deliberation" => "Data Deliberação",
+            "actions" => "Ações",
+            "button" => "Ver Documento",
+            "remove" => "Remover",
+        ]
+    ],
+
+    //new-request
+    "new_request" => [
+        "title" => "Nova Solicitação",
+        "request-type" => "Tipo de Chamado",
+        "description" => "Selecione o tipo de chamado para cadastrar as informações necessárias para seu andamento.",
+        "button" => "Próximo",
     ],
  
     //profile-preview

@@ -40,13 +40,13 @@ date_default_timezone_set('America/Sao_Paulo');
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Atividade</th>
-                                        <th>Descrição</th>
-                                        <th>Quantidade Horas</th>
-                                        <th>Situação</th>
-                                        <th>Data Postagem</th>
-                                        <th>Data Deliberação</th>
-                                        <th>Ações</th>
+                                        <th><?= __("formative_member.details.task") ?></th>
+                                        <th><?= __("formative_member.details.description") ?></th>
+                                        <th><?= __("formative_member.details.hours") ?></th>
+                                        <th><?= __("formative_member.details.situation") ?></th>
+                                        <th><?= __("formative_member.details.post-date") ?></th>
+                                        <th><?= __("formative_member.details.deliberation") ?></th>
+                                        <th><?= __("formative_member.details.actions") ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,8 +58,8 @@ date_default_timezone_set('America/Sao_Paulo');
                                         <td>15/11/2024</td>
                                         <td>20/11/2024</td>
                                         <td>
-                                            <button class="btn btn-secondary" disabled>Ver Documento</button>
-                                            <a href="formative-member" class="btn btn-danger">Remover</a>
+                                            <button class="btn btn-secondary" disabled><?= __("formative_member.details.button") ?></button>
+                                            <a href="formative-member" class="btn btn-danger"><?= __("formative_member.details.remove") ?></a>
                                         </td>
                                     </tr>
                                 </tbody>

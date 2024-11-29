@@ -37,12 +37,11 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div class="content-wrapper">
                     <div class="content-body">
                         <div class="request-container">
-                            <h2 class="main-title align-left">Nova Solicitação</h1>
+                            <h2 class="main-title align-left"><?= __("new_request.title") ?></h1>
 
                             <div class="request-card">
-                                <h2 class="section-title">Tipo de Chamado</h2>
-                                <p class="section-description">Selecione o tipo de chamado para cadastrar as informações necessárias
-                                para seu andamento.</p>
+                                <h2 class="section-title"><?= __("new_request.request-type") ?></h2>
+                                <p class="section-description"><?= __("new_request.description") ?></p>
                 
                                 <div class="custom-select-container">
                                     <select class="request-select">
@@ -54,7 +53,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                     <i class="bi bi-caret-down-fill select-icon"></i>
                                 </div>
 
-                                <button class="next-button" onclick="window.location.href='new-request-field'">Próximo</button>
+                                <button class="next-button" onclick="window.location.href='new-request-field'"><?= __("new_request.button") ?></button>
                             </div>
                         </div>
                     </div>
