@@ -57,7 +57,11 @@ date_default_timezone_set('America/Sao_Paulo');
                                 </button>
                                 
                                 <button class="tab-button" data-tab="details">
-                                    <i class="bi bi-globe"></i> <?= __("request_request.details") ?>
+                                    <i class="bi bi-globe"></i> <?= __("request_request.details-button") ?>
+                                </button>
+
+                                <button class="tab-button" data-tab="settings">
+                                    <i class="bi bi-gear"></i> <?= __("request_request.settings-button") ?>
                                 </button>
                             </div>
 
@@ -103,7 +107,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                         <div class="timeline-item">
                                             <div class="timeline-marker"></div>
                                             <div class="timeline-header">
-                                                <span class="timeline-title">Ticket Registrado</span>
+                                                <span class="comment-title">Ticket Registrado</span>
                                                 <span class="timeline-datetime">2024-03-04 08:51:56</span>
                                             </div>
                                             <div class="timeline-description">
@@ -161,20 +165,112 @@ date_default_timezone_set('America/Sao_Paulo');
                                 <div id="details" class="tab">
                                     <p>Conteúdo da aba "Detalhes".</p>
                                 </div>
+                                
+                                <div id="settings" class="tab">
+                                    <div class="settings-card-container">
+                                        <div class="settings-card">
+                                            <h2 class="comment-title"><?= __("request_request.settings-teacher.title") ?></h2>
+                                            <p class="timeline-description"><?= __("request_request.settings-teacher.description") ?></p>
+
+                                            <div class="custom-select-container">
+                                                <select class="request-select">
+                                                    <option value="" disabled selected><?= __("request_request.settings-teacher.select") ?></option>
+                                                    <option value="Opção 1">Opção 1</option>
+                                                    <option value="Opção 2">Opção 2</option>
+                                                    <option value="Opção 3">Opção 3</option>
+                                                </select>
+                                                <i class="bi bi-caret-down-fill select-icon"></i>
+
+                                                <button class="settings-button"><?= __("request_request.settings-teacher.button") ?></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="settings-card">
+                                            <h2 class="comment-title"><?= __("request_request.settings-status.title") ?></h2>
+                                            <p class="timeline-description"><?= __("request_request.settings-status.description") ?></p>
+
+                                            <div class="custom-select-container">
+                                                <select class="request-select">
+                                                    <option value="" disabled selected><?= __("request_request.settings-status.select") ?></option>
+                                                    <option value="Opção 1">Opção 1</option>
+                                                    <option value="Opção 2">Opção 2</option>
+                                                    <option value="Opção 3">Opção 3</option>
+                                                </select>
+                                                <i class="bi bi-caret-down-fill select-icon"></i>
+
+                                                <button class="settings-button"><?= __("request_request.settings-status.button") ?></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="settings-card-conclusion">
+                                            <h2 class="comment-title"><?= __("request_request.settings-conclude.title") ?></h2>
+                                            <p class="timeline-description"><?= __("request_request.settings-conclude.description") ?></p>
+
+                                            <div class="settings-radio-group">
+                                                <label class="settings-radio-option">
+                                                    <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="deferido">
+                                                    <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-deferido") ?></span>
+                                                </label>
+                                                <label class="settings-radio-option">
+                                                    <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="indeferido">
+                                                    <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-indeferido") ?></span>
+                                                </label>
+                                                <label class="settings-radio-option">
+                                                    <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="concluido">
+                                                    <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-concluido") ?></span>
+                                                </label>
+                                                <label class="settings-radio-option">
+                                                    <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="cancelado">
+                                                    <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-cancelado") ?></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="settings-conclusion-comment">
+                                                <textarea placeholder="Descrição da conclusão" rows="4" class="settings-input"></textarea>
+                                            </div>
+
+                                            <div class="file-upload-container">
+                                                <p class="file-upload-title"><?= __("request_request.settings-conclude.send-file") ?></p>
+                                                <div class="file-upload-area">
+                                                    <div class="file-upload-clickable">
+                                                        <i class="bi bi-pencil"></i>
+                                                        <span class="file-upload-label"><?= __("request_request.settings-conclude.choose-file") ?></span>
+                                                    </div>
+                                                    <div class="file-upload-selected">
+                                                        <?= __("request_request.settings-conclude.no-file") ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button class="settings-conclude-button"><?= __("request_request.settings-conclude.button") ?></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="right-side">
-                        <h2>Dados do Chamado</h2>
                         <p><strong>Chamado ID:</strong> #12345</p>
                         <p><strong>Status:</strong> Em andamento</p>
                         <p><strong>Responsável</strong> Fulano de Tal</p>
                         <p><strong>Data de Abertura:</strong> 23/11/2024</p>
                         <p><strong>Última Atualização:</strong> 24/11/2024</p>
+
+                        <div class="student-info-card">
+                            <div class="student-info">
+                                <div class="profile-pic"></div>
+                                <div class="student-details">
+                                    <p class="student-name">Nome do Aluno</p>
+                                    <p class="student-id">Aluno - GRR999999</p>
+                                    <p class="student-email">aluno@aluno.com</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+            </div>
 
             <?php include "view/src/footer.php"; ?>
 

@@ -35,6 +35,12 @@
     margin-top: 48px;
 }
 
+.right-side p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
 .message-card {
     background-color: white;
     border-radius: 20px;
@@ -256,12 +262,6 @@
     z-index: 1;
 }
 
-.timeline-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-}
-
 .timeline-datetime {
     font-size: 14px;
     color: #888;
@@ -304,4 +304,232 @@
 .status-text.red {
     border-color: #dc3545;
     color: #dc3545 !important;
+}
+
+
+
+/* Aba DEFINIÇÕES */
+
+.settings-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settings-card {
+    margin-top: 15px;
+    margin-bottom: -10px;
+    background-color: lightgray !important;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    height: 250px;
+}
+
+.settings-card-conclusion {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: lightgray !important;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    height: 500px;
+}
+
+.custom-select-container {
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.request-select {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: gray !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+    appearance: none;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: gray !important;
+}
+
+.settings-button {
+    background-color: #007b83;
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold !important;
+    position: absolute !important;
+    right: 5px !important;
+    margin-top: 30px !important;
+}
+
+.settings-radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 140px;
+    margin-top: 30px;
+}
+
+.settings-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.settings-radio-option-2 {
+    width: 18px;
+    height: 18px;
+    accent-color: #007b83;
+}
+
+.settings-radio-label {
+    font-size: 16px;
+    color: #333;
+}
+
+.settings-conclusion-comment {
+    margin-top: 20px;
+}
+
+.settings-input {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 14px;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.settings-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+.settings-conclude-button {
+    background-color: #007b83;
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold !important;
+    position: absolute !important;
+    right: 5px !important;
+    margin-right: 590px;
+    margin-top: 30px !important;
+}
+
+.file-upload-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.file-upload-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-upload-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.file-upload-clickable {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.file-upload-clickable:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload-clickable i {
+    font-size: 18px;
+    color: gray !important;
+    margin-right: 10px;
+}
+
+.file-upload-label {
+    font-size: 14px;
+    color: gray !important;
+}
+
+.file-upload-selected {
+    margin-left: -15px;
+    padding: 12px 20px;
+    background-color: lightgray;
+    font-size: 14px;
+    color: rgb(100, 100, 100) !important;
+}
+
+.student-info-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 50px;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.student-name {
+    font-weight: bold !important;
+    font-size: 16px;
+    color: #333;
+}
+
+.student-id,
+.student-email {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: -30px;
+    margin-top: -15px;
 }

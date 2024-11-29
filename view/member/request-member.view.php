@@ -57,7 +57,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                 </button>
                                 
                                 <button class="tab-button" data-tab="details">
-                                    <i class="bi bi-globe"></i> <?= __("request_request.details") ?>
+                                    <i class="bi bi-globe"></i> <?= __("request_request.details-button") ?>
                                 </button>
                             </div>
 
