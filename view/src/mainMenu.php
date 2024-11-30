@@ -85,7 +85,7 @@ $url = $_SERVER['REQUEST_URI'];
 
             <!-- Dashboard para servidores / professores / administradores -->
             <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Servidor" || $_SESSION["user_role"] == "Professor" || $_SESSION["user_role"] == "Admin")) : ?>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-pencil"></i><span class="menu-title text-truncate">
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'entity-list' ?>"><i class="bi bi-pencil"></i><span class="menu-title text-truncate">
                     <strong><?= __("main_menu.server.entidades-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.entidades-desc") ?></span></span></a>
                 </li>
 

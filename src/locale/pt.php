@@ -1240,6 +1240,49 @@ return [
         ],
     ],
 
+
+    //menus entidades    
+    'menu_entity' => [
+        'menu' => [
+            'titulo' => 'ENTIDADES',
+        ],
+        'alunos' => [
+            'titulo' => 'Alunos',
+            'desc' => 'Gerencie informações dos alunos cadastrados.',
+        ],
+        'servidores' => [
+            'titulo' => 'Servidores',
+            'desc' => 'Acompanhe os servidores e suas atividades.',
+        ],
+        'chamados' => [
+            'titulo' => 'Chamados',
+            'desc' => 'Administre os chamados abertos no sistema.',
+        ],
+        'processos' => [
+            'titulo' => 'Processos',
+            'desc' => 'Controle os processos administrativos.',
+        ],
+    ],
+    //entidades
+         'entities' => [
+        'alunos' => [
+            'titulo' => 'Entitades - Alunos',
+            'desc' => 'Gerencie informações dos alunos cadastrados.',
+        ],
+        'servidores' => [
+            'titulo' => 'Entitades - Servidores',
+            'desc' => 'Acompanhe os servidores e suas atividades.',
+        ],
+        'chamados' => [
+            'titulo' => 'Entitades - Chamados',
+            'desc' => 'Administre os chamados abertos no sistema.',
+        ],
+        'processos' => [
+            'titulo' => 'Entitades - Processos',
+            'desc' => 'Controle os processos administrativos.',
+        ],
+    ],
+
     //dashboard (admin)
     "dashboard_admin" => [
         "titulo" => "Painel Admin",
