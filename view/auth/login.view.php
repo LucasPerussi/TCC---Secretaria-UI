@@ -23,7 +23,9 @@ use API\Controller\Config;
     <!-- BEGIN: Head-->
 
     <head>
-       
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   
+
         <script>
        
         </script>
@@ -250,7 +252,6 @@ use API\Controller\Config;
     </body>
 
     <!-- END: Body-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     </html>
 

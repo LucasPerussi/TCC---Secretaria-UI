@@ -49,6 +49,18 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             require __DIR__ . "/../view/register/register.view.php";
         });
+        $this->addRoute("get", "/password-recovery", function ($args) use ($obj) {
+            $obj->checkSession();
+            require __DIR__ . "/../view/auth/password-recovery.view.php";
+        });
+        $this->addRoute("get", "/password-reset", function ($args) use ($obj) {
+            $obj->checkSession();
+            require __DIR__ . "/../view/auth/password-reset.view.php";
+        });
+        $this->addRoute("get", "/verify-email", function ($args) use ($obj) {
+            $obj->checkSession();
+            require __DIR__ . "/../view/auth/verify-email.view.php";
+        });
         $this->addRoute("get", "/logout", function ($args) use ($obj) {
             // $obj->destroySession();
             $obj->deleteCookies();

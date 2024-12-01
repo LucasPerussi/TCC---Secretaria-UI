@@ -42,36 +42,8 @@ date_default_timezone_set('America/Sao_Paulo');
                                     <a href="new-formative-member" class="btn btn-primary" style="margin-left: 10px;">Nova</a>
                                 </div>
 
-                                <div class="cards-container">
-                                    <div class="card">
-                                        <h4>Cursos de extensão</h4>
-                                        <p>Inglês para a informática - Wizard</p>
-                                        <div class="card-icons">
-                                            <div class="icon red">Inválido</div>
-                                            <div class="icon green">10 horas</div>
-                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <h4>Cursos de extensão</h5>
-                                        <p>Inteligência artificial para Medicina</p>
-                                        <div class="card-icons">
-                                            <div class="icon green">Válido</div>
-                                            <div class="icon green">5 horas</div>
-                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
-                                        </div>
-                                    </div>
-
-                                    <div class="card">
-                                        <h4>Participação em evento</h5>
-                                        <p>SATADS 2024</p>
-                                        <div class="card-icons">
-                                            <div class="icon red">Válido</div>
-                                            <div class="icon green">5 horas</div>
-                                            <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
-                                        </div>
-                                    </div>
+                                <div class="cards-container" id="student-hours-cards">
+                                    
                                 </div>
                             </div>
 
@@ -98,7 +70,10 @@ date_default_timezone_set('America/Sao_Paulo');
 
             <?php include "view/src/footer.php"; ?>
 
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <?php
+                require __DIR__."/../../".Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            ?>
+        
         </body>
     </html>
     <?php endif; ?>

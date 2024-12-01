@@ -13,6 +13,7 @@ use API\Controller\User as UserController;
 use API\Controller\Company as CompanyController;
 use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
+use API\Controller\TrainingHours\Training as TrainingController;
 
 
 
@@ -32,6 +33,7 @@ class Route extends \API\Router\DefaultRouter
     public CompanyController $companyController;
     public TicketsController $ticketsController;
     public SystemController $systemController;
+    public TrainingController $trainingController;
 
     public function __construct()
     {
@@ -42,6 +44,7 @@ class Route extends \API\Router\DefaultRouter
         $this->companyController = new CompanyController();
         $this->ticketsController = new TicketsController();
         $this->systemController = new SystemController();
+        $this->trainingController = new TrainingController();
 
         $obj = $this;
     
@@ -87,5 +90,18 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->userController->login($body["email"], $body["password"]));
     }
 
+    public function getStudentHours()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            echo json_encode([
+                "status" => "error",
+                "message" => "O ID do aluno é obrigatório."
+            ]);
+            return;
+        }
+
+        echo json_encode($this->trainingController->getStudentHours($id));
+    }
   
 }

@@ -3,6 +3,36 @@ namespace API\Model;
 
 class APIRequest
 {
+    public static function getRequest($url, $methodName)
+    {
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+        ]);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            curl_close($ch);
+            return [
+                'status' => 'error',
+                'message' => "Erro ao se concetar à API no método {$methodName}: " . $error_msg
+            ];
+        }
+
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return [
+            'status' => $httpcode,
+            'response' => $response
+        ];
+    }
+
     public static function postRequest($url, $data, $methodName)
     {
         $ch = curl_init($url);
