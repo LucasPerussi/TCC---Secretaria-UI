@@ -25,4 +25,29 @@ class TrainingModel
         $result = APIRequest::getRequest($url, "getStudentHours");
         return APIRequest::handleResponse($result, "getStudentHours");
     }
+
+    public function registerFH($descricao, $data_evento, $horas_solicitadas, $tipo, $comprovante)
+    {
+        $descricao = Sanitize::clean($descricao, "descricao", "registerFH");
+        $data_evento = Sanitize::clean($data_evento, "data_evento", "registerFH");
+        $horas_solicitadas = Sanitize::clean($horas_solicitadas, "horas_solicitadas", "registerFH");
+        $comprovante = Sanitize::clean($comprovante, "comprovante", "registerFH");
+        $tipo = Sanitize::clean($tipo, "tipo", "registerFH");
+        $aluno = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "hours/new";
+
+        $data = [
+            'aluno' => $aluno,
+            'descricao' => $descricao,
+            'data_evento' => $data_evento,
+            'horas_solicitadas' => $horas_solicitadas,
+            'tipo' => $tipo,
+            'comprovante' => $comprovante
+
+        ];
+
+        return APIRequest::postRequest($url, $data, "registerFH");
+    
+    }
 }

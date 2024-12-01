@@ -1,14 +1,14 @@
 <?php
-header("Content-Type: application/javascript");
+// header("Content-Type: application/javascript");
 use API\Controller\Config;
 ?>
 
-document.addEventListener("DOMContentLoaded", function () {
+<!-- document.addEventListener("DOMContentLoaded", function () {
     const studentId = "<?= $_SESSION['user_id'] ?>";
     getStudentHours(studentId);
-})
+}) -->
 
-function getStudentHours(studentId) {
+<!-- function getStudentHours(studentId) {
     axios.get(`<?= Config::BASE_ACTION_URL ?>/getStudentHours`, {
         params: { id: studentId }
     })
@@ -24,8 +24,8 @@ function getStudentHours(studentId) {
         console.error("Erro ao buscar as horas:", error);
         toastr.error("Erro ao buscar as horas", Erro);
     })
-}
-
+} -->
+<!-- 
 function renderCards(data) {
     const container = document.getElementById("student-hours-cards");
     container.innerHTML = "";
@@ -46,4 +46,4 @@ function renderCards(data) {
 
         container.appendChild(card);
     });
-}
+} -->

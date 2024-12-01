@@ -1,37 +1,82 @@
-<?php 
+<?php
+
 namespace API\Model;
+
+use API\Controller\Config;
 
 class APIRequest
 {
-    public static function getRequest($url, $methodName)
+    // public static function getRequest($url, $methodName)
+    // {
+    //     $ch = curl_init($url);
+
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_HTTPGET, true);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    //         'Content-Type: application/json',
+    //     ]);
+
+    //     $response = curl_exec($ch);
+
+    //     if (curl_errno($ch)) {
+    //         $error_msg = curl_error($ch);
+    //         curl_close($ch);
+    //         return [
+    //             'status' => 'error',
+    //             'message' => "Erro ao se concetar à API no método {$methodName}: " . $error_msg
+    //         ];
+    //     }
+
+    //     $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    //     curl_close($ch);
+
+    //     return [
+    //         'status' => $httpcode,
+    //         'response' => $response
+    //     ];
+    // }
+
+
+    public static function getRequest($endpoint)
     {
-        $ch = curl_init($url);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPGET, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-        ]);
-
-        $response = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $error_msg = curl_error($ch);
-            curl_close($ch);
-            return [
-                'status' => 'error',
-                'message' => "Erro ao se concetar à API no método {$methodName}: " . $error_msg
-            ];
-        }
-
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        return [
-            'status' => $httpcode,
-            'response' => $response
+        $options = [
+            CURLOPT_URL => Config::API_URL . $endpoint,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: ' . $_SESSION['user_token'],
+            ],
         ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, $options);
+
+        $response = curl_exec($curl);
+
+        if (curl_errno($curl)) {
+            echo 'Erro na requisição: ' . curl_error($curl);
+        } else {
+            $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            curl_close($curl);
+
+            if ($http_code == 200) {
+                $result_array = json_decode($response, true);
+                if (is_null($result_array)) {
+                    return array(
+                        "error" => true,
+                        "message" => "Nenhum registro encontrado"
+                    );
+                } else {
+                    return $result_array;
+                }
+            } else {
+                return array(
+                    "error" => true,
+                    "message" => "Erro interno ($http_code)"
+                );
+            }
+        }
     }
+
 
     public static function postRequest($url, $data, $methodName)
     {
@@ -72,8 +117,9 @@ class APIRequest
             $_SESSION['user_name'] = $responseData['user']['name'];
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
+            $_SESSION['user_token'] = $responseData['token'];
             $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
-            if ( $_SESSION['user_picture'] == ""){
+            if ($_SESSION['user_picture'] == "") {
                 $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
             }
 
@@ -96,7 +142,7 @@ class APIRequest
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
             $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
-            if ( $_SESSION['user_picture'] == ""){
+            if ($_SESSION['user_picture'] == "") {
                 $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
             }
 

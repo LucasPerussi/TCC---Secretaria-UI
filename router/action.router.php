@@ -54,8 +54,21 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/signup", function ($args) use ($obj) {
             $obj->signup();
         });
+        $this->addRoute("post", "/register-fh", function ($args) use ($obj) {
+            $obj->registerFH();
+        });
       
     }
+
+
+    public function registerFH()
+    {
+        $body = $this->getBody();
+        fields(["descricao", "data_evento", "horas_solicitadas", "tipo", "comprovante"], $body, false);
+
+        echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
+    }
+
 
 
     public function login()

@@ -9,6 +9,10 @@ use API\Controller\CSRFToken;
 use API\Controller\Config;
 
 use Exception;
+
+use function API\Fetch\getCourses;
+use function API\Fetch\getFormativeHoursTypes;
+use function API\Fetch\getHoursUser;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -102,17 +106,41 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
-            $obj->setCookies();
             $obj->verifyLogged();
+            $hours = getHoursUser($_SESSION["user_id"]);
+            $types = getFormativeHoursTypes();
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
+        $this->addRoute("get", "/courses-list", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $courses = getCourses();
+            require __DIR__ . "/../view/member/formative-member.view.php";
+        });
+        // $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
+        //     // $obj->verifyCookies();
+        //     $obj->checkSession();
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     require __DIR__ . "/../view/member/formative-member.view.php";
+        // });
         $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $types = getFormativeHoursTypes();
+
             require __DIR__ . "/../view/member/new-formative-member.view.php";
         });
+        // $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
+        //     // $obj->verifyCookies();
+        //     $obj->checkSession();
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     require __DIR__ . "/../view/member/new-formative-member.view.php";
+        // });
         $this->addRoute("get", "/formative-member-details", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
