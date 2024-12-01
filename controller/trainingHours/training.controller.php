@@ -28,13 +28,12 @@ class Training extends DefaultController
         }
 
         if (!$id) {
-            echo json_encode([
+            return [
                 "status" => "error",
                 "message" => "O ID do aluno é obrigatório."
-            ]);
-            return;
+            ];
         }
 
-        echo json_encode($this->trainingModel->getStudentHours($id));
+        return $this->trainingModel->getStudentHours($id);
     }
 }
