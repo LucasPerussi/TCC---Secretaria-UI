@@ -36,4 +36,17 @@ class Training extends DefaultController
 
         return $this->trainingModel->getStudentHours($id);
     }
+   
+    public function registerFH($descricao, $data_evento, $horas_solicitadas, $tipo, $comprovante)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O ID do aluno é obrigatório."
+            ];
+        }
+
+        return $this->trainingModel->registerFH($descricao, $data_evento, $horas_solicitadas, $tipo, $comprovante);
+    }
 }

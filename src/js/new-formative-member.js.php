@@ -1,11 +1,8 @@
-
-
 <?php
 
 use API\Controller\Config;
 ?>
 <script>
-  
     $("#registerFH").submit(function(e) {
         e.preventDefault();
         const data = new FormData(e.target);
@@ -13,29 +10,18 @@ use API\Controller\Config;
         axios.post('<?= Config::BASE_ACTION_URL ?>/register-fh', object)
             .then(function(response) {
                 console.log(response)
-                // if (response.data != "sucesso!") {
-                //     throw response.data; 
-                // } else {
-                //     Swal.fire({
-                //       title: '<?= __("event_schedule_js.title_feito") ?>',
-                //       text: "<?= __("event_schedule_js.text_agenda") ?>",
-                //       icon: 'success',
-                //       showCancelButton: false,
-                //       allowOutsideClick: false,
-                //       confirmButtonColor: '#1f8cd4',
-                //       cancelButtonColor: '#d33',
-                //       confirmButtonText: '<?= __("event_schedule_js.confirm") ?>'
-                //       }).then((result) => {
-                //       if (result.isConfirmed) {
-                //         window.location.href = "<?= Config::BASE_URL?>project-definitions/<?=$projectNumber?>"
-                //       }
-                // })
-                // }
+                if (response.data.status != 200) {
+                    throw response.data;
+                } else {
+                    window.location.href = "<?= Config::BASE_URL ?>formative-member"
+                }
             })
             .catch(function(error) {
+        
+                console.log(error.status)
                 Swal.fire({
-                    title: '<?= __("event_schedule_js.title_erro") ?>',
-                    text: "<?= __("event_schedule_js.text_erro") ?>",
+                    title: 'Tivemos um problema!',
+                    text: 'Tivemos um problema ao cadastrar hora formativa (STATUS: ' + error.status + ')',
                     icon: 'error',
                     showCancelButton: false,
                     confirmButtonColor: '#1f8cd4',
