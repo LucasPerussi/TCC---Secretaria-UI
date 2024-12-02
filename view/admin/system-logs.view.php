@@ -14,28 +14,28 @@ use API\Controller\Config;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
 
-    <title>WeJourney - Inventário da Empresa</title>
+    <title>Logs</title>
     <meta name='robots' content='noindex'>
-    
+
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/editors/quill/katex.min.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/editors/quill/monokai-sublime.min.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/editors/quill/quill.snow.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/editors/quill/quill.bubble.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/forms/select/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/core/menu/menu-types/horizontal-menu.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/editors/quill/katex.min.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/editors/quill/monokai-sublime.min.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/editors/quill/quill.snow.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/editors/quill/quill.bubble.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/css/core/menu/menu-types/horizontal-menu.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap">
     <!-- END: Vendor CSS-->
 
     <?php include "view/src/head.php"; ?>
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/plugins/forms/form-quill-editor.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/app-assets/css/plugins/forms/form-quill-editor.css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -111,7 +111,7 @@ use API\Controller\Config;
         }
     </style>
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="layout/assets/css/style.css">
+    <link rel="stylesheet" type="text/css"href="<?= Config::BASE_URL ?>layout/assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
@@ -142,7 +142,7 @@ use API\Controller\Config;
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Logs 10 dias
+                                    <li class="breadcrumb-item active">Logs 
                                     </li>
                                 </ol>
                             </div>
@@ -271,70 +271,26 @@ use API\Controller\Config;
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <!-- BEGIN: Footer-->
 
-    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
-    <!-- END: Footer-->
-    <script>
-        $(function() {
-            var valorDaDiv = $(".editor").text();
-            $("#body").val(valorDaDiv);
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/kax3g6nv8huzxh65lnkeyjb9qhudlkdh33rgg5zydz16c8pe/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="layout/app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="layout/app-assets/vendors/js/editors/quill/katex.min.js"></script>
-    <script src="layout/app-assets/vendors/js/editors/quill/highlight.min.js"></script>
-    <script src="layout/app-assets/vendors/js/editors/quill/quill.min.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="layout/app-assets/js/core/app-menu.js"></script>
-    <script src="layout/app-assets/js/core/app.js"></script>
-    <!-- END: Theme JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- BEGIN: Page JS-->
-    <script src="layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
     <?php
     require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
     ?>
-    <script>
-        $(".ql-editor").keyup(function() {
-            var value = $(this).html();
-            $("#editorCopy").val(value);
-        }).keyup();
-    </script>
+
+    <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/vendors.min.js"></script>
 
 
+    <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <!-- END: Page Vendor JS-->
 
-    <script src="layout/app-assets/js/scripts/my-department.js"></script>
-    <script src="layout/app-assets/js/scripts/pages/page-api-key.js"></script>
-    <script src="layout/app-assets/js/scripts/forms/form-select2.js"></script>
-    <script src="layout/app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <script src="layout/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <!-- BEGIN: Theme JS-->
+    <script src="<?= Config::BASE_URL ?>layout/app-assets/js/core/app-menu.js"></script>
+    <script src="<?= Config::BASE_URL ?>layout/app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
 
-
-    <!-- END: Page JS-->
-    <script>
-        $(window).on('load', function() {
-            if (feather) {
-                feather.replace({
-                    width: 14,
-                    height: 14
-                });
-            }
-        })
-    </script>
 
 
 </body>
