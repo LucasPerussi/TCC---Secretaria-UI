@@ -15,6 +15,7 @@ use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
+use function API\Fetch\getLogs;
 use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\loadCompaniesComplete;
@@ -94,6 +95,14 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $timelines = getUserTimelines($_SESSION['user_id']);
             require __DIR__ . "/../view/general/account-history.view.php";
+        });
+        $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $logs = getLogs();
+            require __DIR__ . "/../view/admin/system-logs.view.php";
         });
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
