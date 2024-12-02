@@ -16,6 +16,7 @@ use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
 use function API\Fetch\getUser;
+use function API\Fetch\getUserTimelines;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -85,6 +86,14 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $last50Logs = getLast50Logs();
             require __DIR__ . "/../view/admin/dashboard.view.php";
+        });
+        $this->addRoute("get", "/account-history", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $timelines = getUserTimelines($_SESSION['user_id']);
+            require __DIR__ . "/../view/general/account-history.view.php";
         });
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
             // $obj->verifyCookies();

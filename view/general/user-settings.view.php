@@ -246,6 +246,10 @@ include "view/src/head.php"; ?>
                         <h6>Sempre opte por senhas seguras!</h6>
                         <br />
                         <br />
+                        <h1>Histórico da Conta <a href="account-history" class="btn btn-dark" style="float:right;">Visualizar</a></h1>
+                        <h6>Você a timeline de tudo que realizou.</h6>
+                        <br />
+                        <br />
                         <br />
                     </div>
                     <div class="col-md-6 col-sm-12">

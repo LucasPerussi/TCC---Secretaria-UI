@@ -19,3 +19,12 @@ function getUser($user)
     Logger::log($_SESSION["user_id"], "Erro ao listar horas formativas de usuário $user. Error: " . $response["message"], "getHoursUser", "error");
     return $response;
 }
+function getUserTimelines($user)
+{
+    $response = APIRequest::getRequest("system/timelines-user/" . $user);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar horas formativas de usuário $user. Error: " . $response["message"], "getHoursUser", "error");
+    return $response;
+}
