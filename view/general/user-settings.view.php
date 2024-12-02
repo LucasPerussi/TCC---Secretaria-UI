@@ -119,15 +119,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="email-icon"><?= htmlspecialchars(__("user_edit.email")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
 
                                             <input type="email" class="form-control" value="<?= htmlspecialchars($user["email"]) ?>" name="email" placeholder="email@exemplo.com" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveEmail" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveEmail" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -140,15 +140,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="registro-icon">Registro</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-card-text"></i></span>
 
                                             <input type="text" maxlength="15" class="form-control" value="<?= htmlspecialchars($user["registro"]) ?>" name="registro" placeholder="Registro" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveRegistro" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveRegistro" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -161,15 +161,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="nome-icon"><?= htmlspecialchars(__("user_edit.nome")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-person"></i></span>
 
                                             <input type="text" class="form-control" value="<?= htmlspecialchars($user["nome"]) ?>" name="nome" placeholder="Nome" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNome" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNome" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -182,15 +182,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="sobrenome-icon"><?= htmlspecialchars(__("user_edit.sobrenome")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
 
                                             <input type="text" class="form-control" value="<?= htmlspecialchars($user["sobrenome"]) ?>" name="sobrenome" placeholder="Sobrenome" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveSobrenome" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveSobrenome" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -203,7 +203,7 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="nascimento-icon">Nascimento</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
 
@@ -211,8 +211,8 @@ include "view/src/head.php"; ?>
                                                                                             echo $date->format('Y-m-d'); ?>" name="nascimento" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNascimento" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNascimento" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -225,15 +225,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="curso-icon">Curso</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
 
                                             <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Curso ID" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
