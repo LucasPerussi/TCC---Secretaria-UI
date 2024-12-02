@@ -222,11 +222,9 @@ include "view/src/head.php"; ?>
 
     <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
 
-    <script src="<?= Config::BASE_URL ?>layout/app-assets/js/scripts/pages/auth-reset-password.js"></script>
+
 
     <script src="https://unpkg.com/feather-icons"></script>
-
-
 
 </body>
 <!-- END: Body-->

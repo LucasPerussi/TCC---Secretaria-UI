@@ -222,6 +222,8 @@ use API\Controller\Config;
         <!-- BEGIN: Page JS-->
         <script src="<?= Config::BASE_URL ?>layout/app-assets/js/scripts/pages/auth-login.js"></script>
         <!-- END: Page JS-->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
         <?php
         require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
@@ -239,11 +241,9 @@ use API\Controller\Config;
         <?php
         require __DIR__ . "/../default.js.php";
         ?>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </body>
 
     <!-- END: Body-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     </html>
 

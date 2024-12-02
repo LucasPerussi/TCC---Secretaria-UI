@@ -16,6 +16,7 @@ use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
 use function API\Fetch\getLogs;
+use function API\Fetch\getMytickersAsTeacher;
 use function API\Fetch\getRequestTypes;
 use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
@@ -82,12 +83,23 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/auth/logout.php";
         });
         $this->addRoute("get", "/dashboard", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
+            // $obj->checkSession();
+            // $obj->setCookies();
             $obj->verifyLogged();
-            $last50Logs = getLast50Logs();
-            require __DIR__ . "/../view/admin/dashboard.view.php";
+            if ($_SESSION['user_role'] == "Aluno"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/member/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Professor"){
+                $myteacherRequests = getMytickersAsTeacher();
+                require __DIR__ . "/../view/teacher/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Servidor"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/server/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Admin"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/admin/dashboard.view.php";
+            }
+          
         });
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
             // $obj->verifyCookies();
