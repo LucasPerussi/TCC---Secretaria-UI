@@ -13,6 +13,7 @@ use Exception;
 use function API\Fetch\getCourses;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
+use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -109,13 +110,14 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $hours = getHoursUser($_SESSION["user_id"]);
             $types = getFormativeHoursTypes();
+            $percentage = getHoursUserPercentage($_SESSION["user_id"]);
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
         $this->addRoute("get", "/courses-list", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->verifyLogged();
-            $courses = getCourses();
+            // $courses = getCourses();
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
         // $this->addRoute("get", "/formative-member", function ($args) use ($obj) {

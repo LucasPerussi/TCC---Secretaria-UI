@@ -7,27 +7,39 @@ class Logger
 {
     public static function log($user, $operation, $function, $status)
     {
-        // $conn = mysqli_connect(Config::SERVERNAME, Config::USERNAME, Config::DB_PASSWORD, Config::LOGS_DB_NAME);
+        $url = Config::API_URL . "hours/new-log";
 
-        // if (!$conn) {
-        //     return ("Connection failed: " . mysqli_connect_error());
-        // }
-    
-        // $user = mysqli_real_escape_string($conn, $user);
-        // $operation = mysqli_real_escape_string($conn, $operation);
-        // $function = mysqli_real_escape_string($conn, $function);
-        // $status = mysqli_real_escape_string($conn, $status);
+        $data = [
+            'funcao' => $function,
+            'desmensagemcricao' => $operation,
+            'status' => $status,
+            'usuario' => $user,
+           
+        ];
+        $ch = curl_init($url);
 
-        // $sql = "INSERT INTO " . Config::TABLE_LOGS . "
-        // (log_user, log_operation, log_function, log_status) VALUES
-        // ('$user', '$operation', '$function', '$status');";
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: ' . $_SESSION['user_token'],
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-        // if (mysqli_query($conn, $sql)) {
-        //     return "sucesso!";
-        // } else {
-        //     $error_msg = mysqli_error($conn);
-        //     $error = true;
-        //     return $error_msg;
-        // }
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            curl_close($ch);
+            return [
+                'status' => 'error',
+                'message' => "Erro ao salvar log: " . $error_msg
+            ];
+        }
+
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return;
     }
 }

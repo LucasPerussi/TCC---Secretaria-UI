@@ -3,47 +3,62 @@
 use API\Controller\Config;
 ?>
 
-<!-- document.addEventListener("DOMContentLoaded", function () {
-    const studentId = "<?= $_SESSION['user_id'] ?>";
-    getStudentHours(studentId);
-}) -->
+<script>
+        // Dados fornecidos em JSON
+        const data = <?=json_encode($percentage, true)?>;
 
-<!-- function getStudentHours(studentId) {
-    axios.get(`<?= Config::BASE_ACTION_URL ?>/getStudentHours`, {
-        params: { id: studentId }
-    })
-    .then(response => {
-        if (response.data.status === "error") {
-            toastr.error(response.data.message, "Erro");
-        } else {
-            const hours = response.data;
-            console.log("Horas do Aluno:", hours);
-        }
-    })
-    .catch(error => {
-        console.error("Erro ao buscar as horas:", error);
-        toastr.error("Erro ao buscar as horas", Erro);
-    })
-} -->
-<!-- 
-function renderCards(data) {
-    const container = document.getElementById("student-hours-cards");
-    container.innerHTML = "";
+        // Filtrar tipos com percentual maior que 0 (opcional)
+        const filteredData = data.filter(item => item.percentual > 0);
 
-    data.forEach(record => {
-        const card = document.createElement("div");
-        card.className = "card";
+        // Preparar os dados para o Chart.js
+        const labels = filteredData.map(item => item.nome);
+        const percentuais = filteredData.map(item => item.percentual);
 
-        card.innerHTML =
-            <h4>${record.type}</h4>
-            <p>${record.description}</p>
-            <div class="card-icons">
-                <div class="icon ${record.valid ? 'green' : 'red'}">${record.valid ? 'Válido' : 'Inválido'}</div>
-                <div class="icon green">${record.hours} horas</div>
-                <a href="formative-member-details"><div class="icon gray"><?= __("formative_member.button") ?></div></a>
-            </div>
-        ;
+        // Cores para cada fatia do gráfico
+        const cores = [
+            '#FF5733', // Cor para id 1
+            '#33FF57', // Cor para id 2
+            '#3357FF', // Cor para id 3
+            '#FF33A8', // Cor para id 4
+            '#33FFF5'  // Cor para id 5
+        ];
 
-        container.appendChild(card);
-    });
-} -->
+        // Selecionar apenas as cores dos tipos filtrados
+        const coresFiltradas = filteredData.map(item => cores[item.id - 1]);
+
+        // Configuração do gráfico de pizza
+        const ctx = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: percentuais,
+                    backgroundColor: coresFiltradas,
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                return `${label}: ${value}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
