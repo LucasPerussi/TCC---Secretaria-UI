@@ -14,6 +14,7 @@ use function API\Fetch\getCourses;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
+use function API\Fetch\getLast50Logs;
 use function API\Fetch\getUser;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
@@ -82,7 +83,8 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/dashboard-admin.php";
+            $last50Logs = getLast50Logs();
+            require __DIR__ . "/../view/admin/dashboard.view.php";
         });
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
