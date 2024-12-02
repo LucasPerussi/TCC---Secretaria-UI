@@ -98,7 +98,7 @@ include "view/src/head.php"; ?>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
                                 <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Condifurações de Usuário</li>
+                                <li class="breadcrumb-item active">Conurações de Usuário</li>
                             </ol>
                         </div>
                     </div>

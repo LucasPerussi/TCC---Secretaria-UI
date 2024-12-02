@@ -63,6 +63,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
         });
+        $this->addRoute("post", "/register-type", function ($args) use ($obj) {
+            $obj->newProcessType();
+        });
       
     }
 
@@ -139,6 +142,14 @@ class Route extends \API\Router\DefaultRouter
         fields(["descricao", "data_evento", "horas_solicitadas", "tipo", "comprovante"], $body, false);
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
+    }
+
+    public function newProcessType()
+    {
+        $body = $this->getBody();
+        fields(["nome", "fluxograma", "hrs_resposta", "hrs_resolucao"], $body, false);
+
+        echo json_encode($this->systemController->newProcessType($body["nome"], $body["fluxograma"], $body["hrs_resposta"], $body["hrs_resolucao"]));
     }
 
 

@@ -16,6 +16,7 @@ use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
 use function API\Fetch\getLogs;
+use function API\Fetch\getRequestTypes;
 use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\loadCompaniesComplete;
@@ -219,6 +220,14 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/admin/entity-list.php";
+        });
+        $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $processes = getRequestTypes();
+            require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
     }
 
