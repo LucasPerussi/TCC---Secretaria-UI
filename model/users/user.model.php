@@ -40,6 +40,21 @@ class UserModel
         return APIRequest::handleResponse($result, 'login');
     }
 
+    public function updateUser($field, $endpoint)
+    {
+        $field = Sanitize::clean($field, "field", "updateUser - $endpoint");
+        $endpoint = Sanitize::clean($endpoint, "endpoint", "updateUser - $endpoint");
+        $user = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "users/$endpoint/$user";
+
+        $data = [
+            "$endpoint" => $field,
+        ];
+
+        return APIRequest::patchRequest($url, $data, "registerFH");
+    }
+
     public function signup($name,$lastName,$birth,$registro,$email,$password)
     {
         $email = Sanitize::clean($email, "email", "signup");

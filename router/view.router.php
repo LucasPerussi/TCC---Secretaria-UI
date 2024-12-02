@@ -14,6 +14,7 @@ use function API\Fetch\getCourses;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
+use function API\Fetch\getUser;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -119,6 +120,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             // $courses = getCourses();
             require __DIR__ . "/../view/member/formative-member.view.php";
+        });
+        $this->addRoute("get", "/settings", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $user = getUser($_SESSION['user_id']);
+            require __DIR__ . "/../view/general/user-settings.view.php";
         });
         // $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
         //     // $obj->verifyCookies();

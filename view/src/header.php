@@ -630,7 +630,7 @@ use API\enum\Notification_enum;
                                                                 } else {
                                                                     echo ("admin");
                                                                 } ?></span>
-                        </div><span class="avatar"><img class="round" height="45" alt="profile pic" src="<?= $_SESSION["user_picture"] ?>"></span>
+                        </div><span class="avatar"><img class="round" id="headerProfilePic" height="45" alt="profile pic" src="<?= $_SESSION["user_picture"] ?>"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                         

@@ -83,78 +83,84 @@ include "view/src/head.php"; ?>
 
             </div>
             <div class="content-body">
-                <div class="card p-1 ">
-                    <form id="registerFH">
-                        <div class="row">
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" required for="email-icon">Descrição</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                        <input type="text" id="name-icon" class="form-control" name="descricao" placeholder="Participei de..." />
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <div class="card p-1 ">
+                            <form id="registerFH">
+                                <div class="row">
+                                    <div class="mb-1 row">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label" required for="email-icon">Descrição</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                                                <input type="text" id="name-icon" class="form-control" name="descricao" placeholder="Participei de..." />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Tipo</label>
-                                </div>
+                                    <div class="mb-1 row">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label" for="email-icon">Tipo</label>
+                                        </div>
 
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge select">
-                                        <select class="form-select form-select-lg" name="tipo" id="selectLarge">
-                                            <?php foreach ($types as $type) { ?>
-                                                <option value="<?= htmlspecialchars($type['id']) ?>"><?= htmlspecialchars($type['nome']) ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge select">
+                                                <select class="form-select form-select-lg" name="tipo" id="selectLarge">
+                                                    <?php foreach ($types as $type) { ?>
+                                                        <option value="<?= htmlspecialchars($type['id']) ?>"><?= htmlspecialchars($type['nome']) ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Horas Solicitadas</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                        <input type="number" id="name-icon" class="form-control" name="horas_solicitadas" placeholder="4" />
+                                    <div class="mb-1 row">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label" for="email-icon">Horas Solicitadas</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                                <input type="number" id="name-icon" class="form-control" name="horas_solicitadas" placeholder="4" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Data do evento</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                        <input type="date" id="name-icon" class="form-control" name="data_evento" placeholder="4" />
+                                    <div class="mb-1 row">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label" for="email-icon">Data do evento</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                                <input type="date" id="name-icon" class="form-control" name="data_evento" placeholder="4" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-link"></i></span>
-                                        <input type="name" id="name-icon" class="form-control" name="comprovante" placeholder="https://link.com.br" />
+                                    <div class="mb-1 row">
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-link"></i></span>
+                                                <input type="name" id="name-icon" class="form-control" name="comprovante" placeholder="https://link.com.br" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
-                                </div>
-                            </div>
-                    </form>
-
-
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <h1 style="font-size:250px; text-align:center;">🧑🏽‍🎓</h1>
+                    </div>
                 </div>
             </div>
         </div>

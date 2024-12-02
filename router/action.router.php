@@ -57,9 +57,70 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-fh", function ($args) use ($obj) {
             $obj->registerFH();
         });
+        $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
+            $obj->updateUser($args['endpoint']);
+        });
       
     }
 
+
+    public function updateUser($endpoint)
+    {
+        switch ($endpoint) {
+            case 'email':
+                $body = $this->getBody();
+                fields(["email"], $body, false);
+                $field = $body["descricao"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'registro':
+                $body = $this->getBody();
+                fields(["registro"], $body, false);
+                $field = $body["registro"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'nome':
+                $body = $this->getBody();
+                fields(["nome"], $body, false);
+                $field = $body["nome"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'sobrenome':
+                $body = $this->getBody();
+                fields(["sobrenome"], $body, false);
+                $field = $body["sobrenome"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'nascimento':
+                $body = $this->getBody();
+                fields(["nascimento"], $body, false);
+                $field = $body["nascimento"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'foto':
+                $body = $this->getBody();
+                fields(["foto"], $body, false);
+                $field = $body["foto"];
+                $_SESSION["user_picute"] = $body["foto"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            case 'curso':
+                $body = $this->getBody();
+                fields(["curso"], $body, false);
+                $field = $body["curso"];
+                echo json_encode($this->userController->updateUser($field, $endpoint));
+                break;
+            
+            default:
+                echo json_encode(array(
+                    "error" => true,
+                    "message" => "Endpoint indefinido"
+                ));
+                break;
+        }
+        return;
+
+    }
 
     public function registerFH()
     {

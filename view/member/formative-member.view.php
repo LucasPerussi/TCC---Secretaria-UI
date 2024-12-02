@@ -89,7 +89,7 @@ include "view/src/head.php"; ?>
             </div>
             <div class="content-body">
                 <h1>Horas Formativas <a href="new-formative-member">
-                        <span class="btn btn-dark" style="padding:7px;float:right; font-size:11px;"><i class="bi bi-eye"></i> Cadastrar</span>
+                        <span class="btn btn-dark" style="padding:7px;float:right; font-size:11px;"><i class="bi bi-plus"></i> Cadastrar</span>
                     </a></h1>
                 <h6>Administrar Atividades Formativas</h6>
                 <br />
@@ -172,6 +172,7 @@ include "view/src/head.php"; ?>
                         </div>
                         <div class="large-cards-container">
                             <h2>Percentual de Registros por Tipo</h2>
+                            <br />
                             <div class="card p-1">
 
                                 <div class="chart-container">
@@ -179,10 +180,7 @@ include "view/src/head.php"; ?>
                                 </div>
                             </div>
 
-                            <div class="large-card">
-                                <h4><?= __("formative_member.tasks") ?></h4>
-                                <canvas id="pie-chart-2"></canvas>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
