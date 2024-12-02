@@ -152,7 +152,7 @@ use API\enum\Notification_enum;
             </li> -->
           
             <div id="timer" hidden style="padding:5px; border-radius:20px; background-color:#ff2551; color:#fff; "></div>
-                <li class="nav-item nav-search" style="margin-top: -5px !important;"><a href="#" class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
+                <!-- <li class="nav-item nav-search" style="margin-top: -5px !important;"><a href="#" class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                     <div class="search-input" style="border-radius:20px; height:55px; margin-top: -5px !important;">
                         <div class="search-input-icon" style="margin-top: -3px !important;"><i data-feather="search"></i></div>
                         <input class="form-control input" style="border-radius:20px; margin-top: -4px !important;height:64px !important; padding-left:60px !important;" type="text" placeholder="<?= __("header.barra_pesquisa") ?>" tabindex="-1" data-search="search">
@@ -160,27 +160,11 @@ use API\enum\Notification_enum;
                         <ul class="search-list search-list-main"></ul>
                     </div>
                 </li>
-          
+           -->
             <?php if (((isset($_SESSION["user_role"])) && (($_SESSION["user_role"] == 2) && ((isset($_SESSION["pending-users"])) && ($_SESSION["pending-users"] == "true")))) || ((isset($_SESSION["notifications"])) && ($_SESSION["notifications"] != ""))) : ?>
                 <li class="nav-item dropdown dropdown-notification me-25" style="margin-top: -5px;">
 
-                    <a onclick="Automatic()" class="nav-link" href="#" data-bs-toggle="dropdown"><i class="ficon" data-feather="bell"></i>
-                        <?php $cont = 0;
-                        if (isset($_SESSION["user_id"])) {
-                            foreach ($_SESSION["notifications"] as $item) { ?>
-                                <?php if ($item["viewed"] == 0) { ?>
-                                    <?php $cont++; ?>
-                                <?php } ?>
-                            <?php } ?>
-
-                            <?php if ($cont > 0) { ?>
-                                <span id="contador" class="badge rounded-pill bg-danger badge-up">
-                                    <?= $cont ?>
-                                </span>
-                        <?php }
-                        } ?>
-                    </a>
-
+                
 
                     <script>
                         // Defina o tempo inicial para 25 minutos
@@ -314,171 +298,7 @@ use API\enum\Notification_enum;
                         // Inicie o temporizador da sessão quando a página for carregada
                         startSessionTimer();
                     </script>
-                    <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
-                        <li class="dropdown-menu-header">
-                            <div class="dropdown-header d-flex">
-                                <h4 class="notification-title mb-0 me-auto"><?= __("header.notificacao.titulo") ?></h4>
-                                <a onclick="limpar()" id="notBadge" style="padding:8px; font-size:10px; border-radius:10px;border-color:transparent; border: solid 1px #DC143C; right:5%;margin-right:5px;"><?= __("header.notificacao.limpar") ?></a>
-                                <a onclick="ler()" id="notBadge" style="padding:8px; font-size:10px; border-radius:10px;border-color:transparent; border:solid 1px #4F4F4F; right:5%;"><?= __("header.notificacao.tudo_lido") ?></a>
-                            </div>
-                        </li>
-                        <li class="scrollable-container media-list">
-                            <?php foreach ($_SESSION["notifications"] as $item) { ?>
-                                <a class="d-flex" href="<?= $item["url"] ?>">
-                                    <div data-code="<?= $item["id"] ?>"
-                                        onclick="readNotification(<?= $item['id'] ?>)"
-                                        class="list-item d-flex align-items-start"
-                                        style="<?php if ($item["viewed"] != 2 || $item["status"] != 2) { ?>  
-                                        border-left: 7px solid <?= Notification_enum::getColorReal($item["type"]) ?> !important;
-                                             <?php } ?>">
-                                        <div class="me-1">
-                                            <div>
-                                                <span style="font-size:32px;"><?= Notification_enum::getIcone($item["type"]) ?></span>
-                                            </div>
-                                        </div>
-                                        <div class="list-item-body flex-grow-1">
-                                            <p class="media-heading" style="font-size:13px;">
-                                                <span class="lerNot"
-                                                    <?php if ($item["status"] == 1 && !($item["viewed"] == 2 && $item["status"] == 2)) { ?>
-                                                    class="fw-bolder"
-                                                    <?php } ?>>
-                                                    <?= $item["title"] ?>
-                                                </span>
-                                            </p>
-                                            <span style="margin-top:5px;font-size:11px;"><?= date("d/m/Y à\​\s H:i", strtotime($item["date"])) ?></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            <?php } ?>
-
-
-                            <?php if (((isset($_SESSION["user_role"])) && (($_SESSION["user_role"] == 2) && ((isset($_SESSION["pending-users"])) && ($_SESSION["pending-users"] == "true"))))) : ?>
-                                <?php while ($pending = mysqli_fetch_assoc($waiting)) : ?>
-                                    <a class="d-flex" href="<?= Config::BASE_URL .  "pending-users" ?>">
-                                        <div class="list-item d-flex align-items-start">
-                                            <div class="me-1">
-                                                <div class="avatar"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="avatar" width="32" height="32"></div>
-                                            </div>
-                                            <div class="list-item-body flex-grow-1">
-                                                <p class="media-heading"><span class="fw-bolder"><?= __("header.admin_aprovacao") ?></span></p><small class="notification-text"><?= __("header.admin_resposta") ?></small>
-                                            </div>
-                                        </div>
-                                    </a>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
-
-                            <script>
-                                function readNotification(id) {
-                                    axios.post(`<?= Config::BASE_ACTION_URL ?>/read/notification/${id}`)
-                                        .then(function(response) {
-                                            console.log("codigo :" + id)
-                                            console.log(response)
-                                            if (response.data.error) {
-                                                throw response.data;
-                                            } else {
-                                                // window.location.href = "<?= Config::BASE_URL . $_SESSION["last_page"] ?>"
-                                            }
-                                        })
-                                        .catch(function(response) {
-                                            Swal.fire({
-                                                title: '<?= __("Error!") ?>',
-                                                text: response.data,
-                                                icon: 'error',
-                                                showCancelButton: false,
-                                                confirmButtonColor: '#1f8cd4',
-                                                cancelButtonColor: '#d33',
-                                                confirmButtonText: '<?= __("OK") ?>'
-                                            })
-                                        });
-                                }
-
-
-                                function limpar() {
-                                    Swal.fire({
-                                        title: '<?= __("Limpar Notificações") ?>',
-                                        text: "Tem certeza que deseja excluir todas as suas notificações?",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#B22222',
-                                        cancelButtonColor: '#1f8cd4',
-                                        confirmButtonText: 'Confirmar'
-                                    }).then((result) => {
-                                        if (result.value) {
-                                            axios.post(`<?= Config::BASE_ACTION_URL ?>/delete/notifications`)
-                                                .then(function(response) {
-                                                    console.log(response)
-                                                    if (response.data != "sucesso!") {
-                                                        throw response.data;
-                                                    } else {
-                                                        window.location.href = "<?= Config::BASE_URL . $_SESSION["last_page"] ?>"
-                                                    }
-                                                })
-                                                .catch(function(response) {
-                                                    Swal.fire({
-                                                        title: '<?= __("Error!") ?>',
-                                                        text: response.data,
-                                                        icon: 'error',
-                                                        showCancelButton: false,
-                                                        confirmButtonColor: '#1f8cd4',
-                                                        cancelButtonColor: '#d33',
-                                                        confirmButtonText: '<?= __("OK") ?>'
-                                                    })
-                                                });
-                                        }
-                                    })
-                                }
-
-                                function ler() {
-                                    Swal.fire({
-                                        title: '<?= __("Marcar Tudo como Lido?") ?>',
-                                        text: "Tem certeza que deseja marcar todas as suas notificações como lidas?",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#B22222',
-                                        cancelButtonColor: '#1f8cd4',
-                                        confirmButtonText: 'Confirmar'
-                                    }).then((result) => {
-                                        if (result.value) {
-                                            axios.post(`<?= Config::BASE_ACTION_URL ?>/read/notifications`)
-                                                .then(function(response) {
-                                                    console.log(response)
-                                                    if (response.data != "sucesso!") {
-                                                        throw response.data;
-                                                    } else {
-                                                        window.location.href = "<?= Config::BASE_URL . $_SESSION["last_page"] ?>"
-                                                    }
-                                                })
-                                                .catch(function(response) {
-                                                    Swal.fire({
-                                                        title: '<?= __("Error!") ?>',
-                                                        text: response.data,
-                                                        icon: 'error',
-                                                        showCancelButton: false,
-                                                        confirmButtonColor: '#1f8cd4',
-                                                        cancelButtonColor: '#d33',
-                                                        confirmButtonText: '<?= __("OK") ?>'
-                                                    })
-                                                });
-                                        }
-                                    })
-                                }
-
-                                function Automatic() {
-                                    axios.post(`<?= Config::BASE_ACTION_URL ?>/read/automatic`)
-                                        .then(function(response) {
-                                            // console.log(response)
-                                            if (response.data != "sucesso!") {
-                                                // console.log(response.data);
-                                            } else {
-                                                document.getElementById("contador").hidden = true;
-                                            }
-                                        })
-
-
-                                }
-                            </script>
-                        </li>
-                    </ul>
+                  
                 </li>
 
             <?php endif; ?>
@@ -613,7 +433,7 @@ use API\enum\Notification_enum;
 
             <?php if (isset($_SESSION["user_id"])) : ?>
                 <li class="nav-item dropdown dropdown-user" style="margin-top: -5px !important;"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none" style="color: white !important;"><span class="user-name fw-bolder"> <?php
+                        <div class="user-nav d-sm-flex" style="color: white !important;"><span class="user-name fw-bolder"> <?php
                                                                                                                                     // $sobrenomes = explode(" ", $_SESSION['user_lastName']);
                                                                                                                                     // $ultimoSobrenome = end($sobrenomes);
                                                                                                                                     // echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome

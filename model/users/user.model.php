@@ -52,7 +52,25 @@ class UserModel
             "$endpoint" => $field,
         ];
 
-        return APIRequest::patchRequest($url, $data, "registerFH");
+        return APIRequest::patchRequest($url, $data, "updateUser");
+    }
+    
+    public function changePassword($password, $newPassword, $passwordConfirmation)
+    {
+        $password = Sanitize::clean($password, "password", "changePassword ");
+        $newPassword = Sanitize::clean($newPassword, "newPassword", "changePassword ");
+        $passwordConfirmation = Sanitize::clean($passwordConfirmation, "passwordConfirmation", "changePassword ");
+        $user = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "users/id/$user/change-password";
+
+        $data = [
+            "currentPassword" => $password,
+            "newPassword" => $newPassword,
+            "confirmPassword" => $passwordConfirmation
+        ];
+
+        return APIRequest::patchRequest($url, $data, "changePassword");
     }
 
     public function signup($name,$lastName,$birth,$registro,$email,$password)

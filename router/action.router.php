@@ -60,6 +60,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
             $obj->updateUser($args['endpoint']);
         });
+        $this->addRoute("post", "/change-password", function ($args) use ($obj) {
+            $obj->changePassword();
+        });
       
     }
 
@@ -120,6 +123,14 @@ class Route extends \API\Router\DefaultRouter
         }
         return;
 
+    }
+
+    public function changePassword()
+    {
+        $body = $this->getBody();
+        fields(["password", "new-password", "confirm-new-password"], $body, false);
+
+        echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
     }
 
     public function registerFH()

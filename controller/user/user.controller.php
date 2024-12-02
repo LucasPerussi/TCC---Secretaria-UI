@@ -41,6 +41,11 @@ class User extends DefaultController
         return $this->userModel->updateUser($field, $endpoint);
     }
 
+    function changePassword($password, $newPassword, $passwordConfirmation)
+    {
+        return $this->userModel->changePassword($password, $newPassword, $passwordConfirmation);
+    }
+
     function signup ($name,$lastName,$birth,$registro,$email,$password, $passwordConfirmation)
     {
      

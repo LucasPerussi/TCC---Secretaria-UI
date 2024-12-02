@@ -128,6 +128,13 @@ class Route extends \API\Router\DefaultRouter
             $user = getUser($_SESSION['user_id']);
             require __DIR__ . "/../view/general/user-settings.view.php";
         });
+        $this->addRoute("get", "/change-password", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $user = getUser($_SESSION['user_id']);
+            require __DIR__ . "/../view/general/change-password.view.php";
+        });
         // $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
         //     // $obj->verifyCookies();
         //     $obj->checkSession();
