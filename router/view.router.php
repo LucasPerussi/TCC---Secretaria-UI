@@ -10,6 +10,8 @@ use API\Controller\Config;
 
 use Exception;
 
+use function API\Fetch\getAlunos;
+use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
@@ -116,6 +118,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $logs = getLogs();
             require __DIR__ . "/../view/admin/system-logs.view.php";
+            //require __DIR__ . "/../view/admin/dashboard-admin.php";
         });
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -245,7 +248,37 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $page = $_GET["page"] ?? 'alunos';
+            $fetch_func = [
+                "alunos" => function () {
+                    return getAlunos();
+                },
+                "servidores" => function () {
+                    return getServidores();
+                },
+                // "chamados" => function () {
+                //     return getChamados();
+                // },
+                // "processos" => function () {
+                //     return getProcessos();
+                // },
+            ];
+            $data = array_key_exists($page, $fetch_func) ? $fetch_func[$page]() : $fetch_func["alunos"]();
             require __DIR__ . "/../view/admin/entity-list.php";
+        });
+        $this->addRoute("get", "/process-field", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/process-field.php";
+        });
+        $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/formative-validate.php";
         });
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
             // $obj->verifyCookies();

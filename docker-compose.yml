@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html/secretaria
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+

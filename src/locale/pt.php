@@ -1266,19 +1266,19 @@ return [
     //entidades
          'entities' => [
         'alunos' => [
-            'titulo' => 'Entitades - Alunos',
+            'titulo' => 'Entidades - Alunos',
             'desc' => 'Gerencie informações dos alunos cadastrados.',
         ],
         'servidores' => [
-            'titulo' => 'Entitades - Servidores',
+            'titulo' => 'Entidades - Servidores',
             'desc' => 'Acompanhe os servidores e suas atividades.',
         ],
         'chamados' => [
-            'titulo' => 'Entitades - Chamados',
+            'titulo' => 'Entidades - Chamados',
             'desc' => 'Administre os chamados abertos no sistema.',
         ],
         'processos' => [
-            'titulo' => 'Entitades - Processos',
+            'titulo' => 'Entidades - Processos',
             'desc' => 'Controle os processos administrativos.',
         ],
     ],
