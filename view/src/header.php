@@ -439,17 +439,7 @@ use API\enum\Notification_enum;
                                                                                                                                     // echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome
                                                                                                                                     echo $_SESSION['user_name'] 
                                                                                                                                      ?>
-                            </span><span class="user-status"><?php if ($_SESSION['user_role'] == 1) {
-                                                                    echo ("Member");
-                                                                } else if ($_SESSION['user_role'] == 5) {
-                                                                    echo ("Parceiro");
-                                                                } else if ($_SESSION['user_role'] == 4) {
-                                                                    echo ("Agente Wetalk");
-                                                                } else if (($_SESSION['user_role'] == 2) && ($_SESSION['company_id'] == 9999)) {
-                                                                    echo ("Master");
-                                                                } else {
-                                                                    echo ("admin");
-                                                                } ?></span>
+                            </span><span class="user-status"><?= $_SESSION['user_role']?></span>
                         </div><span class="avatar"><img class="round" id="headerProfilePic" height="45" alt="profile pic" src="<?= $_SESSION["user_picture"] ?>"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">

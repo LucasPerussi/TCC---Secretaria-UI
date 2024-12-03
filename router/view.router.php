@@ -10,11 +10,16 @@ use API\Controller\Config;
 
 use Exception;
 
+use function API\Fetch\getAlunos;
+use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
+use function API\Fetch\getLogs;
+use function API\Fetch\getMytickersAsTeacher;
+use function API\Fetch\getRequestTypes;
 use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
@@ -83,12 +88,23 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/auth/logout.php";
         });
         $this->addRoute("get", "/dashboard", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
+            // $obj->checkSession();
+            // $obj->setCookies();
             $obj->verifyLogged();
-            $last50Logs = getLast50Logs();
-            require __DIR__ . "/../view/admin/dashboard.view.php";
+            if ($_SESSION['user_role'] == "Aluno"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/member/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Professor"){
+                $myteacherRequests = getMytickersAsTeacher();
+                require __DIR__ . "/../view/teacher/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Servidor"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/server/dashboard.view.php";
+            } elseif ($_SESSION['user_role'] == "Admin"){
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/admin/dashboard.view.php";
+            }
+          
         });
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -97,6 +113,15 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $timelines = getUserTimelines($_SESSION['user_id']);
             require __DIR__ . "/../view/general/account-history.view.php";
+        });
+        $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $logs = getLogs();
+            require __DIR__ . "/../view/admin/system-logs.view.php";
+            //require __DIR__ . "/../view/admin/dashboard-admin.php";
         });
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -218,7 +243,45 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $page = $_GET["page"] ?? 'alunos';
+            $fetch_func = [
+                "alunos" => function () {
+                    return getAlunos();
+                },
+                "servidores" => function () {
+                    return getServidores();
+                },
+                // "chamados" => function () {
+                //     return getChamados();
+                // },
+                // "processos" => function () {
+                //     return getProcessos();
+                // },
+            ];
+            $data = array_key_exists($page, $fetch_func) ? $fetch_func[$page]() : $fetch_func["alunos"]();
             require __DIR__ . "/../view/admin/entity-list.php";
+        });
+        $this->addRoute("get", "/process-field", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/process-field.php";
+        });
+        $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/formative-validate.php";
+        });
+        $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $processes = getRequestTypes();
+            require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
     }
 

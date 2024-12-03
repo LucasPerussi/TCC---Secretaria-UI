@@ -98,7 +98,7 @@ include "view/src/head.php"; ?>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
                                 <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Condifurações de Usuário</li>
+                                <li class="breadcrumb-item active">Conurações de Usuário</li>
                             </ol>
                         </div>
                     </div>
@@ -119,15 +119,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="email-icon"><?= htmlspecialchars(__("user_edit.email")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
 
                                             <input type="email" class="form-control" value="<?= htmlspecialchars($user["email"]) ?>" name="email" placeholder="email@exemplo.com" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveEmail" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveEmail" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -140,15 +140,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="registro-icon">Registro</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-card-text"></i></span>
 
                                             <input type="text" maxlength="15" class="form-control" value="<?= htmlspecialchars($user["registro"]) ?>" name="registro" placeholder="Registro" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveRegistro" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveRegistro" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -161,15 +161,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="nome-icon"><?= htmlspecialchars(__("user_edit.nome")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-person"></i></span>
 
                                             <input type="text" class="form-control" value="<?= htmlspecialchars($user["nome"]) ?>" name="nome" placeholder="Nome" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNome" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNome" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -182,15 +182,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="sobrenome-icon"><?= htmlspecialchars(__("user_edit.sobrenome")) ?></label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
 
                                             <input type="text" class="form-control" value="<?= htmlspecialchars($user["sobrenome"]) ?>" name="sobrenome" placeholder="Sobrenome" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveSobrenome" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveSobrenome" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -203,7 +203,7 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="nascimento-icon">Nascimento</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
 
@@ -211,8 +211,8 @@ include "view/src/head.php"; ?>
                                                                                             echo $date->format('Y-m-d'); ?>" name="nascimento" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNascimento" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveNascimento" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -225,15 +225,15 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-3">
                                         <label class="col-form-label" for="curso-icon">Curso</label>
                                     </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
 
                                             <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Curso ID" />
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
+                                    <div class="col-sm-2">
+                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
                                             <?= htmlspecialchars(__("user_edit.salvar")) ?>
                                         </button>
                                     </div>
@@ -241,15 +241,92 @@ include "view/src/head.php"; ?>
                             </form>
 
                         </div>
+                        <h2>Tema
+                            <span class="badge rounded-pill badge-light-secondary" style="font-size:13px; float:right !important;" data-bs-toggle="tooltip" target="_blank" data-bs-placement="top" data-bs-original-title="Tema selecionado">
+                                <?php
+                                if (isset($_COOKIE["themeGetter"])) {
+                                    if ($_COOKIE["themeGetter"] == 2) {
+                                        echo __("settings.card_aparencia.selecionado.escuro");
+                                    } elseif ($_COOKIE["themeGetter"] == 3) {
+                                        echo __("settings.card_aparencia.selecionado.claro");
+                                    } else {
+                                        echo __("settings.card_aparencia.selecionado.sistema");
+                                    }
+                                } else {
+                                    echo __("settings.card_aparencia.selecionado.sistema");
+                                }
+                                ?>
+                            </span>
+                        </h2>
+
                         <br />
-                        <h1>Segurança <a href="change-password" class="btn btn-dark" style="float:right;">Alterar</a></h1>
+                        <div class="card" style="padding:20px;">
+
+                            <div class="d-flex mt-0">
+                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
+                                    <div class="me-1">
+                                        <p class="fw-bolder mb-0"><i class="bi bi-laptop"></i> <span style="margin-left:10px;"><?= htmlspecialchars(__("settings.card_aparencia.sincronizar")) ?></span> </p>
+                                        <span><?= htmlspecialchars(__("settings.card_aparencia.sincronizar_desc")) ?></span>
+                                    </div>
+                                    <div class="mt-10 mt-sm-0">
+                                        <div class="form-check form-check-info">
+                                            <input type="radio" name="theme" class="form-check-input" id="checkSystem" <?php if (!isset($_COOKIE["themeGetter"]) || $_COOKIE["themeGetter"] == 1) {
+                                                                                                                            echo "checked";
+                                                                                                                        } ?> />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-2">
+                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
+                                    <div class="me-1">
+                                        <p class="fw-bolder mb-0"><i class="bi bi-moon"></i> <span style="margin-left:10px;"><?= htmlspecialchars(__("settings.card_aparencia.escuro")) ?></span> </p>
+                                        <span><?= htmlspecialchars(__("settings.card_aparencia.escuro_desc")) ?></span>
+                                    </div>
+                                    <div class="mt-50 mt-sm-0">
+                                        <div class="form-check form-check-info">
+                                            <input type="radio" name="theme" class="form-check-input" id="checkDark" <?php if (isset($_COOKIE["themeGetter"]) && $_COOKIE["themeGetter"] == 2) {
+                                                                                                                            echo "checked";
+                                                                                                                        } ?> />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="search_idioma"></div>
+                            <div class="d-flex mt-2">
+                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
+                                    <div class="me-1">
+                                        <p class="fw-bolder mb-0"><i class="bi bi-brightness-high"></i> <span style="margin-left:10px;"><?= htmlspecialchars(__("settings.card_aparencia.claro")) ?></span> </p>
+                                        <span><?= htmlspecialchars(__("settings.card_aparencia.claro_desc")) ?></span>
+                                    </div>
+                                    <div class="mt-50 mt-sm-0">
+                                        <div class="form-check form-check-info">
+                                            <input type="radio" name="theme" class="form-check-input" id="checkLight" <?php if (isset($_COOKIE["themeGetter"]) && $_COOKIE["themeGetter"] == 3) {
+                                                                                                                            echo "checked";
+                                                                                                                        } ?> />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-0">
+                                <div class="d-flex align-item-center justify-content-between flex-grow-1">
+                                    <div class="me-1">
+                                        <span id="erroSelecao" hidden style="padding:10px; background-color:#d76565a8; color:white !important; border-radius:20px;margin-top:10px;"><?= htmlspecialchars(__("settings.card_aparencia.erro")) ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <h2>Segurança <a href="change-password" class="btn btn-dark" style="float:right;">Alterar</a></h2>
                         <h6>Sempre opte por senhas seguras!</h6>
                         <br />
                         <br />
-                        <h1>Histórico da Conta <a href="account-history" class="btn btn-dark" style="float:right;">Visualizar</a></h1>
+                        <h2>Histórico da Conta <a href="account-history" class="btn btn-dark" style="float:right;">Visualizar</a></h2>
                         <h6>Você a timeline de tudo que realizou.</h6>
                         <br />
                         <br />
+
+
                         <br />
                     </div>
                     <div class="col-md-6 col-sm-12">

@@ -23,7 +23,7 @@ use const Siler\Config\CONFIG; ?>
     <meta name='robots' content='noindex'>
     <link rel="stylesheet" type="text/css" href="src/css/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="src/css/carousel.css">
-    <title>WeJourney - Painel Admin</title>
+    <title>Painel Admin</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
@@ -95,10 +95,11 @@ use const Siler\Config\CONFIG; ?>
                             <p class=" mb-0" style="color:gray;">
                                 Acesse recursos importantes de forma rápida</p>
                             <br />
-                            <a href="<?= Config::BASE_URL ?>company-settings" target="_blank" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;"><?= __("dashboard_admin.bottom_cards.config") ?></a>
-                            <a href="<?= Config::BASE_URL ?>company-settings#logs" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;"><?= __("dashboard_admin.bottom_cards.logs") ?></a>
-                            <a href="<?= Config::BASE_URL ?>list-rooms" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;"><?= __("dashboard_admin.bottom_cards.materiais") ?></a>
-                            <a href="<?= Config::BASE_URL ?>invite-users-company" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Convidar Usuários</a>
+                            <a href="<?= Config::BASE_URL ?>system-logs" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Logs do Sistema</a>
+                            <a href="<?= Config::BASE_URL ?>entity-list"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Entidades</a>
+                            <a href="<?= Config::BASE_URL ?>proccess-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Processos</a>
+                            <a href="<?= Config::BASE_URL ?>mural-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Murais</a>
+                            <a href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Documentação API</a>
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">

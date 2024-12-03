@@ -22,3 +22,15 @@ function getLast50Logs()
 }
 
 
+
+function getLogs()
+{
+    $response = APIRequest::getRequest("system/logs");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar logs. Error: " . $response["message"], "getLast50Logs", "error");
+    return $response;
+}
+
+

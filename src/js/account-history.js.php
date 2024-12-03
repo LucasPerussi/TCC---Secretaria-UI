@@ -16,7 +16,7 @@
             1: '#1E90FF', // Criação de Conta
             2: '#20B2AA', // Login
             3: '#FA8072', // Chamado registrado
-            4: '#00BFFF'  // Alteração de Senha
+            4: '#00BFFF' // Alteração de Senha
         };
 
         // Mapeamento dos textos das badges
@@ -102,6 +102,16 @@
         displayData();
     }
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = ('0' + date.getDate()).slice(-2);
+        const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+        const year = date.getFullYear();
+        const hours = ('0' + date.getHours()).slice(-2); 
+        const minutes = ('0' + date.getMinutes()).slice(-2); 
+
+        return `${day}/${month}/${year} às ${hours}:${minutes}`;
+    }
     // Função para exibir dados na lista de timelines com paginação
     function displayData() {
         const tableBody = document.getElementById('timelines');
@@ -163,7 +173,7 @@
                 <div class="timeline-event">
                     <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                         <h6>${item.titulo}</h6>
-                        <span class="timeline-event-time">${item.data}</span>
+                        <span class="timeline-event-time">${formatDate(item.data)}</span>
                     </div>
                     <div>${item.descricao}</div>
                     <div class="d-flex flex-row align-items-center">

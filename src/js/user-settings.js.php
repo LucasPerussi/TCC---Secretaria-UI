@@ -199,3 +199,91 @@ use API\Controller\Config;
         }
     });
 </script>
+
+
+
+<script>
+    function criarCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function enableSwitches() {
+        document.getElementById("checkSystem").disabled = false;
+        document.getElementById("checkDark").disabled = false;
+        document.getElementById("checkLight").disabled = false;
+    }
+
+    document.addEventListener("DOMContentLoaded", enableSwitches);
+
+    function selecioneSystem() {
+        if (document.getElementById("checkSystem").checked == true) {
+            document.getElementById("checkDark").checked = false;
+            document.getElementById("checkLight").checked = false;
+            document.getElementById("erroSelecao").hidden = true;
+            criarCookie("themeGetter", "1", 7);
+            criarCookie("theme", "System", 7);
+            Toast.fire({
+                icon: 'success',
+                title: '<?= htmlspecialchars(__("settings.card_aparencia.pop_up.sistema")) ?>'
+            });
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } else {
+            document.getElementById("checkSystem").checked = true;
+            document.getElementById("erroSelecao").hidden = false;
+        }
+    }
+
+    function selecioneDark() {
+        if (document.getElementById("checkDark").checked == true) {
+            document.getElementById("checkSystem").checked = false;
+            document.getElementById("checkLight").checked = false;
+            document.getElementById("erroSelecao").hidden = true;
+            criarCookie("themeGetter", "2", 7);
+            criarCookie("theme", "Dark", 7);
+            Toast.fire({
+                icon: 'success',
+                title: '<?= htmlspecialchars(__("settings.card_aparencia.pop_up.escuro")) ?>'
+            });
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } else {
+            document.getElementById("checkDark").checked = true;
+            document.getElementById("erroSelecao").hidden = false;
+        }
+    }
+
+    function selecioneLight() {
+        if (document.getElementById("checkLight").checked == true) {
+            document.getElementById("checkSystem").checked = false;
+            document.getElementById("checkDark").checked = false;
+            document.getElementById("erroSelecao").hidden = true;
+            criarCookie("themeGetter", "3", 7);
+            criarCookie("theme", "Light", 7);
+            Toast.fire({
+                icon: 'success',
+                title: '<?= htmlspecialchars(__("settings.card_aparencia.pop_up.claro")) ?>'
+            });
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } else {
+            document.getElementById("checkLight").checked = true;
+            document.getElementById("erroSelecao").hidden = false;
+        }
+    }
+
+    document.getElementById("erroSelecao").hidden = true;
+
+    document.getElementById("checkSystem").addEventListener("change", selecioneSystem);
+    document.getElementById("checkDark").addEventListener("change", selecioneDark);
+    document.getElementById("checkLight").addEventListener("change", selecioneLight);
+</script>

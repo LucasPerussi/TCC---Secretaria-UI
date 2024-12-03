@@ -68,6 +68,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-request", function($args) use ($obj) {
             $obj->registerRequest();
         });
+        $this->addRoute("post", "/register-type", function ($args) use ($obj) {
+            $obj->newProcessType();
+        });
       
     }
 
@@ -154,6 +157,13 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->requestController->registerRequest($body["titulo"], $body["descricao"], $body["professor_avaliador"]));
     }
 
+    public function newProcessType()
+    {
+        $body = $this->getBody();
+        fields(["nome", "fluxograma", "hrs_resposta", "hrs_resolucao"], $body, false);
+
+        echo json_encode($this->systemController->newProcessType($body["nome"], $body["fluxograma"], $body["hrs_resposta"], $body["hrs_resolucao"]));
+    }
 
     public function login()
     {
