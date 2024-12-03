@@ -168,24 +168,24 @@ use const Siler\Config\CONFIG; ?>
                         <br />
                         <?php if (!isset($defaultFields["error"])) { ?>
                             <div class="card p-1">
-                            <?php foreach ($defaultFields as $field) { ?>
-                                <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
+                                <?php foreach ($defaultFields as $field) { ?>
+                                    <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
                                         <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $field["etiqueta"] ?> <span style=" font-size:12px; float:right;" class="badge rounded-pill bg-light-secondary">Padrão</span></h4>
                                         <h6>Nome: <?= $field["nome"] ?>
                                             ID - <?= $field["id"] ?>
-                                            
+
                                             <span style=" font-size:10px;" class="badge rounded-pill bg-light-<?= $field["obrigatorio"] != 0 ? "danger" : "info" ?>"><?= $field["obrigatorio"] != 0 ? "<i class='bi bi-asterisk'></i> Obrigatório" : "Opcional" ?></span>
                                             <a href="#"><span style=" font-size:10px;float:right;padding:5px !important;" class="badge rounded-pill bg-light-primary"> <i class="bi bi-asterisk"></i></span></a>
                                             <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;padding:5px !important;" class="badge rounded-pill bg-light-danger"> <i class="bi bi-trash"></i></span></a>
                                         </h6>
                                     </div>
-                                    <?php } ?>
-                                </div>
-                            <?php } else { ?>
-                                <div class="card" >
-                                    <h6>Nada a listar</h6>
-                                </div>
-                            <?php } ?>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card">
+                                <h6>Nada a listar</h6>
+                            </div>
+                        <?php } ?>
 
                     </div>
                 </div>

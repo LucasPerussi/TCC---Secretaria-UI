@@ -61,6 +61,45 @@ class System extends DefaultController
 
         return $this->systemModel->newField($nome, $label, $tipo_dado);
     }
+
+    public function newFieldProccess($nome, $label, $tipo_dado, $proccess)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newFieldProccess($nome, $label, $tipo_dado, $proccess);
+    }
+    
+    public function addFieldToProccess($proccessId, $fieldId)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->addFieldToProccess($proccessId, $fieldId);
+    }
+
+    public function removeFieldToProccess($proccessId, $fieldId)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->removeFieldToProccess($proccessId, $fieldId);
+    }
 }
     
    

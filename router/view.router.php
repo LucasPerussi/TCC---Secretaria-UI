@@ -26,6 +26,7 @@ use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
+use function API\Fetch\getProccessTypeId;
 use function API\Fetch\listAdmins;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
@@ -226,6 +227,9 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $proccess = getProccessTypeId($args["proccessId"]);
+            $inputTypes = getInputTypes();
+            $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/proccess-type.view.php";
         });
         $this->addRoute("get", "/request-admin", function ($args) use ($obj) {

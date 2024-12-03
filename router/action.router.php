@@ -22,6 +22,8 @@ use Exception;
 
 use API\Controller\CSRFToken;
 
+use function API\Fetch\getDefaultFields;
+use function API\Fetch\getProccessFields;
 use function API\Validator\JSON\fields;
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -62,6 +64,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
         });
+        $this->addRoute("post", "/new-field-process/{proccessId}", function ($args) use ($obj) {
+            $obj->newFieldProccess($args['proccessId']);
+        });
         $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
             $obj->updateUser($args['endpoint']);
         });
@@ -73,6 +78,20 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/register-type", function ($args) use ($obj) {
             $obj->newProcessType();
+        });
+        $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
+            $obj->addFieldToProccess($args["proccessId"],$args["fieldId"]);
+        });
+        $this->addRoute("post", "/remove-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
+            $obj->removeFieldToProccess($args["proccessId"],$args["fieldId"]);
+        });
+      
+        // GET ENDPOINTS
+        $this->addRoute("get", "/load-default-fields", function ($args) use ($obj) {
+            $obj->listDefaultFields();
+        });
+        $this->addRoute("get", "/load-proccess-fields/{proccess}", function ($args) use ($obj) {
+            $obj->listProccessFields($args["proccess"]);
         });
       
     }
@@ -144,6 +163,15 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
     }
 
+    public function addFieldToProccess($proccessId, $fieldId)
+    {
+        echo json_encode($this->systemController->addFieldToProccess($proccessId, $fieldId));
+    }
+    public function removeFieldToProccess($proccessId, $fieldId)
+    {
+        echo json_encode($this->systemController->removeFieldToProccess($proccessId, $fieldId));
+    }
+
     public function registerFH()
     {
         $body = $this->getBody();
@@ -158,6 +186,24 @@ class Route extends \API\Router\DefaultRouter
         fields(["nome", "label", "tipo_dado"], $body, false);
 
         echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
+    }
+
+    public function newFieldProccess($proccess)
+    {
+        $body = $this->getBody();
+        fields(["nome", "label", "tipo_dado"], $body, false);
+
+        echo json_encode($this->systemController->newFieldProccess($body["nome"], $body["label"], $body["tipo_dado"], $proccess));
+    }
+
+    public function listDefaultFields()
+    {
+        echo json_encode(getDefaultFields());
+    }
+
+    public function listProccessFields($proccess)
+    {
+        echo json_encode(getProccessFields($proccess));
     }
 
     public function registerRequest()
