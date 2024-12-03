@@ -31,7 +31,7 @@ class SystemModel
         }
     }
 
-    public function  newProcessType($nome, $fluxograma, $hrs_resposta, $hrs_resolucao)
+    public function newProcessType($nome, $fluxograma, $hrs_resposta, $hrs_resolucao)
     {
         $nome = Sanitize::clean($nome, "nome", "newProcessType");
         $fluxograma = Sanitize::clean($fluxograma, "fluxograma", "newProcessType");
@@ -46,6 +46,26 @@ class SystemModel
             'hrs_resposta' => $hrs_resposta,
             'hrs_resolucao' => $hrs_resolucao
 
+        ];
+
+        return APIRequest::postRequest($url, $data, "newProcessType");
+    
+    }
+
+    public function newField($nome, $label, $tipo_dado)
+    {
+        $nome = Sanitize::clean($nome, "nome", "newField");
+        $label = Sanitize::clean($label, "label", "newField");
+        $tipo_dado = Sanitize::clean($tipo_dado, "tipo_dado", "newField");
+  
+        $url = Config::API_URL . "fields/new-type";
+
+        $data = [
+            'nome' => $nome,
+            'label' => $label,
+            'tipo_dado' => $tipo_dado,
+            'padrao' => 1,
+            'obrigatorio' => 0,
         ];
 
         return APIRequest::postRequest($url, $data, "newProcessType");

@@ -59,6 +59,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-fh", function ($args) use ($obj) {
             $obj->registerFH();
         });
+        $this->addRoute("post", "/new-field", function ($args) use ($obj) {
+            $obj->newField();
+        });
         $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
             $obj->updateUser($args['endpoint']);
         });
@@ -147,6 +150,14 @@ class Route extends \API\Router\DefaultRouter
         fields(["descricao", "data_evento", "horas_solicitadas", "tipo", "comprovante"], $body, false);
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
+    }
+
+    public function newField()
+    {
+        $body = $this->getBody();
+        fields(["nome", "label", "tipo_dado"], $body, false);
+
+        echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
     }
 
     public function registerRequest()

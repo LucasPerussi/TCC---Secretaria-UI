@@ -31,3 +31,13 @@ function getRequestTypes()
     Logger::log($_SESSION["user_id"], "Erro ao listar tipos de solicitações. Error: " . $response["message"], "getRequestTypes", "error");
     return $response;
 }
+
+function getDefaultFields()
+{
+    $response = APIRequest::getRequest("fields/all-default-fields");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos padrões. Error: " . $response["message"], "getRequestTypes", "error");
+    return $response;
+}

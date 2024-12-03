@@ -48,6 +48,19 @@ class System extends DefaultController
 
         return $this->systemModel->newProcessType($nome, $fluxograma, $hrs_resposta, $hrs_resolucao);
     }
+
+    public function newField($nome, $label, $tipo_dado)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newField($nome, $label, $tipo_dado);
+    }
 }
     
    

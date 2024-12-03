@@ -40,3 +40,13 @@ function getFormativeHoursTypes()
     Logger::log($_SESSION["user_id"], "Erro ao listar tipos de horas formativas. Error: " . $response["message"], "getFormativeHoursTypes", "error");
     return $response;
 }
+
+function getInputTypes()
+{
+    $response = APIRequest::getRequest("fields/input-types-enum");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar tipos inputs. Error: " . $response["message"], "getInputTypes", "error");
+    return $response;
+}

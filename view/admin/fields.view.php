@@ -12,12 +12,11 @@ use const Siler\Config\CONFIG; ?>
 
 <head>
 
-    <?php include "view/src/head.php"; ?>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/pages/dashboard-ecommerce.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/plugins/extensions/ext-component-toastr.css">
+    <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/app-assets/css/plugins/extensions/ext-component-toastr.css">
     <link rel="stylesheet" type="text/css" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/main.css">
     <meta name='robots' content='noindex'>
@@ -36,7 +35,8 @@ use const Siler\Config\CONFIG; ?>
             transform: scale(1.05) !important;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="layout/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= Config::BASE_URL ?>layout/assets/css/style.css">
+    <?php include "view/src/head.php"; ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
@@ -80,7 +80,7 @@ use const Siler\Config\CONFIG; ?>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
-        <div class="content-header row">
+            <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
 
@@ -107,59 +107,57 @@ use const Siler\Config\CONFIG; ?>
                         <h6>Cadastre um novo tipo de processo</h6>
                         <br />
                         <div class="card" style="padding:10px; ">
-                            <form id="registerType">
-                                    <div class="mb-1 row">
-                                        <div class="col-sm-12">
-                                            <label class="col-form-label" required for="email-icon">Nome</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                                <input type="text" id="name-icon" class="form-control" name="nome" placeholder="Quebra de Requisito, Sol..." />
-                                            </div>
+                            <form id="newField">
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Nome</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
+                                            <input type="text" id="name-icon" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Label</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-eye"></i></span>
+                                            <input type="text" id="name-icon" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="email-icon">Tipo de Dado </label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-code"></i></span>
+                                            <select class="form-select " name="tipo_dado" id="selectLarge">
+                                                <?php foreach ($inputTypes as $type) { ?>
+                                                    <option value="<?= htmlspecialchars($type['id']) ?>">
+                                                        <?= htmlspecialchars($type['nome']) ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
 
-                                    <div class="mb-1 row">
-                                        <div class="col-sm-12">
-                                            <label class="col-form-label" for="email-icon">Fluxograma</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bi bi-link"></i></span>
-                                                <input type="name" id="name-icon" class="form-control" name="fluxograma" placeholder="https://link.com.br" />
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="mb-1 row">
-                                        <div class="col-sm-12">
-                                            <label class="col-form-label" for="email-icon">Horas Para Resposta</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                                <input type="number" id="name-icon" class="form-control" name="hrs_resposta" placeholder="(x) horas" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-1 row">
-                                        <div class="col-sm-12">
-                                            <label class="col-form-label" for="email-icon">Horas Para Resolução</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                                <input type="number" id="name-icon" class="form-control" name="hrs_resolucao" placeholder="(x) horas" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
-                                        </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
                                     </div>
+                                </div>
                             </form>
 
                         </div>
@@ -168,30 +166,33 @@ use const Siler\Config\CONFIG; ?>
                         <h2>Lista </h2>
                         <h6>Estes são os tipos de processos operacionais no sistema</h6>
                         <br />
-                        <div class="card p-1">
-                            <?php foreach ($processes as $proccess) { ?>
+                        <?php if (!isset($defaultFields["error"])) { ?>
+                            <div class="card p-1">
+                            <?php foreach ($defaultFields as $field) { ?>
                                 <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $proccess["nome"] ?> </h4>
-                                    <h6><span style=" font-size:10px;" class="badge rounded-pill bg-light-primary"><?= $proccess["hrs_resposta"] ?? 0 ?> Hrs. Resposta</span>
-                                        <span style=" font-size:10px;" class="badge rounded-pill bg-light-success"><?= $proccess["hrs_resolucao"] ?? 0 ?> Hrs. Resolução</span>
-                                        <a href="#"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-eye"></i> Ver Processo</span></a>
-                                        <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;" class="badge rounded-pill bg-dark"> <i class="bi bi-bar-chart-steps"></i></span></a>
-                                    </h6>
+                                        <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $field["etiqueta"] ?> <span style=" font-size:12px; float:right;" class="badge rounded-pill bg-light-secondary">Padrão</span></h4>
+                                        <h6>Nome: <?= $field["nome"] ?>
+                                            ID - <?= $field["id"] ?>
+                                            
+                                            <span style=" font-size:10px;" class="badge rounded-pill bg-light-<?= $field["obrigatorio"] != 0 ? "danger" : "info" ?>"><?= $field["obrigatorio"] != 0 ? "<i class='bi bi-asterisk'></i> Obrigatório" : "Opcional" ?></span>
+                                            <a href="#"><span style=" font-size:10px;float:right;padding:5px !important;" class="badge rounded-pill bg-light-primary"> <i class="bi bi-asterisk"></i></span></a>
+                                            <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;padding:5px !important;" class="badge rounded-pill bg-light-danger"> <i class="bi bi-trash"></i></span></a>
+                                        </h6>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                            <?php } else { ?>
+                                <div class="card" >
+                                    <h6>Nada a listar</h6>
                                 </div>
                             <?php } ?>
 
-                        </div>
                     </div>
                 </div>
 
             </div>
 
 
-            <!-- END: Content-->
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
-            <script src='https://use.fontawesome.com/826a7e3dce.js'></script>
-            <script src="src/js/swiper-bundle.min.js"></script>
 
 
             <div class="sidenav-overlay"></div>
@@ -200,27 +201,29 @@ use const Siler\Config\CONFIG; ?>
             <!-- endbuild -->
 
             <!-- Vendors JS -->
+            <!-- BEGIN: Vendor JS-->
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/vendors.min.js"></script>
+            <!-- BEGIN Vendor JS-->
+
+            <!-- BEGIN: Page Vendor JS-->
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/editors/quill/katex.min.js"></script>
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/editors/quill/highlight.min.js"></script>
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/editors/quill/quill.min.js"></script>
+            <!-- END: Page Vendor JS-->
+
+            <!-- BEGIN: Theme JS-->
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/js/core/app-menu.js"></script>
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/js/core/app.js"></script>
+            <!-- END: Theme JS-->
+
+            <!-- BEGIN: Page JS-->
+            <script src="<?= Config::BASE_URL ?>layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
+            <?php
+            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            ?>
 
 
-            <!-- Main JS -->
-            <script src="test/assets/js/main.js"></script>
 
-            <!-- <script src="layout/app-assets/js/scripts/my-department.js"></script> -->
-            <?php include "view/src/footer.php"; ?>
-            <style>
-                .owl-stage-outer {
-                    height: 500px;
-
-                }
-
-                .cards {
-                    margin-right: 10px;
-                }
-            </style>
-
-<?php
-    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
-    ?>
 </body>
 
 </html>

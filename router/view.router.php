@@ -13,9 +13,11 @@ use Exception;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
+use function API\Fetch\getDefaultFields;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
+use function API\Fetch\getInputTypes;
 use function API\Fetch\getLast50Logs;
 use function API\Fetch\getLogs;
 use function API\Fetch\getMytickersAsTeacher;
@@ -245,6 +247,8 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $inputTypes = getInputTypes();
+            $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/fields.view.php";
         });
         $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
