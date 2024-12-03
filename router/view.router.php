@@ -205,6 +205,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/request-member.view.php";
         });
+        $this->addRoute("get", "/proccess-type/{proccessId}", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/proccess-type.view.php";
+        });
         $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
@@ -218,6 +225,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/new-request.view.php";
+        });
+        $this->addRoute("get", "/fields", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/fields.view.php";
         });
         $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
             // $obj->verifyCookies();
