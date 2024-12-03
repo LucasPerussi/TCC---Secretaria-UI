@@ -24,6 +24,7 @@ use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
+use function API\Fetch\listAdmins;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -268,6 +269,9 @@ class Route extends \API\Router\DefaultRouter
                     break;
                 case 'servidores':
                     $users = listServers();
+                    break;
+                case 'admins':
+                    $users = listAdmins();
                     break;
 
                 default:

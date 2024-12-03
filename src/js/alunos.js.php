@@ -99,10 +99,10 @@ use API\Controller\Config;
                 <td>${item.nome} ${item.sobrenome}</td>
                 <td>${item.email}</td>
                 <td>${item.registro}</td>
-                <td>${item.curso ?? 'N/A'}</td>
+                <td>${item.curso ? "<span class='badge rounded-pill bg-light-primary '>" + item.curso : "<span class='badge rounded-pill bg-light-secondary '>N/A"}</span></td>
                 <td>
-                    <a href='#' class='view-user' data-id='${item.id}'><i class="bi bi-eye"></i></a>
-                    <a href='#' class='delete-user' data-id='${item.id}'><i class="bi bi-trash"></i></a>
+                    <a href='#' class='view-user' data-id='${item.id}'><span class='badge rounded-pill bg-light-primary '><i class="bi bi-eye"></i></span></a>
+                    <a href='#' class='delete-user' data-id='${item.id}'><span class='badge rounded-pill bg-light-danger '><i class="bi bi-trash"></i></span></a>
                 </td>
             `;
             tableBody.appendChild(row);

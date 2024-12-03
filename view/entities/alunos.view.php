@@ -67,7 +67,24 @@ use API\Controller\Config;
         <div class="card" style="padding:20px !important;">
             <div class="row">
                 <div class="col-6">
-                    <h4 style="font-weight:bold !important;">Listagem de Usuários</h4>
+                    <h4 style="font-weight:bold !important;">Listagem de <?php $page = $_GET["page"] ?? 'alunos';
+                                                                            switch ($page) {
+                                                                                case 'alunos':
+                                                                                    echo "Alunos";
+                                                                                    break;
+                                                                                case 'professores':
+                                                                                    echo "Professores";
+                                                                                    break;
+                                                                                case 'servidores':
+                                                                                    echo "Servidores UFPR";
+                                                                                    break;
+                                                                                case 'admins':
+                                                                                    echo "Administradores";
+                                                                                    break;
+                                                                                default:
+                                                                                    echo "Alunos";
+                                                                                    break;
+                                                                            } ?></h4>
                     <span style="font-size:13px;">Aqui você encontra todos os usuários registrados.</span>
                 </div>
                 <div class="col-6">
@@ -90,6 +107,7 @@ use API\Controller\Config;
                         </svg></span>
                     <input type="text" id="searchInput" oninput="searchData()" class="form-control" placeholder="Pesquisar..." aria-label="Pesquisar..." aria-describedby="basic-addon-search1">
                 </div>
+                <br />
                 <table id="data-table" style="margin-top:0px;">
                     <thead id="table-header">
                         <tr>
@@ -113,21 +131,21 @@ use API\Controller\Config;
 
 <!-- Modal -->
 <div class="modal fade" id="logModal" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content p-0">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalTitle">Detalhes do Usuário</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <!-- Conteúdo será preenchido dinamicamente -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-0">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTitle">Detalhes do Usuário</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo será preenchido dinamicamente -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
+</div>
 
 
 <?php

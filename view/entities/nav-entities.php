@@ -46,6 +46,14 @@ use API\Controller\Config;
                 <span class="fw-bold">Servidores </span>
             </a>
         </div>
+        <div class="swiper-slide" style="max-width:130px !important;">
+            <a class="nav-link  <?php if ((isset($_GET["page"])) && ($_GET["page"] == "admins")) {
+                                    echo "active";
+                                } ?>" style="padding:8px; margin-right:10px;" id="business-card-section-btn" href="?page=admins">
+                <i class="bi bi-star font-medium-1 me-50"></i>
+                <span class="fw-bold">Admins </span>
+            </a>
+        </div>
 
        
     </div>

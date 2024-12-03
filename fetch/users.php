@@ -59,3 +59,13 @@ function listServers()
     Logger::log($_SESSION["user_id"], "Erro ao listar servidores. Error: " . $response["message"], "listServers", "error");
     return $response;
 }
+
+function listAdmins()
+{
+    $response = APIRequest::getRequest("users/all-admins");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar admins. Error: " . $response["message"], "listAdmins", "error");
+    return $response;
+}
