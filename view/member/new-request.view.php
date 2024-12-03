@@ -43,14 +43,26 @@ date_default_timezone_set('America/Sao_Paulo');
                                 <h2 class="section-title"><?= __("new_request.request-type") ?></h2>
                                 <p class="section-description"><?= __("new_request.description") ?></p>
                 
-                                <div class="custom-select-container">
-                                    <select class="request-select">
-                                        <option value="" disabled selected>Tipo de chamado</option>
-                                        <option value="Opção 1">Opção 1</option>
-                                        <option value="Opção 2">Opção 2</option>
-                                        <option value="Opção 3">Opção 3</option>
-                                    </select>
-                                    <i class="bi bi-caret-down-fill select-icon"></i>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="card p-1">
+                                            <?php if (!isset($types["error"])) { ?>
+                                                <div class="custom-select-container">
+                                                    <select class="request-select">
+                                                        <option value="" disabled selected>Tipo de chamado</option>
+                                                        <?php foreach ($types as $type) { ?>
+                                                            <option value="<?= htmlspecialchars($type['id']) ?>"><?= htmlspecialchars($type['nome']) ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <i class="bi bi-caret-down-fill select-icon"></i>
+                                                </div>
+                                            <?php } else { ?>
+                                            <div class="card">
+                                                <h4><?= htmlspecialchars($types["message"]) ?></h4>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <button class="next-button" onclick="window.location.href='new-request-field'"><?= __("new_request.button") ?></button>

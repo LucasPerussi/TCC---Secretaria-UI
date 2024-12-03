@@ -35,42 +35,46 @@ date_default_timezone_set('America/Sao_Paulo');
             <div class="main-content">
                 <div class="content-wrapper">
                     <div class="content-body">
-                        <h1 class="title">Mural</h1>
-                        <div class="row">
-                            <div class="card white">
-                                <h3><?= __("news_board.title") ?></h3>
-                                <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
-                                <a href="complete-board" class="card-link"><?= __("news_board.button") ?></a>                                                                                                                       
+                        
+                    <h1 class="title">Mural</h1>
+                    <div class="cards-container">
+                        <?php if (!isset($murais["error"])) { ?>
+                            <?php foreach ($murais as $mural) { ?>
+                                <?php if ($mural["visivel"] == 1) { ?>
+                                    <div class="card white p-2">
+                                        <h4><?= htmlspecialchars($mural["titulo"]) ?></h4>
+                                        <p><?= htmlspecialchars($mural["descricao"]) ?></p>
+                                        <div class="card-icons">
+                                            <h6 style="font-size:11px;">
+
+                                                <span class="badge rounded-pill bg-light-success">Visível</span>
+                        
+                                                <span class="badge rounded-pill bg-light-info">
+                                                    Autor: <?= $authors[$mural["autor"]] ?? "Desconhecido" ?>
+                                                </span>
+
+                                                <span class="badge rounded-pill bg-light-primary">
+                                                    Postado em:
+                                                    <?php
+                                                    $timestamp = strtotime($mural["data"]);
+                                                    echo $timestamp !== false ? date("d/m/Y H:i", $timestamp) : "Data inválida";
+                                                    ?>
+                                                </span>
+
+                                                <a href="news-board-details?mural=<?= urlencode($mural["id"]) ?>" class="badge rounded-pill bg-light-secondary">
+                                                    <i class="bi bi-eye"></i> Ver Detalhes
+                                                </a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <div class="card">
+                                <h4><?= $murais["message"] ?></h4>
                             </div>
-    
-                            <div class="card green">
-                                <h3><?= __("news_board.another_title") ?></h3>
-                                <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem</p>
-                            </div>
-    
-                            <div class="card white">
-                                <h3><?= __("news_board.title") ?></h3>
-                                <p>lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem
-                                ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
-                                <a href="complete-board" class="card-link"><?= __("news_board.button") ?></a>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
-                </div>
-            </div>
 
             <?php include "view/src/footer.php"; ?>
 

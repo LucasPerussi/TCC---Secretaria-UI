@@ -65,7 +65,7 @@ $url = $_SERVER['REQUEST_URI'];
             </li>
 
             <!-- Dashboard para membros (alunos) -->
-            <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Member")) : ?>
+            <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Aluno")) : ?>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'new-request' ?>"><i class="bi bi-plus-circle-fill"></i><span class="menu-title text-truncate">
                     <strong><?= __("main_menu.member.solicitacao-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.solicitacao-desc") ?></span></span></a>
                 </li>

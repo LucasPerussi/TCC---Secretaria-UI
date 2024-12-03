@@ -14,6 +14,7 @@ use API\Controller\Company as CompanyController;
 use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
 use API\Controller\TrainingHours\Training as TrainingController;
+use API\Controller\Request\Request as RequestController;
 
 
 
@@ -34,6 +35,7 @@ class Route extends \API\Router\DefaultRouter
     public TicketsController $ticketsController;
     public SystemController $systemController;
     public TrainingController $trainingController;
+    public RequestController $requestController;
 
     public function __construct()
     {
@@ -62,6 +64,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
+        });
+        $this->addRoute("post", "/register-request", function($args) use ($obj) {
+            $obj->registerRequest();
         });
       
     }
@@ -141,6 +146,13 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
     }
 
+    public function registerRequest()
+    {
+        $body = $this->getBody();
+        fields(["titulo", "descricao", "professor_avaliador"], $body, false);
+
+        echo json_encode($this->requestController->registerRequest($body["titulo"], $body["descricao"], $body["professor_avaliador"]));
+    }
 
 
     public function login()

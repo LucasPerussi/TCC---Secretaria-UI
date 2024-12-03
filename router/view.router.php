@@ -17,6 +17,9 @@ use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getLast50Logs;
 use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
+use function API\Fetch\getMurais;
+use function API\Fetch\getMuralById;
+use function API\Fetch\getRequestTypes;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
@@ -105,15 +108,22 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/news-board", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
-            $obj->setCookies();
             $obj->verifyLogged();
+            $murais = getMurais();
+            $authors = [];
+            foreach ($murais as $mural) {
+                if (!isset($authors[$mural["autor"]])) {
+                    $user = getUser($mural["autor"]);
+                    $authors[$mural["autor"]] = isset($user["error"]) ? "Desconhecido" : htmlspecialchars($user["name"]);
+                }
+            }
             require __DIR__ . "/../view/user/news-board.view.php";
         });
         $this->addRoute("get", "/complete-board", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
-            $obj->setCookies();
             $obj->verifyLogged();
+            $murais = getMuralById();
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
         $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
@@ -159,7 +169,6 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             $types = getFormativeHoursTypes();
-
             require __DIR__ . "/../view/member/new-formative-member.view.php";
         });
         // $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
@@ -193,8 +202,8 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/new-request", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
-            $obj->setCookies();
             $obj->verifyLogged();
+            $types = getRequestTypes();
             require __DIR__ . "/../view/member/new-request.view.php";
         });
         $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
