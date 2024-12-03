@@ -24,6 +24,9 @@ use API\Controller\CSRFToken;
 
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getProccessFields;
+use function API\Fetch\getProccessStages;
+use function API\Fetch\getStageTypes;
+use function API\Fetch\getUnifiedDefaultStages;
 use function API\Validator\JSON\fields;
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -64,6 +67,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
         });
+        $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
+            $obj->newStageDefault();
+        });
         $this->addRoute("post", "/new-field-process/{proccessId}", function ($args) use ($obj) {
             $obj->newFieldProccess($args['proccessId']);
         });
@@ -79,19 +85,33 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-type", function ($args) use ($obj) {
             $obj->newProcessType();
         });
+        // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
             $obj->addFieldToProccess($args["proccessId"],$args["fieldId"]);
         });
         $this->addRoute("post", "/remove-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
             $obj->removeFieldToProccess($args["proccessId"],$args["fieldId"]);
         });
+        // stages
+        $this->addRoute("post", "/add-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
+            $obj->addStageToProccess($args["proccessId"],$args["stage"]);
+        });
+        $this->addRoute("post", "/remove-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
+            $obj->removeStageToProccess($args["proccessId"],$args["stage"]);
+        });
       
         // GET ENDPOINTS
         $this->addRoute("get", "/load-default-fields", function ($args) use ($obj) {
             $obj->listDefaultFields();
         });
+        $this->addRoute("get", "/load-default-stages", function ($args) use ($obj) {
+            $obj->listDefaultStages();
+        });
         $this->addRoute("get", "/load-proccess-fields/{proccess}", function ($args) use ($obj) {
             $obj->listProccessFields($args["proccess"]);
+        });
+        $this->addRoute("get", "/load-proccess-stages/{proccess}", function ($args) use ($obj) {
+            $obj->listProccessStages($args["proccess"]);
         });
       
     }
@@ -172,6 +192,15 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->systemController->removeFieldToProccess($proccessId, $fieldId));
     }
 
+    public function addStageToProccess($proccessId, $stage)
+    {
+        echo json_encode($this->systemController->addStageToProccess($proccessId, $stage));
+    }
+    public function removeStageToProccess($proccessId, $stage)
+    {
+        echo json_encode($this->systemController->removeStageToProccess($proccessId, $stage));
+    }
+
     public function registerFH()
     {
         $body = $this->getBody();
@@ -196,14 +225,32 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->systemController->newFieldProccess($body["nome"], $body["label"], $body["tipo_dado"], $proccess));
     }
 
+    public function newStageDefault()
+    {
+        $body = $this->getBody();
+        fields(["nome", "label", "estimativaHoras", "cor"], $body, false);
+
+        echo json_encode($this->systemController->newStageDefault($body["nome"], $body["label"], $body["estimativaHoras"], $body["cor"]));
+    }
+
     public function listDefaultFields()
     {
         echo json_encode(getDefaultFields());
     }
 
+    public function listDefaultStages()
+    {
+        echo json_encode(getUnifiedDefaultStages());
+    }
+
     public function listProccessFields($proccess)
     {
         echo json_encode(getProccessFields($proccess));
+    }
+
+    public function listProccessStages($proccess)
+    {
+        echo json_encode(getProccessStages($proccess));
     }
 
     public function registerRequest()

@@ -14,6 +14,7 @@ use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
+use function API\Fetch\getDefaultStages;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
@@ -27,6 +28,7 @@ use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
 use function API\Fetch\getProccessTypeId;
+use function API\Fetch\getStageTypes;
 use function API\Fetch\listAdmins;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
@@ -222,7 +224,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/request-member.view.php";
         });
-        $this->addRoute("get", "/proccess-type/{proccessId}", function ($args) use ($obj) {
+        $this->addRoute("get", "/proccess-fields/{proccessId}", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
@@ -230,7 +232,18 @@ class Route extends \API\Router\DefaultRouter
             $proccess = getProccessTypeId($args["proccessId"]);
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
-            require __DIR__ . "/../view/admin/proccess-type.view.php";
+            require __DIR__ . "/../view/admin/proccess-fields.view.php";
+        });
+        $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $proccess = getProccessTypeId($args["proccessId"]);
+            $inputTypes = getInputTypes();
+            $stageTypes = getStageTypes();
+            $defaultFields = getDefaultFields();
+            require __DIR__ . "/../view/admin/proccess-stages.view.php";
         });
         $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -254,6 +267,15 @@ class Route extends \API\Router\DefaultRouter
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/fields.view.php";
+        });
+        $this->addRoute("get", "/stages", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $stageTypes = getStageTypes();
+            $defaultStages = getDefaultStages();
+            require __DIR__ . "/../view/admin/stages.view.php";
         });
         $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
             // $obj->verifyCookies();

@@ -105,13 +105,50 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "addFieldToProccess");
     }
 
-    public function removeFieldToProccess($proccessId, $fieldId)
+    
+
+    public function newStageDefault($nome, $label, $estHoras, $cor)
     {
-        $proccessId = Sanitize::clean($proccessId, "proccessId", "removeFieldToProccess");
-        $fieldId = Sanitize::clean($fieldId, "fieldId", "removeFieldToProccess");
+        $nome = Sanitize::clean($nome, "nome", "newStageDefault");
+        $label = Sanitize::clean($label, "label", "newStageDefault");
+        $estHoras = Sanitize::clean($estHoras, "estHoras", "newStageDefault");
+        $cor = Sanitize::clean($cor, "cor", "newStageDefault");
 
-        $url = Config::API_URL . "fields/remove-link-field-to-request/" . $fieldId . '/' . $proccessId;
+        $url = Config::API_URL . "steps/new-default";
 
-        return APIRequest::deleteRequest($url, "removeFieldToProccess");
+        $data = [
+            'nome' => $nome,
+            'label' => $label,
+            'estimativaHoras' => $estHoras,
+            'cor' => $cor
+        ];
+
+        return APIRequest::postRequest($url, $data, "newStageDefault");
+    }
+
+    public function addStageToProccess($proccessId, $stage)
+    {
+        $proccessId = Sanitize::clean($proccessId, "proccessId", "addStageToProccess");
+        $stage = Sanitize::clean($stage, "stage", "addStageToProccess");
+
+        $url = Config::API_URL . "steps/link-step-to-proccess";
+
+        $data = [
+            'tipo' => $stage,
+            'obrigatorio' => 0,
+            'proccess' => $proccessId
+        ];
+
+        return APIRequest::postRequest($url, $data, "addStageToProccess");
+    }
+
+    public function removeStageToProccess($proccessId, $stage)
+    {
+        $proccessId = Sanitize::clean($proccessId, "proccessId", "removeStageToProccess");
+        $stage = Sanitize::clean($stage, "stage", "removeStageToProccess");
+
+        $url = Config::API_URL . "steps/remove-link-stage-to-request/" . $stage . '/' . $proccessId;
+
+        return APIRequest::deleteRequest($url, "removeStageToProccess");
     }
 }

@@ -88,11 +88,11 @@ use const Siler\Config\CONFIG; ?>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
                                 <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'proccess-management' ?>">Tipos de Processo</a></li>
-                                <li class="breadcrumb-item active">Campos do Processo</li>
+                                <li class="breadcrumb-item active">Estágios do Processo</li>
                             </ol>
                         </div>
                     </div>
-                    <h1 style="font-weight:500; ">Tipos de Processos </h1>
+                    <h1 style="font-weight:500; ">Tipos de Estágios </h1>
                 </div>
 
             </div>
@@ -113,7 +113,7 @@ use const Siler\Config\CONFIG; ?>
                                     <a href="<?= $proccess["fluxograma"] ?? "#" ?> "><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-eye"></i> Ver Fluxograma</span></a>
                                 </h6>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <h2>Campos Padrões <a class="btn btn-dark" style="font-size:10px !important; float:right;" data-bs-toggle="modal" data-bs-target="#cadastrarCampoModal">Novo Campo Personalizado</a></h2>
@@ -137,57 +137,57 @@ use const Siler\Config\CONFIG; ?>
             </div>
 
             <!-- Modal -->
-    <div class="modal fade" id="cadastrarCampoModal" tabindex="-1" aria-labelledby="cadastrarCampoModalLabel" aria-hidden="true">
-        <div class="modal-dialog p-0">
-            <div class="modal-content p-0" style="padding:0px !important;border-radius:10px !important;">
-                <!-- Cabeçalho do Modal -->
-                <div class="modal-header">
-                    <h4 class="modal-title" id="cadastrarCampoModalLabel">Cadastrar Campo Personalizado</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            <div class="modal fade" id="cadastrarCampoModal" tabindex="-1" aria-labelledby="cadastrarCampoModalLabel" aria-hidden="true">
+                <div class="modal-dialog p-0">
+                    <div class="modal-content p-0" style="padding:0px !important;border-radius:10px !important;">
+                        <!-- Cabeçalho do Modal -->
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="cadastrarCampoModalLabel">Cadastrar Campo Personalizado</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <!-- Corpo do Modal -->
+                        <div class="modal-body ">
+                            <h6 style="font-size:12px;">Cadastre um novo tipo de campo, feito para este processo</h6>
+                            <br />
+                            <form id="newField">
+                                <div class="mb-1">
+                                    <label class="form-label" for="nome">Nome <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
+                                        <input type="text" id="nome" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." required />
+                                    </div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="label">Label <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-eye"></i></span>
+                                        <input type="text" id="label" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." required />
+                                    </div>
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="tipo_dado">Tipo de Dado <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-code"></i></span>
+                                        <select class="form-select" name="tipo_dado" id="tipo_dado" required>
+                                            <?php foreach ($inputTypes as $type) { ?>
+                                                <option value="<?= htmlspecialchars($type['id']) ?>">
+                                                    <?= htmlspecialchars($type['nome']) ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Botões do Modal -->
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
-                <!-- Corpo do Modal -->
-                <div class="modal-body ">
-                    <h6  style="font-size:12px;">Cadastre um novo tipo de campo, feito para este processo</h6>
-                    <br />
-                    <form id="newField">
-                        <div class="mb-1">
-                            <label class="form-label" for="nome">Nome <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
-                                <input type="text" id="nome" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." required />
-                            </div>
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label" for="label">Label <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-eye"></i></span>
-                                <input type="text" id="label" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." required />
-                            </div>
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label" for="tipo_dado">Tipo de Dado <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-code"></i></span>
-                                <select class="form-select" name="tipo_dado" id="tipo_dado" required>
-                                    <?php foreach ($inputTypes as $type) { ?>
-                                        <option value="<?= htmlspecialchars($type['id']) ?>">
-                                            <?= htmlspecialchars($type['nome']) ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Botões do Modal -->
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </div>
-                    </form>
-                </div>
-               
             </div>
-        </div>
-    </div>
 
 
             <!-- END: Content-->
@@ -202,6 +202,9 @@ use const Siler\Config\CONFIG; ?>
 
             <!-- endbuild -->
 
+            <?php
+            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            ?>
             <!-- Vendors JS -->
 
 
@@ -221,9 +224,6 @@ use const Siler\Config\CONFIG; ?>
                 }
             </style>
 
-            <?php
-            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
-            ?>
 </body>
 
 </html>

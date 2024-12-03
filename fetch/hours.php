@@ -50,3 +50,13 @@ function getInputTypes()
     Logger::log($_SESSION["user_id"], "Erro ao listar tipos inputs. Error: " . $response["message"], "getInputTypes", "error");
     return $response;
 }
+
+function getStageTypes()
+{
+    $response = APIRequest::getRequest("steps/stages");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $response["message"], "getStageTypes", "error");
+    return $response;
+}

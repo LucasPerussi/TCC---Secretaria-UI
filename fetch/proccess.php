@@ -61,3 +61,47 @@ function getProccessFields($id)
     Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getProccessFields", "error");
     return $response;
 }
+
+function getProccessStages($id)
+{
+    $response = APIRequest::getRequest("steps/link-step-to-proccess/" . $id);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getProccessFields", "error");
+    return $response;
+}
+
+function getDefaultStages()
+{
+    $response = APIRequest::getRequest("steps/all-default" );
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $response["message"], "getDefaultStages", "error");
+    return $response;
+}
+
+function getUnifiedDefaultStages()
+{
+    $defaultStagesResponse = APIRequest::getRequest("steps/all-default");
+    if (isset($defaultStagesResponse["error"])) {
+        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
+        $defaultStages = [];
+    } else {
+        $defaultStages = $defaultStagesResponse;
+    }
+
+    $stageTypesResponse = APIRequest::getRequest("steps/stages");
+    if (isset($stageTypesResponse["error"])) {
+        Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $stageTypesResponse["message"], "getUnifiedStages", "error");
+        $stageTypes = [];
+    } else {
+        $stageTypes = $stageTypesResponse;
+    }
+
+    // Unifica os valores em um único array
+    $unifiedStages = array_merge($stageTypes, $defaultStages);
+
+    return $unifiedStages;
+}

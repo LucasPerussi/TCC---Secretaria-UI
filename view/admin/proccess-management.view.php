@@ -174,7 +174,8 @@ use const Siler\Config\CONFIG; ?>
                                     <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $proccess["nome"] ?> </h4>
                                     <h6><span style=" font-size:10px;" class="badge rounded-pill bg-light-primary"><?= $proccess["hrs_resposta"] ?? 0 ?> Hrs. Resposta</span>
                                         <span style=" font-size:10px;" class="badge rounded-pill bg-light-success"><?= $proccess["hrs_resolucao"] ?? 0 ?> Hrs. Resolução</span>
-                                        <a href="proccess-type/<?= $proccess["id"] ?>"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-eye"></i> Ver Processo</span></a>
+                                        <a href="proccess-fields/<?= $proccess["id"] ?>"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-input-cursor"></i> Campos</span></a>
+                                        <a href="proccess-stages/<?= $proccess["id"] ?>"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-bar-chart-steps"></i> Etapas</span></a>
                                         <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;" class="badge rounded-pill bg-dark"> <i class="bi bi-bar-chart-steps"></i></span></a>
                                     </h6>
 
