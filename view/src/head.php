@@ -27,16 +27,16 @@ use const Siler\Config\CONFIG; ?>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
 <!-- BEGIN: Vendor CSS-->
-<link rel="stylesheet" type="text/css" href="layout/app-assets/vendors/css/vendors.min.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/vendors/css/vendors.min.css">
 
 <!-- BEGIN: Theme CSS-->
-<link rel="stylesheet" type="text/css" href="layout/app-assets/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="layout/app-assets/css/bootstrap-extended.css">
-<link rel="stylesheet" type="text/css" href="layout/app-assets/css/colors.css">
-<link rel="stylesheet" type="text/css" href="layout/app-assets/css/components.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/components.css">
 
 <!-- BEGIN: Page CSS-->
-<link rel="stylesheet" type="text/css" href="layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -46,4 +46,4 @@ use const Siler\Config\CONFIG; ?>
 <!-- END: Page CSS-->
 
 <!-- BEGIN: Custom CSS-->
-<link rel="stylesheet" type="text/css" href="layout/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/assets/css/style.css">

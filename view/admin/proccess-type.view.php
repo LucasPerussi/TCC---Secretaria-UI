@@ -15,15 +15,15 @@ use const Siler\Config\CONFIG; ?>
     <?php include "view/src/head.php"; ?>
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/pages/dashboard-ecommerce.css">
-    <link rel="stylesheet" type="text/css" href="layout/app-assets/css/plugins/extensions/ext-component-toastr.css">
-    <link rel="stylesheet" type="text/css" href="src/css/dashboard.css">
-    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/app-assets/css/plugins/extensions/ext-component-toastr.css">
+    <link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>src/css/dashboard.css">
+    <link rel="stylesheet" href="<?=Config::BASE_URL?>src/css/main.css">
     <meta name='robots' content='noindex'>
     <link rel="stylesheet" type="text/css" href="src/css/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="src/css/carousel.css">
-    <title>Painel Admin</title>
+    <title>WeJourney - Painel Admin</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
@@ -36,7 +36,7 @@ use const Siler\Config\CONFIG; ?>
             transform: scale(1.05) !important;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="layout/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?=Config::BASE_URL?>layout/assets/css/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
@@ -80,44 +80,54 @@ use const Siler\Config\CONFIG; ?>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
+        <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+
+
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb ps-0">
+                                <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Tipos de processos</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <h1 style="font-weight:500; ">Tipos de Processos </h1>
+                </div>
+
+            </div>
             <!-- <div class="content-header row"> </div> -->
             <div class="content-body">
                 <!-- Dashboard Ecommerce Starts -->
-                <h1 style="font-weight:500; "><?= __("dashboard_admin.titulo") ?> </h1>
 
 
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
-                        <div class="card options" style="padding:20px; ">
-                            <h3 style="font-weight: 700 !important;">
-                                Links úteis
-                            </h3>
-                            <p class=" mb-0" style="color:gray;">
-                                Acesse recursos importantes de forma rápida</p>
-                            <br />
-                            <a href="<?= Config::BASE_URL ?>system-logs" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Logs do Sistema</a>
-                            <a href="<?= Config::BASE_URL ?>entity-list"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Entidades</a>
-                            <a href="<?= Config::BASE_URL ?>proccess-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Processos</a>
-                            <a href="<?= Config::BASE_URL ?>fields"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Campos</a>
-                            <a href="<?= Config::BASE_URL ?>mural-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Murais</a>
-                            <a href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Documentação API</a>
+                        <h2>Processo <?=$args["proccessId"]?></h2>
+                        <h6>Cadastre um novo tipo de processo</h6>
+                        <br />
+                        <div class="card" style="padding:10px; ">
+aaaaaaaaaaa
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h2>Logs <a href="system-logs" style="float:right; font-size:11px;padding:7px;"class="btn btn-dark" >Ver Todos</a></h2>
-                        <h6>Últimos 50 logs registrados</h6>
+                        <h2>Lista </h2>
+                        <h6>Estes são os tipos de processos operacionais no sistema</h6>
                         <br />
                         <div class="card p-1">
-                            <?php foreach($last50Logs as $log){?>
-                                <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    <h5 style="font-weight:bold !important;"><?=$log["funcao"]?> <span style="float:right; font-size:11px;"class="badge rounded-pill bg-light-<?php if ($log["status"] == "error"){echo "danger";}else{echo $log["status"];}?>" ><?=$log["status"]?></span></h5>
-                                    <h6 style="font-size:11px;">
-                                         <?=$log["mensagem"] ?> - Usr: <?=$log["usuario"] ?? "EXT"?>                                                
+                            <?php foreach ($processes as $proccess) { ?>
+                                <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
+                                    <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $proccess["nome"] ?> </h4>
+                                    <h6><span style=" font-size:10px;" class="badge rounded-pill bg-light-primary"><?= $proccess["hrs_resposta"] ?? 0 ?> Hrs. Resposta</span>
+                                        <span style=" font-size:10px;" class="badge rounded-pill bg-light-success"><?= $proccess["hrs_resolucao"] ?? 0 ?> Hrs. Resolução</span>
+                                        <a href="#"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-eye"></i> Ver Processo</span></a>
+                                        <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;" class="badge rounded-pill bg-dark"> <i class="bi bi-bar-chart-steps"></i></span></a>
                                     </h6>
-                                  
+
+
 
                                 </div>
-                            <?php }?>
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -144,7 +154,7 @@ use const Siler\Config\CONFIG; ?>
             <!-- Main JS -->
             <script src="test/assets/js/main.js"></script>
 
-            <!-- <script src="layout/app-assets/js/scripts/my-department.js"></script> -->
+            <!-- <script src="<?=Config::BASE_URL?>layout/app-assets/js/scripts/my-department.js"></script> -->
             <?php include "view/src/footer.php"; ?>
             <style>
                 .owl-stage-outer {
@@ -156,6 +166,10 @@ use const Siler\Config\CONFIG; ?>
                     margin-right: 10px;
                 }
             </style>
+
+<?php
+    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+    ?>
 </body>
 
 </html>
