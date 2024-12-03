@@ -154,9 +154,9 @@ class APIRequest
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
             $_SESSION['user_token'] = $responseData['token'];
-            $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
+            $_SESSION['user_picture'] = Config::BASE_URL . $responseData['user']['picture'] ;
             if ($_SESSION['user_picture'] == "") {
-                $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
+                $_SESSION['user_picture'] = Config::BASE_URL . "src/img/avatars/generic.webp";
             }
 
             if (isset($responseData['token'])) {
@@ -177,9 +177,9 @@ class APIRequest
             $_SESSION['user_name'] = $responseData['user']['name'];
             $_SESSION['user_email'] = $responseData['user']['email'];
             $_SESSION['user_role'] = $responseData['user']['role'];
-            $_SESSION['user_picture'] = $responseData['user']['picture'] ?? "https://i.imgur.com/QGmfkja.png";
+            $_SESSION['user_picture'] = Config::BASE_URL . $responseData['user']['picture'] ;
             if ($_SESSION['user_picture'] == "") {
-                $_SESSION['user_picture'] = "https://i.imgur.com/QGmfkja.png";
+                $_SESSION['user_picture'] = Config::BASE_URL . "src/img/avatars/generic.webp";
             }
 
             if (isset($responseData['token'])) {

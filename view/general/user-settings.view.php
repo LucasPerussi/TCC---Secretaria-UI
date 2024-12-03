@@ -392,7 +392,7 @@ include "view/src/head.php"; ?>
                             <div class="swiper-container-avatar" style="overflow:hidden; margin-bottom:15px; ">
                                 <div class="swiper-wrapper">
                                     <?php for ($art = 1; $art < 9; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
                                             <img src="<?= Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
                                         </div>
                                     <?php } ?>
@@ -404,7 +404,7 @@ include "view/src/head.php"; ?>
                             <div class="swiper-container-cartoon" style="overflow:hidden; margin-bottom:15px; ">
                                 <div class="swiper-wrapper">
                                     <?php for ($art = 1; $art < 39; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
                                             <img src="<?= Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
                                         </div>
                                     <?php } ?>

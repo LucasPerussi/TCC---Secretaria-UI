@@ -112,7 +112,7 @@ class Route extends \API\Router\DefaultRouter
                 $body = $this->getBody();
                 fields(["foto"], $body, false);
                 $field = $body["foto"];
-                $_SESSION["user_picture"] = $body["foto"];
+                $_SESSION["user_picture"] = Config::BASE_URL . $body["foto"];
                 echo json_encode($this->userController->updateUser($field, $endpoint));
                 break;
             case 'curso':

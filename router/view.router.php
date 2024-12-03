@@ -29,6 +29,9 @@ use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
 use function API\Fetch\loadProductsContent;
 use function API\Fetch\listContentEmAlta;
+use function API\Fetch\listServers;
+use function API\Fetch\listStudents;
+use function API\Fetch\listTeachers;
 use function API\Fetch\loadContentVinte;
 
 
@@ -90,20 +93,19 @@ class Route extends \API\Router\DefaultRouter
             // $obj->checkSession();
             // $obj->setCookies();
             $obj->verifyLogged();
-            if ($_SESSION['user_role'] == "Aluno"){
+            if ($_SESSION['user_role'] == "Aluno") {
                 $last50Logs = getLast50Logs();
-                require __DIR__ . "/../view/member/dashboard.view.php";
-            } elseif ($_SESSION['user_role'] == "Professor"){
+                require __DIR__ . "/../view/member/dashboard-member.php";
+            } elseif ($_SESSION['user_role'] == "Professor") {
                 $myteacherRequests = getMytickersAsTeacher();
                 require __DIR__ . "/../view/teacher/dashboard.view.php";
-            } elseif ($_SESSION['user_role'] == "Servidor"){
+            } elseif ($_SESSION['user_role'] == "Servidor") {
                 $last50Logs = getLast50Logs();
                 require __DIR__ . "/../view/server/dashboard.view.php";
-            } elseif ($_SESSION['user_role'] == "Admin"){
+            } elseif ($_SESSION['user_role'] == "Admin") {
                 $last50Logs = getLast50Logs();
                 require __DIR__ . "/../view/admin/dashboard.view.php";
             }
-          
         });
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -257,21 +259,22 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             $page = $_GET["page"] ?? 'alunos';
-            $fetch_func = [
-                "alunos" => function () {
-                    return getAlunos();
-                },
-                "servidores" => function () {
-                    return getServidores();
-                },
-                // "chamados" => function () {
-                //     return getChamados();
-                // },
-                // "processos" => function () {
-                //     return getProcessos();
-                // },
-            ];
-            $data = array_key_exists($page, $fetch_func) ? $fetch_func[$page]() : $fetch_func["alunos"]();
+            switch ($page) {
+                case 'alunos':
+                    $users = listStudents();
+                    break;
+                case 'professores':
+                    $users = listTeachers();
+                    break;
+                case 'servidores':
+                    $users = listServers();
+                    break;
+
+                default:
+                    $users = listStudents();
+                    break;
+            }
+
             require __DIR__ . "/../view/admin/entity-list.php";
         });
         $this->addRoute("get", "/process-field", function ($args) use ($obj) {
@@ -351,7 +354,7 @@ class Route extends \API\Router\DefaultRouter
         return;
     }
 
-   
+
     public function verifyAgent()
     {
         if (!((($_SESSION["user_role"] == 2) && ($_SESSION["company_id"] == 9999)) || ($_SESSION["user_role"] == 4))) {
@@ -390,7 +393,7 @@ class Route extends \API\Router\DefaultRouter
         return;
     }
 
-   
+
     // public function destroySession()
     // {
 
