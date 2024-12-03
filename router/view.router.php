@@ -24,7 +24,6 @@ use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
-use function API\Fetch\getRequestTypes;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
 use function API\Fetch\loadContentLast;
