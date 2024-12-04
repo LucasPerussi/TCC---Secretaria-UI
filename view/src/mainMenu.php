@@ -97,7 +97,7 @@ $url = $_SERVER['REQUEST_URI'];
                     <strong><?= __("main_menu.server.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.estagio-desc") ?></span></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board-admin' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
                     <strong><?= __("main_menu.server.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.mural-desc") ?></span></span></a>
                 </li>
 

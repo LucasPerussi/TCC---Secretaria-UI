@@ -139,14 +139,20 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->verifyLogged();
             $murais = getMurais();
-            $authors = [];
-            foreach ($murais as $mural) {
-                if (!isset($authors[$mural["autor"]])) {
-                    $user = getUser($mural["autor"]);
-                    $authors[$mural["autor"]] = isset($user["error"]) ? "Desconhecido" : htmlspecialchars($user["name"]);
-                }
-            }
             require __DIR__ . "/../view/user/news-board.view.php";
+        });
+        $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $murais = getMurais();
+            require __DIR__ . "/../view/admin/news-board-admin.view.php";
+        });
+        $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/news-board-new.view.php";
         });
         $this->addRoute("get", "/complete-board", function ($args) use ($obj) {
             // $obj->verifyCookies();

@@ -15,6 +15,7 @@ use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
 use API\Controller\TrainingHours\Training as TrainingController;
 use API\Controller\Request\Request as RequestController;
+use API\Controller\Mural\Mural as MuralController;
 
 
 
@@ -36,6 +37,7 @@ class Route extends \API\Router\DefaultRouter
     public SystemController $systemController;
     public TrainingController $trainingController;
     public RequestController $requestController;
+    public MuralController $muralController;
 
     public function __construct()
     {
@@ -47,6 +49,7 @@ class Route extends \API\Router\DefaultRouter
         $this->ticketsController = new TicketsController();
         $this->systemController = new SystemController();
         $this->trainingController = new TrainingController();
+        $this->muralController = new MuralController();
 
         $obj = $this;
     
@@ -73,6 +76,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/register-type", function ($args) use ($obj) {
             $obj->newProcessType();
+        });
+        $this->addRoute("post", "/new-mural", function($args) use ($obj) {
+            $obj->newMural();
         });
       
     }
@@ -174,6 +180,14 @@ class Route extends \API\Router\DefaultRouter
         fields(["nome", "fluxograma", "hrs_resposta", "hrs_resolucao"], $body, false);
 
         echo json_encode($this->systemController->newProcessType($body["nome"], $body["fluxograma"], $body["hrs_resposta"], $body["hrs_resolucao"]));
+    }
+
+    public function newMural()
+    {
+        $body = $this->getBody();
+        fields(["titulo", "descricao", "curso", "visivel"], $body, false);
+
+        echo json_encode($this->muralController->newMural($body["titulo"], $body["descricao"], $body["curso"], $body["visivel"]));
     }
 
     public function login()

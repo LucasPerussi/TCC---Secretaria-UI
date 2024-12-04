@@ -70,13 +70,7 @@ include "view/src/head.php"; ?>
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-start mb-0">Cadastrar hora formativa</h2>
-                            <div class="breadcrumb-wrapper">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'formative-member' ?>">Minhas horas formativas</a></li>
-                                    <li class="breadcrumb-item active">Cadastro</li>
-                                </ol>
-                            </div>
+                            <h2 class="content-header-title float-start mb-0">Criar nova postagem para o mural</h2>
                         </div>
                     </div>
                 </div>
@@ -85,51 +79,66 @@ include "view/src/head.php"; ?>
             <div class="content-body">
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">a</h4>
-                                <form id="newMural">
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-12">
-                                            <label for="titulo" class="col-form-label">Título</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="input-group input-group-merge">
-                                                <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                                <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Digite o título da postagem" required>
-                                            </div>
+                        <form id="newMural">
+                            <div class="row">
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="titulo">Título</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                                            <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Digite o título da publicação" required />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-12">
-                                            <label for="descricao" class="col-form-label">Descrição</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Digite a descrição"></textarea>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="descricao">Descrição</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-textarea-t"></i></span>
+                                            <textarea id="descricao" class="form-control" name="descricao" placeholder="Digite a descrição da publicação" rows="4" required></textarea>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="mb-3 row">
-                                        <div class="col-sm-12">
-                                            <label for="visivelSwitch" class="col-form-label">Visível</label>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="visivelSwitch" name="visivel" value="1" checked>
-                                                <label class="form-check-label" for="visivelSwitch">Ativar</label>
-                                            </div>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="curso">Curso</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge select">
+                                            <select class="form-select form-select-lg" name="curso" id="curso">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-12 text-end">
-                                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label">Vísivel</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="visivel" name="visivel" value="1" checked />
+                                            <label class="form-check-label" for="visivel">Ativar visibilidade</label>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Enviar</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
