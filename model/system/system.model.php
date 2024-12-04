@@ -160,6 +160,44 @@ class SystemModel
 
         return APIRequest::postRequest($url, $data, "addStageToProccess");
     }
+    
+    public function newRequest($title, $description, $processo, $user_id)
+    {
+        $title = Sanitize::clean($title, "title", "newRequest");
+        $description = Sanitize::clean($description, "description", "newRequest");
+        $processo = Sanitize::clean($processo, "processo", "newRequest");
+        $user_id = Sanitize::clean($user_id, "user_id", "newRequest");
+
+        $url = Config::API_URL . "requests/new";
+
+        $data = [
+            'titulo' => $title,
+            'descricao' => $description,
+            'aluno' => $user_id,
+            'tipo_solicitacao' => $processo
+        ];
+       
+        return APIRequest::postRequest($url, $data, "newRequest");
+    }
+
+    public function newResponse($nome, $valor, $ticketId, $user_id)
+    {
+        $nome = Sanitize::clean($nome, "nome", "newResponse");
+        $valor = Sanitize::clean($valor, "valor", "newResponse");
+        $ticketId = Sanitize::clean($ticketId, "ticketId", "newResponse");
+        $user_id = Sanitize::clean($user_id, "user_id", "newResponse");
+
+        $url = Config::API_URL . "requests/new-question-reply";
+
+        $data = [
+            'campo' => $nome,
+            'resposta' => $valor,
+            'processo' => $ticketId,
+            'usuario' => $user_id
+        ];
+       
+        return APIRequest::postRequest($url, $data, "newResponse");
+    }
 
     public function removeStageToProccess($proccessId, $stage)
     {

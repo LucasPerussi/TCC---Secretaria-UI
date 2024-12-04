@@ -163,6 +163,32 @@ class System extends DefaultController
 
         return $this->systemModel->removeStageToProccess($proccessId, $stage);
     }
+
+    public function newRequest($title, $description, $processo, $user_id)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newRequest($title, $description, $processo, $user_id);
+    }
+
+    public function newResponse($nome,$valor, $ticketId, $user_id)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newResponse($nome,$valor, $ticketId, $user_id);
+    }
 }
     
    

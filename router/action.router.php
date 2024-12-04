@@ -57,7 +57,7 @@ class Route extends \API\Router\DefaultRouter
         $this->trainingController = new TrainingController();
 
         $obj = $this;
-    
+
         $this->addRoute("post", "/login", function ($args) use ($obj) {
             $obj->login();
         });
@@ -66,6 +66,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/register-fh", function ($args) use ($obj) {
             $obj->registerFH();
+        });
+        $this->addRoute("post", "/new-request", function ($args) use ($obj) {
+            $obj->newRequest();
         });
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
@@ -85,7 +88,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
         });
-        $this->addRoute("post", "/register-request", function($args) use ($obj) {
+        $this->addRoute("post", "/register-request", function ($args) use ($obj) {
             $obj->registerRequest();
         });
         $this->addRoute("post", "/register-type", function ($args) use ($obj) {
@@ -93,22 +96,22 @@ class Route extends \API\Router\DefaultRouter
         });
         // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
-            $obj->addFieldToProccess($args["proccessId"],$args["fieldId"]);
+            $obj->addFieldToProccess($args["proccessId"], $args["fieldId"]);
         });
         $this->addRoute("post", "/remove-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
-            $obj->removeFieldToProccess($args["proccessId"],$args["fieldId"]);
+            $obj->removeFieldToProccess($args["proccessId"], $args["fieldId"]);
         });
         $this->addRoute("post", "/remove-field/{fieldId}", function ($args) use ($obj) {
             $obj->removeField($args["fieldId"]);
         });
         // stages
         $this->addRoute("post", "/add-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
-            $obj->addStageToProccess($args["proccessId"],$args["stage"]);
+            $obj->addStageToProccess($args["proccessId"], $args["stage"]);
         });
         $this->addRoute("post", "/remove-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
-            $obj->removeStageToProccess($args["proccessId"],$args["stage"]);
+            $obj->removeStageToProccess($args["proccessId"], $args["stage"]);
         });
-      
+
         // GET ENDPOINTS
         $this->addRoute("get", "/load-default-fields", function ($args) use ($obj) {
             $obj->listDefaultFields();
@@ -128,7 +131,6 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/get-all-stages", function ($args) use ($obj) {
             $obj->getAllStages();
         });
-      
     }
 
 
@@ -178,7 +180,7 @@ class Route extends \API\Router\DefaultRouter
                 $field = $body["curso"];
                 echo json_encode($this->userController->updateUser($field, $endpoint));
                 break;
-            
+
             default:
                 echo json_encode(array(
                     "error" => true,
@@ -187,7 +189,6 @@ class Route extends \API\Router\DefaultRouter
                 break;
         }
         return;
-
     }
 
     public function changePassword()
@@ -206,7 +207,7 @@ class Route extends \API\Router\DefaultRouter
     {
         echo json_encode($this->systemController->removeFieldToProccess($proccessId, $fieldId));
     }
-    public function removeField( $fieldId)
+    public function removeField($fieldId)
     {
         echo json_encode($this->systemController->removeField($fieldId));
     }
@@ -222,7 +223,7 @@ class Route extends \API\Router\DefaultRouter
     }
 
     public function getAllStages()
-    {        
+    {
         echo json_encode(getAllStagesUnified());
     }
 
@@ -241,6 +242,90 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
     }
+
+    public function newRequest()
+    {
+        $body = $this->getBody();
+        $fieldsArray = [];
+    
+        // Construir o array de campos
+        foreach ($body as $fieldName => $fieldValue) {
+            $fieldsArray[] = [
+                'nome' => $fieldName,
+                'valor' => $fieldValue
+            ];
+        }
+    
+        // Inicializar variáveis para evitar erros de variável indefinida
+        $title = '';
+        $description = '';
+        $processo = '';
+    
+        // Extrair os valores necessários
+        foreach ($fieldsArray as $field) {
+            if ($field["nome"] == "titulo") {
+                $title = $field["valor"];
+            }
+            if ($field["nome"] == "descricao") {
+                $description = $field["valor"];
+            }
+            if ($field["nome"] == "processo") {
+                $processo = $field["valor"];
+            }
+        }
+    
+        $error = false;
+    
+        // Criar a nova solicitação
+        $openRequest = $this->systemController->newRequest($title, $description, $processo, $_SESSION["user_id"]);
+    
+        // Verificar se o status não é 200 ou 201 (sucesso)
+        if ($openRequest["status"] != 200 && $openRequest["status"] != 201) {
+            $error = true;
+        }
+    
+        // Decodificar a resposta JSON
+        $response = json_decode($openRequest["response"], true);
+    
+        if ($response === null) {
+            // Se a decodificação falhar, marcar como erro
+            $error = true;
+        }
+    
+        // Extrair identificador e ID do ticket
+        $ticketIdentifier = isset($response["identificador"]) ? $response["identificador"] : null;
+        $ticketId = isset($response["id"]) ? $response["id"] : null;
+    
+        // Verificar se ticketId está disponível
+        if ($ticketId === null) {
+            $error = true;
+        }
+    
+        // Processar os campos restantes
+        foreach ($fieldsArray as $field) {
+            if (!in_array($field["nome"], ["titulo", "descricao", "processo"])) {
+                $registerResponse = $this->systemController->newResponse($field["nome"], $field["valor"], $ticketId, $_SESSION["user_id"]);
+                if ($registerResponse["status"] != 200 && $registerResponse["status"] != 201) {
+                    $error = true;
+                }
+            }
+        }
+    
+        // Retornar a resposta adequada
+        if ($error) {
+            echo json_encode([
+                "status" => 500,
+                "message" => "Tivemos um problema ao abrir seu chamado"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => 200,
+                "message" => "Chamado aberto com sucesso",
+                "identificador" => $ticketIdentifier
+            ]);
+        }
+    }
+    
 
     public function newFieldProccess($proccess)
     {
@@ -311,7 +396,7 @@ class Route extends \API\Router\DefaultRouter
     {
         $body = $this->getBody();
         fields(["email", "password"], $body, false);
-        
+
 
         echo json_encode($this->userController->login($body["email"], $body["password"]));
     }
@@ -321,9 +406,8 @@ class Route extends \API\Router\DefaultRouter
 
         $body = $this->getBody();
         fields(["name", "lastName", "birth", "registro", "email", "password", "password-confirmation"], $body, false);
-        
-        echo json_encode($this->userController->signup($body["name"],$body["lastName"],$body["birth"],$body["registro"],$body["email"],$body["password"], $body["password-confirmation"]));
 
+        echo json_encode($this->userController->signup($body["name"], $body["lastName"], $body["birth"], $body["registro"], $body["email"], $body["password"], $body["password-confirmation"]));
     }
 
     public function outro()
@@ -352,5 +436,4 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->trainingController->getStudentHours($id));
     }
-  
 }

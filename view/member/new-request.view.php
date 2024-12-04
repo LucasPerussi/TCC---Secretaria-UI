@@ -139,7 +139,32 @@ use const Siler\Config\CONFIG; ?>
 
 
                             <div class="card p-1">
-                                <form method="GET">
+                                <form id="newRequest">
+                                    <div class="mb-1 row">
+                                        <h5>Título</h5>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-file-richtext"></i></span>
+                                                <input type="text" id="name-icon" class="form-control" name="titulo" required placeholder="Título do Chamado" />
+                                                <input type="text" id="name-icon" hidden class="form-control" value="<?=$_GET["tipo_de_chamado"]?>" name="processo" required  />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-1 row">
+                                        <h5>Descrição</h5>
+                                        <div class="col-sm-12">
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                                                <textarea name="descricao" class="form-control" required placeholder="Descrição do chamado"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <h4>Infomações adicionais necessárias</h4>
+                                    <br/>
 
                                     <?php foreach ($proccessFields as $field) { ?>
                                         <?php foreach ($fieldtypesDb as $dbTypes) { ?>
@@ -153,9 +178,9 @@ use const Siler\Config\CONFIG; ?>
                                                                     <div class="input-group input-group-merge">
                                                                         <span class="input-group-text"><i class="bi <?= htmlspecialchars($type["icone"]) ?>"></i></span>
                                                                         <?php if ($type["htmlType"] != "textarea") { ?>
-                                                                            <input type="<?= htmlspecialchars($type["htmlType"]) ?>" id="name-icon" class="form-control" name="<?= htmlspecialchars($field["nome"]) ?>" placeholder="<?= htmlspecialchars($type["placeholder"]) ?>" />
+                                                                            <input type="<?= htmlspecialchars($type["htmlType"]) ?>" required id="name-icon" class="form-control" name="<?= htmlspecialchars($field["id"]) ?>" placeholder="<?= htmlspecialchars($type["placeholder"]) ?>" />
                                                                         <?php } else { ?>
-                                                                            <textarea name="<?= htmlspecialchars($field["nome"]) ?>" class="form-control" placeholder="<?= htmlspecialchars($type["placeholder"]) ?>"></textarea>
+                                                                            <textarea name="<?= htmlspecialchars($field["id"]) ?>" required class="form-control" placeholder="<?= htmlspecialchars($type["placeholder"]) ?>"></textarea>
                                                                         <?php } ?>
                                                                     </div>
                                                                 </div>
@@ -174,6 +199,10 @@ use const Siler\Config\CONFIG; ?>
                                     </div>
                                 </form>
                             </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                        <h1 style="font-size:200px;text-align:center; color:#7367f0 !important;"><i class="bi bi-person-raised-hand"></i></h1>
+
                         </div>
 
                     </div>
@@ -215,6 +244,9 @@ use const Siler\Config\CONFIG; ?>
                     margin-right: 10px;
                 }
             </style>
+             <?php
+                require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            ?>
 </body>
 
 </html>
