@@ -15,18 +15,32 @@ use API\Controller\Config;
         }
     });
 
+    let processStagesMap = {};
+    let defaultStagesMap = {};
+
     async function loadStages() {
         try {
             // Fetch etapas padrão (default stages)
-            const defaultStagesResponse = await axios.get('<?= Config::BASE_ACTION_URL ?>/load-default-stages');
+            const defaultStagesResponse = await axios.get('<?= Config::BASE_ACTION_URL ?>/get-all-stages');
             let defaultStages = defaultStagesResponse.data;
+            console.log("defaultStagesResponse")
+            console.log(defaultStagesResponse)
 
             // Garantir que defaultStages seja um array
             defaultStages = Array.isArray(defaultStages) ? defaultStages : Object.values(defaultStages);
 
+            // Criar mapa de defaultStages usando 'id' como chave
+            defaultStagesMap = defaultStages.reduce((map, stage) => {
+                map[stage.id] = stage;
+                return map;
+            }, {});
+
             // Fetch etapas do processo
             const processStagesResponse = await axios.get('<?= Config::BASE_ACTION_URL ?>/load-proccess-stages/<?= $args["proccessId"] ?>');
             let processStages = [];
+
+            console.log("processStagesResponse")
+            console.log(processStagesResponse)
 
             if (processStagesResponse.data.error) {
                 // Se houver um erro, log e continue com processStages vazio
@@ -36,6 +50,12 @@ use API\Controller\Config;
                 processStages = Array.isArray(processStages) ? processStages : Object.values(processStages);
             }
 
+            // Criar mapa para rápida comparação usando 'tipo' das etapas do processo
+            processStagesMap = processStages.reduce((map, stage) => {
+                map[stage.tipo] = stage; // Armazena o objeto stage com 'tipo' como chave
+                return map;
+            }, {});
+
             const container = document.getElementById('default-fields-container'); // Certifique-se de que o ID corresponda ao do HTML
             container.innerHTML = ''; // Limpar conteúdo anterior
 
@@ -44,12 +64,6 @@ use API\Controller\Config;
                 return;
             }
 
-            // Criar mapa para rápida comparação usando IDs das etapas do processo
-            const processStagesMap = processStages.reduce((map, stage) => {
-                map[stage.id] = true; // Marca que a etapa está no processo
-                return map;
-            }, {});
-
             // Renderizar os stages padrão
             defaultStages.forEach(stage => {
                 const card = document.createElement('div');
@@ -57,11 +71,13 @@ use API\Controller\Config;
                 card.id = `stage-${stage.id}`;
                 card.style.marginBottom = '10px';
 
-                const isInProcess = processStagesMap[stage.id];
+                // Verificar se o stage está no processo comparando 'id' de defaultStages com 'tipo' de processStages
+                const isInProcess = !!processStagesMap[stage.id];
                 const iconClass = isInProcess ? 'bi-check-circle-fill' : 'bi-circle';
                 const should = isInProcess ? 'delete' : 'add';
 
                 // Determinar o nome e a cor da etapa
+                const stageHour = stage.estimativaHoras | '0';
                 const stageName = stage.label || stage.nome || 'Sem Nome';
                 const stageColor = stage.cor || '#000000';
 
@@ -71,8 +87,8 @@ use API\Controller\Config;
                         <a onclick="ModifyStageInProcess('${stage.id}', '${should}')">
                             <i style="float:right;margin-left:10px;" class="bi ${iconClass}"></i>
                         </a>
-                        <span style="font-size:12px; float:right; margin-left:10px;" class="badge rounded-pill" style="background-color: ${stageColor};">
-                            Padrão
+                        <span style="font-size:12px; float:right; margin-left:10px;" class="badge rounded-pill bg-light-secondary" style="background-color: ${stageColor};">
+                             ${stageHour} Horas
                         </span>
                     </h5>
                 `;
@@ -120,7 +136,14 @@ use API\Controller\Config;
     function ModifyStageInProcess(stageId, action) {
         console.log('Operação:', action, 'Stage ID:', stageId);
         if (action === "delete") {
-            axios.post('<?= Config::BASE_ACTION_URL ?>/remove-stage-process/<?= $args["proccessId"] ?>/' + stageId)
+            // Encontrar o stage no processStagesMap usando 'id' do defaultStage
+            const stage = processStagesMap[stageId];
+            if (!stage) {
+                console.error('Stage não encontrado no processStagesMap para o id:', stageId);
+                return;
+            }
+            const processStageId = stage.id; // ID do stage no processo
+            axios.post('<?= Config::BASE_ACTION_URL ?>/remove-stage-process/<?= $args["proccessId"] ?>/' + processStageId)
                 .then(response => {
                     if (response.status !== 200) {
                         throw response.data;
@@ -139,6 +162,7 @@ use API\Controller\Config;
                     });
                 });
         } else {
+            // Adicionar o stage padrão ao processo usando o 'stageId' do defaultStage
             axios.post('<?= Config::BASE_ACTION_URL ?>/add-stage-process/<?= $args["proccessId"] ?>/' + stageId)
                 .then(response => {
                     if (response.status !== 200) {
@@ -191,7 +215,7 @@ use API\Controller\Config;
         e.preventDefault();
         const data = new FormData(e.target);
         const object = Object.fromEntries(data.entries());
-        axios.post('<?= Config::BASE_ACTION_URL ?>/new-stage-process/<?= $args["proccessId"] ?>', object)
+        axios.post('<?= Config::BASE_ACTION_URL ?>/new-stage-customized', object)
             .then(function(response) {
                 console.log(response)
                 if ((response.data.status != 200) && (response.data.status != 201)) {
@@ -202,7 +226,7 @@ use API\Controller\Config;
                         title: 'Stage personalizado criado com sucesso!'
                     });
                     loadStages();
-                    var modalElement = document.getElementById('cadastrarStageModal');
+                    var modalElement = document.getElementById('cadastrarCampoModal');
                     var modalInstance = bootstrap.Modal.getInstance(modalElement);
                     if (modalInstance) {
                         modalInstance.hide();

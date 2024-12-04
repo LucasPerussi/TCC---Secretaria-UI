@@ -171,12 +171,13 @@ use const Siler\Config\CONFIG; ?>
                         <div class="card p-1">
                             <?php foreach ($processes as $proccess) { ?>
                                 <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    <h4 style="font-weight:bold !important; margin-bottom:10px;"><?= $proccess["nome"] ?> </h4>
-                                    <h6><span style=" font-size:10px;" class="badge rounded-pill bg-light-primary"><?= $proccess["hrs_resposta"] ?? 0 ?> Hrs. Resposta</span>
-                                        <span style=" font-size:10px;" class="badge rounded-pill bg-light-success"><?= $proccess["hrs_resolucao"] ?? 0 ?> Hrs. Resolução</span>
-                                        <a href="proccess-fields/<?= $proccess["id"] ?>"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-input-cursor"></i> Campos</span></a>
-                                        <a href="proccess-stages/<?= $proccess["id"] ?>"><span style=" font-size:10px;float:right;" class="badge rounded-pill bg-dark"><i class="bi bi-bar-chart-steps"></i> Etapas</span></a>
-                                        <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;" class="badge rounded-pill bg-dark"> <i class="bi bi-bar-chart-steps"></i></span></a>
+                                    <h5 style="font-weight:bold !important; margin-bottom:10px;"><?= $proccess["nome"] ?> 
+                                    <a href="proccess-management/<?= $proccess["id"] ?>"><span style=" float:right; font-size:11px;padding:7px;" class="btn btn-primary"><i class="bi bi-eye"></i> Gerenciar</span></h5>
+                                    <h6><span style=" font-size:10px !important;" class="badge rounded-pill bg-light-primary"><?= $proccess["hrs_resposta"] ?? 0 ?> Hrs. Resposta</span>
+                                        <span style=" font-size:10px !important;" class="badge rounded-pill bg-light-success"><?= $proccess["hrs_resolucao"] ?? 0 ?> Hrs. Resolução</span>
+                                        <a href="proccess-fields/<?= $proccess["id"] ?>"><span style=" font-size:10px !important;float:right;padding:6px;color: #7367f0 !important;" class="btn btn-outline-primary"><i class="bi bi-input-cursor"></i> Campos</span></a>
+                                        <a href="proccess-stages/<?= $proccess["id"] ?>"><span style=" font-size:10px !important;float:right;margin-right:6px;padding:5px;color: #7367f0 !important;" class="btn btn-outline-primary"><i class="bi bi-bar-chart-steps"></i> Etapas</span></a>
+                                        <a href="#"><span style=" font-size:10px !important;float:right;margin-right:5px;padding:6px;color: #7367f0 !important;" class="btn btn-outline-primary"> <i class="bi bi-share"></i> Fluxograma</span></a>
                                     </h6>
 
 

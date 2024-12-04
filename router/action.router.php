@@ -22,11 +22,13 @@ use Exception;
 
 use API\Controller\CSRFToken;
 
+use function API\Fetch\getCustomizedStages;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedDefaultStages;
+use function API\Fetch\getUnifiedStages;
 use function API\Validator\JSON\fields;
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -70,6 +72,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
             $obj->newStageDefault();
         });
+        $this->addRoute("post", "/new-stage-customized", function ($args) use ($obj) {
+            $obj->newStageCustomized();
+        });
         $this->addRoute("post", "/new-field-process/{proccessId}", function ($args) use ($obj) {
             $obj->newFieldProccess($args['proccessId']);
         });
@@ -107,11 +112,17 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/load-default-stages", function ($args) use ($obj) {
             $obj->listDefaultStages();
         });
+        $this->addRoute("get", "/load-customized-stages", function ($args) use ($obj) {
+            $obj->listCustomizedStages();
+        });
         $this->addRoute("get", "/load-proccess-fields/{proccess}", function ($args) use ($obj) {
             $obj->listProccessFields($args["proccess"]);
         });
         $this->addRoute("get", "/load-proccess-stages/{proccess}", function ($args) use ($obj) {
             $obj->listProccessStages($args["proccess"]);
+        });
+        $this->addRoute("get", "/get-all-stages", function ($args) use ($obj) {
+            $obj->getAllStages();
         });
       
     }
@@ -196,9 +207,15 @@ class Route extends \API\Router\DefaultRouter
     {
         echo json_encode($this->systemController->addStageToProccess($proccessId, $stage));
     }
+
     public function removeStageToProccess($proccessId, $stage)
     {
         echo json_encode($this->systemController->removeStageToProccess($proccessId, $stage));
+    }
+
+    public function getAllStages()
+    {        
+        echo json_encode(getUnifiedStages());
     }
 
     public function registerFH()
@@ -233,6 +250,14 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->systemController->newStageDefault($body["nome"], $body["label"], $body["estimativaHoras"], $body["cor"]));
     }
 
+    public function newStageCustomized()
+    {
+        $body = $this->getBody();
+        fields(["nome", "label", "estimativaHoras", "cor"], $body, false);
+
+        echo json_encode($this->systemController->newStageCustomized($body["nome"], $body["label"], $body["estimativaHoras"], $body["cor"]));
+    }
+
     public function listDefaultFields()
     {
         echo json_encode(getDefaultFields());
@@ -241,6 +266,11 @@ class Route extends \API\Router\DefaultRouter
     public function listDefaultStages()
     {
         echo json_encode(getUnifiedDefaultStages());
+    }
+
+    public function listCustomizedStages()
+    {
+        echo json_encode(getCustomizedStages());
     }
 
     public function listProccessFields($proccess)

@@ -126,6 +126,25 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "newStageDefault");
     }
 
+    public function newStageCustomized($nome, $label, $estHoras, $cor)
+    {
+        $nome = Sanitize::clean($nome, "nome", "newStageCustomized");
+        $label = Sanitize::clean($label, "label", "newStageCustomized");
+        $estHoras = Sanitize::clean($estHoras, "estHoras", "newStageCustomized");
+        $cor = Sanitize::clean($cor, "cor", "newStageCustomized");
+
+        $url = Config::API_URL . "steps/new-customized";
+
+        $data = [
+            'nome' => $nome,
+            'label' => $label,
+            'estimativaHoras' => $estHoras,
+            'cor' => $cor
+        ];
+
+        return APIRequest::postRequest($url, $data, "newStageCustomized");
+    }
+
     public function addStageToProccess($proccessId, $stage)
     {
         $proccessId = Sanitize::clean($proccessId, "proccessId", "addStageToProccess");
@@ -150,5 +169,14 @@ class SystemModel
         $url = Config::API_URL . "steps/remove-link-stage-to-request/" . $stage . '/' . $proccessId;
 
         return APIRequest::deleteRequest($url, "removeStageToProccess");
+    }
+    public function removeFieldToProccess($proccessId, $field)
+    {
+        $proccessId = Sanitize::clean($proccessId, "proccessId", "removeFieldToProccess");
+        $field = Sanitize::clean($field, "field", "removeFieldToProccess");
+
+        $url = Config::API_URL . "fields/remove-link-field-to-request/" . $field . '/' . $proccessId;
+
+        return APIRequest::deleteRequest($url, "removeFieldToProccess");
     }
 }

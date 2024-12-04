@@ -87,6 +87,19 @@ class System extends DefaultController
 
         return $this->systemModel->newStageDefault($nome, $label, $estHoras, $cor);
     }
+
+    public function newStageCustomized($nome, $label, $estHoras, $cor)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newStageCustomized($nome, $label, $estHoras, $cor);
+    }
     
     public function addFieldToProccess($proccessId, $fieldId)
     {
@@ -111,9 +124,9 @@ class System extends DefaultController
             ];
         }
 
-        return $this->systemModel->removeStageToProccess($proccessId, $fieldId);
+        return $this->systemModel->removeFieldToProccess($proccessId, $fieldId);
     }
-    public function addStageToProccess($proccessId, $fieldId)
+    public function addStageToProccess($proccessId, $stage)
     {
 
         if (!$this->sessionUserId) {
@@ -123,7 +136,7 @@ class System extends DefaultController
             ];
         }
 
-        return $this->systemModel->addStageToProccess($proccessId, $fieldId);
+        return $this->systemModel->addStageToProccess($proccessId, $stage);
     }
 
     public function removeStageToProccess($proccessId, $stage)

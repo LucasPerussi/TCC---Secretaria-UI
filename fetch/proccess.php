@@ -82,6 +82,16 @@ function getDefaultStages()
     return $response;
 }
 
+function getCustomizedStages()
+{
+    $response = APIRequest::getRequest("steps/all-customized" );
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $response["message"], "getDefaultStages", "error");
+    return $response;
+}
+
 function getUnifiedDefaultStages()
 {
     $defaultStagesResponse = APIRequest::getRequest("steps/all-default");
@@ -102,6 +112,38 @@ function getUnifiedDefaultStages()
 
     // Unifica os valores em um único array
     $unifiedStages = array_merge($stageTypes, $defaultStages);
+
+    return $unifiedStages;
+}
+
+function getUnifiedStages()
+{
+    $defaultStagesResponse = APIRequest::getRequest("steps/all-default");
+    if (isset($defaultStagesResponse["error"])) {
+        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
+        $defaultStages = [];
+    } else {
+        $defaultStages = $defaultStagesResponse;
+    }
+
+    $customizedtagesResponse = APIRequest::getRequest("steps/all-customized");
+    if (isset($customizedtagesResponse["error"])) {
+        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de customizadas. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
+        $customizedStages = [];
+    } else {
+        $customizedStages = $customizedtagesResponse;
+    }
+
+    $stageTypesResponse = APIRequest::getRequest("steps/stages");
+    if (isset($stageTypesResponse["error"])) {
+        Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $stageTypesResponse["message"], "getUnifiedStages", "error");
+        $stageTypes = [];
+    } else {
+        $stageTypes = $stageTypesResponse;
+    }
+
+    // Unifica os valores em um único array
+    $unifiedStages = array_merge($stageTypes, $defaultStages, $customizedStages);
 
     return $unifiedStages;
 }

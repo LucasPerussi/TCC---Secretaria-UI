@@ -149,38 +149,57 @@ use const Siler\Config\CONFIG; ?>
                         <div class="modal-body ">
                             <h6 style="font-size:12px;">Cadastre um novo tipo de campo, feito para este processo</h6>
                             <br />
-                            <form id="newField">
-                                <div class="mb-1">
-                                    <label class="form-label" for="nome">Nome <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
-                                        <input type="text" id="nome" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." required />
+                            <form id="newStage">
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Nome</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
+                                            <input type="text" id="name-icon" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mb-1">
-                                    <label class="form-label" for="label">Label <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-eye"></i></span>
-                                        <input type="text" id="label" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." required />
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Label</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-eye"></i></span>
+                                            <input type="text" id="name-icon" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mb-1">
-                                    <label class="form-label" for="tipo_dado">Tipo de Dado <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-code"></i></span>
-                                        <select class="form-select" name="tipo_dado" id="tipo_dado" required>
-                                            <?php foreach ($inputTypes as $type) { ?>
-                                                <option value="<?= htmlspecialchars($type['id']) ?>">
-                                                    <?= htmlspecialchars($type['nome']) ?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Estimativa de horas para estágio</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                            <input type="number" id="name-icon" class="form-control" name="estimativaHoras" placeholder="1,2,3,.." />
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Botões do Modal -->
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" required for="email-icon">Cor indicativa</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-droplet"></i></span>
+                                            <input type="color" id="name-icon" class="form-control " style="height:39px;" name="cor" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
