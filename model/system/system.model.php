@@ -170,6 +170,7 @@ class SystemModel
 
         return APIRequest::deleteRequest($url, "removeStageToProccess");
     }
+
     public function removeFieldToProccess($proccessId, $field)
     {
         $proccessId = Sanitize::clean($proccessId, "proccessId", "removeFieldToProccess");
@@ -178,5 +179,14 @@ class SystemModel
         $url = Config::API_URL . "fields/remove-link-field-to-request/" . $field . '/' . $proccessId;
 
         return APIRequest::deleteRequest($url, "removeFieldToProccess");
+    }
+
+    public function removeField($fieldId)
+    {
+        $field = Sanitize::clean($fieldId, "fieldId", "removeField");
+
+        $url = Config::API_URL . "fields/type/" . $field ;
+
+        return APIRequest::deleteRequest($url, "removeField");
     }
 }

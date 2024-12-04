@@ -17,7 +17,7 @@ use API\Controller\Config;
                 }
             })
             .catch(function(error) {
-        
+
                 console.log(error.status)
                 Swal.fire({
                     title: 'Tivemos um problema!',
@@ -30,4 +30,29 @@ use API\Controller\Config;
                 })
             });
     });
+
+
+
+    function deleteField(field) {
+
+        axios.post('<?= Config::BASE_ACTION_URL ?>/remove-field/' + field)
+            .then(response => {
+                if (response.data.status !== 200) {
+                    throw response.data;
+                } else {
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Tivemos um problema!',
+                    text: 'Tivemos um problema ao remover campo. Talvez ele já esteja em uso. (STATUS: ' + error.status + ')',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#1f8cd4',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
+                })
+            });
+        }
 </script>

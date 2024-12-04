@@ -87,12 +87,12 @@ use const Siler\Config\CONFIG; ?>
 
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
-                                <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'proccess-management' ?>">Tipos de Processo</a></li>
+                                <li class="breadcrumb-item"><a href="<?=Config::BASE_URL?>proccess-type/<?=$args['proccessId']?>">Processo</a></li>
                                 <li class="breadcrumb-item active">Estágios do Processo</li>
                             </ol>
                         </div>
                     </div>
-                    <h1 style="font-weight:500; ">Tipos de Estágios </h1>
+                    <h1 style="font-weight:500; ">Etapas </h1>
                 </div>
 
             </div>
@@ -116,8 +116,8 @@ use const Siler\Config\CONFIG; ?>
 
                         </div>
                         <div class="col-md-8 col-sm-12">
-                            <h2>Campos Padrões <a class="btn btn-dark" style="font-size:10px !important; float:right;" data-bs-toggle="modal" data-bs-target="#cadastrarCampoModal">Novo Campo Personalizado</a></h2>
-                            <h6>Estes são os tipos de processos operacionais no sistema</h6>
+                            <h2>Etapas do Processo <a class="btn btn-dark" style="font-size:10px !important; float:right;" data-bs-toggle="modal" data-bs-target="#cadastrarCampoModal">Cadastrar Etapa</a></h2>
+                            <h6>Selecione as etapas que este processo terá</h6>
                             <br />
                             <div id="default-fields-container">
                                 <!-- Os campos serão renderizados aqui -->
@@ -142,12 +142,12 @@ use const Siler\Config\CONFIG; ?>
                     <div class="modal-content p-0" style="padding:0px !important;border-radius:10px !important;">
                         <!-- Cabeçalho do Modal -->
                         <div class="modal-header">
-                            <h4 class="modal-title" id="cadastrarCampoModalLabel">Cadastrar Campo Personalizado</h4>
+                            <h4 class="modal-title" id="cadastrarCampoModalLabel">Cadastrar Etapa</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                         </div>
                         <!-- Corpo do Modal -->
                         <div class="modal-body ">
-                            <h6 style="font-size:12px;">Cadastre um novo tipo de campo, feito para este processo</h6>
+                            <h6 style="font-size:12px;">Cadastre uma nova etapa para este processo</h6>
                             <br />
                             <form id="newStage">
                                 <div class="mb-1 row">

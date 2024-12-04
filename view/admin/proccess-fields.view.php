@@ -87,12 +87,12 @@ use const Siler\Config\CONFIG; ?>
 
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
-                                <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'proccess-management' ?>">Tipos de Processo</a></li>
-                                <li class="breadcrumb-item active">Campos do Processo</li>
+                            <li class="breadcrumb-item"><a href="<?=Config::BASE_URL?>proccess-type/<?=$args['proccessId']?>">Processo</a></li>
+                            <li class="breadcrumb-item active">Campos do Processo</li>
                             </ol>
                         </div>
                     </div>
-                    <h1 style="font-weight:500; ">Tipos de Processos </h1>
+                    <h1 style="font-weight:500; ">Campos </h1>
                 </div>
 
             </div>

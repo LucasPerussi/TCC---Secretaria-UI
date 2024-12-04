@@ -22,13 +22,14 @@ use Exception;
 
 use API\Controller\CSRFToken;
 
+use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getCustomizedStages;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedDefaultStages;
-use function API\Fetch\getUnifiedStages;
+// use function API\Fetch\getUnifiedStages;
 use function API\Validator\JSON\fields;
 
 date_default_timezone_set('America/Sao_Paulo');
@@ -96,6 +97,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/remove-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
             $obj->removeFieldToProccess($args["proccessId"],$args["fieldId"]);
+        });
+        $this->addRoute("post", "/remove-field/{fieldId}", function ($args) use ($obj) {
+            $obj->removeField($args["fieldId"]);
         });
         // stages
         $this->addRoute("post", "/add-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
@@ -202,6 +206,10 @@ class Route extends \API\Router\DefaultRouter
     {
         echo json_encode($this->systemController->removeFieldToProccess($proccessId, $fieldId));
     }
+    public function removeField( $fieldId)
+    {
+        echo json_encode($this->systemController->removeField($fieldId));
+    }
 
     public function addStageToProccess($proccessId, $stage)
     {
@@ -215,7 +223,7 @@ class Route extends \API\Router\DefaultRouter
 
     public function getAllStages()
     {        
-        echo json_encode(getUnifiedStages());
+        echo json_encode(getAllStagesUnified());
     }
 
     public function registerFH()

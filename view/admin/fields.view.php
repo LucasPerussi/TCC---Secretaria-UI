@@ -115,7 +115,7 @@ use const Siler\Config\CONFIG; ?>
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-asterisk"></i></span>
-                                            <input type="text" id="name-icon" class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." />
+                                            <input type="text" id="name-icon" required class="form-control" name="nome" placeholder="telefone, email, data_nascimento, ..." />
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@ use const Siler\Config\CONFIG; ?>
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-eye"></i></span>
-                                            <input type="text" id="name-icon" class="form-control" name="label" placeholder="Telefone, Email, Data de Nascimento ..." />
+                                            <input type="text" id="name-icon" class="form-control" required name="label" placeholder="Telefone, Email, Data de Nascimento ..." />
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ use const Siler\Config\CONFIG; ?>
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-code"></i></span>
-                                            <select class="form-select " name="tipo_dado" id="selectLarge">
+                                            <select class="form-select " required name="tipo_dado" id="selectLarge">
                                                 <?php foreach ($inputTypes as $type) { ?>
                                                     <option value="<?= htmlspecialchars($type['id']) ?>">
                                                         <?= htmlspecialchars($type['nome']) ?>
@@ -166,21 +166,37 @@ use const Siler\Config\CONFIG; ?>
                         <h2>Lista </h2>
                         <h6>Estes são os tipos de processos operacionais no sistema</h6>
                         <br />
-                        <?php if (!isset($defaultFields["error"])) { ?>
-                            <div class="card p-1">
-                                <?php foreach ($defaultFields as $field) { ?>
-                                    <div class="card mb-0 pb-1" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                        <h5 style="font-weight:bold !important; margin-bottom:10px;"><?= $field["etiqueta"] ?> <span style=" font-size:12px; float:right;" class="badge rounded-pill bg-light-secondary">Padrão</span></h5>
-                                        <span style="font-size:11px;">Nome: <?= $field["nome"] ?>
-                                            (ID: <?= $field["id"] ?>)
 
-                                            <!-- <span style=" font-size:10px;" class="badge rounded-pill bg-light-<?= $field["obrigatorio"] != 0 ? "danger" : "info" ?>"><?= $field["obrigatorio"] != 0 ? "<i class='bi bi-asterisk'></i> Obrigatório" : "Opcional" ?></span> -->
-                                            <!-- <a href="#"><span style=" font-size:10px;float:right;padding:5px !important;" class="badge rounded-pill bg-light-primary"> <i class="bi bi-asterisk"></i></span></a> -->
-                                            <a href="#"><span style=" font-size:10px;float:right;margin-right:5px;padding:5px !important;" class="badge rounded-pill bg-light-danger"> <i class="bi bi-trash"></i></span></a>
-                                        </span>
+
+
+                        <?php foreach ($proccessFields as $field) { ?>
+                            <?php foreach ($inputTypes as $type) { ?>
+                                <?php if ($field["tipo_processo"] == $type["id"]) { ?>
+                                    <div class="card mb-0 p-1 pb-0" style="margin-bottom:5px !important;">
+                                        <h6 style=" margin-bottom:10px;">
+                                            <i class="bi <?= htmlspecialchars($type["icone"]) ?> me-1"></i> <?= htmlspecialchars($field["nome"]) ?> (<?= htmlspecialchars($field["id"]) ?>)
+                                            <div style=" font-size:12px; float:right; margin-top:-5px;" class="badge rounded-pill bg-light-secondary"><?= htmlspecialchars($type["nome"]) ?></div>
+                                        </h6>
                                     </div>
                                 <?php } ?>
-                            </div>
+                            <?php } ?>
+                        <?php } ?>
+                        <?php if (!isset($defaultFields["error"])) { ?>
+                            <?php foreach ($defaultFields as $field) { ?>
+                                <?php foreach ($inputTypes as $type) { ?>
+                                    <?php if ($field["tipo_dado"] == $type["id"]) { ?>
+                                        <div class="card mb-0 p-1 pb-0" style="margin-bottom:5px !important;">
+                                            <h6 style=" margin-bottom:10px;">
+                                                <i class="bi <?= htmlspecialchars($type["icone"]) ?> me-1"></i> <?= $field["etiqueta"] ?> (<?= htmlspecialchars($field["id"]) ?> - <?= $field["nome"] ?>)
+                                                <div style=" font-size:12px; float:right; margin-top:-5px;" class="badge rounded-pill bg-light-secondary"><?= htmlspecialchars($type["nome"]) ?></div>
+                                                <a onclick="deleteField(<?= htmlspecialchars($field['id']) ?>)">
+                                                    <div style=" font-size:12px; float:right; margin-top:-5px; margin-right: 10px;" class="badge rounded-pill bg-light-danger"><i class="bi bi-trash"></i></div>
+                                                </a>
+                                            </h6>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
                         <?php } else { ?>
                             <div class="card">
                                 <h6>Nada a listar</h6>

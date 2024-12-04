@@ -10,6 +10,7 @@ use API\Controller\Config;
 
 use Exception;
 
+use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
@@ -27,8 +28,11 @@ use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
+use function API\Fetch\getProccessFields;
+use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
 use function API\Fetch\getStageTypes;
+use function API\Fetch\getUnifiedStages;
 use function API\Fetch\listAdmins;
 use function API\Fetch\loadCompaniesComplete;
 use function API\Fetch\listProducts;
@@ -233,6 +237,19 @@ class Route extends \API\Router\DefaultRouter
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/proccess-fields.view.php";
+        });
+        $this->addRoute("get", "/proccess-type/{proccessId}", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $inputTypes = getInputTypes();
+            $process = getProccessTypeId($args["proccessId"]);
+            $proccessFields = getProccessFields($args["proccessId"]);
+            $proccessStages = getProccessStages($args["proccessId"]);
+            $allStageTypes = getAllStagesUnified();
+
+            require __DIR__ . "/../view/admin/process-type.view.php";
         });
         $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
             // $obj->verifyCookies();

@@ -96,7 +96,7 @@ function getUnifiedDefaultStages()
 {
     $defaultStagesResponse = APIRequest::getRequest("steps/all-default");
     if (isset($defaultStagesResponse["error"])) {
-        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
+        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $defaultStagesResponse["message"], "getUnifiedDefaultStages", "error");
         $defaultStages = [];
     } else {
         $defaultStages = $defaultStagesResponse;
@@ -104,7 +104,7 @@ function getUnifiedDefaultStages()
 
     $stageTypesResponse = APIRequest::getRequest("steps/stages");
     if (isset($stageTypesResponse["error"])) {
-        Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $stageTypesResponse["message"], "getUnifiedStages", "error");
+        Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $stageTypesResponse["message"], "getUnifiedDefaultStages", "error");
         $stageTypes = [];
     } else {
         $stageTypes = $stageTypesResponse;
@@ -116,34 +116,114 @@ function getUnifiedDefaultStages()
     return $unifiedStages;
 }
 
-function getUnifiedStages()
+function getAllStagesUnified()
 {
+    // Inicializa arrays vazios para garantir que sempre sejam arrays
+    $defaultStages = [];
+    $customizedStages = [];
+    $stageTypes = [];
+
+    // Obtém as etapas padrão
     $defaultStagesResponse = APIRequest::getRequest("steps/all-default");
     if (isset($defaultStagesResponse["error"])) {
-        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
-        $defaultStages = [];
-    } else {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Erro ao listar etapas padrão. Erro: " . $defaultStagesResponse["message"],
+            "getUnifiedStages",
+            "error"
+        );
+    } elseif (!empty($defaultStagesResponse) && is_array($defaultStagesResponse)) {
         $defaultStages = $defaultStagesResponse;
-    }
-
-    $customizedtagesResponse = APIRequest::getRequest("steps/all-customized");
-    if (isset($customizedtagesResponse["error"])) {
-        Logger::log($_SESSION["user_id"], "Erro ao listar etapas de customizadas. Error: " . $defaultStagesResponse["message"], "getUnifiedStages", "error");
-        $customizedStages = [];
     } else {
-        $customizedStages = $customizedtagesResponse;
+        Logger::log(
+            $_SESSION["user_id"],
+            "Resposta inesperada ao listar etapas padrão: " . json_encode($defaultStagesResponse),
+            "getUnifiedStages",
+            "warning"
+        );
     }
 
+    // Obtém as etapas personalizadas
+    $customizedStagesResponse = APIRequest::getRequest("steps/all-customized");
+    if (isset($customizedStagesResponse["error"])) {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Erro ao listar etapas personalizadas. Erro: " . $customizedStagesResponse["message"],
+            "getUnifiedStages",
+            "error"
+        );
+    } elseif (!empty($customizedStagesResponse) && is_array($customizedStagesResponse)) {
+        $customizedStages = $customizedStagesResponse;
+    } else {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Resposta inesperada ao listar etapas personalizadas: " . json_encode($customizedStagesResponse),
+            "getUnifiedStages",
+            "warning"
+        );
+    }
+    
+
+    // Obtém os tipos de estágios
     $stageTypesResponse = APIRequest::getRequest("steps/stages");
     if (isset($stageTypesResponse["error"])) {
-        Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $stageTypesResponse["message"], "getUnifiedStages", "error");
-        $stageTypes = [];
-    } else {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Erro ao listar tipos de etapas. Erro: " . $stageTypesResponse["message"],
+            "getUnifiedStages",
+            "error"
+        );
+    } elseif (!empty($stageTypesResponse) && is_array($stageTypesResponse)) {
         $stageTypes = $stageTypesResponse;
+    } else {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Resposta inesperada ao listar tipos de etapas: " . json_encode($stageTypesResponse),
+            "getUnifiedStages",
+            "warning"
+        );
     }
 
-    // Unifica os valores em um único array
-    $unifiedStages = array_merge($stageTypes, $defaultStages, $customizedStages);
+
+    // Coleciona os arrays válidos para unificação
+    $stagesToMerge = [];
+
+    if (!empty($stageTypes)) {
+        $stagesToMerge[] = $stageTypes;
+    }
+
+    if (!empty($defaultStages)) {
+        $stagesToMerge[] = $defaultStages;
+    }
+
+    if (!empty($customizedStages)) {
+        $stagesToMerge[] = $customizedStages;
+    }
+
+    // Unifica os arrays válidos
+    if (!empty($stagesToMerge)) {
+        // Utiliza array_merge para combinar todos os arrays em $stagesToMerge
+        $unifiedStages = call_user_func_array('array_merge', $stagesToMerge);
+    } else {
+        // Se nenhum array válido estiver disponível, retorna um array vazio
+        $unifiedStages = [];
+        Logger::log(
+            $_SESSION["user_id"],
+            "Nenhuma etapa válida foi retornada para unificação.",
+            "getUnifiedStages",
+            "warning"
+        );
+    }
+
+    // Log de sucesso se houver etapas unificadas
+    if (!empty($unifiedStages)) {
+        Logger::log(
+            $_SESSION["user_id"],
+            "Etapas unificadas retornadas com sucesso.",
+            "getUnifiedStages",
+            "info"
+        );
+    }
 
     return $unifiedStages;
 }

@@ -126,6 +126,18 @@ class System extends DefaultController
 
         return $this->systemModel->removeFieldToProccess($proccessId, $fieldId);
     }
+    public function removeField($fieldId)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->removeField($fieldId);
+    }
     public function addStageToProccess($proccessId, $stage)
     {
 
