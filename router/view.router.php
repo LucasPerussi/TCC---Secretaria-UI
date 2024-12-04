@@ -10,6 +10,7 @@ use API\Controller\Config;
 
 use Exception;
 
+use function API\Fetch\getAllFieldTypesDB;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
@@ -274,6 +275,15 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->verifyLogged();
             $types = getRequestTypes();
+            if(isset($_GET['tipo_de_chamado'])){
+                $inputTypes = getInputTypes();
+                $process = getProccessTypeId($_GET['tipo_de_chamado']);
+                $proccessFields = getProccessFields($_GET['tipo_de_chamado']);
+                $defaultFields = getDefaultFields($_GET['tipo_de_chamado']);
+                $fieldtypesDb = getAllFieldTypesDB();
+                $proccessStages = getProccessStages($_GET['tipo_de_chamado']);
+                $allStageTypes = getAllStagesUnified();
+            }
             require __DIR__ . "/../view/member/new-request.view.php";
         });
         $this->addRoute("get", "/fields", function ($args) use ($obj) {

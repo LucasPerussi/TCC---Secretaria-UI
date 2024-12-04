@@ -62,6 +62,16 @@ function getProccessFields($id)
     return $response;
 }
 
+function getAllFieldTypesDB()
+{
+    $response = APIRequest::getRequest("fields/all-field-types");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getAllFieldTypesDB", "error");
+    return $response;
+}
+
 function getProccessStages($id)
 {
     $response = APIRequest::getRequest("steps/link-step-to-proccess/" . $id);
