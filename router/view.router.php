@@ -29,6 +29,7 @@ use function API\Fetch\getUser;
 use function API\Fetch\getUserTimelines;
 use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
+use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
@@ -105,7 +106,7 @@ class Route extends \API\Router\DefaultRouter
             // $obj->setCookies();
             $obj->verifyLogged();
             if ($_SESSION['user_role'] == "Aluno") {
-                $last50Logs = getLast50Logs();
+                $requests = getMyRequestsStudent();
                 require __DIR__ . "/../view/member/dashboard-member.php";
             } elseif ($_SESSION['user_role'] == "Professor") {
                 $myteacherRequests = getMytickersAsTeacher();

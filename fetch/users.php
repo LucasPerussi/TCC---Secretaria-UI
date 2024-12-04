@@ -69,3 +69,13 @@ function listAdmins()
     Logger::log($_SESSION["user_id"], "Erro ao listar admins. Error: " . $response["message"], "listAdmins", "error");
     return $response;
 }
+
+function getMyRequestsStudent()
+{
+    $response = APIRequest::getRequest("requests/all-requests-as-student");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar admins. Error: " . $response["message"], "getMyRequestsStudent", "error");
+    return $response;
+}
