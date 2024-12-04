@@ -31,6 +31,7 @@ use function API\Fetch\getMurais;
 use function API\Fetch\getMuralById;
 use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
+use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
 use function API\Fetch\getStageTypes;
@@ -142,6 +143,14 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/dashboard-member.php";
+        });
+        $this->addRoute("get", "/request/{processId}", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $request = getProccessIdentifier($args["processId"]);
+            require __DIR__ . "/../view/general/request.view.php";
         });
         $this->addRoute("get", "/news-board", function ($args) use ($obj) {
             // $obj->verifyCookies();

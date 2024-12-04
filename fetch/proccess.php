@@ -82,6 +82,16 @@ function getProccessStages($id)
     return $response;
 }
 
+function getProccessIdentifier($id)
+{
+    $response = APIRequest::getRequest("requests/process-identificador/" . $id);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getProccessIdentifier", "error");
+    return $response;
+}
+
 function getDefaultStages()
 {
     $response = APIRequest::getRequest("steps/all-default" );
