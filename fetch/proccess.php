@@ -121,6 +121,16 @@ function getAllProcessComments($process)
     return $response;
 }
 
+function getProccesTimelines($process)
+{
+    $response = APIRequest::getRequest("system/timelines-proccess/$process" );
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $response["message"], "getProccesTimelines", "error");
+    return $response;
+}
+
 function getAllProcessResponses($process)
 {
     // Validação básica para garantir que $process não está vazio

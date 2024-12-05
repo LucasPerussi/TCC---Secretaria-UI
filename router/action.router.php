@@ -107,6 +107,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/remove-field/{fieldId}", function ($args) use ($obj) {
             $obj->removeField($args["fieldId"]);
         });
+        $this->addRoute("post", "/add-teacher", function ($args) use ($obj) {
+            $obj->addTeacher();
+        });
         // stages
         $this->addRoute("post", "/add-stage-process/{proccessId}/{stage}", function ($args) use ($obj) {
             $obj->addStageToProccess($args["proccessId"], $args["stage"]);
@@ -251,6 +254,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["nome", "label", "tipo_dado"], $body, false);
 
         echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
+    }
+    public function addTeacher()
+    {
+        $body = $this->getBody();
+        fields(["professor", "processo"], $body, false);
+
+        echo json_encode($this->systemController->addTeacher($body["professor"], $body["processo"]));
     }
 
     public function newRequest()

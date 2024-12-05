@@ -36,6 +36,7 @@ use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
+use function API\Fetch\getProccesTimelines;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedStages;
 use function API\Fetch\listAdmins;
@@ -163,6 +164,8 @@ class Route extends \API\Router\DefaultRouter
             $allStageTypes = getAllStagesUnified();
             $allResponses = getAllProcessResponses($args["processId"]);
             $allProcessComments = getAllProcessComments($request['id']);
+            $timelines = getProccesTimelines($request['id']);
+            $teachers = listTeachers();
 
             require __DIR__ . "/../view/general/request.view.php";
         });

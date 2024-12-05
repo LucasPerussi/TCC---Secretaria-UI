@@ -34,9 +34,9 @@ foreach ($proccessFields as $field) {
         ?>
         <div class="card mb-2 p-2">
             <div class="row">
-                <h5 class="col-12"><?= htmlspecialchars($field["nome_exibicao"]) ?></h5>
+                <h4 style="font-weight:bold !important;" class="col-12"><?= htmlspecialchars($field["nome_exibicao"]) ?></h4>
                 <div class="col-12">
-                    <?= htmlspecialchars($response["resposta"]) ?>
+                   <h6> <?= htmlspecialchars($response["resposta"]) ?></h6>
                 </div>
             </div>
         </div>

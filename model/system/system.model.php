@@ -197,6 +197,21 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "newComment");
     }
 
+    public function addTeacher($professor, $processo)
+    {
+        $professor = Sanitize::clean($professor, "professor", "addTeacher");
+        $processo = Sanitize::clean($processo, "processo", "addTeacher");
+
+        $url = Config::API_URL . "requests/add-teacher";
+
+        $data = [
+            'professor' => $professor,
+            'identificador' => $processo
+        ];
+       
+        return APIRequest::patchRequest($url, $data, "addTeacher");
+    }
+
     public function newResponse($nome, $valor, $ticketId, $user_id)
     {
         $nome = Sanitize::clean($nome, "nome", "newResponse");

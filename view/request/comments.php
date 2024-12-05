@@ -15,12 +15,14 @@
     }
 
     .bubble-left {
-        background-color: #9ba8d8;
+        background-color: #627ad3;
+        /* background-color: #9ba8d8; */
         margin-left: 10px;
     }
 
     .bubble-right {
-        background-color: #9bd8bc;
+        background-color: #31a392;
+        /* background-color: #9bd8bc; */
         /* background-color: #d1e7dd; */
         margin-right: 10px;
     }
@@ -32,18 +34,18 @@
     .comment-header {
         font-size: 15px;
         font-weight: bold;
-        color: #6c757d;
+        color: #fff;
         margin-bottom: 5px;
     }
 
     .comment-date {
         font-size: 11px;
-        color: #6c757d;
+        color: #fff;
     }
 
     .comment-text {
         font-size: 14px;
-        color: #6c757d;
+        color: #fff;
 
     }
 
@@ -146,7 +148,7 @@ else:
     <h2 class="mt-25"><?= htmlspecialchars(__("request.comentario.comentar")) ?></h2>
     <br />
     <div class="card" style="padding:10px !important;">
-        <form id="new-comment">
+        <form id="newComment">
             <textarea name="comentario" id="editorCopy" required="required"
                 placeholder="Deixe um comentário" class="form-control textarea"></textarea>
             <input type="text" name="processo" hidden value="<?= $request["id"] ?>">

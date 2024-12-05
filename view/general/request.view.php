@@ -25,6 +25,7 @@ use const Siler\Config\CONFIG; ?>
     <link rel="stylesheet" type="text/css" href="src/css/carousel.css">
     <title>Painel Admin</title>
 
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
@@ -89,7 +90,7 @@ use const Siler\Config\CONFIG; ?>
                     <div class="col-md-8 col-sm-12">
                         <br />
 
-                    <?php include "view/request/nav-request.php"; ?>
+                        <?php include "view/request/nav-request.php"; ?>
 
 
 
@@ -99,12 +100,13 @@ use const Siler\Config\CONFIG; ?>
                             <h2>Andamento</h2>
                             <!-- Conteúdo da aba Andamento -->
                             <?php include "view/request/comments.php"; ?>
-                            </div>
+                        </div>
 
                         <div id="timeline-section" class="section">
-                            <h2><?= __("configuracoes_nav.timeline") ?></h2>
+                            <h2>Timeline</h2>
+                            <br />
                             <!-- Conteúdo da aba Timeline -->
-                            <p>Conteúdo da seção Timeline...</p>
+                            <?php include "view/request/timelines.php"; ?>
                         </div>
 
                         <div id="campos-section" class="section">
@@ -115,9 +117,10 @@ use const Siler\Config\CONFIG; ?>
                         </div>
 
                         <div id="definicoes-section" class="section">
-                            <h2><?= __("configuracoes_nav.definicoes") ?></h2>
+                            <h2>Definições</h2>
+                            <br />
                             <!-- Conteúdo da aba Definições -->
-                            <p>Conteúdo da seção Definições...</p>
+                            <?php include "view/request/definition.php"; ?>
                         </div>
 
 
@@ -139,6 +142,28 @@ use const Siler\Config\CONFIG; ?>
                                     <span style="font-size:11px;" class="badge rounded-pill bg-light-secondary">Aluno</span>
                                 </h6>
                             </div>
+                            <?php if ($request["usuario_processo_professor_avaliadorTousuario"] != null) { ?>
+                                <div class="card p-1" style="text-align:center;" id="bodyRequestDash">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <h6>
+                                                <img src="<?= Config::BASE_URL?><?= $request["usuario_processo_professor_avaliadorTousuario"]["foto"] != "" ? $request["usuario_processo_professor_avaliadorTousuario"]["foto"] : "src/img/avatars/art-1.webp"?>" alt="Foto Usuário" style="width:80px; width:80px; border-radius:60px; ">
+                                            </h6>
+                                        </div>
+                                        <div class="col-7" style="text-align:left;">
+                                            <h5>
+                                                <?= $request["usuario_processo_professor_avaliadorTousuario"]["nome"] . " " . $request["usuario_processo_professor_avaliadorTousuario"]["sobrenome"] ?>
+                                            </h5>
+                                            <h6>
+                                                <?= $request["usuario_processo_professor_avaliadorTousuario"]["email"] ?>
+                                            </h6>
+                                            <h6>
+                                                <span style="font-size:11px;" class="badge rounded-pill bg-light-secondary">Professor</span>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
                             <h5>Descrição</h5>
                             <div class="card p-1" id="bodyRequestDash">
                                 <p><?= $request["descricao"] ?></p>
@@ -184,6 +209,9 @@ use const Siler\Config\CONFIG; ?>
             <!-- Vendors JS -->
 
 
+            <?php
+            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            ?>
             <!-- Main JS -->
             <script src="test/assets/js/main.js"></script>
 

@@ -201,6 +201,18 @@ class System extends DefaultController
 
         return $this->systemModel->newResponse($nome,$valor, $ticketId, $user_id);
     }
+    public function addTeacher($professor, $processo)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->addTeacher($professor, $processo);
+    }
 }
     
    
