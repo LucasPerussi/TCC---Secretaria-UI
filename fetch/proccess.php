@@ -111,6 +111,46 @@ function getCustomizedStages()
     Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $response["message"], "getDefaultStages", "error");
     return $response;
 }
+function getAllProcessComments($process)
+{
+    $response = APIRequest::getRequest("comments/all-from-proccess/$process" );
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar etapas de padrões. Error: " . $response["message"], "getAllProcessComments", "error");
+    return $response;
+}
+
+function getAllProcessResponses($process)
+{
+    // Validação básica para garantir que $process não está vazio
+    if (empty($process)) {
+        Logger::log($_SESSION["user_id"], "Processo vazio fornecido para getAllProcessResponses.", "getAllProcessResponses", "error");
+        return ["error" => "Processo inválido."];
+    }
+
+    // Concatenar a URL corretamente usando o operador de ponto
+    // Adicionar uma barra se necessário. Isso depende de como a API espera o formato.
+    $endpoint = "requests/all-responses-process/" . urlencode($process);
+
+    // Fazer a requisição à API
+    $response = APIRequest::getRequest($endpoint);
+
+    // Verificar se a resposta não contém erros
+    if (!isset($response["error"])) {
+        return $response;
+    }
+
+    // Logar o erro para depuração
+    Logger::log(
+        $_SESSION["user_id"],
+        "Erro ao listar etapas de padrões. Error: " . $response["message"],
+        "getAllProcessResponses",
+        "error"
+    );
+
+    return $response;
+}
 
 function getUnifiedDefaultStages()
 {

@@ -11,6 +11,8 @@ use API\Controller\Config;
 use Exception;
 
 use function API\Fetch\getAllFieldTypesDB;
+use function API\Fetch\getAllProcessComments;
+use function API\Fetch\getAllProcessResponses;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
@@ -150,6 +152,18 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             $request = getProccessIdentifier($args["processId"]);
+
+
+            $inputTypes = getInputTypes();
+            $process = getProccessTypeId($request['tipo_solicitacao']);
+            $proccessFields = getProccessFields($request['tipo_solicitacao']);
+            $defaultFields = getDefaultFields($request['tipo_solicitacao']);
+            $fieldtypesDb = getAllFieldTypesDB();
+            $proccessStages = getProccessStages($request['tipo_solicitacao']);
+            $allStageTypes = getAllStagesUnified();
+            $allResponses = getAllProcessResponses($args["processId"]);
+            $allProcessComments = getAllProcessComments($request['id']);
+
             require __DIR__ . "/../view/general/request.view.php";
         });
         $this->addRoute("get", "/news-board", function ($args) use ($obj) {

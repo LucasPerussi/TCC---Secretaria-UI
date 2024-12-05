@@ -96,10 +96,10 @@ use const Siler\Config\CONFIG; ?>
 
                         <!-- Seções Correspondentes -->
                         <div id="andamento-section" class="section active-section">
-                            <h2><?= __("configuracoes_nav.andamento") ?></h2>
+                            <h2>Andamento</h2>
                             <!-- Conteúdo da aba Andamento -->
-                            <p>Conteúdo da seção Andamento...</p>
-                        </div>
+                            <?php include "view/request/comments.php"; ?>
+                            </div>
 
                         <div id="timeline-section" class="section">
                             <h2><?= __("configuracoes_nav.timeline") ?></h2>
@@ -108,9 +108,10 @@ use const Siler\Config\CONFIG; ?>
                         </div>
 
                         <div id="campos-section" class="section">
-                            <h2><?= __("configuracoes_nav.campos") ?></h2>
-                            <!-- Conteúdo da aba Campos -->
-                            <p>Conteúdo da seção Campos...</p>
+                            <h2>Informações</h2>
+                            <br />
+                            <?php include "view/request/information.php"; ?>
+
                         </div>
 
                         <div id="definicoes-section" class="section">

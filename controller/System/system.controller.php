@@ -176,6 +176,18 @@ class System extends DefaultController
 
         return $this->systemModel->newRequest($title, $description, $processo, $user_id);
     }
+    public function newComment($comentario, $processo, $user_id)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newComment($comentario, $processo, $user_id);
+    }
 
     public function newResponse($nome,$valor, $ticketId, $user_id)
     {

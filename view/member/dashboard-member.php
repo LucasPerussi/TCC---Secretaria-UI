@@ -117,7 +117,7 @@ use const Siler\Config\CONFIG; ?>
                                                                                                                                                         } else {
                                                                                                                                                             echo "Data inválida";
                                                                                                                                                         }
-                                                                                                                                                        ?><span style=" float:right;font-size:11px;"class="badge rounded-pill bg-light-<?=$request["status"] == 1 ? "success" : "secondary";?>"><?=$request["status"] == 1 ? "Aberto" : "Fechado";?></span> - <?=$request["numero"]?>  </h6>
+                                                                                                                                                        ?><span style=" float:right;font-size:11px;" class="badge rounded-pill bg-light-<?=$request["status"] == 1 ? "success" : "secondary";?>"><?=$request["status"] == 1 ? "Aberto" : "Fechado";?></span> - <?=$request["numero"]?>  </h6>
                                     
                                   
 

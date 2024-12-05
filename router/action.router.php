@@ -70,6 +70,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-request", function ($args) use ($obj) {
             $obj->newRequest();
         });
+        $this->addRoute("post", "/new-comment", function ($args) use ($obj) {
+            $obj->newComment();
+        });
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
         });
@@ -197,6 +200,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["password", "new-password", "confirm-new-password"], $body, false);
 
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
+    }
+    public function newComment()
+    {
+        $body = $this->getBody();
+        fields(["comentario", "processo"], $body, false);
+
+        echo json_encode($this->systemController->newComment($body["comentario"], $body["processo"], $_SESSION["user_id"]));
     }
 
     public function addFieldToProccess($proccessId, $fieldId)

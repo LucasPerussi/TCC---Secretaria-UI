@@ -180,6 +180,23 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "newRequest");
     }
 
+    public function newComment($comentario, $processo, $user_id)
+    {
+        $comentario = Sanitize::clean($comentario, "comentario", "newComment");
+        $processo = Sanitize::clean($processo, "processo", "newComment");
+        $user_id = Sanitize::clean($user_id, "user_id", "newComment");
+
+        $url = Config::API_URL . "comments/new";
+
+        $data = [
+            'comentario' => $comentario,
+            'usuario' => $user_id,
+            'processo' => $processo
+        ];
+       
+        return APIRequest::postRequest($url, $data, "newComment");
+    }
+
     public function newResponse($nome, $valor, $ticketId, $user_id)
     {
         $nome = Sanitize::clean($nome, "nome", "newResponse");
