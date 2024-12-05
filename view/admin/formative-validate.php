@@ -66,7 +66,8 @@ include "view/src/head.php"; ?>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
                 <div class="content-header row">
                     <div class="content-header-left col-md-9 col-12 mb-2">
                         <div class="row breadcrumbs-top">
@@ -82,24 +83,20 @@ include "view/src/head.php"; ?>
                             <div class="row">
                                 <div class="mb-1 row">
                                     <div class="col-sm-12">
-                                        <label class="col-form-label" required for="email-icon">Descrição</label>
+                                        <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                            <input type="text" id="name-icon" class="form-control" name="descricao" placeholder="Participei de..." />
+
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
                                 <div class="mb-1 row">
                                     <div class="col-sm-12">
                                         <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-link"></i></span>
-                                            <input type="name" id="name-icon" class="form-control" name="comprovante" placeholder="https://link.com.br" />
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -114,22 +111,15 @@ include "view/src/head.php"; ?>
 
                 <div class="content-body">
                     <div class="card p-1 ">
+                        <div class="col-12">
+                            <h3 class="content-header-title float-start mb-0">Conclusão</h3>
+                        </div>
                         <form id="registerFH">
                             <div class="row">
+
                                 <div class="mb-1 row">
                                     <div class="col-sm-12">
-                                        <label class="col-form-label" required for="email-icon">Descrição</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                            <input type="text" id="name-icon" class="form-control" name="descricao" placeholder="Participei de..." />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-1 row">
-                                    <div class="col-sm-12">
-                                        <label class="col-form-label" for="email-icon">Tipo</label>
+                                        <label class="col-form-label" for="email-icon">Professor</label>
                                     </div>
 
                                     <form id="changeCurso">
@@ -149,37 +139,31 @@ include "view/src/head.php"; ?>
 
                                     </form>
                                 </div>
-                                <div class="mb-1 row">
-                                    <div class="col-sm-12">
-                                        <label class="col-form-label" for="email-icon">Horas Solicitadas</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                            <input type="number" id="name-icon" class="form-control" name="horas_solicitadas" placeholder="4" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-1 row">
-                                    <div class="col-sm-12">
-                                        <label class="col-form-label" for="email-icon">Data do evento</label>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                            <input type="date" id="name-icon" class="form-control" name="data_evento" placeholder="4" />
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="mb-1 row">
                                     <div class="col-sm-12">
-                                        <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadioInline1" name="customRadioInline" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioInline1">Deferido</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadioInline2" name="customRadioInline" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioInline2">Indeferido</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadioInline2" name="customRadioInline" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadioInline2">Deferido parcialmente</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="email-icon">Horas Concedidas</label>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-link"></i></span>
-                                            <input type="name" id="name-icon" class="form-control" name="comprovante" placeholder="https://link.com.br" />
+                                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                            <input type="number" id="name-icon" class="form-control" name="horas_concedidas" placeholder="30" />
                                         </div>
                                     </div>
                                 </div>
@@ -194,6 +178,30 @@ include "view/src/head.php"; ?>
 
                     </div>
                 </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="card p-2" style="text-align:center !important;" id="bodyRequestDash">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12">
+                            <img id="preview"
+                                src="<?= isset($_SESSION['user_picture']) ? $_SESSION['user_picture'] : 'placeholder.jpg' ?>"
+                                alt="Profile Picture"
+                                class="img-fluid rounded mb-0">
+                        </div>
+                        <div class="col-md-5 col-sm-12">
+                            <div style="text-align:left; margin-left:10px;margin-top:30px;">
+
+                                <h2>
+                                    <?= $_SESSION['user_name'] ?>
+                                </h2>
+                                <span><?= $_SESSION['user_email'] ?></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
             </div>
             <!-- END: Content-->
 
