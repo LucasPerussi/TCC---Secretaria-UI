@@ -179,7 +179,7 @@ class APIRequest
     
     public static function handleResponse($result, $method)
     {
-        if ($result['status'] === 200) {
+        if (($result['status'] === 200) || ($result['status'] === 201)) {
             $responseData = json_decode($result['response'], true);
             $_SESSION['user_id'] = $responseData['user']['id'];
             $_SESSION['user_name'] = $responseData['user']['name'];
