@@ -51,10 +51,6 @@ date_default_timezone_set('America/Sao_Paulo');
                                             <h6 style="font-size:11px;">
 
                                                 <span class="badge rounded-pill bg-light-success">Visível</span>
-                        
-                                                <span class="badge rounded-pill bg-light-info">
-                                                    Autor: <?= $authors[$mural["autor"]] ?? "Desconhecido" ?>
-                                                </span>
 
                                                 <span class="badge rounded-pill bg-light-primary">
                                                     Postado em:
