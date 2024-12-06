@@ -49,6 +49,7 @@ use function API\Fetch\listServers;
 use function API\Fetch\listStudents;
 use function API\Fetch\listTeachers;
 use function API\Fetch\loadContentVinte;
+use function API\Fetch\getCourseById;
 
 
 
@@ -200,6 +201,12 @@ class Route extends \API\Router\DefaultRouter
                 $mural = getMuralById($id);
             } else {
                 $mural = ["error" => "ID não fornecido"];
+            }
+
+            $mural = getMuralById($id);
+            if (!isset($mural["error"])) {
+                $autor = getUser($mural["autor"]);
+                $curso = getCourseById($mural["curso_alvo"]);
             }
             require __DIR__ . "/../view/user/complete-board.view.php";
         });

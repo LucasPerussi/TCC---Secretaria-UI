@@ -39,7 +39,7 @@ date_default_timezone_set('America/Sao_Paulo');
                             <div class="board p-3">
                                 <h3><?= htmlspecialchars($mural["titulo"]) ?></h3>
                                 <p>
-                                    por <?= htmlspecialchars($mural["autor"]) ?> -
+                                    por <?= htmlspecialchars($autor["nome"]) ?> -
                                     <?php
                                     $timestamp = strtotime($mural["data"]);
                                     echo $timestamp !== false ? date("d/m/Y H:i", $timestamp) : "Data inválida";
@@ -47,7 +47,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                 </p>
                                 <p class="board-text"><?= nl2br(htmlspecialchars($mural["descricao"])) ?></p>
                                 <span class="badge rounded-pill bg-light-primary">
-                                    Curso Alvo: <?= htmlspecialchars($mural["curso_alvo"]) ?>
+                                    Curso Alvo: <?= htmlspecialchars($curso["nome"]) ?>
                                 </span>
                                 <span class="badge rounded-pill bg-light-<?= $mural["visivel"] == 1 ? "success" : "danger" ?>">
                                     <? $mural["visivel"] == 1 ? "Visível" : "Oculto" ?>
