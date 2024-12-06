@@ -99,7 +99,7 @@ use const Siler\Config\CONFIG; ?>
                         <?php
                         $timestamp = strtotime($mural["data"]);
                         echo $timestamp !== false ? date("d/m/Y H:i", $timestamp) : "Data inválida";
-                        ?> 
+                        ?>
                         <span class="badge ms-1 rounded-pill bg-light-primary">
                             Curso Alvo: <?= htmlspecialchars($curso["curso_alvo"]) ?>
                         </span>
