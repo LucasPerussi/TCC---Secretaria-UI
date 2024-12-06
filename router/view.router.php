@@ -16,6 +16,7 @@ use function API\Fetch\getAllProcessResponses;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
+use function API\Fetch\getCourseById;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
@@ -37,7 +38,6 @@ use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
-use function API\Fetch\getProccesTimelines;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedStages;
 use function API\Fetch\listAdmins;
@@ -50,7 +50,6 @@ use function API\Fetch\listServers;
 use function API\Fetch\listStudents;
 use function API\Fetch\listTeachers;
 use function API\Fetch\loadContentVinte;
-use function API\Fetch\getCourseById;
 
 
 
@@ -168,10 +167,6 @@ class Route extends \API\Router\DefaultRouter
             $allResponses = getAllProcessResponses($args["processId"]);
             $allProcessComments = getAllProcessComments($request['id']);
 
-            $statusTypes = getAllStatusTypes();
-            $timelines = getProccesTimelines($request['id']);
-            $teachers = listTeachers();
-
             require __DIR__ . "/../view/general/request.view.php";
         });
         $this->addRoute("get", "/news-board", function ($args) use ($obj) {
@@ -210,7 +205,6 @@ class Route extends \API\Router\DefaultRouter
             $mural = getMuralById($id);
             if (!isset($mural["error"])) {
                 $autor = getUser($mural["autor"]);
-                $curso = getCourseById($mural["curso_alvo"]);
             }
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
@@ -411,6 +405,14 @@ class Route extends \API\Router\DefaultRouter
             $processes = getRequestTypes();
             require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
+        $this->addRoute("get", "/internship-validate", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/admin/internship-validate.php";
+        });
+
     }
 
     public function createSolicitation() {}
