@@ -1,17 +1,18 @@
 
 # TCC - Secretaria UI
 
-Projeto desenvolvido em PHP para a Secretaria, baseado no repositório [TCC---Secretaria-UI](https://github.com/LucasPerussi/TCC---Secretaria-UI.git).
+Projeto desenvolvido em PHP para a interface da Secretaria, hospedado no repositório [TCC---Secretaria-UI](https://github.com/LucasPerussi/TCC---Secretaria-UI.git).
 
 ## 📋 Descrição
 
-Este projeto é um clone do repositório [LucasPerussi/TCC---Secretaria-UI](https://github.com/LucasPerussi/TCC---Secretaria-UI.git). Ele fornece uma interface de usuário para a Secretaria, permitindo a gestão eficiente de diversas funcionalidades administrativas.
+Este projeto fornece uma interface de usuário para a Secretaria, permitindo a gestão eficiente de diversas funcionalidades administrativas.
 
 ## 🚀 Tecnologias Utilizadas
 
 - PHP
 - Composer
-- [Outras tecnologias relevantes, se houver]
+- Bootstrap
+- Javascript
 
 ## 🛠️ Instalação
 
@@ -47,7 +48,7 @@ namespace API\Controller;
 
 class Config
 {
-    // O IP local de sua máquina
+    // O IP local de sua máquina e substitua o nome da pasta criada
     const BASE_URL = "http://192.168.0.28/tcc-ui/";
     const DOMINIO = "/wejourney/";
 
@@ -83,7 +84,7 @@ class Config
 
 ## 🔧 Executando o Projeto
 
-Após a configuração, você pode iniciar o servidor localmente. Se estiver usando o PHP embutido, execute:
+Após a configuração, você pode iniciar o servidor localmente. Apesar de recomendarmos o XAMPP, se estiver usando o PHP embutido, execute:
 
 ```bash
 php -S localhost:8000
@@ -91,18 +92,8 @@ php -S localhost:8000
 
 Acesse o projeto através do navegador em `http://localhost:8000`.
 
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests para melhorar este projeto.
-
-## 📄 Licença
-
-Este projeto está licenciado sob a licença [MIT](LICENSE).
-
 ## 📞 Contato
 
-Para mais informações, entre em contato através do [seu-email@example.com](mailto:seu-email@example.com).
+Para mais informações, entre em contato através do [perussilucas@hotmail.com](mailto:perussilucas@hotmail.com).
 
 ---
-
-*Este README foi gerado para auxiliar na configuração e utilização do projeto TCC - Secretaria UI.*
