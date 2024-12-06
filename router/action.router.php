@@ -14,6 +14,7 @@ use API\Controller\Company as CompanyController;
 use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
 use API\Controller\TrainingHours\Training as TrainingController;
+use API\Controller\Internship\Internship as InternshipController;
 use API\Controller\Request\Request as RequestController;
 use API\Controller\Mural\Mural as MuralController;
 
@@ -44,6 +45,9 @@ class Route extends \API\Router\DefaultRouter
     public TicketsController $ticketsController;
     public SystemController $systemController;
     public TrainingController $trainingController;
+
+    public InternshipController $internshipController;
+    
     public RequestController $requestController;
     public MuralController $muralController;
 
@@ -57,6 +61,7 @@ class Route extends \API\Router\DefaultRouter
         $this->ticketsController = new TicketsController();
         $this->systemController = new SystemController();
         $this->trainingController = new TrainingController();
+        $this->internshipController = new InternshipController();
         $this->requestController = new RequestController();
 
         $obj = $this;
@@ -105,6 +110,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/change-stage", function ($args) use ($obj) {
             $obj->changeStage();
+        });
+        $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
+            $obj->registerInternship();
         });
         // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
@@ -263,6 +271,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["descricao", "data_evento", "horas_solicitadas", "tipo", "comprovante"], $body, false);
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
+    }
+     public function registerInternship()
+    {
+        $body = $this->getBody();
+        fields(["professor_orientador", "empresa", "area_atuacao", "data_inicio", "duracaoMeses"], $body, false);
+
+        echo json_encode($this->internshipController->registerInternship($body["professor_orientador"], $body["empresa"], $body["area_atuacao"], $body["data_inicio"], $body["duracaoMeses"]));
     }
 
     public function newMural()

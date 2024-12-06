@@ -122,35 +122,32 @@ include "view/src/head.php"; ?>
                         <div class="card p-1 ">
 
 
-                            <form id="changeNome">
+
+                            <div class="row">
+                                <div class="col-sm-7">
+
+                                    <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+                            <div class=" row">
+                                <div class="col-sm-7">
+                                    <label class="col-label" for="email-icon">Comprovante de Participação (link)</label>
+                                </div>
+
                                 <div class="row">
-                                    <div class="col-sm-7">
-
-                                        <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
-
-                                    </div>
-
-
-                                </div>
-                            </form>
-
-                            <!-- Formulário de Sobrenome -->
-
-
-                            <!-- Formulário de Curso -->
-                            <form id="changeCurso">
-                                <div class=" row">
-                                    <div class="col-sm-7">
-                                        <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
-                                        </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+
 
                         </div>
 
@@ -163,22 +160,18 @@ include "view/src/head.php"; ?>
                                     <label class="col-form-label" for="email-icon">Professor</label>
                                 </div>
 
-                                <form id="changeCurso">
-
-                                    <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-book"></i></span>
-
-                                            <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Selecione o Professor para adicionar ao chamado" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
-                                            <?= htmlspecialchars(__("user_edit.salvar")) ?>
-                                        </button>
-                                    </div>
-
-                                </form>
+                                <div class="custom-select-container">
+                                    <form id="hoursTeacher">
+                                        <select required name="professor" class="form-control select2">
+                                            <option value="" disabled selected><?= __("request_request.settings-teacher.select") ?></option>
+                                            <?php foreach ($teachers as $teacher) { ?>
+                                                <option <?php if ($request["professor_avaliador"] == $teacher["id"]) {
+                                                            echo "selected";
+                                                        } ?> value="<?= $teacher["id"] ?>"><?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </form>
+                                </div>
                             </div>
                             <div class="mb-1 row">
                                 <div class="col-sm-12">
@@ -234,13 +227,13 @@ include "view/src/head.php"; ?>
 
                     </div>
                     <div class="col-md-6 col-sm-12">
-                    <div class="content-header-left col-md-9 col-12 mb-2">
-                                <div class="row breadcrumbs-top">
-                                    <div class="col-12">
-                                        <h2 class="content-header-title float-start mb-0">Informações</h2>
-                                    </div>
+                        <div class="content-header-left col-md-9 col-12 mb-2">
+                            <div class="row breadcrumbs-top">
+                                <div class="col-12">
+                                    <h2 class="content-header-title float-start mb-0">Informações</h2>
                                 </div>
                             </div>
+                        </div>
                         <style>
                             #preview {
                                 max-width: 250px;
