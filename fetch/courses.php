@@ -20,3 +20,13 @@ function getCourses()
     Logger::log($_SESSION["user_id"], "Erro ao listar cursos do sistema. Error: " . $response["message"], "getCourses", "error");
     return $response;
 }
+
+function getCourseById($id)
+{
+    $response = APIRequest::getRequest("courses/id/" . $id);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar curso. Error: " . $response["message"], "getCourseById", "error");
+    return $response;
+}

@@ -50,6 +50,7 @@ use function API\Fetch\listServers;
 use function API\Fetch\listStudents;
 use function API\Fetch\listTeachers;
 use function API\Fetch\loadContentVinte;
+use function API\Fetch\getCourseById;
 
 
 
@@ -178,20 +179,39 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->verifyLogged();
             $murais = getMurais();
-            $authors = [];
-            foreach ($murais as $mural) {
-                if (!isset($authors[$mural["autor"]])) {
-                    $user = getUser($mural["autor"]);
-                    $authors[$mural["autor"]] = isset($user["error"]) ? "Desconhecido" : htmlspecialchars($user["name"]);
-                }
-            }
             require __DIR__ . "/../view/user/news-board.view.php";
+        });
+        $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $murais = getMurais();
+            require __DIR__ . "/../view/admin/news-board-admin.view.php";
+        });
+        $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->verifyLogged();
+            $courses = getCourses();
+            require __DIR__ . "/../view/admin/news-board-new.view.php";
         });
         $this->addRoute("get", "/complete-board", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->verifyLogged();
-            $murais = getMuralById();
+
+            $id = $_GET['id'] ?? null;
+            if ($id) {
+                $mural = getMuralById($id);
+            } else {
+                $mural = ["error" => "ID não fornecido"];
+            }
+
+            $mural = getMuralById($id);
+            if (!isset($mural["error"])) {
+                $autor = getUser($mural["autor"]);
+                $curso = getCourseById($mural["curso_alvo"]);
+            }
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
         $this->addRoute("get", "/formative-member", function ($args) use ($obj) {

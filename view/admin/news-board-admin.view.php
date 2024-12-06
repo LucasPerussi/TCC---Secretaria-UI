@@ -37,6 +37,9 @@ date_default_timezone_set('America/Sao_Paulo');
                     <div class="content-body">
                         
                     <h1 class="title">Mural</h1>
+                    <a href="news-board-new">
+                        <span class="btn btn-dark" style="margin-bottom: 20px; padding:7px; float:right; font-size:11px;"><i class="bi bi-plus"></i>Novo post</span>
+                    </a>
                     <div class="cards-container">
                         <?php if (!isset($murais["error"])) { ?>
                             <?php foreach ($murais as $mural) { ?>

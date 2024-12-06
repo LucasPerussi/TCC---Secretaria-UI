@@ -15,6 +15,7 @@ use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
 use API\Controller\TrainingHours\Training as TrainingController;
 use API\Controller\Request\Request as RequestController;
+use API\Controller\Mural\Mural as MuralController;
 
 
 
@@ -44,6 +45,7 @@ class Route extends \API\Router\DefaultRouter
     public SystemController $systemController;
     public TrainingController $trainingController;
     public RequestController $requestController;
+    public MuralController $muralController;
 
     public function __construct()
     {
@@ -67,6 +69,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/register-fh", function ($args) use ($obj) {
             $obj->registerFH();
+        });
+        $this->addRoute("post", "/new-mural", function ($args) use ($obj) {
+            $obj->newMural();
         });
         $this->addRoute("post", "/new-request", function ($args) use ($obj) {
             $obj->newRequest();
@@ -258,6 +263,14 @@ class Route extends \API\Router\DefaultRouter
         fields(["descricao", "data_evento", "horas_solicitadas", "tipo", "comprovante"], $body, false);
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
+    }
+
+    public function newMural()
+    {
+        $body = $this->getBody();
+        fields(["titulo", "descricao", "curso", "visivel"], $body, false);
+
+        echo json_encode($this->muralController->newMural($body["titulo"], $body["descricao"], $body["curso"], $body["visivel"]));
     }
 
     public function newField()
