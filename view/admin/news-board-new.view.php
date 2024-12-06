@@ -81,43 +81,69 @@ include "view/src/head.php"; ?>
                     <div class="col-md-7 col-sm-12">
                         <div class="card p-3">
                             <form id="newMural">
-                                <div class="mb-3">
-                                    <label for="titulo" class="form-label">Título</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-pencil"></i></span>
-                                        <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Digite o título do post" required />
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label for="titulo" class="form-label">Título</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                                            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Digite o título do post" required />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="descricao" class="form-label">Descrição</label>
-                                    <textarea id="descricao" name="descricao" rows="4" class="form-control" placeholder="Descreva sua postagem" required></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="curso" class="form-label">Curso</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="bi bi-book"></i></span>
-                                        <select id="curso" name="curso" class="form-select" required>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="descricao">Descrição</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                                            <textarea id="descricao" class="form-control" name="descricao" rows="3" placeholder="Descreva sua postagem" required></textarea>
                                 
-                                        </select>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label">Visibilidade</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="visivel" id="visivelSim" value="1" checked />
-                                        <label class="form-check-label" for="visivelSim">Visível</label>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="curso">Curso</label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="visivel" id="visivelNao" value="0" />
-                                        <label class="form-check-label" for="visivelNao">Não visível</label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <select class="form-select form-select-lg" name="curso" required>
+                                                <option value="" selected disabled>Selecione um curso</option>
+                                                <?php if (isset($courses) && !isset($courses["error"])) { ?>
+                                                    <?php foreach ($courses as $course) { ?>
+                                                        <option value="<?= htmlspecialchars($course["id"]) ?>">
+                                                            <?= htmlspecialchars($course["nome"]) ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                <?php } else { ?>
+                                                    <option disabled>Erro ao carregar cursos.</option>
+                                                <?php } ?>                        
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="text-end">
-                                    <button type="submit" class="btn btn-primary">Cadastrar Postagem</button>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="visivel">Visível</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="visivel" name="visivel" value="1" checked>
+                                            <label class="form-check-label" for="visivel">Sim</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Postar</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -126,7 +152,7 @@ include "view/src/head.php"; ?>
             </div>
         </div>
     </div>
-    
+
         <!-- END: Content-->
 
         <div class="sidenav-overlay"></div>

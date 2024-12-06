@@ -187,7 +187,7 @@ class Route extends \API\Router\DefaultRouter
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->verifyLogged();
-            $murais = getMurais();
+            $courses = getCourses();
             require __DIR__ . "/../view/admin/news-board-new.view.php";
         });
         $this->addRoute("get", "/complete-board", function ($args) use ($obj) {
