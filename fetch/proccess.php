@@ -78,7 +78,17 @@ function getProccessStages($id)
     if (!isset($response["error"])){
         return $response;
     }; 
-    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getProccessFields", "error");
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getProccessStages", "error");
+    return $response;
+}
+
+function getAllStatusTypes()
+{
+    $response = APIRequest::getRequest("requests/all-status-types");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar campos de processo. Error: " . $response["message"], "getAllStatusTypes", "error");
     return $response;
 }
 

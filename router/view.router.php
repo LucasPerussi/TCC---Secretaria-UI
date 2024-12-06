@@ -14,6 +14,7 @@ use function API\Fetch\getAllFieldTypesDB;
 use function API\Fetch\getAllProcessComments;
 use function API\Fetch\getAllProcessResponses;
 use function API\Fetch\getAllStagesUnified;
+use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
@@ -153,17 +154,20 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             $request = getProccessIdentifier($args["processId"]);
-
-
+            
             $inputTypes = getInputTypes();
             $process = getProccessTypeId($request['tipo_solicitacao']);
             $proccessFields = getProccessFields($request['tipo_solicitacao']);
             $defaultFields = getDefaultFields($request['tipo_solicitacao']);
             $fieldtypesDb = getAllFieldTypesDB();
+
             $proccessStages = getProccessStages($request['tipo_solicitacao']);
             $allStageTypes = getAllStagesUnified();
+
             $allResponses = getAllProcessResponses($args["processId"]);
             $allProcessComments = getAllProcessComments($request['id']);
+
+            $statusTypes = getAllStatusTypes();
             $timelines = getProccesTimelines($request['id']);
             $teachers = listTeachers();
 

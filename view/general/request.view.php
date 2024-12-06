@@ -147,7 +147,7 @@ use const Siler\Config\CONFIG; ?>
                                     <div class="row">
                                         <div class="col-5">
                                             <h6>
-                                                <img src="<?= Config::BASE_URL?><?= $request["usuario_processo_professor_avaliadorTousuario"]["foto"] != "" ? $request["usuario_processo_professor_avaliadorTousuario"]["foto"] : "src/img/avatars/art-1.webp"?>" alt="Foto Usuário" style="width:80px; width:80px; border-radius:60px; ">
+                                                <img src="<?= Config::BASE_URL ?><?= $request["usuario_processo_professor_avaliadorTousuario"]["foto"] != "" ? $request["usuario_processo_professor_avaliadorTousuario"]["foto"] : "src/img/avatars/art-1.webp" ?>" alt="Foto Usuário" style="width:80px; width:80px; border-radius:60px; ">
                                             </h6>
                                         </div>
                                         <div class="col-7" style="text-align:left;">
@@ -173,7 +173,20 @@ use const Siler\Config\CONFIG; ?>
                                 <p>
                                     <span style="font-size:11px;" class="badge rounded-pill bg-light-primary">Tipo: <?= $request["tipo_solicitacao_processo_tipo_solicitacaoTotipo_solicitacao"]["nome"] ?></span> <br />
                                     <span style="font-size:11px;" class="badge rounded-pill bg-light-info">Tempo Resposta:<?= $request["tipo_solicitacao_processo_tipo_solicitacaoTotipo_solicitacao"]["hrs_resposta"] ?> (Hrs.)</span><br />
-                                    <span style="font-size:11px;" class="badge rounded-pill bg-light-danger">Tempo Resolução:<?= $request["tipo_solicitacao_processo_tipo_solicitacaoTotipo_solicitacao"]["hrs_resolucao"] ?> (Hrs.)</span>
+                                    <span style="font-size:11px;" class="badge rounded-pill bg-light-danger">Tempo Resolução:<?= $request["tipo_solicitacao_processo_tipo_solicitacaoTotipo_solicitacao"]["hrs_resolucao"] ?> (Hrs.)</span><br />
+
+                                    <?php foreach ($allStageTypes as $stage) { ?>
+                                        <?php foreach ($proccessStages as $processStage) { ?>
+                                            <?php if ($processStage["tipo"] == $stage["id"]) { ?>
+                                                <?php if ($request["etapa_atual"] == $processStage['id']) { ?>
+                                                    <span class="badge rounded-pill bg-light-danger" style="font-size:11px;background-color: <?= $stage["cor"] ?>30 !important; color:<?= $stage["cor"] ?> !important;">Etapa Atual: <?= $stage["nome"] ?></span>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    <?php } ?>
+
+
+
                                 </p>
                             </div>
                             <h6>Aberto em</h6>

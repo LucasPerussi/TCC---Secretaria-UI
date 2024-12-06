@@ -55,6 +55,7 @@ class Route extends \API\Router\DefaultRouter
         $this->ticketsController = new TicketsController();
         $this->systemController = new SystemController();
         $this->trainingController = new TrainingController();
+        $this->requestController = new RequestController();
 
         $obj = $this;
 
@@ -96,6 +97,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/register-type", function ($args) use ($obj) {
             $obj->newProcessType();
+        });
+        $this->addRoute("post", "/change-stage", function ($args) use ($obj) {
+            $obj->changeStage();
         });
         // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
@@ -203,6 +207,14 @@ class Route extends \API\Router\DefaultRouter
         fields(["password", "new-password", "confirm-new-password"], $body, false);
 
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
+    }
+
+    public function changeStage()
+    {
+        $body = $this->getBody();
+        fields(["stage", "request"], $body, false);
+
+        echo json_encode($this->requestController->changeStage($body["stage"], $body["request"]));
     }
     public function newComment()
     {

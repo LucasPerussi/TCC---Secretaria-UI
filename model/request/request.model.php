@@ -35,4 +35,21 @@ class RequestModel
         return APIRequest::postRequest($url, $data, "registerRequest");
     
     }
+    
+    public function changeStage($stage, $request)
+    {
+        $stage = Sanitize::clean($stage, "stage", "changeStage");
+        $request = Sanitize::clean($request, "request", "changeStage");
+       
+
+        $url = Config::API_URL . "requests/change-stage";
+
+        $data = [
+            'stage' => $stage,
+            'identificador' => $request
+        ];
+
+        return APIRequest::patchRequest($url, $data, "changeStage");
+    
+    }
 }

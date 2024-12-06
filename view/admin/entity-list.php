@@ -91,8 +91,7 @@ use const Siler\Config\CONFIG; ?>
 
             </div>
             <div class="content-body">
-            <?php include "view/entities/alunos.view.php"; ?>
-
+                <?php include "view/entities/alunos.view.php"; ?>
             </div>
 
 

@@ -33,4 +33,16 @@ class Request extends DefaultController
 
         return $this->requestModel->registerRequest($titulo, $descricao, $professor_avaliador);
     }
+    public function changeStage($stage, $request)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O ID do aluno é obrigatório."
+            ];
+        }
+
+        return $this->requestModel->changeStage($stage, $request);
+    }
 }

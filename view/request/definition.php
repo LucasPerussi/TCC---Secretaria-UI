@@ -8,7 +8,9 @@
                 <select required name="professor" class="form-control select2">
                     <option value="" disabled selected><?= __("request_request.settings-teacher.select") ?></option>
                     <?php foreach ($teachers as $teacher) { ?>
-                        <option <?php if ($request["professor_avaliador"] == $teacher["id"]){echo "selected";}?> value="<?= $teacher["id"] ?>"><?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?></option>
+                        <option <?php if ($request["professor_avaliador"] == $teacher["id"]) {
+                                    echo "selected";
+                                } ?> value="<?= $teacher["id"] ?>"><?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?></option>
                     <?php } ?>
                 </select>
                 <input type="text" hidden name="processo" value="<?= $request["id"] ?>">
@@ -22,14 +24,19 @@
         <p class="timeline-description"><?= __("request_request.settings-status.description") ?></p>
 
         <div class="custom-select-container">
-            <select class="form-control select2">
-                <option value="" disabled selected><?= __("request_request.settings-status.select") ?></option>
-                <option value="Opção 1">Opção 1</option>
-                <option value="Opção 2">Opção 2</option>
-                <option value="Opção 3">Opção 3</option>
-            </select>
-
-            <button class="btn btn-primary" style="margin-top:20px; float:right;"><?= __("request_request.settings-status.button") ?></button>
+            <form id="changeStage">
+                <select class="form-control select2" name="stage">
+                    <?php foreach ($allStageTypes as $stage) { ?>
+                        <?php foreach ($proccessStages as $processStage) { ?>
+                            <?php if ($processStage["tipo"] == $stage["id"]) { ?>
+                                <option <?= $request["etapa_atual"] == $processStage['id'] ? "selected" : ""; ?> value="<?= $processStage["id"] ?>"><?= $stage["nome"] ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+                <input type="text" name="request" value="<?=$args["processId"]?>" hidden>
+                <button class="btn btn-primary" style="margin-top:20px; float:right;"><?= __("request_request.settings-status.button") ?></button>
+            </form>
         </div>
     </div>
 

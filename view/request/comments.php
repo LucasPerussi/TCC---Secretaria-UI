@@ -138,7 +138,9 @@ if (isset($allProcessComments) && !empty($allProcessComments)) :
 else:
     ?>
     <div class="col-12 mt-1">
-        <p><?= htmlspecialchars(__("request.comentario.sem_comentarios")) ?></p>
+        <div class="card p-1 pb-0">
+            <p>Nenhum comentário cadastrado para este chamado.</p>
+        </div>
     </div>
 <?php endif; ?>
 
