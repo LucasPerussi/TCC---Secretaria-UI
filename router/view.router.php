@@ -395,7 +395,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/formative-validate.php";
+            require __DIR__ . "/../view/admin/formative-validate.view.php";
         });
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
             // $obj->verifyCookies();
@@ -405,12 +405,19 @@ class Route extends \API\Router\DefaultRouter
             $processes = getRequestTypes();
             require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
+        $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
+            // $obj->verifyCookies();
+            $obj->checkSession();
+            $obj->setCookies();
+            $obj->verifyLogged();
+            require __DIR__ . "/../view/member/new-internship-member.view.php";
+        });
         $this->addRoute("get", "/internship-validate", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/internship-validate.php";
+            require __DIR__ . "/../view/admin/internship-validate.view.php";
         });
 
     }
