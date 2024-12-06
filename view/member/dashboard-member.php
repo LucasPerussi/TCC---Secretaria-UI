@@ -98,34 +98,38 @@ use const Siler\Config\CONFIG; ?>
                             <a href="<?= Config::BASE_URL ?>new-request" class="btn btn-dark" id="" style="padding:15px;width:100%;margin-bottom:15px;">Abrir chamado</a>
                             <a href="<?= Config::BASE_URL ?>formative-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Horas Formativas</a>
                             <a href="<?= Config::BASE_URL ?>system-logs" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Estágio</a>
-                            <a href="<?= Config::BASE_URL ?>news-board"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
-                            <a href="<?= Config::BASE_URL ?>settings"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
+                            <a href="<?= Config::BASE_URL ?>news-board" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
+                            <a href="<?= Config::BASE_URL ?>settings" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h2>Meus chamados <a href="system-logs" style="float:right; font-size:11px;padding:7px;"class="btn btn-dark" >Ver Todos</a></h2>
+                        <h2>Meus chamados <a href="system-logs" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Ver Todos</a></h2>
                         <h6>Lista de chamados em aberto</h6>
                         <br />
                         <div class="card p-1">
-                            <?php foreach($requests as $request){?>
-                                <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    <h5 style="font-weight:bold !important;"><?=$request["titulo"]?> <a href="<?=Config::BASE_URL. "request/" . $request["identificador"]?>" style="float:right; font-size:11px;padding:8px;"class="btn btn-dark">Ver Chamado</a></h5>
-                                    <h6 style="font-weight:bold !important;font-size:11px;"><?php
-                                                                                                                                                        $timestamp = strtotime($request["data_abertura"]);
-                                                                                                                                                        if ($timestamp !== false) {
-                                                                                                                                                            echo date("d/m/y \à\s H:i", $timestamp);
-                                                                                                                                                        } else {
-                                                                                                                                                            echo "Data inválida";
-                                                                                                                                                        }
-                                                                                                                                                        ?><span style=" float:right;font-size:11px;" class="badge rounded-pill bg-light-<?=$request["status"] == 1 ? "success" : "secondary";?>"><?=$request["status"] == 1 ? "Aberto" : "Fechado";?></span> - <?=$request["numero"]?>  </h6>
-                                    
-                                  
+                            <?php if (!($requests["error"])) { ?>
+                                <?php foreach ($requests as $request) { ?>
+                                    <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
+                                        <h5 style="font-weight:bold !important;"><?= $request["titulo"] ?> <a href="<?= Config::BASE_URL . "request/" . $request["identificador"] ?>" style="float:right; font-size:11px;padding:8px;" class="btn btn-dark">Ver Chamado</a></h5>
+                                        <h6 style="font-size:11px;"><?php
+                                                                                                $timestamp = strtotime($request["data_abertura"]);
+                                                                                                if ($timestamp !== false) {
+                                                                                                    echo date("d/m/y \à\s H:i", $timestamp);
+                                                                                                } else {
+                                                                                                    echo "Data inválida";
+                                                                                                }
+                                                                                                ?><span style=" float:right;font-size:11px;" class="badge rounded-pill bg-light-<?= $request["status"] == 1 ? "success" : "secondary"; ?>"><?= $request["status"] == 1 ? "Aberto" : "Fechado"; ?></span> - <?= $request["numero"] ?> </h6>
 
-                                </div>
-                            <?php }?>
+
+
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <h6>Você ainda não tem nenhum chamado!</h6>
+                            <?php } ?>
+
 
                         </div>
-                    </div>
                 </div>
 
             </div>
