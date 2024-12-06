@@ -10,15 +10,15 @@ class Sanitize
 {
     public static function clean($input, $att, $function)
     {
-        $conn = Database::connect();
+        //$conn = Database::connect();
 
         // SQL SANITIZE
-        $inputSQLClean = mysqli_real_escape_string($conn, $input);
+        //$inputSQLClean = mysqli_real_escape_string($conn, $input);
 
-        $inputHTML_SQLClean = strip_tags($inputSQLClean);
+        $inputHTML_SQLClean = strip_tags($input);
 
-        if (strcmp($inputSQLClean, $inputHTML_SQLClean) !== 0) {
-            $inputTry = htmlspecialchars($inputSQLClean, ENT_QUOTES, 'UTF-8');
+        if (strcmp($input, $inputHTML_SQLClean) !== 0) {
+            $inputTry = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
             Logger::log($_SESSION["user_id"] ?? 9999, "Houve uma tentativa de cadastro de script no campo $att, da função $function, que foi sanitizada! O código inserido foi: $inputTry, valor salvo: $inputHTML_SQLClean", "Sanitize", "ERROR (XSS)");
         }
 

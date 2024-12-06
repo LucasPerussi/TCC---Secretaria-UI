@@ -90,13 +90,13 @@ use const Siler\Config\CONFIG; ?>
                         <!-- <div class="content-header row"> </div> -->
                         <div class="content-body">
                             <!-- Dashboard Ecommerce Starts -->
-                            <h1 style="font-weight:500; "><?= __("dashboard_admin.titulo") ?> <a href="<?= Config::BASE_URL . 'customize-dashboard' ?>" style="text-align:end; float:right;font-size:13px;"><i class="bi bi-pencil-square"></i> Personalizar</a></h1>
+                            <h1 style="font-weight:500; "><?= __("dashboard_aluno.titulo") ?> <a href="<?= Config::BASE_URL . 'customize-dashboard' ?>" style="text-align:end; float:right;font-size:13px;"><i class="bi bi-pencil-square"></i> Personalizar</a></h1>
 
                             <!-- AVISO DE USUÁRIOS PENDENTES DE APROVACAO  -->
                             
 
                             <div class="row kb-search-content-info match-height">
-                                <h2 style="font-weight:500; margin-top: 20px; "><?= __("dashboard_admin.titulo2") ?> <a href="<?= Config::BASE_URL . 'customize-dashboard' ?>" style="text-align:end; float:right;font-size:13px;"><i class="bi bi-pencil-square"></i></h2>
+                                <h2 style="font-weight:500; margin-top: 20px; "><?= __("dashboard_aluno.titulo2") ?> <a href="<?= Config::BASE_URL . 'customize-dashboard' ?>" style="text-align:end; float:right;font-size:13px;"><i class="bi bi-pencil-square"></i></h1>
                                     <!-- email -->
                                      <div class="card-container">
                                         <div class="col-12 kb-search-content">
@@ -104,10 +104,9 @@ use const Siler\Config\CONFIG; ?>
                                                 <a href="<?= Config::BASE_URL .  "company-tickets" ?>">
 
                                                     <div class="card-body text-left">
-                                                        <h4><b><?= __("dashboard_admin.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
-                                                        <p class=" mt-0 mb-0"><?= __("dashboard_admin.top_cards.data_chamado") ?>
+                                                        <h4><b><?= __("dashboard_aluno.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
+                                                        <p class=" mt-0 mb-0"><?= __("dashboard_aluno.top_cards.data_chamado") ?>
                                                         </p>
-                                                        <span class="card-icon big blue"><b>GRR1234343 - Lucas Perussi</b></span>
                                                         <span class="card-icon big green"><b>Tempo restante: 2 dias e 3 horas</b></span>
                                                         <span class="card-icon small red"><b>Aberto</b></span>
                                                     </div>
@@ -120,10 +119,9 @@ use const Siler\Config\CONFIG; ?>
                                                 <a href="<?= Config::BASE_URL .  "admin-request" ?>">
                                                     
                                                     <div class="card-body text-left">
-                                                        <h4><b><?= __("dashboard_admin.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
-                                                        <p class=" mt-0 mb-0"><?= __("dashboard_admin.top_cards.data_chamado") ?>
+                                                        <h4><b><?= __("dashboard_aluno.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
+                                                        <p class=" mt-0 mb-0"><?= __("dashboard_aluno.top_cards.data_chamado") ?>
                                                         </p>
-                                                        <span class="card-icon big blue"><b>GRR1234343 - Lucas Perussi</b></span>
                                                         <span class="card-icon medium red"><b>Atrasado</b></span>
                                                         <span class="card-icon small red"><b>Aberto</b></span>
                                                     </div>
@@ -137,12 +135,10 @@ use const Siler\Config\CONFIG; ?>
                                                 <a href="#">
 
                                                     <div class="card-body text-left">
-                                                        <h4><b><?= __("dashboard_admin.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
-                                                        <p class=" mt-0 mb-0"><?= __("dashboard_admin.top_cards.data_chamado") ?>
+                                                        <h4><b><?= __("dashboard_aluno.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
+                                                        <p class=" mt-0 mb-0"><?= __("dashboard_aluno.top_cards.data_chamado") ?>
                                                         </p>
-                                                        <span class="card-icon big blue"><b>GRR1234343 - Lucas Perussi</b></span>
-                                                        <span class="card-icon big green"><b>Tempo restante: 2 dias e 3 horas</b></span>
-                                                        <span class="card-icon big red"><b>Aguardando Professor</b></span>
+                                                        <span class="card-icon small green"><b>Resolvido</b></span>
                                                     </div>
                                                 </a>
                                             </div>
@@ -153,12 +149,10 @@ use const Siler\Config\CONFIG; ?>
                                                 <a href="#">
 
                                                     <div class="card-body text-left">
-                                                        <h4><b><?= __("dashboard_admin.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
-                                                        <p class=" mt-0 mb-0"><?= __("dashboard_admin.top_cards.data_chamado") ?>
+                                                        <h4><b><?= __("dashboard_aluno.top_cards.titulo_chamado") ?><i class="bi bi-chevron-right" style="right:10px;position:absolute;margin-top:15px;"></i></b></h4>
+                                                        <p class=" mt-0 mb-0"><?= __("dashboard_aluno.top_cards.data_chamado") ?>
                                                         </p>
-                                                        <span class="card-icon big blue"><b>GRR1234343 - Lucas Perussi</b></span>
-                                                        <span class="card-icon big green"><b>Tempo restante: 2 dias e 3 horas</b></span>
-                                                        <span class="card-icon small red"><b>Aberto</b></span>
+                                                        <span class="card-icon small green"><b>Resolvido</b></span>
                                                     </div>
                                                 </a>
                                             </div>
@@ -166,7 +160,6 @@ use const Siler\Config\CONFIG; ?>
                             </div>
 
 
-                              
 
 
 

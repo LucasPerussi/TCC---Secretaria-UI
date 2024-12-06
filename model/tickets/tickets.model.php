@@ -2,7 +2,6 @@
 
 namespace API\Model;
 
-use API\Model\Database;
 use API\Model\Logger;
 use const Siler\Config\CONFIG;
 use API\Controller\Config;
@@ -25,7 +24,6 @@ class TicketsModel
         if (isset($_SESSION["user_id"])) {
             $this->user = $_SESSION["user_id"];
         }
-        $this->dbConnection = Database::connect();
     }
 
 

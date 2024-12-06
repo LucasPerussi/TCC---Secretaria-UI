@@ -1,7 +1,6 @@
 <?php
 namespace API\Model;
 use API\Model\Logger;
-use API\Model\Database;
 use API\Controller\Config;
 
 class CompanyDAO

@@ -1,3 +1,85 @@
+    .kb-search-content {
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .card {
+      flex: 1 1 calc(33.333% - 20px);
+      min-width: 280px;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-body h4 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .card-icon {
+      display: inline-block;
+      height: 30px;
+      margin-top: 15px;
+      margin-right: 10px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 30px;
+    }
+
+    .small {
+      width: 180px;
+    }
+
+    .medium {
+      width: 220px;
+    }
+
+    .big {
+      width: 280px;
+    }
+
+    .red {
+      background-color: #ffb3b3;
+      color: #cf0404;
+    }
+
+    .green {
+      background-color: #b4f0ca;
+      color: #248547;
+    }
+
+    .blue {
+      background-color: #b8ecff;
+      color: #0e769c;
+    }
+
+    .gray {
+      background-color: #eeeeee;
+      border-radius: 20px;
+      padding: 15px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
 
     .clock {
     width: 15rem;

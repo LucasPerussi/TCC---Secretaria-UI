@@ -156,6 +156,18 @@ return [
                 "historico" => "Histórico de Acessos",
             ],
         ],
+        "admin_menu" => [
+            "entidades-titulo" => "Entidades",
+            "entidades-desc" => "Liste e gerencie alunos, professores e disciplinas.",
+            "formativas-titulo" => "Gerenciar Horas Formativas",
+            "formativas-desc" => "Liste e gerencie pedidos de horas formativas.",
+            "estagio-titulo" => "Gerenciamento de Estágio",
+            "estagio-desc" => "Liste e gerencie processos de estágio.",
+            "mural-titulo" => "Mural UFPR",
+            "mural-desc" => "Veja e publique novos artigos do mural.",
+            "cadastro-titulo" => "Cadastro de Processos",
+            "cadastro-desc" => "Crie um novo processo personalizado",
+        ],
         "admin" => [
             "titulo" => "ADMINISTRADOR",
             "pendente" => "Usuários Pendentes",
@@ -1152,7 +1164,14 @@ return [
     //dashboard (admin)
     "dashboard_admin" => [
         "titulo" => "Painel Admin",
+        "titulo2" => "Solicitações em Aberto",
         "top_cards" => [
+            //Título - Provisório:
+            "titulo_chamado" => "3276452 - Solicitação de Quebra de Requisito",
+
+            //Data do chamado:
+            "data_chamado" => "Aberta em 11 de abril de 2024 às 10:11",
+
             "meus_chamados" => "Meus Chamados",
             "meus_chamados_desc" => "Chamados registrados por sua empresa",
             "abrir_chamado" => "Abrir Chamado",
@@ -1188,6 +1207,26 @@ return [
         "acessos" => "Acessos",
         "total_acessos" => "Total de Acessos",
         "acessadas" => "Postagens Acessadas  (últimos 6 Meses)",
+    ],
+
+    //dashboard (aluno)
+    "dashboard_aluno" => [
+        "titulo" => "Painel do Aluno",
+        "titulo2" => "Suas Solicitações",
+        "top_cards" => [
+            //Título - Provisório:
+            "titulo_chamado" => "3276452 - Solicitação de Quebra de Requisito",
+
+            //Data do chamado:
+            "data_chamado" => "Aberta em 11 de abril de 2024 às 10:11",
+
+            "meus_chamados" => "Meus Chamados",
+            "meus_chamados_desc" => "Chamados registrados por sua empresa",
+            "abrir_chamado" => "Abrir Chamado",
+            "abrir_chamado_desc" => "Abra um chamado com a Wetalk",
+            "salas" => "Salas",
+            "salas_desc" => "Encontre as salas de sua empresa",  
+        ],
     ],
 
     //company-settings

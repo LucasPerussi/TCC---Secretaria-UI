@@ -2,7 +2,6 @@
 
 namespace API\Model;
 
-use API\Model\Database;
 use API\Model\Logger;
 use API\Controller\Config;
 use API\Model\UserModel;
@@ -30,7 +29,6 @@ class SystemModel
             $this->user = $_SESSION["user_id"];
          
         }
-        $this->dbConnection = Database::connect();
     }
 
     // public function apikey($type, $valid, $apiKeyName, $company, $key): bool
