@@ -110,6 +110,8 @@ class APIRequest
             'response' => $response
         ];
     }
+
+    
     public static function patchRequest($url, $data, $methodName)
     {
         $ch = curl_init($url);
@@ -187,7 +189,7 @@ class APIRequest
             $_SESSION['user_role'] = $responseData['user']['role'];
             $_SESSION['user_token'] = $responseData['token'];
             $_SESSION['user_picture'] = Config::BASE_URL . $responseData['user']['picture'] ;
-            if ($_SESSION['user_picture'] == "") {
+            if (($_SESSION['user_picture'] == "")) {
                 $_SESSION['user_picture'] = Config::BASE_URL . "src/img/avatars/generic.webp";
             }
 
