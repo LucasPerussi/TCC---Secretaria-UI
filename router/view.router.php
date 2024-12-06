@@ -119,6 +119,14 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/general/account-history.view.php";
         });
 
+        $this->addRoute("get", "/onboarding", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $timelines = getUserTimelines($_SESSION['user_id']);
+            $user = getUser($_SESSION['user_id']);
+            require __DIR__ . "/../view/register/onboarding.view.php";
+        });
+
         $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();

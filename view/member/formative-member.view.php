@@ -98,7 +98,7 @@ include "view/src/head.php"; ?>
                         <h2>Meus registros</h2>
                         <br />
                         <div class="card p-1">
-                            <?php if (!isset($hours["error"])) { ?>
+                            <?php if ((!isset($hours["error"])) && (!empty($hours))) { ?>
                                 <?php foreach ($hours as $hour) { ?>
                                     <div class="card p-1" id="bodyRequestDash">
                                         <h4><?= $types[$hour["tipo"]]["nome"] ?></h4>
@@ -156,10 +156,9 @@ include "view/src/head.php"; ?>
                                     </div>
                                 <?php } ?>
                             <?php } else { ?>
-                                <div class="card">
-                                    <h4><?= $hours["message"] ?></h4>
-                                </div>
+                                    <h6>Você ainda não registrou suas horas 😥</h6>
                             <?php } ?>
+                            
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12">
