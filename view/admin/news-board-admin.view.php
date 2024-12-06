@@ -60,7 +60,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                                     ?>
                                                 </span>
 
-                                                <a href="news-board-details?mural=<?= urlencode($mural["id"]) ?>" class="badge rounded-pill bg-light-secondary">
+                                                <a href="complete-board?id=<?= urlencode($mural["id"]) ?>" class="badge rounded-pill bg-light-secondary">
                                                     <i class="bi bi-eye"></i> Ver Detalhes
                                                 </a>
                                             </h6>

@@ -20,12 +20,12 @@ function getMurais()
     return $response;
 }
 
-function getMuralById()
+function getMuralById($id)
 {
-    $response = APIRequest::getRequest("mural/id");
+    $response = APIRequest::getRequest("mural/id/{$id}");
     if (!isset($response["error"])){
         return $response;
     }; 
-    Logger::log($_SESSION["user_id"], "Erro ao mostrar postagem do mural. Error: " . $response["message"], "getMuralById", "error");
+    Logger::log($_SESSION["user_id"], "Erro ao mostrar postagem do mural. ID: $id. Error: " . $response["message"], "getMuralById", "error");
     return $response;
 }

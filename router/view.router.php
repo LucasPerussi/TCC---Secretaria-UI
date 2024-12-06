@@ -194,7 +194,13 @@ class Route extends \API\Router\DefaultRouter
             // $obj->verifyCookies();
             $obj->checkSession();
             $obj->verifyLogged();
-            $murais = getMuralById();
+
+            $id = $_GET['id'] ?? null;
+            if ($id) {
+                $mural = getMuralById($id);
+            } else {
+                $mural = ["error" => "ID não fornecido"];
+            }
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
         $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
