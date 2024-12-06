@@ -1,0 +1,38 @@
+.settings-radio-group {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2px;
+    gap: 20px;
+}
+
+.settings-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.settings-radio-label {
+    font-size: 0.857rem;
+    font-weight: var(--bs-body-font-weight);
+    font-family: "Inter", sans-serif !important;
+    color: #333;
+}
+
+
+.right-side {
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: fit-content;
+    margin-right: 30px;
+    margin-top: 48px;
+}
+
+.right-side p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
