@@ -50,7 +50,7 @@ class Config
 {
     // O IP local de sua máquina e substitua o nome da pasta criada
     const BASE_URL = "http://192.168.0.28/tcc-ui/";
-    const DOMINIO = "/wejourney/";
+    const DOMINIO = "/tcc-ui/";
 
     // Caso esteja usando a API localmente
     // const API_URL = "localhost:3000/";
