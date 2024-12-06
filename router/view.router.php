@@ -260,13 +260,7 @@ class Route extends \API\Router\DefaultRouter
         //     $obj->verifyLogged();
         //     require __DIR__ . "/../view/member/new-formative-member.view.php";
         // });
-        $this->addRoute("get", "/formative-member-details", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/member/formative-member-details.view.php";
-        });
+        
         $this->addRoute("get", "/request-member", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();
@@ -383,13 +377,7 @@ class Route extends \API\Router\DefaultRouter
 
             require __DIR__ . "/../view/admin/entity-list.php";
         });
-        $this->addRoute("get", "/process-field", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/process-field.php";
-        });
+        
         $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
             // $obj->verifyCookies();
             $obj->checkSession();

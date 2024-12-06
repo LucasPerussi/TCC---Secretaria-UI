@@ -3,9 +3,8 @@
 use API\Controller\Config;
 ?>
 <script>
-    console.log("rodei o script");
     $("#registerInternship").submit(function(e) {
-        console.log("registrei o estagio");
+
         e.preventDefault();
         const data = new FormData(e.target);
         const object = Object.fromEntries(data.entries());
@@ -15,11 +14,11 @@ use API\Controller\Config;
                 if (response.data.status != 200) {
                     throw response.data;
                 } else {
-                    window.location.href = "<?= Config::BASE_URL ?>formative-member"
+                    window.location.href = "<?= Config::BASE_URL ?>internship-member"
                 }
             })
             .catch(function(error) {
-        
+
                 console.log(error.status)
                 Swal.fire({
                     title: 'Tivemos um problema!',

@@ -122,35 +122,32 @@ include "view/src/head.php"; ?>
                         <div class="card p-1 ">
 
 
-                            <form id="changeNome">
+
+                            <div class="row">
+                                <div class="col-sm-7">
+
+                                    <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+                            <div class=" row">
+                                <div class="col-sm-7">
+                                    <label class="col-label" for="email-icon">Comprovante de Participação (link)</label>
+                                </div>
+
                                 <div class="row">
-                                    <div class="col-sm-7">
-
-                                        <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
-
-                                    </div>
-
-
-                                </div>
-                            </form>
-
-                            <!-- Formulário de Sobrenome -->
-
-
-                            <!-- Formulário de Curso -->
-                            <form id="changeCurso">
-                                <div class=" row">
-                                    <div class="col-sm-7">
-                                        <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
-                                        </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+
 
                         </div>
 
@@ -164,7 +161,7 @@ include "view/src/head.php"; ?>
                                 </div>
 
                                 <div class="custom-select-container">
-                                    <form id="addTeacher">
+                                    <form id="hoursTeacher">
                                         <select required name="professor" class="form-control select2">
                                             <option value="" disabled selected><?= __("request_request.settings-teacher.select") ?></option>
                                             <?php foreach ($teachers as $teacher) { ?>
