@@ -15,6 +15,7 @@ use API\Controller\Tickets as TicketsController;
 use API\Controller\System as SystemController;
 use API\Controller\TrainingHours\Training as TrainingController;
 use API\Controller\Internship\Internship as InternshipController;
+use API\Controller\Entities\Entities as EntitiesController;
 use API\Controller\Request\Request as RequestController;
 use API\Controller\Mural\Mural as MuralController;
 
@@ -47,6 +48,7 @@ class Route extends \API\Router\DefaultRouter
     public TrainingController $trainingController;
 
     public InternshipController $internshipController;
+    public EntitiesController $entitiesController;
     
     public RequestController $requestController;
     public MuralController $muralController;
@@ -62,6 +64,7 @@ class Route extends \API\Router\DefaultRouter
         $this->systemController = new SystemController();
         $this->trainingController = new TrainingController();
         $this->internshipController = new InternshipController();
+        $this->entitiesController = new EntitiesController();
         $this->requestController = new RequestController();
 
         $obj = $this;
@@ -110,6 +113,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/change-stage", function ($args) use ($obj) {
             $obj->changeStage();
+        });
+        $this->addRoute("patch", "/change-role", function ($args) use ($obj) {
+            $obj->changeRole();
         });
         $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
             $obj->registerInternship();
@@ -228,6 +234,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["stage", "request"], $body, false);
 
         echo json_encode($this->requestController->changeStage($body["stage"], $body["request"]));
+    }
+    public function changeRole()
+    {
+        $body = $this->getBody();
+        fields(["user", "role"], $body, false);
+
+        echo json_encode($this->requestController->changeStage($body["user"], $body["role"]));
     }
     public function newComment()
     {

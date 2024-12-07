@@ -13,7 +13,7 @@ include "view/src/head.php"; ?>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>WeJourney - Novo Estágio</title>
+    <title>WeJourney</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     <!-- BEGIN: Vendor CSS-->

@@ -133,7 +133,7 @@ include "view/src/head.php"; ?>
 
 
                             <!-- Formulário de Curso -->
-                            <form id="changeCurso">
+                           
                                 <div class=" row">
                                     <div class="col-sm-7">
                                         <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
@@ -145,7 +145,7 @@ include "view/src/head.php"; ?>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            
 
                         </div>
 
@@ -158,7 +158,7 @@ include "view/src/head.php"; ?>
                                     <label class="col-form-label" for="email-icon">Professor</label>
                                 </div>
 
-                                <form id="changeCurso">
+                                
 
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
@@ -173,7 +173,7 @@ include "view/src/head.php"; ?>
                                         </button>
                                     </div>
 
-                                </form>
+                               
                             </div>
                             <div class="mb-1 row">
                                 <div class="col-sm-12">
