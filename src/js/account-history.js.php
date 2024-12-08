@@ -2,7 +2,6 @@
     // Passa os dados PHP para o JavaScript
     const jsonData = <?php echo json_encode($timelines, true); ?>;
 </script>
-
 <script>
     class TimelineEnum {
         // Definição dos tipos com base no TimelineTypes
@@ -10,13 +9,45 @@
         static LOGIN = 2;
         static TICKET_OPEN = 3;
         static PASSWORD_CHANGE = 4;
+        static NEW_COMMENT = 5;
+        static NEW_STAGE = 6;
+        static NEW_TEACHER = 7;
+        static NEW_SERVER = 8;
+        static TICKET_CLOSED = 9;
+        static NEW_STATUS = 10;
+        static EMAIL_UPDATE = 11;
+        static REGISTRATION_UPDATE = 12;
+        static NAME_UPDATE = 13;
+        static SURNAME_UPDATE = 14;
+        static BIRTHDATE_UPDATE = 15;
+        static PHOTO_UPDATE = 16;
+        static USER_STATUS_UPDATE = 17;
+        static COURSE_UPDATE = 18;
+        static COURSE_STATUS_UPDATE = 19;
+        static ROLE_UPDATE = 20;
 
         // Mapeamento das cores com base no TimelineTypeInfo
         static colorReal = {
             1: '#1E90FF', // Criação de Conta
             2: '#20B2AA', // Login
             3: '#FA8072', // Chamado registrado
-            4: '#00BFFF' // Alteração de Senha
+            4: '#00BFFF', // Alteração de Senha
+            5: '#2bff00', // Novo Comentário
+            6: '#5521b6', // Mudança de etapa
+            7: '#8caa21', // Professor Vinculado
+            8: '#217ab6', // Servidor Vinculado
+            9: '#eec12d', // Chamado Encerrado
+            10: '#b72dee', // Novo Status
+            11: '#ff5733', // Atualização de Email
+            12: '#ff0037', // Atualização de Registro
+            13: '#0c907e', // Atualização de Nome
+            14: '#581845', // Atualização de Sobrenome
+            15: '#b2ba1b', // Atualização de Data de Nascimento
+            16: '#900C3F', // Atualização de Foto
+            17: '#c53d9c', // Atualização de Status do Usuário
+            18: '#FF5733', // Atualização de Curso
+            19: '#FFC300', // Atualização de Status do Curso
+            20: '#c49a12'  // Atualização de Função
         };
 
         // Mapeamento dos textos das badges
@@ -24,13 +55,38 @@
             1: 'Criação de Conta',
             2: 'Login',
             3: 'Chamado Registrado',
-            4: 'Alteração de Senha'
+            4: 'Alteração de Senha',
+            5: 'Novo Comentário',
+            6: 'Mudança de Etapa',
+            7: 'Professor Vinculado',
+            8: 'Servidor Vinculado',
+            9: 'Chamado Encerrado',
+            10: 'Novo Status',
+            11: 'Atualização de Email',
+            12: 'Atualização de Registro',
+            13: 'Atualização de Nome',
+            14: 'Atualização de Sobrenome',
+            15: 'Atualização de Data de Nascimento',
+            16: 'Atualização de Foto',
+            17: 'Atualização de Status do Usuário',
+            18: 'Atualização de Curso',
+            19: 'Atualização de Status do Curso',
+            20: 'Atualização de Função'
         };
 
         // Mapeamento dos botões (ajuste conforme necessário)
         static button = {
             4: 'Alterar Senha',
-            // Adicione outros tipos de botões conforme necessário
+            11: 'Atualizar Email',
+            12: 'Atualizar Registro',
+            13: 'Atualizar Nome',
+            14: 'Atualizar Sobrenome',
+            15: 'Atualizar Data de Nascimento',
+            16: 'Atualizar Foto',
+            17: 'Atualizar Status do Usuário',
+            18: 'Atualizar Curso',
+            19: 'Atualizar Status do Curso',
+            20: 'Atualizar Função'
         };
 
         // Mapeamento de invisibilidade (ajuste conforme necessário)
@@ -38,13 +94,38 @@
             1: 'hidden',
             2: 'hidden',
             3: '',
-            4: ''
+            4: '',
+            5: '',
+            6: '',
+            7: '',
+            8: '',
+            9: '',
+            10: '',
+            11: '',
+            12: '',
+            13: '',
+            14: '',
+            15: '',
+            16: '',
+            17: '',
+            18: '',
+            19: '',
+            20: ''
         };
 
         // Mapeamento das cores dos botões (ajuste conforme necessário)
         static buttonColor = {
             4: '#808080',
-            // Adicione outras cores de botões conforme necessário
+            11: '#ff5733',
+            12: '#ff0037',
+            13: '#0c907e',
+            14: '#581845',
+            15: '#DAF7A6',
+            16: '#900C3F',
+            17: '#c53d9c',
+            18: '#FF5733',
+            19: '#FFC300',
+            20: '#c49a12'
         };
 
         // Método para obter os atributos com base no tipo
@@ -59,6 +140,8 @@
         }
     }
 </script>
+
+
 
 <script>
     // Variáveis para controle de paginação, ordenação, pesquisa e itens por página
