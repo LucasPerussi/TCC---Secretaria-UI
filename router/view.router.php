@@ -101,6 +101,8 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/dashboard", function ($args) use ($obj) {
             $obj->verifyLogged();
             if ($_SESSION['user_role'] == "Aluno") {
+                $course = getCourseByStudent($_SESSION["user_id"]);
+                $teachers = listTeachers();
                 $requests = getMyRequestsStudent();
                 require __DIR__ . "/../view/member/dashboard-member.php";
             } elseif ($_SESSION['user_role'] == "Professor") {
@@ -133,6 +135,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $logs = getLogs();
             require __DIR__ . "/../view/admin/system-logs.view.php";
         });
@@ -147,6 +150,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             $request = getProccessIdentifier($args["processId"]);
+            $obj->verifyUserCanAccess($request["aluno"]);
 
             $inputTypes = getInputTypes();
             $process = getProccessTypeId($request['tipo_solicitacao']);
@@ -172,12 +176,15 @@ class Route extends \API\Router\DefaultRouter
 
         $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $murais = getMurais();
             require __DIR__ . "/../view/admin/news-board-admin.view.php";
         });
 
         $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
             $obj->verifyLogged();
+            $obj->verifyServer();
+
             $courses = getCourses();
             require __DIR__ . "/../view/admin/news-board-new.view.php";
         });
@@ -206,12 +213,6 @@ class Route extends \API\Router\DefaultRouter
             $course = getCourseByStudent($_SESSION["user_id"]);
             $percentage = getHoursUserPercentage($_SESSION["user_id"]);
             $percentageTotal = getHoursTotalUserPercentage($_SESSION["user_id"]);
-            require __DIR__ . "/../view/member/formative-member.view.php";
-        });
-
-        $this->addRoute("get", "/courses-list", function ($args) use ($obj) {
-            $obj->verifyLogged();
-            // $courses = getCourses();
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
 
@@ -244,6 +245,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/proccess-fields/{proccessId}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $proccess = getProccessTypeId($args["proccessId"]);
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
@@ -253,6 +255,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/proccess-type/{proccessId}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $inputTypes = getInputTypes();
             $process = getProccessTypeId($args["proccessId"]);
             $proccessFields = getProccessFields($args["proccessId"]);
@@ -265,6 +268,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $proccess = getProccessTypeId($args["proccessId"]);
             $inputTypes = getInputTypes();
             $stageTypes = getStageTypes();
@@ -272,11 +276,11 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/proccess-stages.view.php";
         });
 
-        $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/request-admin.view.php";
-        });
+        // $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     require __DIR__ . "/../view/admin/request-admin.view.php";
+        // });
 
         $this->addRoute("get", "/new-request", function ($args) use ($obj) {
             $obj->verifyLogged();
@@ -296,6 +300,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/fields", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/fields.view.php";
@@ -304,20 +309,23 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/stages", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $stageTypes = getStageTypes();
             $defaultStages = getDefaultStages();
             require __DIR__ . "/../view/admin/stages.view.php";
         });
 
-        $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/member/new-request-field.view.php";
-        });
+        // $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     $obj->verifyAdmin();
+        //     require __DIR__ . "/../view/member/new-request-field.view.php";
+        // });
 
         $this->addRoute("get", "/entity-list", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $page = $_GET["page"] ?? 'alunos';
             switch ($page) {
                 case 'alunos':
@@ -349,6 +357,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $processes = getRequestTypes();
             require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
@@ -356,6 +365,8 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/courses-management", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
+
             $courses = getCourses();
             $teachers = listTeachers();
 
@@ -406,6 +417,14 @@ class Route extends \API\Router\DefaultRouter
     public function verifyServer()
     {
         if (($_SESSION["user_role"] != "Admin") && ($_SESSION["user_role"] != "Servidor") && ($_SESSION["user_role"] != "Professor")) {
+            header('Location: ' . Config::BASE_URL . "denied");
+        };
+        return;
+    }
+
+    public function verifyUserCanAccess($author)
+    {
+        if (($_SESSION["user_role"] != "Admin") && ($_SESSION["user_role"] != "Servidor") && ($_SESSION["user_id"] != $author)) {
             header('Location: ' . Config::BASE_URL . "denied");
         };
         return;

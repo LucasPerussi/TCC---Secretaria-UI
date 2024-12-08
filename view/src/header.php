@@ -113,7 +113,7 @@ use API\enum\Notification_enum;
                                                                                                                                                                                                                         } else {
                                                                                                                                                                                                                             echo Config::BASE_URL . 'dashboard';
                                                                                                                                                                                                                         } ?>">
-                        <img  style="width:140px !important;height:auto !important; margin-top: 0px;" src="<?= Config::BASE_URL ?>src/img/logo/sept-<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>branco.webp<?php else : ?>azul.png<?php endif; ?>" alt="logo"></a> </li>
+                        <img style="width:140px !important;height:auto !important; margin-top: 0px;" src="<?= Config::BASE_URL ?>src/img/logo/sept-<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>branco.webp<?php else : ?>azul.png<?php endif; ?>" alt="logo"></a> </li>
             </ul>
 
         </div>
@@ -123,48 +123,14 @@ use API\enum\Notification_enum;
 
 
         <ul class="nav navbar-nav align-items-center ms-auto">
-            <!-- <li id="searchHeader" style="margin-right:10px;" class="nav-item dropdown d-lg-block "><a href="#" class="nav-link"><i class="bi bi-search"></i></a></li> -->
-            <script>
-                // $("#searchHeader").click(function(e) {
-                //     Swal.fire({
-                //         title: '<strong>O que você procura?</u></strong>',
-                //         icon: 'none',
-                //         html: '<form method="GET" action="<?php if ((isset($_SESSION["company_identifier"])) && ($_SESSION["company_identifier"] != 9999)) {
-                                                                    echo Config::BASE_URL . "company/" . $_SESSION["company_identifier"];
-                                                                } else {
-                                                                    echo Config::BASE_URL . "dashboard";
-                                                                }; ?>" id="form" autocomplete="off">' +
-                //             '<input style="font-family: "Montserrat", sans-serif;border-style:solid;" placeholder="Busque a plataforma, equipamento ou empresa..." name="search"  id="searchModal" type="text">' +
-                //             '<button  type="submit" style="z-index:1; margin:-48px; border-style: hidden; background-color:white; width:40px;"><i class="bi bi-search"></i></button>' +
-                //             '</form>',
-                //         showCloseButton: true,
-                //         showCancelButton: false,
-                //         showConfirmButton: false,
-                //         focusConfirm: false
 
-                //     })
-                // })
-            </script>
-            <!-- <li class="nav-item nav-search"><a onclick="Voltar()" class="nav-link nav-link-search"><?php $horaAbertura = date("H");
-                                                                                                        echo $horaAbertura; ?></i></a>
-            </li> -->
-            <!-- <li class="nav-item nav-search"><a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Sistema em Manutenção. Retorno estimado para 16 horas"  class="badge rounded-pill bg-danger ">Sistema Offline</i></a>
-            </li> -->
-          
+
             <div id="timer" hidden style="padding:5px; border-radius:20px; background-color:#ff2551; color:#fff; "></div>
-                <!-- <li class="nav-item nav-search" style="margin-top: -5px !important;"><a href="#" class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
-                    <div class="search-input" style="border-radius:20px; height:55px; margin-top: -5px !important;">
-                        <div class="search-input-icon" style="margin-top: -3px !important;"><i data-feather="search"></i></div>
-                        <input class="form-control input" style="border-radius:20px; margin-top: -4px !important;height:64px !important; padding-left:60px !important;" type="text" placeholder="<?= __("header.barra_pesquisa") ?>" tabindex="-1" data-search="search">
-                        <div class="search-input-close" style="margin-top: -3px !important;"><i data-feather="x"></i></div>
-                        <ul class="search-list search-list-main"></ul>
-                    </div>
-                </li>
-           -->
+
             <?php if (((isset($_SESSION["user_role"])) && (($_SESSION["user_role"] == 2) && ((isset($_SESSION["pending-users"])) && ($_SESSION["pending-users"] == "true")))) || ((isset($_SESSION["notifications"])) && ($_SESSION["notifications"] != ""))) : ?>
                 <li class="nav-item dropdown dropdown-notification me-25" style="margin-top: -5px;">
 
-                
+
 
                     <script>
                         // Defina o tempo inicial para 25 minutos
@@ -298,7 +264,7 @@ use API\enum\Notification_enum;
                         // Inicie o temporizador da sessão quando a página for carregada
                         startSessionTimer();
                     </script>
-                  
+
                 </li>
 
             <?php endif; ?>
@@ -330,16 +296,7 @@ use API\enum\Notification_enum;
                 }
             </style>
 
-            <!-- <li class="nav-item nav-search" id="turnDark">
-                <label class="switch">
-                    <input type="checkbox" id="theme-switch">
-                    <span class="slider round"></span>
-                </label>
-            </li> -->
-            <!-- <li class="nav-item nav-search"><a href="#" id="themeDark" onclick="switchDark()" class="nav-link nav-link-search"><i class="ficon" data-feather="moon" id="icon"></i></a><a href="#" id="themeLight" onclick="switchLight()" class="nav-link nav-link-search"><i class="ficon" data-feather="sun" id="icon"></i></a></li> -->
             <script>
-                // Listener para o evento de mudança do switch
-                // const currentTheme = localStorage.getItem("theme");
                 const currentTheme = obterCookie('theme');
                 themeSwitch = document.getElementById("theme");
                 var iconElement = document.getElementById("icon");
@@ -347,10 +304,6 @@ use API\enum\Notification_enum;
                 if (currentTheme === "Dark") {
                     switchDark();
                     criarCookie('theme', 'Dark', 7); // Cria um cookie chamado 'usuario' com valor 'joao' que expira em 7 dias.
-                    // document.getElementById("themeDark").hidden = true;
-                    // document.getElementById("themeLight").hidden = false;
-                    // document.querySelector("body").style.background = "#f8f8f8;"
-                    // document.getElementsByClassName("header-navbar-shadow").style.background = "#f8f8f8 !important;"
                 } else {
                     switchLight();
                     criarCookie('theme', 'Light', 7); // Cria um cookie chamado 'usuario' com valor 'joao' que expira em 7 dias.
@@ -434,18 +387,17 @@ use API\enum\Notification_enum;
             <?php if (isset($_SESSION["user_id"])) : ?>
                 <li class="nav-item dropdown dropdown-user" style="margin-top: -5px !important;"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="user-nav d-sm-flex" style="color: white !important;"><span class="user-name fw-bolder"> <?php
-                                                                                                                                    // $sobrenomes = explode(" ", $_SESSION['user_lastName']);
-                                                                                                                                    // $ultimoSobrenome = end($sobrenomes);
-                                                                                                                                    // echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome
-                                                                                                                                    echo $_SESSION['user_name'] 
-                                                                                                                                     ?>
-                            </span><span class="user-status"><?= $_SESSION['user_role']?></span>
+                                                                                                                            // $sobrenomes = explode(" ", $_SESSION['user_lastName']);
+                                                                                                                            // $ultimoSobrenome = end($sobrenomes);
+                                                                                                                            // echo $_SESSION['user_name'] . ' ' . $ultimoSobrenome
+                                                                                                                            echo $_SESSION['user_name']
+                                                                                                                            ?>
+                            </span><span class="user-status"><?= $_SESSION['user_role'] ?></span>
                         </div><span class="avatar"><img class="round" id="headerProfilePic" height="45" alt="profile pic" src="<?= $_SESSION["user_picture"] ?>"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                        
+
                         <a class="dropdown-item" style="border-radius:8px;" href="<?= Config::BASE_URL . 'settings' ?>"><i style="margin-right:10px;" class="bi bi-toggles"></i> <span><?= __("header.profile.config") ?></span></a>
-                        <a class="dropdown-item" style="border-radius:8px;" data-toggle="modal" data-target="#myModal" id="openModalButton"><i style="margin-right:10px;" class="bi bi-bug"></i> <span>Report Bug</span></a>
                         <a class="dropdown-item" style="border-radius:8px;" href="<?= Config::BASE_URL . 'logout' ?>"><svg style="margin-right:10px;border-radius:" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
                             </svg> <span><?= __("header.profile.sair") ?></span></a>
@@ -473,193 +425,3 @@ use API\enum\Notification_enum;
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-<script>
-    const clientID = 'eeed9dbdec9477f'; // Replace with your Imgur Client ID
-
-    const uploadImage = (image) => {
-        let replacedImage = image.replace(/^data:image\/(png|jpg|jpeg|gif|heic);base64,/, "");
-
-        return axios.post('https://api.imgur.com/3/image', {
-            image: replacedImage,
-            type: 'base64'
-        }, {
-            headers: {
-                Authorization: 'Client-ID ' + clientID,
-                Accept: 'application/json'
-            }
-        });
-    };
-
-    const waitForImagesToLoad = () => {
-        return new Promise((resolve) => {
-            const images = document.querySelectorAll('img');
-            let loadedImagesCount = 0;
-            const totalImages = images.length;
-
-            if (totalImages === 0) {
-                resolve();
-            }
-
-            images.forEach((image) => {
-                if (image.complete) {
-                    loadedImagesCount++;
-                    if (loadedImagesCount === totalImages) {
-                        resolve();
-                    }
-                } else {
-                    image.addEventListener('load', () => {
-                        loadedImagesCount++;
-                        if (loadedImagesCount === totalImages) {
-                            resolve();
-                        }
-                    });
-
-                    image.addEventListener('error', () => {
-                        loadedImagesCount++;
-                        if (loadedImagesCount === totalImages) {
-                            resolve();
-                        }
-                    });
-                }
-            });
-        });
-    };
-
-    const captureViewport = () => {
-        return html2canvas(document.body, {
-            width: window.innerWidth,
-            height: window.innerHeight,
-            x: window.scrollX,
-            y: window.scrollY,
-            scrollX: 0,
-            scrollY: 0,
-            useCORS: true,
-            logging: true
-        });
-    };
-
-    document.getElementById('openModalButton').addEventListener('click', function() {
-        // Close any open SweetAlert modals
-        Swal.close();
-
-        // Add a small delay to ensure the modal is fully closed
-        setTimeout(() => {
-            waitForImagesToLoad().then(() => {
-                captureViewport().then(function(canvas) {
-                    const base64Image = canvas.toDataURL('image/png');
-
-                    // Show uploading modal
-                    Swal.fire({
-                        title: 'Uploading...',
-                        text: 'Please wait while we upload your screenshot.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-
-                            uploadImage(base64Image)
-                                .then(response => {
-                                    if (response.data.success && response.status === 200) {
-                                        const imageUrl = response.data.data.link;
-                                        Swal.fire({
-                                            title: '🕷️ Reportar Bug ou Solicitar Melhoria',
-                                            html: `
-                                                <img src="${imageUrl}" alt="Screenshot" class="img-fluid mb-3">
-                                                <form id="openBugReport">
-                                                    <div class="form-group">
-                                                        <input hidden value="<?= $_SESSION["csrf_token"] ?>" name="csrf_token" type="text">
-                                                        <input hidden value="<?php
-                                                                                // Função para obter a URL atual                        
-                                                                                function getCurrentUrl()
-                                                                                {
-                                                                                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-                                                                                    $host = $_SERVER['HTTP_HOST'];
-                                                                                    $uri = $_SERVER['REQUEST_URI'];
-
-                                                                                    return $protocol . $host . $uri;
-                                                                                }
-
-                                                                                echo getCurrentUrl();
-                                                                                ?>" name="url" type="text">
-                                                        <label for="imageTitle">Qual o problema ou solicitação? </label>
-                                                        <br />
-                                                        
-                                                        <input type="text" class="form-control mt-1" name="title" required id="imageTitle" placeholder="Enter title">
-                                                    </div>
-                                                    <div class="form-group mt-2">
-                                                        <label for="imageDescription">Detalhes</label>
-                                                        <br />
-                                                        <textarea class="form-control mt-1" id="imageDescription" name="description" required rows="3" placeholder="Enter description"></textarea>
-                                                    </div>
-                                                    <input type="text" hidden class="form-control" id="imageLink" name="picture" value="${imageUrl}" readonly>
-                                                </form>
-                                            `,
-                                            showCancelButton: true,
-                                            confirmButtonText: 'Enviar',
-                                            cancelButtonText: 'Close',
-                                            preConfirm: () => {
-                                                const form = document.getElementById('openBugReport');
-                                                if (form.checkValidity()) {
-                                                    const data = new FormData(form);
-                                                    const object = Object.fromEntries(data.entries());
-                                                    return axios.post('<?= Config::BASE_ACTION_URL ?>/new-report', object)
-                                                        .then(function(response) {
-                                                            if (response.data !== "sucesso!") {
-                                                                throw response.data;
-                                                            } else {
-                                                                Swal.fire({
-                                                                    title: 'Agradecemos a ajuda!',
-                                                                    text: "Já recebemos seu report por aqui e em breve lhe atualizamos sobre o tema.",
-                                                                    icon: 'success',
-                                                                    showCancelButton: false,
-                                                                    allowOutsideClick: false,
-                                                                    confirmButtonColor: '#1f8cd4',
-                                                                    cancelButtonColor: '#d33',
-                                                                    confirmButtonText: '<?= __("new_room_js.confirm") ?>'
-                                                                }).then((result) => {
-                                                                    if (result.isConfirmed) {
-
-                                                                    }
-                                                                });
-                                                            }
-                                                        })
-                                                        .catch(function(error) {
-                                                            Swal.fire({
-                                                                title: 'Ops, tivemos um problema',
-                                                                text: "Não fomos capazes de receber sua solicitação. Possivelmente estejamos com algum problema interno nesse momento e nossa equipe já deve estar tratando o problema. ",
-                                                                icon: 'error',
-                                                                showCancelButton: false,
-                                                                confirmButtonColor: '#1f8cd4',
-                                                                cancelButtonColor: '#d33',
-                                                                confirmButtonText: '<?= __("new_room_js.ok") ?>'
-                                                            });
-                                                        });
-                                                } else {
-                                                    Swal.showValidationMessage('Por favor, preencha todos os campos obrigatórios.');
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'Upload failed!',
-                                        });
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error uploading image:', error);
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: 'An error occurred!',
-                                    });
-                                });
-
-                        }
-                    });
-                });
-            });
-        }, 500); // Delay of half a second before capturing the screenshot
-    });
-</script>

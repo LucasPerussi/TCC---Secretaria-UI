@@ -191,8 +191,7 @@ use const Siler\Config\CONFIG; ?>
 
                                 </p>
                             </div>
-                            <h6>Aberto em</h6>
-                            <p><?php
+                            <p style="font-size:11px;">Aberto em <?php
                                 $timestamp = strtotime($request["data_abertura"]);
                                 if ($timestamp !== false) {
                                     echo date("d/m/y \à\s H:i", $timestamp);
@@ -200,6 +199,7 @@ use const Siler\Config\CONFIG; ?>
                                     echo "Data inválida";
                                 }
                                 ?></p>
+                            
 
                         </div>
 
