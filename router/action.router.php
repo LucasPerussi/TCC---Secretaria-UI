@@ -30,6 +30,8 @@ use function API\Fetch\getCustomizedStages;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessStages;
+use function API\Fetch\getInternshipById;
+use function API\Fetch\getStudentInternship;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedDefaultStages;
 // use function API\Fetch\getUnifiedStages;
@@ -117,6 +119,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("patch", "/change-role", function ($args) use ($obj) {
             $obj->changeRole();
         });
+        $this->addRoute("patch", "/change-is", function ($args) use ($obj) {
+            $obj->changeIS();
+        });
         $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
             $obj->registerInternship();
         });
@@ -159,6 +164,12 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("get", "/get-all-stages", function ($args) use ($obj) {
             $obj->getAllStages();
+        });
+        $this->addRoute("get", "/get-internship-id/{id}", function ($args) use ($obj) {
+            $obj->getInternshipById($args["id"]);
+        });
+        $this->addRoute("get", "/get-internship-student/{id}", function ($args) use ($obj) {
+            $obj->getStudentInternship($args["id"]);
         });
     }
 
@@ -240,7 +251,14 @@ class Route extends \API\Router\DefaultRouter
         $body = $this->getBody();
         fields(["user", "role"], $body, false);
 
-        echo json_encode($this->requestController->changeStage($body["user"], $body["role"]));
+        echo json_encode($this->entitiesController->changeRole($body["user"], $body["role"]));
+    }
+    public function changeIS()
+    {
+        $body = $this->getBody();
+        fields(["id_estagio", "status"], $body, false);
+
+        echo json_encode($this->internshipController->changeIS($body["id_estagio"], $body["status"]));
     }
     public function newComment()
     {
@@ -442,6 +460,14 @@ class Route extends \API\Router\DefaultRouter
     public function listProccessFields($proccess)
     {
         echo json_encode(getProccessFields($proccess));
+    }
+    public function getInternshipById($id)
+    {
+        echo json_encode(getInternshipById($id));
+    }
+    public function getStudentInternship($id)
+    {
+        echo json_encode(getStudentInternship($id));
     }
 
     public function listProccessStages($proccess)

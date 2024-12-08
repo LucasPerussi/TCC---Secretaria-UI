@@ -9,17 +9,9 @@ function getInternshipById($id)
     $response = APIRequest::getRequest("internship/id/" . $id);
     if (!isset($response["error"])) {
         return $response;
-    }
-
-    
-    Logger::log(
-        $_SESSION["user_id"] ?? null,
-        "Erro ao buscar informações do estágio com ID $id. Erro: " . $response["message"],
-        "getInternshipById",
-        "error"
-    );
-
-    return $response;
+    }    
+   Logger::log($_SESSION["user_id"], "Erro ao buscar informações do estágio. Error: " . $response["message"], "getInternshipById", "error");
+    return $response;    
 }
 
 function getStudentInternship($id)
@@ -27,16 +19,8 @@ function getStudentInternship($id)
     $response = APIRequest::getRequest("internship/all/" . $id);
     if (!isset($response["error"])) {
         return $response;
-    }
-
-    
-    Logger::log(
-        $_SESSION["user_id"] ?? null,
-        "Erro ao buscar informações do estágio com ID $id. Erro: " . $response["message"],
-        "getInternshipById",
-        "error"
-    );
-
-    return $response;
+    }    
+    Logger::log($_SESSION["user_id"], "Erro ao buscar informações do estágio. Error: " . $response["message"], "getStudentInternship", "error");
+    return $response;   
 }
 

@@ -178,7 +178,7 @@ use API\Controller\Config;
                 .catch(error => {
                     Swal.fire({
                         title: 'Tivemos um problema!',
-                        text: 'Tivemos um problema ao remover campo. Talvez ele já esteja em uso. (STATUS: ' + error.status + ')',
+                        text: 'Tivemos um problema ao alterar a role do usuário. (STATUS: ' + error.status + ')',
                         icon: 'error',
                         showCancelButton: false,
                         confirmButtonColor: '#1f8cd4',
