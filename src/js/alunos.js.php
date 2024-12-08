@@ -21,7 +21,7 @@ use API\Controller\Config;
     function formatDate(dateString) {
         const date = new Date(dateString);
         const day = ('0' + date.getDate()).slice(-2);
-        const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
         const year = date.getFullYear();
         return `${day}/${month}/${year}`;
     }
@@ -95,7 +95,7 @@ use API\Controller\Config;
             const row = document.createElement('tr');
 
             row.innerHTML = `
-                <td><img src="${item.foto != "" ? "<?=Config::BASE_URL?>" + item.foto : "<?=Config::BASE_URL?>src/img/avatars/generic.webp"}" alt="Foto" style="width:50px; height:50px; object-fit:cover; border-radius:50%;"></td>
+                <td><img src="${item.foto != "" ? "<?= Config::BASE_URL ?>" + item.foto : "<?= Config::BASE_URL ?>src/img/avatars/generic.webp"}" alt="Foto" style="width:50px; height:50px; object-fit:cover; border-radius:50%;"></td>
                 <td>${item.nome} ${item.sobrenome}</td>
                 <td>${item.email}</td>
                 <td>${item.registro}</td>
@@ -103,6 +103,7 @@ use API\Controller\Config;
                 <td>
                     <a href='#' class='view-user' data-id='${item.id}'><span class='badge rounded-pill bg-light-primary '><i class="bi bi-eye"></i></span></a>
                     <a href='#' class='delete-user' data-id='${item.id}'><span class='badge rounded-pill bg-light-danger '><i class="bi bi-trash"></i></span></a>
+                    <a href='#' class='change-user-role' data-id='${item.id}'><span class='badge rounded-pill bg-light-warning '><i class="bi bi-person-fill-gear"></i></span></a>
                 </td>
             `;
             tableBody.appendChild(row);
@@ -127,6 +128,67 @@ use API\Controller\Config;
                 deleteUser(id);
             });
         });
+        document.querySelectorAll('.change-user-role').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('data-id');
+
+            });
+        });
+
+
+        /*$("#changeRole").submit(function(e) {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const object = Object.fromEntries(data.entries());
+            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', object)
+                .then(function(response) {
+                    console.log(response)
+                    if (response.data.status > 202) {
+                        throw response.data;
+                    } else {
+                        location.reload();
+                    }
+                })
+                .catch(function(error) {
+
+                    console.log(error.status)
+                    Swal.fire({
+                        title: 'Tivemos um problema!',
+                        text: 'Tivemos um problema ao cadastrar solicitacao (STATUS: ' + error.status + ')',
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#1f8cd4',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
+                    })
+                });
+        });*/
+
+        function changeRole(user,role) {
+
+            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', object)
+                .then(response => {
+                    if (response.data.status !== 200) {
+                        throw response.data;
+                    } else {
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Tivemos um problema!',
+                        text: 'Tivemos um problema ao alterar a role do usuário. (STATUS: ' + error.status + ')',
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#1f8cd4',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
+                    })
+                });
+        }
+
+
 
         // Exibir mensagem 'Nenhum item encontrado' se necessário
         noResultsMessage.textContent = filteredData.length === 0 ? 'Nenhum item encontrado.' : '';
@@ -181,6 +243,7 @@ use API\Controller\Config;
             }
         })
     }
+
 
     // Função para alterar o número de itens por página
     function changeItemsPerPage() {

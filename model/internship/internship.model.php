@@ -7,13 +7,13 @@ use API\Model\APIRequest;
 
 class InternshipModel
 {
-    public function getInternship($id)
+    public function getInternshipById($id)
     {        
-        $id = Sanitize::clean($id, "id", "getInternship");    
+        $id = Sanitize::clean($id, "id", "getInternshipById");    
 
         $url = Config::API_URL . "internship/id/$id";             
 
-        $result = APIRequest::getRequest($url, "getInternship");
+        $result = APIRequest::getRequest($url, "getInternshipById");
 
         return APIRequest::handleResponse($result, "getInternship");
     }
@@ -49,6 +49,19 @@ class InternshipModel
         
         return APIRequest::postRequest($url, $data, "registerInternship");
     
+    }
+    public function changeIS($id_estagio, $status)
+    {
+        $id_estagio = Sanitize::clean($id_estagio, "id_estagio", "changeIS");
+        $status = Sanitize::clean($status, "status", "changeIS");
+
+        $url = Config::API_URL . "internship/update-status";
+        $data = [
+            'id_estagio' => intval($id_estagio, 10),
+            'status' => intval($status, 10)
+        ];
+
+        return APIRequest::patchRequest($url, $data, "changeIS");
     }
 
 }

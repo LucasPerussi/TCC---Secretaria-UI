@@ -36,6 +36,7 @@ use function API\Fetch\getMuralById;
 use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
+use function API\Fetch\getInternshipById;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
 use function API\Fetch\getStageTypes;

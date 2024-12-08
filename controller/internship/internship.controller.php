@@ -33,7 +33,7 @@ class Internship extends DefaultController
                 "message" => "O ID do estágio é obrigatório."
             ];
         }
-        return $this->internshipModel->getInternship($id);
+        return $this->internshipModel->getInternshipById($id);
     }
     public function getStudentInternship($id)
     {
@@ -58,5 +58,18 @@ class Internship extends DefaultController
         }
 
         return $this->internshipModel->registerInternship($professor_orientador, $empresa, $area_atuacao, $data_inicio, $duracaoMeses);
+    }
+
+    public function changeIS($id_estagio, $status)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O ID do aluno é obrigatório."
+            ];
+        }
+
+        return $this->internshipModel->changeIS($id_estagio, $status);
     }
 }
