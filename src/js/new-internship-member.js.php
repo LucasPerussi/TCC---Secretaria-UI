@@ -10,7 +10,7 @@ use API\Controller\Config;
         const object = Object.fromEntries(data.entries());
         axios.post('<?= Config::BASE_ACTION_URL ?>/register-internship', object)
             .then(function(response) {
-                console.log(response)
+                
                 if (response.data.status != 200) {
                     throw response.data;
                 } else {

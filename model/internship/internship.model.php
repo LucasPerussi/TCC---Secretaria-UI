@@ -7,24 +7,7 @@ use API\Model\APIRequest;
 
 class InternshipModel
 {
-    public function getInternshipById($id)
-    {        
-        $id = Sanitize::clean($id, "id", "getInternshipById");    
-
-        $url = Config::API_URL . "internship/id/$id";             
-
-        $result = APIRequest::getRequest($url, "getInternshipById");
-
-        return APIRequest::handleResponse($result, "getInternship");
-    }
-    public function getStudentInternship($id)
-    {        
-        $id = Sanitize::clean($id, "id", "getStudentInternship");   
-        $url = Config::API_URL . "internship/all/$id";             
-        $result = APIRequest::getRequest($url, "getStudentInternship");
-        return APIRequest::handleResponse($result, "getStudentInternship");
-    }
-
+    
     public function registerInternship($professor_orientador, $empresa, $area_atuacao, $data_inicio, $duracaoMeses)
     {
         

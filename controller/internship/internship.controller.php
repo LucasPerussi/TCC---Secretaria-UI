@@ -24,28 +24,7 @@ class Internship extends DefaultController
     }
 
 
-    public function getInternshipById($id)
-    {
-
-        if (!$id) {
-            return [
-                "status" => "error",
-                "message" => "O ID do estágio é obrigatório."
-            ];
-        }
-        return $this->internshipModel->getInternshipById($id);
-    }
-    public function getStudentInternship($id)
-    {
-
-        if (!$id) {
-            return [
-                "status" => "error",
-                "message" => "O ID do aluno é obrigatório."
-            ];
-        }
-        return $this->internshipModel->getStudentInternship($id);
-    }
+    
 
     public function registerInternship($professor_orientador, $empresa, $area_atuacao, $data_inicio, $duracaoMeses)
     {

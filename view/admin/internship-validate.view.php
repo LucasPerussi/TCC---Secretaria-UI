@@ -96,7 +96,7 @@ include "view/src/head.php"; ?>
                     <div class="row breadcrumbs-top">
 
 
-                        
+
                     </div>
                 </div>
 
@@ -114,128 +114,84 @@ include "view/src/head.php"; ?>
                             </div>
                         </div>
 
-                        <div class="card p-1 ">
+                        <div class="card p-1">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <label class="col-form-label" for="email-icon">Dados do estágio</label>
+                                    <?php if (!empty($internshipId)): ?>
+                                        <p><strong>Área de Atuação:</strong> <?= htmlspecialchars($internshipId['area_atuacao']); ?></p>
+                                        <p><strong>Empresa:</strong> <?= htmlspecialchars($internshipId['empresa']); ?></p>
+                                        <p><strong>Data de Renovação:</strong> <?= htmlspecialchars($internshipId['data_renovacao']); ?></p>
+                                        <p><strong>Status:</strong> <?= htmlspecialchars($internshipId['status']); ?></p>
+                                        <p><strong>Professor orientador:</strong> <?= htmlspecialchars($internshipId['professor_orientador']); ?></p>
 
-
-                            <form id="changeNome">
-                                <div class="row">
-                                    <div class="col-sm-7">
-
-                                        <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
-
-                                    </div>
-
-
+                                    <?php else: ?>
+                                        <p class="text-danger">Erro ao carregar os dados do estágio.</p>
+                                    <?php endif; ?>
                                 </div>
-                            </form>
-
-                            <!-- Formulário de Sobrenome -->
-
-
-                            <!-- Formulário de Curso -->
-                           
-                                <div class=" row">
-                                    <div class="col-sm-7">
-                                        <label class="col-form-label" for="email-icon">Comprovante de Participação (link)</label>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-
+                            </div>
                         </div>
-
 
                         <br />
                         <div class="card" style="padding:20px;">
                             <h3>Conclusão</h3>
+
                             <div class="mb-1 row">
                                 <div class="col-sm-12">
                                     <label class="col-form-label" for="email-icon">Professor</label>
                                 </div>
 
-                                
 
+                            </div>
+                            <form id="changeIS">
+                                <div class="mb-1 row">
                                     <div class="col-sm-12">
-                                        <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><i class="bi bi-book"></i></span>
-
-                                            <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Selecione o Professor para adicionar ao chamado" />
+                                        <label class="col-form-label">Alterar Status do Estágio</label>
+                                    </div>
+                                    <input type="text" name="id_estagio" value="<?= $args["id"] ?>" hidden>
+                                    <div class="col-sm-12">
+                                        <div class="settings-radio-group">
+                                            <label class="settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" value="1">
+                                                <span class="settings-radio-label">Deferido</span>
+                                            </label>
+                                            <label class="settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" value="2">
+                                                <span class="settings-radio-label">Indeferido</span>
+                                            </label>
+                                            <label class="settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" value="3">
+                                                <span class="settings-radio-label">Concluído</span>
+                                            </label>
+                                            <label class="settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" value="4">
+                                                <span class="settings-radio-label">Cancelado</span>
+                                            </label>
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" style="font-size: 11px; padding: 10px; width: 100%; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
-                                            <?= htmlspecialchars(__("user_edit.salvar")) ?>
-                                        </button>
-                                    </div>
-
-                               
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Status</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="settings-radio-group">
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="deferido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-deferido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="indeferido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-indeferido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="concluido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-concluido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="cancelado">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-cancelado") ?></span>
-                                        </label>
-                                    </div>
-                                    <br>
+                                    
+                                    
                                 </div>
 
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" id="justificativa" name="justificativa" rows="3" placeholder="Justificativa" required></textarea>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Horas Concedidas</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                        <input type="number" id="name-icon" class="form-control" name="horas_concedidas" placeholder="30" />
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary" style="float:right;">Confirmar</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                    <div class="content-header-left col-md-9 col-12 mb-2">
-                                <div class="row breadcrumbs-top">
+                                <div class="row">
                                     <div class="col-12">
-                                        <h2 class="content-header-title float-start mb-0">Informações</h2>
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Confirmar</button>
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="content-header-left col-md-9 col-12 mb-2">
+                            <div class="row breadcrumbs-top">
+                                <div class="col-12">
+                                    <h2 class="content-header-title float-start mb-0">Informações</h2>
+                                </div>
                             </div>
+                        </div>
                         <style>
                             #preview {
                                 max-width: 250px;
@@ -366,7 +322,8 @@ include "view/src/head.php"; ?>
     <script src="layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <?php
-    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+    require __DIR__ ."/../../src/js/internship-validate.view.js.php";
+    //require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
     ?>
 
 
