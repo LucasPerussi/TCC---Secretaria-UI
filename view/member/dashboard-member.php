@@ -97,70 +97,101 @@ use const Siler\Config\CONFIG; ?>
                             <br />
                             <a href="<?= Config::BASE_URL ?>new-request" class="btn btn-dark" id="" style="padding:15px;width:100%;margin-bottom:15px;">Abrir chamado</a>
                             <a href="<?= Config::BASE_URL ?>formative-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Horas Formativas</a>
-                            <a href="<?= Config::BASE_URL ?>system-logs" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Estágio</a>
-                            <a href="<?= Config::BASE_URL ?>news-board"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
-                            <a href="<?= Config::BASE_URL ?>settings"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
+                            <a href="<?= Config::BASE_URL ?>new-internship-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Estágio</a>
+                            <a href="<?= Config::BASE_URL ?>news-board" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
+                            <a href="<?= Config::BASE_URL ?>settings" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
+                        </div>
+                        <div class="card">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <img style="width:80%; margin:10%;" src="<?= Config::BASE_URL ?>src/img/logo/<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>ufpr_logo.png<?php else : ?>logo-ufpr.svg<?php endif; ?>" alt="logo"></span>
+                                </div>
+                                <div class="col-8">
+                                    <h3><?= $course["nome"] ?></h3>
+                                    <p><?= $course["descricao"] ?></p>
+                                    <h6>
+                                        <span style=" font-size:10px !important;" class="badge rounded-pill bg-light-primary"><?= $course["horas_formativas"] ?? 0 ?> Hrs. Formativas</span>
+                                        <span style=" font-size:10px !important;" class="badge rounded-pill bg-light-success"><?= $course["semestres"] ?? 0 ?> Semestres</span>
+                                       
+                                    </h6>
+                                    <h6>
+                                        
+                                        <span style=" font-size:10px !important;" class="badge rounded-pill bg-light-info"> Coordenador:
+                                            <?php foreach ($teachers as $teacher) { ?>
+                                                <?php if ($course["coordenador"] == $teacher["id"]) { ?>
+                                                    <?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?> (<?= $teacher["id"] ?>)
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </span>
+                                    </h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h2>Meus chamados <a href="system-logs" style="float:right; font-size:11px;padding:7px;"class="btn btn-dark" >Ver Todos</a></h2>
+                        <h2>Meus chamados <a href="system-logs" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Ver Todos</a></h2>
                         <h6>Lista de chamados em aberto</h6>
                         <br />
                         <div class="card p-1">
-                            <?php foreach($requests as $request){?>
-                                <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    <h5 style="font-weight:bold !important;"><?=$request["titulo"]?> <a href="<?=Config::BASE_URL. "request/" . $request["identificador"]?>" style="float:right; font-size:11px;padding:8px;"class="btn btn-dark">Ver Chamado</a></h5>
-                                    <h6 style="font-weight:bold !important;font-size:11px;"><?php
-                                                                                                                                                        $timestamp = strtotime($request["data_abertura"]);
-                                                                                                                                                        if ($timestamp !== false) {
-                                                                                                                                                            echo date("d/m/y \à\s H:i", $timestamp);
-                                                                                                                                                        } else {
-                                                                                                                                                            echo "Data inválida";
-                                                                                                                                                        }
-                                                                                                                                                        ?><span style=" float:right;font-size:11px;" class="badge rounded-pill bg-light-<?=$request["status"] == 1 ? "success" : "secondary";?>"><?=$request["status"] == 1 ? "Aberto" : "Fechado";?></span> - <?=$request["numero"]?>  </h6>
-                                    
-                                  
+                            <?php if (!($requests["error"])) { ?>
+                                <?php foreach ($requests as $request) { ?>
+                                    <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
+                                        <h5 style="font-weight:bold !important;"><?= $request["titulo"] ?> <a href="<?= Config::BASE_URL . "request/" . $request["identificador"] ?>" style="float:right; font-size:11px;padding:8px;" class="btn btn-dark">Ver Chamado</a></h5>
+                                        <h6 style="font-size:11px;"><?php
+                                                                    $timestamp = strtotime($request["data_abertura"]);
+                                                                    if ($timestamp !== false) {
+                                                                        echo date("d/m/y \à\s H:i", $timestamp);
+                                                                    } else {
+                                                                        echo "Data inválida";
+                                                                    }
+                                                                    ?><span style=" float:right;font-size:11px;" class="badge rounded-pill bg-light-<?= $request["status"] == 1 ? "success" : "secondary"; ?>"><?= $request["status"] == 1 ? "Aberto" : "Fechado"; ?></span> - <?= $request["numero"] ?> </h6>
 
-                                </div>
-                            <?php }?>
+
+
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <h6>Você ainda não tem nenhum chamado!</h6>
+                            <?php } ?>
+
 
                         </div>
                     </div>
+
                 </div>
 
-            </div>
+
+                <!-- END: Content-->
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
+                <script src='https://use.fontawesome.com/826a7e3dce.js'></script>
+                <script src="src/js/swiper-bundle.min.js"></script>
 
 
-            <!-- END: Content-->
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js'></script>
-            <script src='https://use.fontawesome.com/826a7e3dce.js'></script>
-            <script src="src/js/swiper-bundle.min.js"></script>
+                <div class="sidenav-overlay"></div>
+                <div class="drag-target"></div>
+
+                <!-- endbuild -->
+
+                <!-- Vendors JS -->
 
 
-            <div class="sidenav-overlay"></div>
-            <div class="drag-target"></div>
+                <!-- Main JS -->
+                <script src="test/assets/js/main.js"></script>
 
-            <!-- endbuild -->
+                <!-- <script src="layout/app-assets/js/scripts/my-department.js"></script> -->
+                <?php include "view/src/footer.php"; ?>
+                <style>
+                    .owl-stage-outer {
+                        height: 500px;
 
-            <!-- Vendors JS -->
+                    }
 
-
-            <!-- Main JS -->
-            <script src="test/assets/js/main.js"></script>
-
-            <!-- <script src="layout/app-assets/js/scripts/my-department.js"></script> -->
-            <?php include "view/src/footer.php"; ?>
-            <style>
-                .owl-stage-outer {
-                    height: 500px;
-
-                }
-
-                .cards {
-                    margin-right: 10px;
-                }
-            </style>
+                    .cards {
+                        margin-right: 10px;
+                    }
+                </style>
 </body>
 
 </html>

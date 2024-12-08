@@ -12,10 +12,8 @@ include "view/src/head.php"; ?>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-
-    <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>WeJourney - Nova Empresa</title>
+    <title>Bem-vindo(a) à Secretaria do SEPT</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -90,26 +88,114 @@ include "view/src/head.php"; ?>
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
-            <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
 
-
-                        <div class="breadcrumb-wrapper">
-                            <ol class="breadcrumb ps-0">
-                                <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Conurações de Usuário</li>
-                            </ol>
-                        </div>
+            <div class="card p-1">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+<h1 style="font-size: 200px; text-align: center">👨🏽‍💻</h1>
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                        <br />
+                        <br />
+                        <br />
+                        <h1>Que tal completar sua conta?</h1>
+                        <h6>Verifique suas informações, defina suas preferencias e escolha seu avatar. Você também poderá fazer isso pelas configurações!</h6>
+                        <br />
+                        <a class="btn btn-primary" href="<?= Config::BASE_URL . 'dashboard' ?>">Painel do Estudante</a>
                     </div>
                 </div>
 
             </div>
             <div class="content-body">
                 <div class="row">
+                <div class="col-md-6 col-sm-12">
+                        <h1><?= __("complete_profile.aparencia") ?> </h1>
+                        <p><?= __("complete_profile.aparencia_desc") ?></p>
+                        <br />
+                        <style>
+                            #preview {
+                                max-width: 250px;
+                                max-height: 250px;
+                                border-radius: 150px !important;
+                                object-fit: cover;
+                            }
+
+                            #imageToCrop {
+                                max-width: 100%;
+                                max-height: 500px;
+                                border-radius: 10px;
+                            }
+
+                            .selectedAvatar {
+                                border: 3px solid #00adff;
+                            }
+
+                            .modal .modal-content {
+                                /* background-color: #fff !important; */
+                                padding: 0px !important;
+                                border-radius: 20px !important;
+                            }
+
+                            .modal-header {
+
+                                border-top-left-radius: 20px !important;
+                                border-top-right-radius: 20px !important;
+                            }
+                        </style>
+                        <div class="card p-2">
+                            <div class="card p-2" style="text-align:center !important;" id="bodyRequestDash">
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-12">
+                                        <img id="preview"
+                                            src="<?= isset($_SESSION['user_picture']) ? $_SESSION['user_picture'] : 'placeholder.jpg' ?>"
+                                            alt="Profile Picture"
+                                            class="img-fluid rounded mb-0">
+                                    </div>
+                                    <div class="col-md-5 col-sm-12">
+                                        <div style="text-align:left; margin-left:10px;margin-top:30px;">
+
+                                            <h2>
+                                                <?= $_SESSION['user_name'] ?>
+                                            </h2>
+                                            <span><?= $_SESSION['user_email'] ?></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <h3 style="font-weight:bolder !important;">Avatar </h3>
+                            <h6>Se preferir, selecione um avatar que combine com você!</h6>
+                            <br />
+                            <h4 style="font-weight:bolder !important;">Abstrato</h4>
+                            <br />
+
+                            <div class="swiper-container-avatar" style="overflow:hidden; margin-bottom:15px; ">
+                                <div class="swiper-wrapper">
+                                    <?php for ($art = 1; $art < 9; $art++) { ?>
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= 'src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                            <img src="<?= Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <br />
+                            <h4 style="font-weight:bolder !important;">Cartoon</h4>
+                            <br />
+                            <div class="swiper-container-cartoon" style="overflow:hidden; margin-bottom:15px; ">
+                                <div class="swiper-wrapper">
+                                    <?php for ($art = 1; $art < 39; $art++) { ?>
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= 'src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                            <img src="<?= Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="col-md-6 col-sm-12">
                         <h1>Perfil</h1>
-                        <h6>Atualize suas informações básicas</h6>
+                        <p>Atualize suas informações básicas</p>
                         <br />
                         <div class="card p-1 ">
 
@@ -226,17 +312,11 @@ include "view/src/head.php"; ?>
                                         <label class="col-form-label" for="curso-icon">Curso</label>
                                     </div>
                                     <div class="col-sm-7">
-                                    <div class="input-group input-group-merge">
+                                        <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
-                                            <select class="form-control select2" value="<?= htmlspecialchars($user["curso"]) ?>" onchange="document.getElementById('saveCurso').hidden = false;" name="curso" placeholder="Curso ID">
-                                                <?php foreach ($courses as $course) { ?>
-                                                    <option <?php if ($user["curso"] == $course["id"]) {
-                                                                echo "selected";
-                                                            } ?> value="<?= $course["id"] ?>"><?= $course["nome"] ?></option>
-                                                <?php } ?>
-                                            </select>
+
+                                            <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Curso ID" />
                                         </div>
-         
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
@@ -322,103 +402,12 @@ include "view/src/head.php"; ?>
                                 </div>
                             </div>
                         </div>
-                        <br />
-                        <h2>Segurança <a href="change-password" class="btn btn-dark" style="float:right;">Alterar</a></h2>
-                        <h6>Sempre opte por senhas seguras!</h6>
-                        <br />
-                        <br />
-                        <h2>Histórico da Conta <a href="account-history" class="btn btn-dark" style="float:right;">Visualizar</a></h2>
-                        <h6>Você a timeline de tudo que realizou.</h6>
-                        <br />
-                        <br />
+
 
 
                         <br />
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <h1><?= __("complete_profile.aparencia") ?> </h1>
-                        <p><?= __("complete_profile.aparencia_desc") ?></p>
-                        <style>
-                            #preview {
-                                max-width: 250px;
-                                max-height: 250px;
-                                border-radius: 150px !important;
-                                object-fit: cover;
-                            }
-
-                            #imageToCrop {
-                                max-width: 100%;
-                                max-height: 500px;
-                                border-radius: 10px;
-                            }
-
-                            .selectedAvatar {
-                                border: 3px solid #00adff;
-                            }
-
-                            .modal .modal-content {
-                                /* background-color: #fff !important; */
-                                padding: 0px !important;
-                                border-radius: 20px !important;
-                            }
-
-                            .modal-header {
-
-                                border-top-left-radius: 20px !important;
-                                border-top-right-radius: 20px !important;
-                            }
-                        </style>
-                        <div class="card p-2">
-                            <div class="card p-2" style="text-align:center !important;" id="bodyRequestDash">
-                                <div class="row">
-                                    <div class="col-md-5 col-sm-12">
-                                        <img id="preview"
-                                            src="<?= isset($_SESSION['user_picture']) ? $_SESSION['user_picture'] : 'placeholder.jpg' ?>"
-                                            alt="Profile Picture"
-                                            class="img-fluid rounded mb-0">
-                                    </div>
-                                    <div class="col-md-5 col-sm-12">
-                                        <div style="text-align:left; margin-left:10px;margin-top:30px;">
-
-                                            <h2>
-                                                <?= $_SESSION['user_name'] ?>
-                                            </h2>
-                                            <span><?= $_SESSION['user_email'] ?></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <h3 style="font-weight:bolder !important;">Avatar </h3>
-                            <h6>Se preferir, selecione um avatar que combine com você!</h6>
-                            <br />
-                            <h4 style="font-weight:bolder !important;">Abstrato</h4>
-                            <br />
-
-                            <div class="swiper-container-avatar" style="overflow:hidden; margin-bottom:15px; ">
-                                <div class="swiper-wrapper">
-                                    <?php for ($art = 1; $art < 9; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
-                                            <img src="<?= Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                            <br />
-                            <h4 style="font-weight:bolder !important;">Cartoon</h4>
-                            <br />
-                            <div class="swiper-container-cartoon" style="overflow:hidden; margin-bottom:15px; ">
-                                <div class="swiper-wrapper">
-                                    <?php for ($art = 1; $art < 39; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
-                                            <img src="<?= Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    
 
 
                     <!-- Modal -->

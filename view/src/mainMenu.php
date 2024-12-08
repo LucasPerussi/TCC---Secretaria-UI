@@ -32,7 +32,6 @@ $url = $_SERVER['REQUEST_URI'];
             <li class="nav-item me-auto"><a class="navbar-brand" href="<?= Config::BASE_URL . "dashboard"; ?>"><span class="brand-logo">
                         <img height="30" src="<?= Config::BASE_URL ?>src/img/logo/<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>ufpr_logo.png<?php else : ?>logo-ufpr.svg<?php endif; ?>" alt="logo"></span>
                     <h2 style="font-size: 18px; font-family: 'Quicksand', sans-serif; font-weight:800;" class="brand-text">Secretaria</h2>
-                    <!-- <h2 style="font-size: 18px; font-family: 'Quicksand', sans-serif; font-weight:800;" class="brand-text"><img height="20" src="<?= Config::BASE_URL ?>/src/img/logo/logo-<?php if ((isset($_COOKIE['theme']))  && ($_COOKIE['theme'] == "Dark")) : ?>branco<?php else : ?>preto<?php endif; ?>.png" alt="logo"></h2> -->
                 </a></li>
             <li class="nav-item nav-toggle"><a href="#" style="margin-top:28px;" class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
@@ -106,25 +105,6 @@ $url = $_SERVER['REQUEST_URI'];
                 </li>
             <?php endif; ?>
 
-                <!--
-                <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "blog") {
-                                                                                echo "active ";
-                                                                            } ?>" href="<?= Config::BASE_URL ?>blog"><i style="margin-top:-8px;" class="bi bi-columns"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.artigos") ?></span></a>
-                </li>
-                
-                <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "content-request") {
-                                                                                echo "active";
-                                                                            } ?>" href="<?= Config::BASE_URL . 'content-request' ?>"><i style="margin-top:-5px;" class="bi bi-chat-right-text"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.abrir_chamado") ?></span></a>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "badges") {
-                                                                                echo "active";
-                                                                            } ?>" href="<?= Config::BASE_URL . 'badges' ?>"><i style="margin-top:-5px;" class="bi bi-trophy"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.medalhas") ?></span></a>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "business-card-management") {
-                                                                                echo "active";
-                                                                            } ?>" href="<?= Config::BASE_URL . 'business-card-management' ?>"><i style="margin-top:-10px;" class="bi bi-person-badge"></i><span class="menu-title text-truncate" data-i18n="Calendar">Meu Business Card</span></a>
-                </li>
-                -->
 
                 <li class=" nav-item "><a href="#" class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
                                                                                         echo "active";
@@ -133,38 +113,25 @@ $url = $_SERVER['REQUEST_URI'];
                                                 echo "open";
                                             } ?>">
               
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings#requests-section") {
+                        <!-- <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
                                                                     echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'settings#requests-section' ?>"><i class="bi bi-wechat"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.meus_chamados") ?></span></a>
+                                                                } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-wechat"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.meus_chamados") ?></span></a>
+                        </li> -->
+                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
+                                                                    echo "active";
+                                                                } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-toggles"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.conta") ?></span></a>
                         </li>
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "#settings") {
+                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "change-password") {
                                                                     echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . '#settings' ?>"><i class="bi bi-toggles"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.conta") ?></span></a>
+                                                                } ?>" href="<?= Config::BASE_URL . 'change-password' ?>"><i class="bi bi-person-fill-lock"></i><span class="menu-item text-truncate" data-i18n="Advance">Alterar Senha</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "list-logins") {
+                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "account-history") {
                                                                     echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'list-logins' ?>"><i class="bi bi-universal-access"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.historico") ?></span></a>
+                                                                } ?>" href="<?= Config::BASE_URL . 'account-history' ?>"><i class="bi bi-clock"></i><span class="menu-item text-truncate" data-i18n="Advance">Histórico de Conta</span></a>
                         </li>
                     </ul>
                 </li>
-                <!-- *************************** MENU DE ADMIN ******************* -->
-                <?php if ($_SESSION["user_role"] >= 2) : ?>
-                    <li class=" navigation-header"><span data-i18n="Apps &amp; Pages"><?= __("main_menu.admin.titulo") ?></span>
-                    </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "company-settings") {
-                                                                                    echo "active";
-                                                                                } ?>" href="<?= Config::BASE_URL . 'company-settings' ?>"><i style="margin-top:-5px;" class="bi bi-building"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.admin.empresa") ?></span></a>
-                    </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "inventory-dashboard") || ($url == Config::DOMINIO . "inventory-dashboard#inventory-section") || ($url == Config::DOMINIO . "inventory-dashboard#rooms-section")) {
-                                                                                    echo "active";
-                                                                                } ?>" href="<?= Config::BASE_URL . 'inventory-dashboard' ?>"><i style="margin-top:-8px;" class="bi bi-intersect"></i><span class="menu-item text-truncate" data-i18n="Advance">Central de Inventário</span></a>
-                    </li>
-                    <li class=" nav-item"><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "painel") {
-                                                                                    echo "active";
-                                                                                } ?>" href="<?= Config::BASE_URL . 'painel' ?>"><i class="bi bi-bar-chart" style="margin-top:-10px;"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.admin.relatorios") ?></span></a>
-                    </li>
-                
-            <?php endif; ?>
+               
             <br />
             <br />
             <br />

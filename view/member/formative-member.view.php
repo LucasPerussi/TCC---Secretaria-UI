@@ -48,14 +48,7 @@ include "view/src/head.php"; ?>
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="layout/assets/css/style.css">
     <!-- END: Custom CSS-->
-    <style>
-        /* Estilização opcional para centralizar o gráfico */
-        
-        .chart-container {
-            width: 80%;
-            /* max-width: 600px; */
-        }
-    </style>
+
 </head>
 </head>
 <!-- END: Head-->
@@ -98,18 +91,18 @@ include "view/src/head.php"; ?>
                         <h2>Meus registros</h2>
                         <br />
                         <div class="card p-1">
-                            <?php if (!isset($hours["error"])) { ?>
+                            <?php if ((!isset($hours["error"])) && (!empty($hours))) { ?>
                                 <?php foreach ($hours as $hour) { ?>
                                     <div class="card p-1" id="bodyRequestDash">
                                         <h4><?= $types[$hour["tipo"]]["nome"] ?></h4>
-                                        <p><?php
-                                            $timestamp = strtotime($hour["data_evento"]);
-                                            if ($timestamp !== false) {
-                                                echo date("d/m/y", $timestamp);
-                                            } else {
-                                                echo "Data inválida";
-                                            }
-                                            ?> - <?= $hour["descricao"] ?></p>
+                                        <p style="font-size:11px;"><?php
+                                                                    $timestamp = strtotime($hour["data_evento"]);
+                                                                    if ($timestamp !== false) {
+                                                                        echo date("d/m/y", $timestamp);
+                                                                    } else {
+                                                                        echo "Data inválida";
+                                                                    }
+                                                                    ?> - <?= $hour["descricao"] ?></p>
                                         <div class="card-icons">
                                             <h6 style="font-size:11px;">
 
@@ -156,10 +149,9 @@ include "view/src/head.php"; ?>
                                     </div>
                                 <?php } ?>
                             <?php } else { ?>
-                                <div class="card">
-                                    <h4><?= $hours["message"] ?></h4>
-                                </div>
+                                <h6>Você ainda não registrou suas horas 😥</h6>
                             <?php } ?>
+
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12">
@@ -167,21 +159,30 @@ include "view/src/head.php"; ?>
                         <h2>Meus Progresso</h2>
                         <br />
                         <div class="card p-1">
-                            <h3>60 horas</h3>
-                            <p><?= __("formative_member.total-hours") ?></p>
+                            <h3> <?= $course["horas_formativas"] ?> horas necessárias
+                                <span class="badge rounded-pill bg-light-primary" style="float:right;font-size:13px;"><?= $course["nome"] ?></span>
+                            </h3>
+                            <p style="font-size:12px;"><?= __("formative_member.total-hours") ?></p>
+                        </div>
+                        <div class="large-cards-container">
+                            <h2>Percentual Total</h2>
+                            <br />
+                            <div class="card p-1">
+                                <div class="chart-container">
+                                    <canvas id="horasChart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
                         </div>
                         <div class="large-cards-container">
                             <h2>Percentual de Registros por Tipo</h2>
                             <br />
                             <div class="card p-1">
-
                                 <div class="chart-container">
-                                    <canvas id="pieChart"></canvas>
+                                    <canvas id="pieChart" style="max-height:300px !important;"></canvas>
                                 </div>
                             </div>
-
-                           
                         </div>
+
                     </div>
                 </div>
 

@@ -135,7 +135,7 @@ use API\Controller\Config;
                         progressBar: true
                     });
 
-                    window.location.href = "<?= Config::BASE_URL ?>dashboard";
+                    window.location.href = "<?= Config::BASE_URL ?>onboarding";
 
                 }
             })

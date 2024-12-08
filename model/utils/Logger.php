@@ -7,11 +7,11 @@ class Logger
 {
     public static function log($user, $operation, $function, $status)
     {
-        $url = Config::API_URL . "hours/new-log";
+        $url = Config::API_URL . "system/new-log";
 
         $data = [
             'funcao' => $function,
-            'desmensagemcricao' => $operation,
+            'mensagem' => $operation,
             'status' => $status,
             'usuario' => $user,
            

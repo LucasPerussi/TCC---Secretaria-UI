@@ -117,10 +117,12 @@ use const Siler\Config\CONFIG; ?>
                         </div>
 
                         <div id="definicoes-section" class="section">
+                        <?php if (($_SESSION["user_role"] == "Servidor") || ($_SESSION["user_role"] == "Admin")):?>
                             <h2>Definições</h2>
                             <br />
                             <!-- Conteúdo da aba Definições -->
                             <?php include "view/request/definition.php"; ?>
+                            <?php endif; ?>
                         </div>
 
 
@@ -189,8 +191,7 @@ use const Siler\Config\CONFIG; ?>
 
                                 </p>
                             </div>
-                            <h6>Aberto em</h6>
-                            <p><?php
+                            <p style="font-size:11px;">Aberto em <?php
                                 $timestamp = strtotime($request["data_abertura"]);
                                 if ($timestamp !== false) {
                                     echo date("d/m/y \à\s H:i", $timestamp);
@@ -198,6 +199,7 @@ use const Siler\Config\CONFIG; ?>
                                     echo "Data inválida";
                                 }
                                 ?></p>
+                            
 
                         </div>
 

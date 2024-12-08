@@ -51,6 +51,8 @@ use API\Controller\Config;
                 <span class="fw-bold">Informações</span>
             </a>
         </div>
+        <?php if (($_SESSION["user_role"] == "Servidor") || ($_SESSION["user_role"] == "Admin")):?>
+
         <!-- Aba Definições -->
         <div class="swiper-slide" style="max-width:150px !important;">
             <a class="nav-link" style="padding:8px; margin-right:10px;" id="definicoes-section-btn" href="#definicoes-section">
@@ -58,6 +60,7 @@ use API\Controller\Config;
                 <span class="fw-bold">Definições</span>
             </a>
         </div>
+        <?php endif;?>
     </div>
 </div>
 <!--/ User Pills -->

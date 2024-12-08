@@ -51,7 +51,7 @@ class Route extends \API\Router\DefaultRouter
 
     public InternshipController $internshipController;
     public EntitiesController $entitiesController;
-    
+
     public RequestController $requestController;
     public MuralController $muralController;
 
@@ -89,8 +89,14 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-comment", function ($args) use ($obj) {
             $obj->newComment();
         });
+        $this->addRoute("post", "/close-ticket", function ($args) use ($obj) {
+            $obj->closeTicket();
+        });
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
+        });
+        $this->addRoute("post", "/new-course", function ($args) use ($obj) {
+            $obj->newCourse();
         });
         $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
             $obj->newStageDefault();
@@ -267,6 +273,13 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->systemController->newComment($body["comentario"], $body["processo"], $_SESSION["user_id"]));
     }
+    public function closeTicket()
+    {
+        $body = $this->getBody();
+        fields(["comentario", "request", "stage"], $body, false);
+
+        echo json_encode($this->systemController->closeTicket($body["comentario"], $body["request"], $body["stage"], $_SESSION["user_id"]));
+    }
 
     public function addFieldToProccess($proccessId, $fieldId)
     {
@@ -303,7 +316,7 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
     }
-     public function registerInternship()
+    public function registerInternship()
     {
         $body = $this->getBody();
         fields(["professor_orientador", "empresa", "area_atuacao", "data_inicio", "duracaoMeses"], $body, false);
@@ -326,6 +339,15 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
     }
+
+    public function newCourse()
+    {
+        $body = $this->getBody();
+        fields(["nome", "descricao", "coordenador", "horas_formativas", "semestres"], $body, false);
+
+        echo json_encode($this->systemController->newCourse($body["nome"], $body["descricao"], $body["coordenador"], $body["horas_formativas"], $body["semestres"]));
+    }
+
     public function addTeacher()
     {
         $body = $this->getBody();
@@ -336,87 +358,132 @@ class Route extends \API\Router\DefaultRouter
 
     public function newRequest()
     {
+        // Iniciar sessão se ainda não estiver iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Verificar se o usuário está autenticado
+        if (!isset($_SESSION["user_id"])) {
+            return $this->jsonResponse([
+                "status" => 401,
+                "message" => "Usuário não autenticado."
+            ], 401);
+        }
+
+        // Obter o corpo da requisição
         $body = $this->getBody();
-        $fieldsArray = [];
-    
-        // Construir o array de campos
-        foreach ($body as $fieldName => $fieldValue) {
-            $fieldsArray[] = [
-                'nome' => $fieldName,
-                'valor' => $fieldValue
-            ];
+
+        // Logar o corpo da requisição para depuração
+        error_log("Corpo da Requisição: " . json_encode($body));
+
+        // Definir campos obrigatórios
+        $requiredFields = ['titulo', 'descricao', 'processo'];
+
+        // Validar se todos os campos obrigatórios estão presentes
+        foreach ($requiredFields as $field) {
+            if (empty($body[$field])) {
+                return $this->jsonResponse([
+                    "status" => 400,
+                    "message" => "O campo '{$field}' é obrigatório."
+                ], 400);
+            }
         }
-    
-        // Inicializar variáveis para evitar erros de variável indefinida
-        $title = '';
-        $description = '';
-        $processo = '';
-    
+
         // Extrair os valores necessários
-        foreach ($fieldsArray as $field) {
-            if ($field["nome"] == "titulo") {
-                $title = $field["valor"];
+        $title = trim($body['titulo']);
+        $description = trim($body['descricao']);
+        $processo = trim($body['processo']);
+
+        // Coletar campos adicionais
+        $additionalFields = array_filter($body, function ($key) use ($requiredFields) {
+            return !in_array($key, $requiredFields);
+        }, ARRAY_FILTER_USE_KEY);
+
+        // Logar campos adicionais
+        error_log("Campos Adicionais: " . json_encode($additionalFields));
+
+        try {
+            // Criar a nova solicitação
+            $openRequest = $this->systemController->newRequest($title, $description, $processo, $_SESSION["user_id"]);
+
+            // Verificar se a solicitação foi bem-sucedida
+            if (!in_array($openRequest["status"], [200, 201])) {
+                // Logar o erro para análise futura
+                error_log("Erro ao criar solicitação: " . json_encode($openRequest));
+                throw new Exception("Falha ao criar a solicitação.");
             }
-            if ($field["nome"] == "descricao") {
-                $description = $field["valor"];
+
+            // Decodificar a resposta JSON
+            $response = json_decode($openRequest["response"], true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Logar o erro de decodificação
+                error_log("Erro ao decodificar a resposta: " . json_last_error_msg());
+                throw new Exception("Resposta inválida da solicitação.");
             }
-            if ($field["nome"] == "processo") {
-                $processo = $field["valor"];
+
+            // Extrair identificador e ID do ticket
+            $ticketIdentifier = $response["identificador"] ?? null;
+            $ticketId = $response["id"] ?? null;
+
+            if (is_null($ticketId)) {
+                // Logar o erro de ticketId ausente
+                error_log("ID do ticket ausente na resposta: " . json_encode($response));
+                throw new Exception("ID do ticket não encontrado.");
             }
-        }
-    
-        $error = false;
-    
-        // Criar a nova solicitação
-        $openRequest = $this->systemController->newRequest($title, $description, $processo, $_SESSION["user_id"]);
-    
-        // Verificar se o status não é 200 ou 201 (sucesso)
-        if ($openRequest["status"] != 200 && $openRequest["status"] != 201) {
-            $error = true;
-        }
-    
-        // Decodificar a resposta JSON
-        $response = json_decode($openRequest["response"], true);
-    
-        if ($response === null) {
-            // Se a decodificação falhar, marcar como erro
-            $error = true;
-        }
-    
-        // Extrair identificador e ID do ticket
-        $ticketIdentifier = isset($response["identificador"]) ? $response["identificador"] : null;
-        $ticketId = isset($response["id"]) ? $response["id"] : null;
-    
-        // Verificar se ticketId está disponível
-        if ($ticketId === null) {
-            $error = true;
-        }
-    
-        // Processar os campos restantes
-        foreach ($fieldsArray as $field) {
-            if (!in_array($field["nome"], ["titulo", "descricao", "processo"])) {
-                $registerResponse = $this->systemController->newResponse($field["nome"], $field["valor"], $ticketId, $_SESSION["user_id"]);
-                if ($registerResponse["status"] != 200 && $registerResponse["status"] != 201) {
-                    $error = true;
+
+            // Processar os campos adicionais
+            foreach ($additionalFields as $fieldName => $fieldValue) {
+                // Verificar se o nome do campo é válido (apenas caracteres alfanuméricos e underscores)
+                if (!preg_match('/^[a-zA-Z0-9_]+$/', $fieldName)) {
+                    error_log("Nome de campo inválido: '{$fieldName}'. Ignorando.");
+                    continue; // Pular para o próximo campo
+                }
+
+                // Logar cada tentativa de registro de resposta
+                error_log("Tentando registrar resposta para o campo '{$fieldName}' com valor '{$fieldValue}'.");
+
+                $registerResponse = $this->systemController->newResponse($fieldName, $fieldValue, $ticketId, $_SESSION["user_id"]);
+
+                // Verificar resposta do registro
+                if (!in_array($registerResponse["status"], [200, 201])) {
+                    // Logar o erro no registro de resposta
+                    error_log("Erro ao registrar resposta para '{$fieldName}': " . json_encode($registerResponse));
+                    throw new Exception("Falha ao registrar a resposta para '{$fieldName}'.");
                 }
             }
-        }
-    
-        // Retornar a resposta adequada
-        if ($error) {
-            echo json_encode([
-                "status" => 500,
-                "message" => "Tivemos um problema ao abrir seu chamado"
-            ]);
-        } else {
-            echo json_encode([
+
+            // Retornar resposta de sucesso
+            return $this->jsonResponse([
                 "status" => 200,
-                "message" => "Chamado aberto com sucesso",
+                "message" => "Chamado aberto com sucesso.",
                 "identificador" => $ticketIdentifier
-            ]);
+            ], 200);
+        } catch (Exception $e) {
+            // Retornar resposta de erro genérico
+            error_log("Exceção capturada: " . $e->getMessage());
+            return $this->jsonResponse([
+                "status" => 500,
+                "message" => "Tivemos um problema ao abrir seu chamado: " . $e->getMessage()
+            ], 500);
         }
     }
-    
+
+    /**
+     * Função auxiliar para retornar respostas JSON de forma consistente.
+     *
+     * @param array $data Dados a serem retornados.
+     * @param int $status Código de status HTTP.
+     * @return void
+     */
+    private function jsonResponse(array $data, int $status = 200)
+    {
+        header('Content-Type: application/json');
+        http_response_code($status);
+        echo json_encode($data);
+        exit;
+    }
 
     public function newFieldProccess($proccess)
     {

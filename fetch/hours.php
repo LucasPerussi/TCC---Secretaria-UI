@@ -31,6 +31,16 @@ function getHoursUserPercentage($user)
     return $response;
 }
 
+function getHoursTotalUserPercentage($user)
+{
+    $response = APIRequest::getRequest("hours/horas-aluno/" . $user);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar horas formativas de usuário $user. Error: " . $response["message"], "getHoursTotalUserPercentage", "error");
+    return $response;
+}
+
 function getFormativeHoursTypes()
 {
     $response = APIRequest::getRequest("hours/types");

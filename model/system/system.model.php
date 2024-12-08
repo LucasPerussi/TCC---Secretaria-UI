@@ -251,6 +251,47 @@ class SystemModel
         return APIRequest::deleteRequest($url, "removeFieldToProccess");
     }
 
+    public function newCourse($nome, $descricao, $coordenador, $horas_formativas, $semestres)
+    {
+        $nome = Sanitize::clean($nome, "nome", "newCourse");
+        $descricao = Sanitize::clean($descricao, "nodescricaome", "newCourse");
+        $coordenador = Sanitize::clean($coordenador, "coordenador", "newCourse");
+        $horas_formativas = Sanitize::clean($horas_formativas, "horas_formativas", "newCourse");
+        $semestres = Sanitize::clean($semestres, "semestres", "newCourse");
+
+        $url = Config::API_URL . "courses/new";
+
+        $data = [
+            'nome' => $nome,
+            'descricao' => $descricao,
+            'coordenador' => $coordenador,
+            'horas_formativas' => $horas_formativas,
+            'semestres' => $semestres
+        ];
+
+        return APIRequest::postRequest($url, $data, "newCourse");
+    }
+    
+    public function closeTicket($comentario, $processo, $stage, $user_id)
+    {
+        $comentario = Sanitize::clean($comentario, "comentario", "closeTicket");
+        $processo = Sanitize::clean($processo, "processo", "closeTicket");
+        $stage = Sanitize::clean($stage, "stage", "closeTicket");
+        $user_id = Sanitize::clean($user_id, "user_id", "closeTicket");
+        
+
+        $url = Config::API_URL . "requests/close-ticket";
+
+        $data = [
+            'identificador' => $processo,
+            'stage' => $stage,
+            'usuario' => $user_id,
+            'comentario' => $comentario
+        ];
+
+        return APIRequest::postRequest($url, $data, "closeTicket");
+    }
+
     public function removeField($fieldId)
     {
         $field = Sanitize::clean($fieldId, "fieldId", "removeField");

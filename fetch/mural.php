@@ -22,7 +22,7 @@ function getMurais()
 
 function getMuralById($id)
 {
-    $response = APIRequest::getRequest("mural/id/" . $id);
+    $response = APIRequest::getRequest("mural/identifier/" . $id);
     if (!isset($response["error"])){
         return $response;
     }; 

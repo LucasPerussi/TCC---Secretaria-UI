@@ -17,11 +17,13 @@ use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getCourseById;
+use function API\Fetch\getCourseByStudent;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getDefaultStages;
 use function API\Fetch\getFormativeHoursTypes;
+use function API\Fetch\getHoursTotalUserPercentage;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getInputTypes;
@@ -54,9 +56,7 @@ use function API\Fetch\listTeachers;
 use function API\Fetch\loadContentVinte;
 
 
-
 // END REPORTS
-
 
 class Route extends \API\Router\DefaultRouter
 
@@ -69,50 +69,41 @@ class Route extends \API\Router\DefaultRouter
         $obj = $this;
 
         $this->addRoute("get", "/", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             require __DIR__ . "/../view/public/new-index.view.php";
         });
-        $this->addRoute("get", "/redirect", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            require __DIR__ . "/../view/public/redirect-server.php";
-        });
+
         $this->addRoute("get", "/login", function ($args) use ($obj) {
-            $obj->checkSession();
             require __DIR__ . "/../view/auth/login.view.php";
         });
+
         $this->addRoute("get", "/register", function ($args) use ($obj) {
-            $obj->checkSession();
             require __DIR__ . "/../view/register/register.view.php";
         });
+
         $this->addRoute("get", "/password-recovery", function ($args) use ($obj) {
-            $obj->checkSession();
             require __DIR__ . "/../view/auth/password-recovery.view.php";
         });
-        $this->addRoute("get", "/password-reset", function ($args) use ($obj) {
-            $obj->checkSession();
-            require __DIR__ . "/../view/auth/password-reset.view.php";
-        });
+
         $this->addRoute("get", "/verify-email", function ($args) use ($obj) {
-            $obj->checkSession();
             require __DIR__ . "/../view/auth/verify-email.view.php";
         });
+
         $this->addRoute("get", "/logout", function ($args) use ($obj) {
-            // $obj->destroySession();
             $obj->deleteCookies();
             require __DIR__ . "/../view/auth/logout.view.php";
         });
+
         $this->addRoute("get", "/closing-session", function ($args) use ($obj) {
             unset($_COOKIE['vr_session']);
             setcookie('vr_session', '', time() - 3600, '/'); // empty value and old timestamp
             require __DIR__ . "/../view/auth/logout.php";
         });
+
         $this->addRoute("get", "/dashboard", function ($args) use ($obj) {
-            // $obj->checkSession();
-            // $obj->setCookies();
             $obj->verifyLogged();
             if ($_SESSION['user_role'] == "Aluno") {
+                $course = getCourseByStudent($_SESSION["user_id"]);
+                $teachers = listTeachers();
                 $requests = getMyRequestsStudent();
                 require __DIR__ . "/../view/member/dashboard-member.php";
             } elseif ($_SESSION['user_role'] == "Professor") {
@@ -126,37 +117,42 @@ class Route extends \API\Router\DefaultRouter
                 require __DIR__ . "/../view/admin/dashboard.view.php";
             }
         });
+
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             $timelines = getUserTimelines($_SESSION['user_id']);
             require __DIR__ . "/../view/general/account-history.view.php";
         });
-        $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
+
+        $this->addRoute("get", "/onboarding", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $timelines = getUserTimelines($_SESSION['user_id']);
+            $user = getUser($_SESSION['user_id']);
+            require __DIR__ . "/../view/register/onboarding.view.php";
+        });
+
+        $this->addRoute("get", "/system-logs", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $obj->verifyAdmin();
             $logs = getLogs();
             require __DIR__ . "/../view/admin/system-logs.view.php";
-            //require __DIR__ . "/../view/admin/dashboard-admin.php";
         });
+
         $this->addRoute("get", "/dashboard-member", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/dashboard-member.php";
         });
+
         $this->addRoute("get", "/request/{processId}", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             $request = getProccessIdentifier($args["processId"]);
-            
+            $obj->verifyUserCanAccess($request["aluno"]);
+
             $inputTypes = getInputTypes();
             $process = getProccessTypeId($request['tipo_solicitacao']);
             $proccessFields = getProccessFields($request['tipo_solicitacao']);
@@ -166,35 +162,35 @@ class Route extends \API\Router\DefaultRouter
             $proccessStages = getProccessStages($request['tipo_solicitacao']);
             $allStageTypes = getAllStagesUnified();
 
+            $teachers = listTeachers();
             $allResponses = getAllProcessResponses($args["processId"]);
             $allProcessComments = getAllProcessComments($request['id']);
 
             require __DIR__ . "/../view/general/request.view.php";
         });
+
         $this->addRoute("get", "/news-board", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
             $murais = getMurais();
             require __DIR__ . "/../view/user/news-board.view.php";
         });
+
         $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $murais = getMurais();
             require __DIR__ . "/../view/admin/news-board-admin.view.php";
         });
+
         $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
+            $obj->verifyServer();
+
             $courses = getCourses();
             require __DIR__ . "/../view/admin/news-board-new.view.php";
         });
+
         $this->addRoute("get", "/complete-board", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
 
             $id = $_GET['id'] ?? null;
@@ -210,81 +206,57 @@ class Route extends \API\Router\DefaultRouter
             }
             require __DIR__ . "/../view/user/complete-board.view.php";
         });
+
         $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
             $hours = getHoursUser($_SESSION["user_id"]);
             $types = getFormativeHoursTypes();
+            $course = getCourseByStudent($_SESSION["user_id"]);
             $percentage = getHoursUserPercentage($_SESSION["user_id"]);
+            $percentageTotal = getHoursTotalUserPercentage($_SESSION["user_id"]);
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
-        $this->addRoute("get", "/courses-list", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->verifyLogged();
-            // $courses = getCourses();
-            require __DIR__ . "/../view/member/formative-member.view.php";
-        });
+
         $this->addRoute("get", "/settings", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
             $user = getUser($_SESSION['user_id']);
+            $courses = getCourses();
             require __DIR__ . "/../view/general/user-settings.view.php";
         });
+
         $this->addRoute("get", "/change-password", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
             $user = getUser($_SESSION['user_id']);
             require __DIR__ . "/../view/general/change-password.view.php";
         });
-        // $this->addRoute("get", "/formative-member", function ($args) use ($obj) {
-        //     // $obj->verifyCookies();
-        //     $obj->checkSession();
-        //     $obj->setCookies();
-        //     $obj->verifyLogged();
-        //     require __DIR__ . "/../view/member/formative-member.view.php";
-        // });
+
         $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             $types = getFormativeHoursTypes();
             require __DIR__ . "/../view/member/new-formative-member.view.php";
         });
-        // $this->addRoute("get", "/new-formative-member", function ($args) use ($obj) {
-        //     // $obj->verifyCookies();
-        //     $obj->checkSession();
-        //     $obj->setCookies();
-        //     $obj->verifyLogged();
-        //     require __DIR__ . "/../view/member/new-formative-member.view.php";
-        // });
-        
+
         $this->addRoute("get", "/request-member", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/request-member.view.php";
         });
+
         $this->addRoute("get", "/proccess-fields/{proccessId}", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $proccess = getProccessTypeId($args["proccessId"]);
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/proccess-fields.view.php";
         });
+
         $this->addRoute("get", "/proccess-type/{proccessId}", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $inputTypes = getInputTypes();
             $process = getProccessTypeId($args["proccessId"]);
             $proccessFields = getProccessFields($args["proccessId"]);
@@ -294,30 +266,28 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/process-type.view.php";
         });
         
+
         $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $proccess = getProccessTypeId($args["proccessId"]);
             $inputTypes = getInputTypes();
             $stageTypes = getStageTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/proccess-stages.view.php";
         });
-        $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/request-admin.view.php";
-        });
+
+        // $this->addRoute("get", "/request-admin", function ($args) use ($obj) {
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     require __DIR__ . "/../view/admin/request-admin.view.php";
+        // });
+
         $this->addRoute("get", "/new-request", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->verifyLogged();
             $types = getRequestTypes();
-            if(isset($_GET['tipo_de_chamado'])){
+            if (isset($_GET['tipo_de_chamado'])) {
                 $inputTypes = getInputTypes();
                 $process = getProccessTypeId($_GET['tipo_de_chamado']);
                 $proccessFields = getProccessFields($_GET['tipo_de_chamado']);
@@ -328,36 +298,36 @@ class Route extends \API\Router\DefaultRouter
             }
             require __DIR__ . "/../view/member/new-request.view.php";
         });
+
         $this->addRoute("get", "/fields", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $inputTypes = getInputTypes();
             $defaultFields = getDefaultFields();
             require __DIR__ . "/../view/admin/fields.view.php";
         });
+
         $this->addRoute("get", "/stages", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $stageTypes = getStageTypes();
             $defaultStages = getDefaultStages();
             require __DIR__ . "/../view/admin/stages.view.php";
         });
-        $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
-            $obj->setCookies();
-            $obj->verifyLogged();
-            require __DIR__ . "/../view/member/new-request-field.view.php";
-        });
+
+        // $this->addRoute("get", "/new-request-field", function ($args) use ($obj) {
+        //     $obj->setCookies();
+        //     $obj->verifyLogged();
+        //     $obj->verifyAdmin();
+        //     require __DIR__ . "/../view/member/new-request-field.view.php";
+        // });
+
         $this->addRoute("get", "/entity-list", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $page = $_GET["page"] ?? 'alunos';
             switch ($page) {
                 case 'alunos':
@@ -377,42 +347,49 @@ class Route extends \API\Router\DefaultRouter
                     $users = listStudents();
                     break;
             }
-
             require __DIR__ . "/../view/admin/entity-list.php";
         });
-        
+
         $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/admin/formative-validate.view.php";
         });
+
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
+            $obj->verifyAdmin();
             $processes = getRequestTypes();
             require __DIR__ . "/../view/admin/proccess-management.view.php";
         });
+
+        $this->addRoute("get", "/courses-management", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $obj->verifyAdmin();
+
+            $courses = getCourses();
+            $teachers = listTeachers();
+
+            require __DIR__ . "/../view/admin/courses-management.view.php";
+        });
+
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/new-internship-member.view.php";
         });    
         
+
         $this->addRoute("get", "/internship-validate/{id}", function ($args) use ($obj) {
-            // $obj->verifyCookies();
-            $obj->checkSession();
             $obj->setCookies();
             $obj->verifyLogged();                     
             $internshipId = getInternshipById($args["id"]);    
 
             require __DIR__ . "/../view/admin/internship-validate.view.php";
         });
+
     }
 
     public function createSolicitation() {}
@@ -427,35 +404,17 @@ class Route extends \API\Router\DefaultRouter
         if (!isset($_SESSION["user_id"])) {
             header('Location: ' . Config::BASE_URL . "login");
         };
-        // if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == 0)) {
-        //     header('Location: ' . Config::BASE_URL . "verify-email");
-        // };
-        if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == 9)) {
+
+        if (isset($_SESSION["user_role"])  && ($_SESSION["user_role"] == "Deactivated")) {
             header('Location: ' . Config::BASE_URL . "deactivated");
         };
         return;
     }
 
-
     public function verifyAdmin()
     {
-        if (($_SESSION["user_role"] < 2) || ($_SESSION["user_role"] == 5)) {
+        if ($_SESSION["user_role"] != "Admin") {
             header('Location: ' . Config::BASE_URL . "denied");
-        };
-        return;
-    }
-
-    public function verifyPartner()
-    {
-        if (($_SESSION["user_role"] != 5) && (($_SESSION["user_role"] != 2) || ($_SESSION["company_id"] != 9999))) {
-            header('Location: ' . Config::BASE_URL . "dashboard");
-        };
-        return;
-    }
-    public function verifyHigherThanMember()
-    {
-        if ($_SESSION["user_role"] < 2) {
-            header('Location: ' . Config::BASE_URL . "dashboard");
         };
         return;
     }
@@ -468,21 +427,17 @@ class Route extends \API\Router\DefaultRouter
         return;
     }
 
-
-    public function verifyAgent()
+    public function verifyServer()
     {
-        if (!((($_SESSION["user_role"] == 2) && ($_SESSION["company_id"] == 9999)) || ($_SESSION["user_role"] == 4))) {
+        if (($_SESSION["user_role"] != "Admin") && ($_SESSION["user_role"] != "Servidor") && ($_SESSION["user_role"] != "Professor")) {
             header('Location: ' . Config::BASE_URL . "denied");
         };
         return;
     }
 
-    public function verifyMaster()
+    public function verifyUserCanAccess($author)
     {
-        if ($_SESSION["user_role"] != 2) {
-            header('Location: ' . Config::BASE_URL . "denied");
-        };
-        if (($_SESSION["user_role"]  == 2 && ($_SESSION["company_id"] != 9999))) {
+        if (($_SESSION["user_role"] != "Admin") && ($_SESSION["user_role"] != "Servidor") && ($_SESSION["user_id"] != $author)) {
             header('Location: ' . Config::BASE_URL . "denied");
         };
         return;
@@ -502,95 +457,6 @@ class Route extends \API\Router\DefaultRouter
     {
         if (isset($_COOKIE["vr_session_key"])) {
             setcookie("vr_session_key", "", time() - 3600);
-            // setcookie("vr_session_keep", 2, 0);         
-        };
-        return;
-    }
-
-
-    // public function destroySession()
-    // {
-
-    //     $conn = mysqli_connect(Config::SERVERNAME, Config::USERNAME, Config::DB_PASSWORD, Config::DB_NAME);
-    //     $conn2 = mysqli_connect(Config::SERVERNAME, Config::USERNAME, Config::DB_PASSWORD, Config::DB_NAME);
-
-    //     if (!$conn) {
-    //         return ("Connection failed: " . mysqli_connect_error());
-    //     }
-    //     if (!$conn2) {
-    //         return ("Connection failed: " . mysqli_connect_error());
-    //     }
-
-    //     $session = $_SESSION["session_key"];
-
-    //     $sql = "DELETE FROM " . Config::TABLE_LOGINS . " WHERE log_session = '$session'";
-    //     if (mysqli_query($conn, $sql)) {
-    //         $user = $_SESSION["user_id"];
-    //         $operation = "LOGOUT DE USUÁRIO";
-    //         $function = "view.router - destroySession";
-    //         $status = "OK";
-
-    //         $sql2 = "INSERT INTO " . Config::TABLE_LOGS . "
-    //         (log_user, log_operation, log_function, log_status) VALUES
-    //         ('$user', '$operation', '$function', '$status');";
-
-    //         mysqli_query($conn2, $sql2);
-    //         return;
-    //     } else {
-
-    //         $user = $_SESSION["user_id"];
-    //         $operation = mysqli_error($conn);
-    //         $function = "view.router - destroySession";
-    //         $status = "ERRO";
-
-    //         $sql2 = "INSERT INTO " . Config::TABLE_LOGS . "
-    //         (log_user, log_operation, log_function, log_status) VALUES
-    //         ('$user', '$operation', '$function', '$status');";
-
-    //         mysqli_query($conn2, $sql2);
-    //         return;
-    //     }
-    // }
-
-    public function checkSession()
-    {
-        // if ((isset($_SESSION["session_key"])) && ((isset($_COOKIE["keep"])) && ($_COOKIE["keep"] == "keep"))){
-        // if ((isset($_SESSION["session_key"]))) {
-        //     $connSession = mysqli_connect(Config::SERVERNAME, Config::USERNAME, Config::DB_PASSWORD, Config::LOGS_DB_NAME);
-
-        //     if (!$connSession) {
-        //         return ("Connection failed: " . mysqli_connect_error());
-        //     }
-
-        //     $session = $_SESSION["session_key"];
-
-        //     $sql = "SELECT log_session FROM " . Config::TABLE_LOGINS . " WHERE log_session = '$session'";
-        //     $resultSession = mysqli_query($connSession, $sql);
-        //     if ($resultSession) {
-        //         if (mysqli_num_rows($resultSession) > 0) {
-        //             return;
-        //         } else {
-        //             echo "<script>window.location.href = '" . Config::BASE_URL . "logout" . "';</script>";
-        //         }
-        //         return;
-        //     } else {
-        //         return "erro de acesso ao banco";
-        //     }
-        // }
-    }
-
-    public function verifyGeneric()
-    {
-        // if (isset($_SESSION["company_id"]) && ($_SESSION["company_id"] == 9999)) {
-        //     echo "<script>window.location.href = '" . Config::BASE_URL . "dashboard';</script>";
-        // } 
-        return;
-    }
-
-    public function verifyHasCompany()
-    {
-        if (isset($_SESSION["company_id"]) && ($_SESSION["company_id"] != 9999)) {
-            echo "<script>window.location.href = '" . Config::BASE_URL . "company/" . $_SESSION["company_identifier"] . "';</script>";
         };
         return;
     }

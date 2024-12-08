@@ -176,6 +176,18 @@ class System extends DefaultController
 
         return $this->systemModel->newRequest($title, $description, $processo, $user_id);
     }
+    public function closeTicket($comentario, $processo, $stage, $user_id)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->closeTicket($comentario, $processo, $stage, $user_id);
+    }
     public function newComment($comentario, $processo, $user_id)
     {
 
@@ -201,6 +213,7 @@ class System extends DefaultController
 
         return $this->systemModel->newResponse($nome,$valor, $ticketId, $user_id);
     }
+
     public function addTeacher($professor, $processo)
     {
 
@@ -212,6 +225,19 @@ class System extends DefaultController
         }
 
         return $this->systemModel->addTeacher($professor, $processo);
+    }
+
+    public function newCourse($nome, $descricao, $coordenador, $horas_formativas, $semestres)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->newCourse($nome, $descricao, $coordenador, $horas_formativas, $semestres);
     }
 }
     

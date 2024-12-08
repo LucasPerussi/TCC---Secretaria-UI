@@ -100,6 +100,7 @@ use const Siler\Config\CONFIG; ?>
                             <a href="<?= Config::BASE_URL ?>proccess-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Processos</a>
                             <a href="<?= Config::BASE_URL ?>fields"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Campos Padrões</a>
                             <a href="<?= Config::BASE_URL ?>stages"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Etapas Padrões</a>
+                            <a href="<?= Config::BASE_URL ?>courses-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Cursos</a>
                             <a href="<?= Config::BASE_URL ?>mural-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Murais</a>
                             <a href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Documentação API</a>
                         </div>
