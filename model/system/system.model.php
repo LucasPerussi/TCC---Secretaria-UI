@@ -251,6 +251,27 @@ class SystemModel
         return APIRequest::deleteRequest($url, "removeFieldToProccess");
     }
 
+    public function newCourse($nome, $descricao, $coordenador, $horas_formativas, $semestres)
+    {
+        $nome = Sanitize::clean($nome, "nome", "newCourse");
+        $descricao = Sanitize::clean($descricao, "nodescricaome", "newCourse");
+        $coordenador = Sanitize::clean($coordenador, "coordenador", "newCourse");
+        $horas_formativas = Sanitize::clean($horas_formativas, "horas_formativas", "newCourse");
+        $semestres = Sanitize::clean($semestres, "semestres", "newCourse");
+
+        $url = Config::API_URL . "courses/new";
+
+        $data = [
+            'nome' => $nome,
+            'descricao' => $descricao,
+            'coordenador' => $coordenador,
+            'horas_formativas' => $horas_formativas,
+            'semestres' => $semestres
+        ];
+
+        return APIRequest::postRequest($url, $data, "newCourse");
+    }
+
     public function removeField($fieldId)
     {
         $field = Sanitize::clean($fieldId, "fieldId", "removeField");

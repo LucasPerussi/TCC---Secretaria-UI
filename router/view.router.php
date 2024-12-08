@@ -155,6 +155,7 @@ class Route extends \API\Router\DefaultRouter
             $proccessStages = getProccessStages($request['tipo_solicitacao']);
             $allStageTypes = getAllStagesUnified();
 
+            $teachers = listTeachers();
             $allResponses = getAllProcessResponses($args["processId"]);
             $allProcessComments = getAllProcessComments($request['id']);
 
@@ -213,6 +214,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/settings", function ($args) use ($obj) {
             $obj->verifyLogged();
             $user = getUser($_SESSION['user_id']);
+            $courses = getCourses();
             require __DIR__ . "/../view/general/user-settings.view.php";
         });
 
@@ -345,6 +347,15 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $processes = getRequestTypes();
             require __DIR__ . "/../view/admin/proccess-management.view.php";
+        });
+
+        $this->addRoute("get", "/courses-management", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $courses = getCourses();
+            $teachers = listTeachers();
+
+            require __DIR__ . "/../view/admin/courses-management.view.php";
         });
 
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {

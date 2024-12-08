@@ -51,7 +51,7 @@ class Route extends \API\Router\DefaultRouter
 
     public InternshipController $internshipController;
     public EntitiesController $entitiesController;
-    
+
     public RequestController $requestController;
     public MuralController $muralController;
 
@@ -91,6 +91,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
+        });
+        $this->addRoute("post", "/new-course", function ($args) use ($obj) {
+            $obj->newCourse();
         });
         $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
             $obj->newStageDefault();
@@ -303,7 +306,7 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->trainingController->registerFH($body["descricao"], $body["data_evento"], $body["horas_solicitadas"], $body["tipo"], $body["comprovante"]));
     }
-     public function registerInternship()
+    public function registerInternship()
     {
         $body = $this->getBody();
         fields(["professor_orientador", "empresa", "area_atuacao", "data_inicio", "duracaoMeses"], $body, false);
@@ -326,6 +329,15 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->systemController->newField($body["nome"], $body["label"], $body["tipo_dado"]));
     }
+
+    public function newCourse()
+    {
+        $body = $this->getBody();
+        fields(["nome", "descricao", "coordenador", "horas_formativas", "semestres"], $body, false);
+
+        echo json_encode($this->systemController->newCourse($body["nome"], $body["descricao"], $body["coordenador"], $body["horas_formativas"], $body["semestres"]));
+    }
+
     public function addTeacher()
     {
         $body = $this->getBody();
@@ -340,7 +352,7 @@ class Route extends \API\Router\DefaultRouter
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-    
+
         // Verificar se o usuário está autenticado
         if (!isset($_SESSION["user_id"])) {
             return $this->jsonResponse([
@@ -348,16 +360,16 @@ class Route extends \API\Router\DefaultRouter
                 "message" => "Usuário não autenticado."
             ], 401);
         }
-    
+
         // Obter o corpo da requisição
         $body = $this->getBody();
-    
+
         // Logar o corpo da requisição para depuração
         error_log("Corpo da Requisição: " . json_encode($body));
-    
+
         // Definir campos obrigatórios
         $requiredFields = ['titulo', 'descricao', 'processo'];
-    
+
         // Validar se todos os campos obrigatórios estão presentes
         foreach ($requiredFields as $field) {
             if (empty($body[$field])) {
@@ -367,50 +379,50 @@ class Route extends \API\Router\DefaultRouter
                 ], 400);
             }
         }
-    
+
         // Extrair os valores necessários
         $title = trim($body['titulo']);
         $description = trim($body['descricao']);
         $processo = trim($body['processo']);
-    
+
         // Coletar campos adicionais
-        $additionalFields = array_filter($body, function($key) use ($requiredFields) {
+        $additionalFields = array_filter($body, function ($key) use ($requiredFields) {
             return !in_array($key, $requiredFields);
         }, ARRAY_FILTER_USE_KEY);
-    
+
         // Logar campos adicionais
         error_log("Campos Adicionais: " . json_encode($additionalFields));
-    
+
         try {
             // Criar a nova solicitação
             $openRequest = $this->systemController->newRequest($title, $description, $processo, $_SESSION["user_id"]);
-    
+
             // Verificar se a solicitação foi bem-sucedida
             if (!in_array($openRequest["status"], [200, 201])) {
                 // Logar o erro para análise futura
                 error_log("Erro ao criar solicitação: " . json_encode($openRequest));
                 throw new Exception("Falha ao criar a solicitação.");
             }
-    
+
             // Decodificar a resposta JSON
             $response = json_decode($openRequest["response"], true);
-    
+
             if (json_last_error() !== JSON_ERROR_NONE) {
                 // Logar o erro de decodificação
                 error_log("Erro ao decodificar a resposta: " . json_last_error_msg());
                 throw new Exception("Resposta inválida da solicitação.");
             }
-    
+
             // Extrair identificador e ID do ticket
             $ticketIdentifier = $response["identificador"] ?? null;
             $ticketId = $response["id"] ?? null;
-    
+
             if (is_null($ticketId)) {
                 // Logar o erro de ticketId ausente
                 error_log("ID do ticket ausente na resposta: " . json_encode($response));
                 throw new Exception("ID do ticket não encontrado.");
             }
-    
+
             // Processar os campos adicionais
             foreach ($additionalFields as $fieldName => $fieldValue) {
                 // Verificar se o nome do campo é válido (apenas caracteres alfanuméricos e underscores)
@@ -418,12 +430,12 @@ class Route extends \API\Router\DefaultRouter
                     error_log("Nome de campo inválido: '{$fieldName}'. Ignorando.");
                     continue; // Pular para o próximo campo
                 }
-    
+
                 // Logar cada tentativa de registro de resposta
                 error_log("Tentando registrar resposta para o campo '{$fieldName}' com valor '{$fieldValue}'.");
-    
+
                 $registerResponse = $this->systemController->newResponse($fieldName, $fieldValue, $ticketId, $_SESSION["user_id"]);
-    
+
                 // Verificar resposta do registro
                 if (!in_array($registerResponse["status"], [200, 201])) {
                     // Logar o erro no registro de resposta
@@ -431,14 +443,13 @@ class Route extends \API\Router\DefaultRouter
                     throw new Exception("Falha ao registrar a resposta para '{$fieldName}'.");
                 }
             }
-    
+
             // Retornar resposta de sucesso
             return $this->jsonResponse([
                 "status" => 200,
                 "message" => "Chamado aberto com sucesso.",
                 "identificador" => $ticketIdentifier
             ], 200);
-    
         } catch (Exception $e) {
             // Retornar resposta de erro genérico
             error_log("Exceção capturada: " . $e->getMessage());
@@ -448,7 +459,7 @@ class Route extends \API\Router\DefaultRouter
             ], 500);
         }
     }
-    
+
     /**
      * Função auxiliar para retornar respostas JSON de forma consistente.
      *

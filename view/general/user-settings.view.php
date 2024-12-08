@@ -226,11 +226,17 @@ include "view/src/head.php"; ?>
                                         <label class="col-form-label" for="curso-icon">Curso</label>
                                     </div>
                                     <div class="col-sm-7">
-                                        <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
-
-                                            <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Curso ID" />
+                                            <select class="form-control select2" value="<?= htmlspecialchars($user["curso"]) ?>" onchange="document.getElementById('saveCurso').hidden = false;" name="curso" placeholder="Curso ID">
+                                                <?php foreach ($courses as $course) { ?>
+                                                    <option <?php if ($user["curso"] == $course["id"]) {
+                                                                echo "selected";
+                                                            } ?> value="<?= $course["id"] ?>"><?= $course["nome"] ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
+         
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
