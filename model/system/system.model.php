@@ -271,6 +271,26 @@ class SystemModel
 
         return APIRequest::postRequest($url, $data, "newCourse");
     }
+    
+    public function closeTicket($comentario, $processo, $stage, $user_id)
+    {
+        $comentario = Sanitize::clean($comentario, "comentario", "closeTicket");
+        $processo = Sanitize::clean($processo, "processo", "closeTicket");
+        $stage = Sanitize::clean($stage, "stage", "closeTicket");
+        $user_id = Sanitize::clean($user_id, "user_id", "closeTicket");
+        
+
+        $url = Config::API_URL . "requests/close-ticket";
+
+        $data = [
+            'identificador' => $processo,
+            'stage' => $stage,
+            'usuario' => $user_id,
+            'comentario' => $comentario
+        ];
+
+        return APIRequest::postRequest($url, $data, "closeTicket");
+    }
 
     public function removeField($fieldId)
     {

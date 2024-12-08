@@ -89,6 +89,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-comment", function ($args) use ($obj) {
             $obj->newComment();
         });
+        $this->addRoute("post", "/close-ticket", function ($args) use ($obj) {
+            $obj->closeTicket();
+        });
         $this->addRoute("post", "/new-field", function ($args) use ($obj) {
             $obj->newField();
         });
@@ -269,6 +272,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["comentario", "processo"], $body, false);
 
         echo json_encode($this->systemController->newComment($body["comentario"], $body["processo"], $_SESSION["user_id"]));
+    }
+    public function closeTicket()
+    {
+        $body = $this->getBody();
+        fields(["comentario", "request", "stage"], $body, false);
+
+        echo json_encode($this->systemController->closeTicket($body["comentario"], $body["request"], $body["stage"], $_SESSION["user_id"]));
     }
 
     public function addFieldToProccess($proccessId, $fieldId)

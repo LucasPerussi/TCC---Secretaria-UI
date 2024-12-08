@@ -176,6 +176,18 @@ class System extends DefaultController
 
         return $this->systemModel->newRequest($title, $description, $processo, $user_id);
     }
+    public function closeTicket($comentario, $processo, $stage, $user_id)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->systemModel->closeTicket($comentario, $processo, $stage, $user_id);
+    }
     public function newComment($comentario, $processo, $user_id)
     {
 

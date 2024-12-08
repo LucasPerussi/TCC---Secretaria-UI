@@ -117,10 +117,12 @@ use const Siler\Config\CONFIG; ?>
                         </div>
 
                         <div id="definicoes-section" class="section">
+                        <?php if (($_SESSION["user_role"] == "Servidor") || ($_SESSION["user_role"] == "Admin")):?>
                             <h2>Definições</h2>
                             <br />
                             <!-- Conteúdo da aba Definições -->
                             <?php include "view/request/definition.php"; ?>
+                            <?php endif; ?>
                         </div>
 
 

@@ -118,8 +118,8 @@ include "view/src/head.php"; ?>
                         <div class="card p-1">
                             <?php if (!isset($myteacherRequests["error"])) { ?>
                                 <?php foreach ($myteacherRequests as $request) { ?>
-                                    <div class="card p-1 mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                        <h5 style="font-weight:bold !important;"><?= $request["numero"] . " - " . $request["titulo"] ?> <a href="request/<?= $request["identificador"]?>" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Acessar</a></h5>
+                                    <div class="card p-1 mb-0" id="bodyRequestDash" style="margin-bottom:10px !important;">
+                                        <h5 style="font-weight:bold !important;"><?= $request["numero"] . " - " . $request["titulo"] ?> <a href="request/<?= $request["identificador"] ?>" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Acessar</a></h5>
 
                                         <div class="row">
 
@@ -146,59 +146,55 @@ include "view/src/head.php"; ?>
                                                                                                                                                                                 echo $date->format('d/m/Y'); ?></span>
                                                 <?php endif; ?>
                                                 <span style="font-size:10px;margin-left:5px;padding:7px !important;" class="badge rounded-pill bg-light-primary"><?= $request["tipo_solicitacao_processo_tipo_solicitacaoTotipo_solicitacao"]["nome"] ?></span>
-
                                             </div>
-
-
-
-
                                         </div>
-                                    <?php } ?>
-                                <?php } else { ?>
-                                    <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                        aaaaaaaaaaaaaa
                                     </div>
                                 <?php } ?>
+                            <?php } else { ?>
+                                <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
+                                    aaaaaaaaaaaaaa
+                                </div>
+                            <?php } ?>
 
-                                    </div>
                         </div>
                     </div>
-
-
                 </div>
+
+
             </div>
         </div>
-        <!-- END: Content-->
+    </div>
+    <!-- END: Content-->
 
-        <div class="sidenav-overlay"></div>
-        <div class="drag-target"></div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
 
-        <!-- BEGIN: Footer-->
-
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
+    <!-- BEGIN: Footer-->
 
 
-        <script src="https://cdn.tiny.cloud/1/kax3g6nv8huzxh65lnkeyjb9qhudlkdh33rgg5zydz16c8pe/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-
-        <!-- BEGIN: Vendor JS-->
-        <script src="layout/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
 
 
-        <!-- BEGIN: Theme JS-->
-        <script src="layout/app-assets/js/core/app-menu.js"></script>
-        <script src="layout/app-assets/js/core/app.js"></script>
-        <!-- END: Theme JS-->
+    <script src="https://cdn.tiny.cloud/1/kax3g6nv8huzxh65lnkeyjb9qhudlkdh33rgg5zydz16c8pe/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-        <!-- BEGIN: Page JS-->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <?php
-        require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
-        ?>
+    <!-- BEGIN: Vendor JS-->
+    <script src="layout/app-assets/vendors/js/vendors.min.js"></script>
 
-        <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
-        <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- BEGIN: Theme JS-->
+    <script src="layout/app-assets/js/core/app-menu.js"></script>
+    <script src="layout/app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <?php
+    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+    ?>
+
+    <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
 
 
 

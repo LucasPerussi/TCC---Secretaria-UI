@@ -17,11 +17,13 @@ use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
 use function API\Fetch\getCourseById;
+use function API\Fetch\getCourseByStudent;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getDefaultStages;
 use function API\Fetch\getFormativeHoursTypes;
+use function API\Fetch\getHoursTotalUserPercentage;
 use function API\Fetch\getHoursUser;
 use function API\Fetch\getHoursUserPercentage;
 use function API\Fetch\getInputTypes;
@@ -201,7 +203,9 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $hours = getHoursUser($_SESSION["user_id"]);
             $types = getFormativeHoursTypes();
+            $course = getCourseByStudent($_SESSION["user_id"]);
             $percentage = getHoursUserPercentage($_SESSION["user_id"]);
+            $percentageTotal = getHoursTotalUserPercentage($_SESSION["user_id"]);
             require __DIR__ . "/../view/member/formative-member.view.php";
         });
 
