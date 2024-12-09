@@ -234,7 +234,6 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
             $obj->verifyLogged();
             $obj->verifyServer();
-
             $courses = getCourses();
             require __DIR__ . "/../view/admin/news-board-new.view.php";
         });

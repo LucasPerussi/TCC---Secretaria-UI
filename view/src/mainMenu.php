@@ -66,44 +66,43 @@ $url = $_SERVER['REQUEST_URI'];
             <!-- Dashboard para membros (alunos) -->
             <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Aluno")) : ?>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'new-request' ?>"><i class="bi bi-plus-circle-fill"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.member.solicitacao-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.solicitacao-desc") ?></span></span></a>
+                    <?= __("main_menu.member.solicitacao-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'formative-member' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.member.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.formativas-desc") ?></span></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'pending-formative-hours' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                    <?= __("main_menu.member.formativas-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.member.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.estagio-desc") ?></span></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'internships' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
+                    <?= __("main_menu.member.estagio-titulo") ?></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.member.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.member.mural-desc") ?></span></span></a>
+                    <?= __("main_menu.member.mural-titulo") ?></a>
                 </li>
             <?php endif; ?>
 
-            <!-- Dashboard para servidores / professores / administradores -->
+            <!-- Dashboard para servidores / professores -->
             <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Servidor" || $_SESSION["user_role"] == "Professor" || $_SESSION["user_role"] == "Admin")) : ?>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'entity-list' ?>"><i class="bi bi-pencil"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.server.entidades-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.entidades-desc") ?></span></span></a>
+                    <?= __("main_menu.server.entidades-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.server.formativas-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.formativas-desc") ?></span></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'pending-formative-hours' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                    <?= __("main_menu.server.formativas-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.server.estagio-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.estagio-desc") ?></span></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'internships' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
+                    <?= __("main_menu.server.estagio-titulo") ?></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.server.mural-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.mural-desc") ?></span></span></a>
+                    <?= __("main_menu.server.mural-titulo") ?></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'teste' ?>"><i class="bi bi-file-earmark-plus"></i><span class="menu-title text-truncate">
-                    <strong><?= __("main_menu.server.cadastro-titulo") ?></strong><br><span style="font-size: smaller;"><?= __("main_menu.server.cadastro-desc") ?></span></span></a>
-                </li>
             <?php endif; ?>
+            <!-- Dashboard para servidores / professores -->
+           
 
 
                 <li class=" nav-item "><a href="#" class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
@@ -131,6 +130,69 @@ $url = $_SERVER['REQUEST_URI'];
                         </li>
                     </ul>
                 </li>
+
+                <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Admin")) : ?>
+
+                
+<li class=" nav-item">
+   <br />
+</li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>dashboard-server">
+            <i class="bi bi-person-workspace"></i>
+            <span class="menu-title text-truncate">Atuar como Servidor</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>system-logs">
+            <i class="bi bi-list-columns-reverse"></i>
+            <span class="menu-title text-truncate">Logs do Sistema</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>entity-list">
+            <i class="bi bi-pencil"></i>
+            <span class="menu-title text-truncate">Entidades</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>proccess-management">
+            <i class="bi bi-diagram-2"></i>
+            <span class="menu-title text-truncate">Processos</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>fields">
+            <i class="bi bi-input-cursor-text"></i>
+            <span class="menu-title text-truncate">Campos Padrões</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>stages">
+            <i class="bi bi-layer-backward"></i>
+            <span class="menu-title text-truncate">Etapas Padrões</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>courses-management">
+            <i class="bi bi-journal-bookmark"></i>
+            <span class="menu-title text-truncate">Cursos</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>news-board">
+            <i class="bi bi-megaphone"></i>
+            <span class="menu-title text-truncate">Murais</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex align-items-center" href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            <span class="menu-title text-truncate">Documentação API</span>
+        </a>
+    </li>
+
+<?php endif; ?>
                
             <br />
             <br />
@@ -145,7 +207,7 @@ $url = $_SERVER['REQUEST_URI'];
 <script>
     function search() {
         Swal.fire({
-            title: '<strong><?= __("main_menu.buscar_material.titulo") ?></u></strong>',
+            title: '<?= __("main_menu.buscar_material.titulo") ?></u>',
             icon: 'none',
             html: '<form method="GET" action="<?php if ((isset($_SESSION["company_identifier"])) && ($_SESSION["company_id"] != 9999)) {
                                                     echo Config::BASE_URL . "company/" . $_SESSION["company_identifier"];
@@ -170,7 +232,7 @@ $url = $_SERVER['REQUEST_URI'];
 
     function cursos() {
         Swal.fire({
-            title: '<strong>Ainda não temos nenhum curso disponível :/</u></strong>',
+            title: 'Ainda não temos nenhum curso disponível :/</u>',
             icon: 'error',
             showCloseButton: true,
             showCancelButton: true,

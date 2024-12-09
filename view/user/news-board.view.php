@@ -90,7 +90,8 @@ use const Siler\Config\CONFIG; ?>
                         </div> </div>
             <div class="content-body">
                 <!-- Dashboard Ecommerce Starts -->
-                <h1 style="font-weight:500; ">Mural </h1>
+                <h1 style="font-weight:500; ">Mural  
+                    <?php if ($_SESSION["user_role"] != "Aluno"):?><a href="<?= Config::BASE_URL . "news-board-new"?>" class="btn btn-dark" style="float:right;font-size:12px;"> Nova</a><?php endif;?></h1>
 
                 <?php if (!isset($murais["error"])) { ?>
                             <?php foreach ($murais as $mural) { ?>
