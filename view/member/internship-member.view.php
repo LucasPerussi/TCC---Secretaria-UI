@@ -62,7 +62,6 @@ include "view/src/head.php"; ?>
                     </a>
                 </h1>
                 <div class="row">
-    <!-- Estágio Mais Recente -->
     <div class="col-md-12 col-sm-12">
         <?php if (!isset($latest_internship["error"]) && !empty($latest_internship)) { ?>
             <h2>Meu Estágio Atual</h2>
