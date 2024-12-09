@@ -5,6 +5,7 @@ use API\Controller\Config;
 <script>
     // Converter o array PHP $users para o formato JSON para uso no JavaScript
     let jsonData = <?= json_encode($users, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE); ?>;
+    if (!jsonData) setTimeout(location.reload, 1000);
 
     // Garantir que jsonData é um array
     if (typeof jsonData === 'string') {
@@ -67,7 +68,7 @@ use API\Controller\Config;
     function displayData() {
         const tableBody = document.getElementById('table-body');
         const noResultsMessage = document.getElementById('noResultsMessage');
-
+console.log(jsonData);
         // Filtrar dados com base na pesquisa
         const filteredData = jsonData.filter(item => {
             const matchesSearch = Object.values(item).some(value => {
@@ -128,19 +129,20 @@ use API\Controller\Config;
                 deleteUser(id);
             });
         });
+
         document.querySelectorAll('.change-user-role').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                const id = this.getAttribute('data-id');
+                const id = this.getAttribute("data-id");
                 Swal.fire({
                     title: 'Alterar a função do usuário',
                     text:'Selecione a nova função do usuário',
                     input: 'select',
                     inputOptions: {
-                        1: 'Aluno',
-                        2: 'Servidor',
-                        3: 'Professor',
-                        4: 'Adiministrador'
+                        "1": 'Aluno',
+                        "2": 'Servidor',
+                        "3": 'Professor',
+                        "4": 'Adiministrador'
                     },
                     inputPlaceholder: 'Selecione uma opção',
                     showCancelButton: true,
@@ -154,10 +156,9 @@ use API\Controller\Config;
                 }).then((result) => {
                     if (result.isConfirmed) {
                         changeRole(id, result.value)
-                        Swal.fire(`Você escolheu: ${result.value}`);
+                        
                     } else if (result.isDismissed) {
-                        console.log(result)
-                        console.log (`Você escolheu: ${result.value}`);
+                        
                         Swal.fire('Ação cancelada!');
                     }
                 });
@@ -165,33 +166,6 @@ use API\Controller\Config;
         });
 
 
-        /*$("#changeRole").submit(function(e) {
-            e.preventDefault();
-            const data = new FormData(e.target);
-            const object = Object.fromEntries(data.entries());
-            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', object)
-                .then(function(response) {
-                    console.log(response)
-                    if (response.data.status > 202) {
-                        throw response.data;
-                    } else {
-                        location.reload();
-                    }
-                })
-                .catch(function(error) {
-
-                    console.log(error.status)
-                    Swal.fire({
-                        title: 'Tivemos um problema!',
-                        text: 'Tivemos um problema ao cadastrar solicitacao (STATUS: ' + error.status + ')',
-                        icon: 'error',
-                        showCancelButton: false,
-                        confirmButtonColor: '#1f8cd4',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
-                    })
-                });
-        });*/
 
         function changeRole(user, role) {
             axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', {user,role})
@@ -199,7 +173,14 @@ use API\Controller\Config;
                     if (response.data.status !== 200) {
                         throw response.data;
                     } else {
+                       Swal.fire({
+                        title: '',
+                        icon: 'success',
+                        text: 'Usuário alterado com sucesso'
+                       }).then(()=>{
+                        console.log("rodou")
                         location.reload();
+                       })
                     }
                 })
                 .catch(error => {
@@ -261,7 +242,7 @@ use API\Controller\Config;
                 // Remover o usuário de jsonData
                 jsonData = jsonData.filter(item => item.id != id);
                 // Atualizar a exibição
-                displayData();
+                location.reload();
                 Swal.fire(
                     'Excluído!',
                     'O usuário foi excluído.',
