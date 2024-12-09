@@ -22,7 +22,7 @@ use const Siler\Config\CONFIG; ?>
     <meta name='robots' content='noindex'>
     <link rel="stylesheet" type="text/css" href="src/css/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="src/css/carousel.css">
-    <title>WeJourney - Painel Admin</title>
+    <title>Estágios</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');

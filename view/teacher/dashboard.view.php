@@ -106,7 +106,7 @@ include "view/src/head.php"; ?>
                             <p class=" mb-0" style="color:gray;">
                                 Acesse recursos importantes de forma rápida</p>
                             <br />
-                            <a href="<?= Config::BASE_URL ?>my-requests-as-teacher" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Meus chamados</a>
+                            <a href="<?= Config::BASE_URL ?>requests-list" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Meus chamados</a>
                             <a href="<?= Config::BASE_URL ?>news-board" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
                             <a href="<?= Config::BASE_URL ?>internship" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Estágios de Alunos</a>
                             <a href="<?= Config::BASE_URL ?>settings" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>

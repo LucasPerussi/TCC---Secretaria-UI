@@ -98,6 +98,7 @@ use const Siler\Config\CONFIG; ?>
                             <a href="<?= Config::BASE_URL ?>dashboard-server" class="btn btn-info" id="" style="padding:15px;width:100%;margin-bottom:15px;">Atuar como Servidor</a>
                             <a href="<?= Config::BASE_URL ?>system-logs" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Logs do Sistema</a>
                             <a href="<?= Config::BASE_URL ?>entity-list"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Entidades</a>
+                            <a href="<?= Config::BASE_URL ?>requests-list"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Chamados</a>
                             <a href="<?= Config::BASE_URL ?>proccess-management"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Processos</a>
                             <a href="<?= Config::BASE_URL ?>fields"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Campos Padrões</a>
                             <a href="<?= Config::BASE_URL ?>stages"  class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Etapas Padrões</a>

@@ -15,6 +15,7 @@ use function API\Fetch\getAllInternship;
 use function API\Fetch\getAllPendingHours;
 use function API\Fetch\getAllProcessComments;
 use function API\Fetch\getAllProcessResponses;
+use function API\Fetch\getAllRequests;
 use function API\Fetch\getAllRequestsWithoutServer;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
@@ -47,6 +48,9 @@ use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
 use function API\Fetch\getMyticketsAsServer;
 use function API\Fetch\getLatestInternship;
+use function API\Fetch\getMyOpenStudentRequests;
+use function API\Fetch\getMyStudentRequests;
+use function API\Fetch\getMyTeacherRequests;
 use function API\Fetch\getStudentInternship;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
@@ -117,7 +121,8 @@ class Route extends \API\Router\DefaultRouter
             if ($_SESSION['user_role'] == "Aluno") {
                 $course = getCourseByStudent($_SESSION["user_id"]);
                 $teachers = listTeachers();
-                $requests = getMyRequestsStudent();
+                // $requests = getMyRequestsStudent();
+                $requests = getMyOpenStudentRequests($_SESSION["user_id"]);
                 require __DIR__ . "/../view/member/dashboard-member.php";
             } elseif ($_SESSION['user_role'] == "Professor") {
                 $myteacherRequests = getMytickersAsTeacher();
@@ -125,7 +130,9 @@ class Route extends \API\Router\DefaultRouter
             } elseif ($_SESSION['user_role'] == "Servidor") {
                 $hours = getAllPendingHours();
                 $contHoursPending = 0;
-                foreach ($hours as $hour) {$contHoursPending++; };
+                foreach ($hours as $hour) {
+                    $contHoursPending++;
+                };
 
                 $myServerRequests = getMyticketsAsServer();
                 $allRequestsWithoutServer = getAllRequestsWithoutServer();
@@ -139,16 +146,17 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/dashboard-server", function ($args) use ($obj) {
             $obj->verifyLogged();
             $obj->verifyAdmin();
-          
-                $hours = getAllPendingHours();
-                $contHoursPending = 0;
-                foreach ($hours as $hour) {$contHoursPending++; };
 
-                $myServerRequests = getMyticketsAsServer();
-                $allRequestsWithoutServer = getAllRequestsWithoutServer();
-                $last50Logs = getLast50Logs();
-                require __DIR__ . "/../view/server/dashboard.view.php";
-         
+            $hours = getAllPendingHours();
+            $contHoursPending = 0;
+            foreach ($hours as $hour) {
+                $contHoursPending++;
+            };
+
+            $myServerRequests = getMyticketsAsServer();
+            $allRequestsWithoutServer = getAllRequestsWithoutServer();
+            $last50Logs = getLast50Logs();
+            require __DIR__ . "/../view/server/dashboard.view.php";
         });
 
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
@@ -313,7 +321,7 @@ class Route extends \API\Router\DefaultRouter
 
             require __DIR__ . "/../view/admin/process-type.view.php";
         });
-        
+
 
         $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
             $obj->setCookies();
@@ -398,6 +406,29 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/entity-list.php";
         });
 
+        $this->addRoute("get", "/requests-list", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            switch ($_SESSION["user_role"]) {
+                case 'Aluno':
+                    $requests = getMyStudentRequests($_SESSION["user_id"]);
+                    break;
+                case 'Professor':
+                    $requests = getMyTeacherRequests($_SESSION["user_id"]);
+                    break;
+                case 'Servidor':
+                    $requests = getAllRequests();
+                    break;
+                case 'Admin':
+                    $requests = getAllRequests();
+                    break;
+                default:
+                    $requests = listStudents();
+                    break;
+            }
+            require __DIR__ . "/../view/general/requests.view.php";
+        });
+
         $this->addRoute("get", "/formative-validate/{id}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
@@ -443,28 +474,27 @@ class Route extends \API\Router\DefaultRouter
 
 
             require __DIR__ . "/../view/member/new-internship-member.view.php";
-        });    
-        
+        });
+
         $this->addRoute("get", "/internship-member", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
             $latest_internship = getLatestInternship($_SESSION["user_id"]);
             $internships = getStudentInternship($_SESSION["user_id"]);
             require __DIR__ . "/../view/member/internship-member.view.php";
-        });  
-        
+        });
+
 
         $this->addRoute("get", "/internship-validate/{id}", function ($args) use ($obj) {
             $obj->setCookies();
-            $obj->verifyLogged();                     
-            $internshipId = getInternshipById($args["id"]);    
-            $companyType = getCompanyTypes();  
+            $obj->verifyLogged();
+            $internshipId = getInternshipById($args["id"]);
+            $companyType = getCompanyTypes();
             $teachers = listTeachers();
 
 
             require __DIR__ . "/../view/admin/internship-validate.view.php";
         });
-
     }
 
     public function createSolicitation() {}
