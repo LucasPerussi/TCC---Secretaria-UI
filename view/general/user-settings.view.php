@@ -226,7 +226,7 @@ include "view/src/head.php"; ?>
                                         <label class="col-form-label" for="curso-icon">Curso</label>
                                     </div>
                                     <div class="col-sm-7">
-                                    <div class="input-group input-group-merge">
+                                        <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
                                             <select class="form-control select2" value="<?= htmlspecialchars($user["curso"]) ?>" onchange="document.getElementById('saveCurso').hidden = false;" name="curso" placeholder="Curso ID">
                                                 <?php foreach ($courses as $course) { ?>
@@ -236,7 +236,7 @@ include "view/src/head.php"; ?>
                                                 <?php } ?>
                                             </select>
                                         </div>
-         
+
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
@@ -398,7 +398,7 @@ include "view/src/head.php"; ?>
                             <div class="swiper-container-avatar" style="overflow:hidden; margin-bottom:15px; ">
                                 <div class="swiper-wrapper">
                                     <?php for ($art = 1; $art < 9; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= 'src/img/avatars/art-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
                                             <img src="<?= Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/art-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
                                         </div>
                                     <?php } ?>
@@ -410,7 +410,7 @@ include "view/src/head.php"; ?>
                             <div class="swiper-container-cartoon" style="overflow:hidden; margin-bottom:15px; ">
                                 <div class="swiper-wrapper">
                                     <?php for ($art = 1; $art < 39; $art++) { ?>
-                                        <div class="swiper-slide" onclick="updatePicture(this, '<?='src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
+                                        <div class="swiper-slide" onclick="updatePicture(this, '<?= 'src/img/avatars/pessoa-' . $art . '.webp' ?>')" style="max-width:100px !important;border-radius:100px !important;">
                                             <img src="<?= Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp' ?>" <?php if ($_SESSION["user_picture"] == Config::BASE_URL . 'src/img/avatars/pessoa-' . $art . '.webp'): ?> class="selectedAvatar" <?php endif; ?> alt="avatar" style="width:100%; border-radius:100px;">
                                         </div>
                                     <?php } ?>

@@ -130,7 +130,9 @@ use const Siler\Config\CONFIG; ?>
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h2>Meus chamados <a href="system-logs" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Ver Todos</a></h2>
+                        <h2>Meus chamados 
+                            <!-- <a href="system-logs" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Ver Todos</a> -->
+                        </h2>
                         <h6>Lista de chamados em aberto</h6>
                         <br />
                         <div class="card p-1">

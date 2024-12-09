@@ -11,8 +11,10 @@ use API\Controller\Config;
 use Exception;
 
 use function API\Fetch\getAllFieldTypesDB;
+use function API\Fetch\getAllPendingHours;
 use function API\Fetch\getAllProcessComments;
 use function API\Fetch\getAllProcessResponses;
+use function API\Fetch\getAllRequestsWithoutServer;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
@@ -39,8 +41,10 @@ use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
+use function API\Fetch\getMyticketsAsServer;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
+use function API\Fetch\getReferenceTimelines;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedStages;
 use function API\Fetch\listAdmins;
@@ -87,6 +91,10 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/auth/verify-email.view.php";
         });
 
+        $this->addRoute("get", "/denied", function ($args) use ($obj) {
+            require __DIR__ . "/../view/general/noPermission.php";
+        });
+
         $this->addRoute("get", "/logout", function ($args) use ($obj) {
             $obj->deleteCookies();
             require __DIR__ . "/../view/auth/logout.view.php";
@@ -109,6 +117,8 @@ class Route extends \API\Router\DefaultRouter
                 $myteacherRequests = getMytickersAsTeacher();
                 require __DIR__ . "/../view/teacher/dashboard.view.php";
             } elseif ($_SESSION['user_role'] == "Servidor") {
+                $myServerRequests = getMyticketsAsServer();
+                $allRequestsWithoutServer = getAllRequestsWithoutServer();
                 $last50Logs = getLast50Logs();
                 require __DIR__ . "/../view/server/dashboard.view.php";
             } elseif ($_SESSION['user_role'] == "Admin") {
@@ -129,6 +139,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $timelines = getUserTimelines($_SESSION['user_id']);
             $user = getUser($_SESSION['user_id']);
+            $courses = getCourses();
             require __DIR__ . "/../view/register/onboarding.view.php";
         });
 
@@ -157,6 +168,7 @@ class Route extends \API\Router\DefaultRouter
             $proccessFields = getProccessFields($request['tipo_solicitacao']);
             $defaultFields = getDefaultFields($request['tipo_solicitacao']);
             $fieldtypesDb = getAllFieldTypesDB();
+            $timelines = getReferenceTimelines($request['id']);
 
             $proccessStages = getProccessStages($request['tipo_solicitacao']);
             $allStageTypes = getAllStagesUnified();
@@ -179,6 +191,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyAdmin();
             $murais = getMurais();
             require __DIR__ . "/../view/admin/news-board-admin.view.php";
+        });
+
+        $this->addRoute("get", "/pending-formative-hours", function ($args) use ($obj) {
+            $obj->verifyLogged();
+            $obj->verifyServer();
+            $hours = getAllPendingHours();
+            require __DIR__ . "/../view/server/pending-formative-hours.view.php";
         });
 
         $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {

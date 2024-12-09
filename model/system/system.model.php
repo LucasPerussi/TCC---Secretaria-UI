@@ -300,4 +300,19 @@ class SystemModel
 
         return APIRequest::deleteRequest($url, "removeField");
     }
+
+    public function addoptTicket($ticket)
+    {
+        $ticket = Sanitize::clean($ticket, "ticket", "addoptTicket");
+        $server = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "requests/add-server";
+
+        $data = [
+            'identificador' => $ticket,
+            'servidor' => $server
+        ];
+
+        return APIRequest::patchRequest($url, $data, "newCourse");
+    }
 }

@@ -51,6 +51,16 @@ function getFormativeHoursTypes()
     return $response;
 }
 
+function getAllPendingHours()
+{
+    $response = APIRequest::getRequest("hours/all-pending");
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar tipos de horas formativas. Error: " . $response["message"], "getAllPendingHours", "error");
+    return $response;
+}
+
 function getInputTypes()
 {
     $response = APIRequest::getRequest("fields/input-types-enum");

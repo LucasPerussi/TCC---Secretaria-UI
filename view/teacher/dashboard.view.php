@@ -112,7 +112,7 @@ include "view/src/head.php"; ?>
                         </div>
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h2>Minha fila <a href="my-requests-as-teacher" style="float:right; font-size:11px;padding:7px;" class="btn btn-dark">Ver Todos</a></h2>
+                        <h2>Minha fila </h2>
                         <h6>Os chamados dos quais você está envolvido(a)</h6>
                         <br />
                         <div class="card p-1">
@@ -151,9 +151,7 @@ include "view/src/head.php"; ?>
                                     </div>
                                 <?php } ?>
                             <?php } else { ?>
-                                <div class="card mb-0" id="bodyRequestDash" style="margin-bottom:5px !important;">
-                                    aaaaaaaaaaaaaa
-                                </div>
+                                    Você não possuí nenhum chamado em sua fila.
                             <?php } ?>
 
                         </div>

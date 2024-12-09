@@ -110,6 +110,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
             $obj->updateUser($args['endpoint']);
         });
+        $this->addRoute("post", "/addopt-request/{request}", function ($args) use ($obj) {
+            $obj->addoptTicket($args['request']);
+        });
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
         });
@@ -243,6 +246,11 @@ class Route extends \API\Router\DefaultRouter
         fields(["password", "new-password", "confirm-new-password"], $body, false);
 
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
+    }
+
+    public function addoptTicket($ticket)
+    {
+        echo json_encode($this->systemController->addoptTicket($ticket));
     }
 
     public function changeStage()
