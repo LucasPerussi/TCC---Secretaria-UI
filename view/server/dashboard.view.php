@@ -112,6 +112,7 @@ include "view/src/head.php"; ?>
                                 echo " <span class='badge rounded-pill bg-light-danger ms-1'>" . $contHoursPending . "</span>";
                                 }?> </a>
                             <a href="<?= Config::BASE_URL ?>news-board" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Gerenciar Mural</a>
+                            <a href="<?= Config::BASE_URL ?>internships" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Estagios</a>
                             <a href="<?= Config::BASE_URL ?>companies" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Gerenciar Empresas Estágio</a>
                             <a href="<?= Config::BASE_URL ?>settings" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
                         </div>

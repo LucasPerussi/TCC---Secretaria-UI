@@ -21,7 +21,7 @@ use API\Controller\Config;
                     confirmButtonColor: '#1f8cd4',
                     cancelButtonColor: '#d33',
                     confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
-                }).then (function(){ window.location.href = "<?= Config::BASE_URL ?>internship-validate" })
+                }).then (function(){ location.realod(); })
                     
                 }
             })

@@ -11,6 +11,7 @@ use API\Controller\Config;
 use Exception;
 
 use function API\Fetch\getAllFieldTypesDB;
+use function API\Fetch\getAllInternship;
 use function API\Fetch\getAllPendingHours;
 use function API\Fetch\getAllProcessComments;
 use function API\Fetch\getAllProcessResponses;
@@ -412,9 +413,23 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/courses-management.view.php";
         });
 
+        $this->addRoute("get", "/internships", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $obj->verifyServer();
+
+            $internships = getAllInternship();
+            require __DIR__ . "/../view/server/internships.view.php";
+        });
+
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $teachers = listTeachers();
+            $companies = getCompanies();
+            $types = getCompanyTypes();
+
+
             require __DIR__ . "/../view/member/new-internship-member.view.php";
         });    
         
@@ -423,6 +438,9 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();                     
             $internshipId = getInternshipById($args["id"]);    
+            $companyType = getCompanyTypes();  
+            $teachers = listTeachers();
+
 
             require __DIR__ . "/../view/admin/internship-validate.view.php";
         });
