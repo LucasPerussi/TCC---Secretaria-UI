@@ -66,134 +66,134 @@ $url = $_SERVER['REQUEST_URI'];
             <!-- Dashboard para membros (alunos) -->
             <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Aluno")) : ?>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'new-request' ?>"><i class="bi bi-plus-circle-fill"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.member.solicitacao-titulo") ?></span></a>
+                            <?= __("main_menu.member.solicitacao-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'pending-formative-hours' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.member.formativas-titulo") ?></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'formative-member' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
+                            <?= __("main_menu.member.formativas-titulo") ?></span></a>
                 </li>
 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'internships' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.member.estagio-titulo") ?></span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'internship-member' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
+                            <?= __("main_menu.member.estagio-titulo") ?></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.member.mural-titulo") ?></a>
+                            <?= __("main_menu.member.mural-titulo") ?></a>
                 </li>
             <?php endif; ?>
 
             <!-- Dashboard para servidores / professores -->
             <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Servidor" || $_SESSION["user_role"] == "Professor" || $_SESSION["user_role"] == "Admin")) : ?>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'entity-list' ?>"><i class="bi bi-pencil"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.server.entidades-titulo") ?></span></a>
+                            <?= __("main_menu.server.entidades-titulo") ?></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'pending-formative-hours' ?>"><i class="bi bi-clock-history"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.server.formativas-titulo") ?></span></a>
+                            <?= __("main_menu.server.formativas-titulo") ?></span></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'internships' ?>"><i class="bi bi-briefcase"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.server.estagio-titulo") ?></a>
+                            <?= __("main_menu.server.estagio-titulo") ?></a>
                 </li>
 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="<?= Config::BASE_URL . 'news-board' ?>"><i class="bi bi-megaphone"></i><span class="menu-title text-truncate">
-                    <?= __("main_menu.server.mural-titulo") ?></a>
+                            <?= __("main_menu.server.mural-titulo") ?></a>
                 </li>
 
             <?php endif; ?>
             <!-- Dashboard para servidores / professores -->
-           
 
 
-                <li class=" nav-item "><a href="#" class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
-                                                                                        echo "active";
-                                                                                    } ?> "><i style="margin-top:-6px;" class="bi bi-toggles"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.menu_configuracoes.titulo") ?></span></a>
-                    <ul class="menu-content <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
-                                                echo "open";
-                                            } ?>">
-              
-                        <!-- <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
-                                                                    echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-wechat"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.meus_chamados") ?></span></a>
+
+            <li class=" nav-item "><a href="#" class="d-flex align-items-center <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
+                                                                                    echo "active";
+                                                                                } ?> "><i style="margin-top:-6px;" class="bi bi-toggles"></i><span class="menu-title text-truncate" data-i18n="Calendar"><?= __("main_menu.menu.menu_configuracoes.titulo") ?></span></a>
+                <ul class="menu-content <?php if (($url == Config::DOMINIO . "settings#requests-section") || ($url == Config::DOMINIO . "settings") || ($url == Config::DOMINIO . "list-logins")) {
+                                            echo "open";
+                                        } ?>">
+
+                    <!-- <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
+                                                                        echo "active";
+                                                                    } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-wechat"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.meus_chamados") ?></span></a>
                         </li> -->
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
-                                                                    echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-toggles"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.conta") ?></span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "change-password") {
-                                                                    echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'change-password' ?>"><i class="bi bi-person-fill-lock"></i><span class="menu-item text-truncate" data-i18n="Advance">Alterar Senha</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "account-history") {
-                                                                    echo "active";
-                                                                } ?>" href="<?= Config::BASE_URL . 'account-history' ?>"><i class="bi bi-clock"></i><span class="menu-item text-truncate" data-i18n="Advance">Histórico de Conta</span></a>
-                        </li>
-                    </ul>
+                    <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "settings") {
+                                                                echo "active";
+                                                            } ?>" href="<?= Config::BASE_URL . 'settings' ?>"><i class="bi bi-toggles"></i><span class="menu-item text-truncate" data-i18n="Advance"><?= __("main_menu.menu.menu_configuracoes.conta") ?></span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "change-password") {
+                                                                echo "active";
+                                                            } ?>" href="<?= Config::BASE_URL . 'change-password' ?>"><i class="bi bi-person-fill-lock"></i><span class="menu-item text-truncate" data-i18n="Advance">Alterar Senha</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center <?php if ($url == Config::DOMINIO . "account-history") {
+                                                                echo "active";
+                                                            } ?>" href="<?= Config::BASE_URL . 'account-history' ?>"><i class="bi bi-clock"></i><span class="menu-item text-truncate" data-i18n="Advance">Histórico de Conta</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Admin")) : ?>
+
+
+                <li class=" nav-item">
+                    <br />
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>dashboard-server">
+                        <i class="bi bi-person-workspace"></i>
+                        <span class="menu-title text-truncate">Atuar como Servidor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>system-logs">
+                        <i class="bi bi-list-columns-reverse"></i>
+                        <span class="menu-title text-truncate">Logs do Sistema</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>entity-list">
+                        <i class="bi bi-pencil"></i>
+                        <span class="menu-title text-truncate">Entidades</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>proccess-management">
+                        <i class="bi bi-diagram-2"></i>
+                        <span class="menu-title text-truncate">Processos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>fields">
+                        <i class="bi bi-input-cursor-text"></i>
+                        <span class="menu-title text-truncate">Campos Padrões</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>stages">
+                        <i class="bi bi-layer-backward"></i>
+                        <span class="menu-title text-truncate">Etapas Padrões</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>courses-management">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span class="menu-title text-truncate">Cursos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>news-board">
+                        <i class="bi bi-megaphone"></i>
+                        <span class="menu-title text-truncate">Murais</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span class="menu-title text-truncate">Documentação API</span>
+                    </a>
                 </li>
 
-                <?php if (isset($_SESSION["user_id"]) && ($_SESSION["user_role"] == "Admin")) : ?>
+            <?php endif; ?>
 
-                
-<li class=" nav-item">
-   <br />
-</li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>dashboard-server">
-            <i class="bi bi-person-workspace"></i>
-            <span class="menu-title text-truncate">Atuar como Servidor</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>system-logs">
-            <i class="bi bi-list-columns-reverse"></i>
-            <span class="menu-title text-truncate">Logs do Sistema</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>entity-list">
-            <i class="bi bi-pencil"></i>
-            <span class="menu-title text-truncate">Entidades</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>proccess-management">
-            <i class="bi bi-diagram-2"></i>
-            <span class="menu-title text-truncate">Processos</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>fields">
-            <i class="bi bi-input-cursor-text"></i>
-            <span class="menu-title text-truncate">Campos Padrões</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>stages">
-            <i class="bi bi-layer-backward"></i>
-            <span class="menu-title text-truncate">Etapas Padrões</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>courses-management">
-            <i class="bi bi-journal-bookmark"></i>
-            <span class="menu-title text-truncate">Cursos</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="<?= Config::BASE_URL ?>news-board">
-            <i class="bi bi-megaphone"></i>
-            <span class="menu-title text-truncate">Murais</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="d-flex align-items-center" href="https://documenter.getpostman.com/view/17286749/2sAY545dog" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            <span class="menu-title text-truncate">Documentação API</span>
-        </a>
-    </li>
-
-<?php endif; ?>
-               
             <br />
             <br />
             <br />
