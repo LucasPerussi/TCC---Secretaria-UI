@@ -136,6 +136,20 @@ class Route extends \API\Router\DefaultRouter
                 require __DIR__ . "/../view/admin/dashboard.view.php";
             }
         });
+        $this->addRoute("get", "/dashboard-server", function ($args) use ($obj) {
+            $obj->verifyLogged();
+            $obj->verifyAdmin();
+          
+                $hours = getAllPendingHours();
+                $contHoursPending = 0;
+                foreach ($hours as $hour) {$contHoursPending++; };
+
+                $myServerRequests = getMyticketsAsServer();
+                $allRequestsWithoutServer = getAllRequestsWithoutServer();
+                $last50Logs = getLast50Logs();
+                require __DIR__ . "/../view/server/dashboard.view.php";
+         
+        });
 
         $this->addRoute("get", "/account-history", function ($args) use ($obj) {
             $obj->setCookies();
@@ -196,11 +210,18 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/user/news-board.view.php";
         });
 
-        $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
+        // $this->addRoute("get", "/news-board-admin", function ($args) use ($obj) {
+        //     $obj->verifyLogged();
+        //     $obj->verifyServer();
+        //     $murais = getMurais();
+        //     require __DIR__ . "/../view/admin/news-board-admin.view.php";
+        // });
+
+        $this->addRoute("get", "/internships", function ($args) use ($obj) {
             $obj->verifyLogged();
-            $obj->verifyAdmin();
-            $murais = getMurais();
-            require __DIR__ . "/../view/admin/news-board-admin.view.php";
+            $obj->verifyServer();
+            $internships = getAllInternship();
+            require __DIR__ . "/../view/server/internships.view.php";
         });
 
         $this->addRoute("get", "/pending-formative-hours", function ($args) use ($obj) {
@@ -424,6 +445,14 @@ class Route extends \API\Router\DefaultRouter
 
             require __DIR__ . "/../view/member/new-internship-member.view.php";
         });    
+        
+        $this->addRoute("get", "/internship-member", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $latest_internship = getLatestInternship($_SESSION["user_id"]);
+            $internships = getStudentInternship($_SESSION["user_id"]);
+            require __DIR__ . "/../view/member/internship-member.view.php";
+        });  
         
 
         $this->addRoute("get", "/internship-validate/{id}", function ($args) use ($obj) {

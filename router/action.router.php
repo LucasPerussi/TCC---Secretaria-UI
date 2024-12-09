@@ -68,6 +68,7 @@ class Route extends \API\Router\DefaultRouter
         $this->internshipController = new InternshipController();
         $this->entitiesController = new EntitiesController();
         $this->requestController = new RequestController();
+        $this->muralController = new MuralController();
 
         $obj = $this;
 

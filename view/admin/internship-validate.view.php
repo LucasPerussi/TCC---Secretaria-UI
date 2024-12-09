@@ -145,7 +145,8 @@ include "view/src/head.php"; ?>
 
                         </div>
 
-                        <h3>Conclusão</h3>
+                        <?php if ($_SESSION["user_role"] != "Aluno"):?>
+                        <h3>Validar</h3>
                         <br />
                         <div class="card" style="padding:20px;">
                             <form id="changeIS">
@@ -187,6 +188,8 @@ include "view/src/head.php"; ?>
                                 </div>
                             </form>
                         </div>
+                        <?php endif;?>
+
                     </div>
 
                     <div class="col-md-6 col-sm-12">

@@ -113,7 +113,6 @@ use const Siler\Config\CONFIG; ?>
             <!-- Main JS -->
             <script src="test/assets/js/main.js"></script>
 
-            <!-- <script src="<?=// Config::BASE_URL ?>layout/app-assets/js/scripts/my-department.js"></script> -->
             <?php include "view/src/footer.php"; ?>
             <style>
                 .owl-stage-outer {

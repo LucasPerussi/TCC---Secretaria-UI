@@ -13,7 +13,7 @@ use API\Controller\Config;
                 if (response.data.status != 200) {
                     throw response.data;
                 } else {
-                    window.location.href = "<?= Config::BASE_URL ?>news-board-admin"
+                    window.location.href = "<?= Config::BASE_URL ?>news-board"
                 }
             })
             .catch(function(error) {
