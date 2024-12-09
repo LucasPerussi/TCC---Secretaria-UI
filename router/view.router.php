@@ -39,6 +39,7 @@ use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
+use function API\Fetch\getLatestInternship;
 use function API\Fetch\getStudentInternship;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
@@ -378,6 +379,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/internship-member", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $latest_internship = getLatestInternship($_SESSION["user_id"]);
             $internships = getStudentInternship($_SESSION["user_id"]);
             require __DIR__ . "/../view/member/internship-member.view.php";
         });

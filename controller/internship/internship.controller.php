@@ -51,4 +51,17 @@ class Internship extends DefaultController
 
         return $this->internshipModel->changeIS($id_estagio, $status);
     }
+
+    public function removeInternship($internshipId)
+    {
+
+        if (!$this->sessionUserId) {
+            return [
+                "status" => "error",
+                "message" => "O usuário estar logado é obrigatório."
+            ];
+        }
+
+        return $this->internshipModel->removeInternship($internshipId);
+    }
 }

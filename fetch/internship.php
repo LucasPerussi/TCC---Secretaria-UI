@@ -25,3 +25,14 @@ function getStudentInternship($id)
     return $response;   
 }
 
+
+function getLatestInternship($id)
+{
+    $response = APIRequest::getRequest("internship/recent-by-student/" . $id);
+    if (!isset($response["error"])) {
+        return $response;
+    }    
+    Logger::log($_SESSION["user_id"], "Erro ao buscar informações do estágio. Error: " . $response["message"], "getLatestInternship", "error");
+    return $response;   
+}
+

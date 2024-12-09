@@ -14,7 +14,7 @@ include "view/src/head.php"; ?>
 
     <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>Histórico de Estágios</title>
+    <title>Gerenciar Estágios</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -54,7 +54,7 @@ include "view/src/head.php"; ?>
             </div>
 
             <div class="content-body">
-                <h1>Histórico de Estágios 
+                <h1>Seu Estágio 
                     <a href="new-internship-member">
                         <span class="btn btn-dark" style="padding:7px;float:right; font-size:11px;">
                             <i class="bi bi-plus"></i> Cadastrar Estágio
@@ -62,8 +62,35 @@ include "view/src/head.php"; ?>
                     </a>
                 </h1>
                 <div class="row">
+    <!-- Estágio Mais Recente -->
     <div class="col-md-12 col-sm-12">
-        <h2>Meus Estágios</h2>
+        <?php if (!isset($latest_internship["error"]) && !empty($latest_internship)) { ?>
+            <h2>Meu Estágio Atual</h2>
+            <br />
+            <div class="card p-2" style="border: 2px solid #007bff;">
+                <h4 style="color: #007bff;"><?= $latest_internship["empresa"] ?> - <?= $latest_internship["area_atuacao"] ?></h4>
+                <p style="font-size:12px;">
+                    <?php
+                    $data_inicio = strtotime($latest_internship["data_inicio"]);
+                    $data_renovacao = strtotime($latest_internship["data_renovacao"]);
+                    echo date("d/m/Y", $data_inicio) . " - " . date("d/m/Y", $data_renovacao);
+                    ?>
+                </p>
+                <div class="card-icons">
+                    <span class="badge rounded-pill bg-light-warning">Ativo</span>
+                    <span class="badge rounded-pill bg-light-primary">Código: <?= $latest_internship["codigo_estagio"] ?></span>
+                    <a href="#">
+                        <span class="btn btn-dark" style="padding:7px;float:right; font-size:11px;">
+                            <i class="bi bi-pencil"></i> Editar
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <br />
+        <?php } ?>
+    </div>
+    <div class="col-md-12 col-sm-12">
+        <h2>Histórico de Estágios</h2>
         <br />
         <div class="card p-1">
             <?php if (!isset($internships["error"]) && !empty($internships)) { ?>
@@ -98,6 +125,10 @@ include "view/src/head.php"; ?>
         </div>
     </div>
 </div>
+    
+            </div>
+        </div>
+    </div>
 
         </div>
     </div>
@@ -115,6 +146,10 @@ include "view/src/head.php"; ?>
     <script src="layout/app-assets/js/core/app-menu.js"></script>
     <script src="layout/app-assets/js/core/app.js"></script>
     <!-- END: Vendor JS-->
+
+    <?php
+            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+    ?>
 </body>
 
 </html>
