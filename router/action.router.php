@@ -137,6 +137,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
             $obj->registerInternship();
         });
+        $this->addRoute("post", "/register-company", function ($args) use ($obj) {
+            $obj->registerCompany();
+        });
         // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
             $obj->addFieldToProccess($args["proccessId"], $args["fieldId"]);
@@ -284,6 +287,14 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->trainingController->validateHours($body["justificativa"], $body["horas_concedidas"], $body["identificador"]));
     }
+    public function registerCompany()
+    {
+        $body = $this->getBody();
+        fields(["nome", "cnpj", "emailContato", "tipo"], $body, false);
+
+        echo json_encode($this->systemController->registerCompany($body["nome"], $body["cnpj"], $body["emailContato"], $body["tipo"]));
+    }
+   
     public function newComment()
     {
         $body = $this->getBody();

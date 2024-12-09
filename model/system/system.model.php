@@ -292,6 +292,26 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "closeTicket");
     }
 
+    public function registerCompany($nome, $cnpj, $emailContato, $tipo)
+    {
+        $nome = Sanitize::clean($nome, "nome", "registerCompany");
+        $cnpj = Sanitize::clean($cnpj, "cnpj", "registerCompany");
+        $emailContato = Sanitize::clean($emailContato, "emailContato", "registerCompany");
+        $tipo = Sanitize::clean($tipo, "tipo", "registerCompany");
+        
+
+        $url = Config::API_URL . "companies/new";
+
+        $data = [
+            'nome' => $nome,
+            'cnpj' => $cnpj,
+            'emailContato' => $emailContato,
+            'tipo' => $tipo
+        ];
+
+        return APIRequest::postRequest($url, $data, "closeTicket");
+    }
+
     public function removeField($fieldId)
     {
         $field = Sanitize::clean($fieldId, "fieldId", "removeField");

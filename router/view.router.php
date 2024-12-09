@@ -18,6 +18,8 @@ use function API\Fetch\getAllRequestsWithoutServer;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
+use function API\Fetch\getCompanies;
+use function API\Fetch\getCompanyTypes;
 use function API\Fetch\getCourseById;
 use function API\Fetch\getCourseByStudent;
 use function API\Fetch\getServidores;
@@ -378,6 +380,15 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyServer();
             $hour = getFormativeHourId($args["id"]);
             require __DIR__ . "/../view/server/formative-validate.view.php";
+        });
+
+        $this->addRoute("get", "/companies", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $obj->verifyServer();
+            $types = getCompanyTypes();
+            $companies = getCompanies();
+            require __DIR__ . "/../view/server/companies-management.view.php";
         });
 
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
