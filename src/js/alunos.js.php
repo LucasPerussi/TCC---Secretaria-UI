@@ -132,7 +132,35 @@ use API\Controller\Config;
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const id = this.getAttribute('data-id');
-
+                Swal.fire({
+                    title: 'Alterar a função do usuário',
+                    text:'Selecione a nova função do usuário',
+                    input: 'select',
+                    inputOptions: {
+                        1: 'Aluno',
+                        2: 'Servidor',
+                        3: 'Professor',
+                        4: 'Adiministrador'
+                    },
+                    inputPlaceholder: 'Selecione uma opção',
+                    showCancelButton: true,
+                    confirmButtonText: 'Confirmar',
+                    cancelButtonText: 'Cancelar',
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'Você precisa selecionar uma opção!';
+                        }
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        changeRole(id, result.value)
+                        Swal.fire(`Você escolheu: ${result.value}`);
+                    } else if (result.isDismissed) {
+                        console.log(result)
+                        console.log (`Você escolheu: ${result.value}`);
+                        Swal.fire('Ação cancelada!');
+                    }
+                });
             });
         });
 
@@ -165,9 +193,8 @@ use API\Controller\Config;
                 });
         });*/
 
-        function changeRole(user,role) {
-
-            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', object)
+        function changeRole(user, role) {
+            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', {user,role})
                 .then(response => {
                     if (response.data.status !== 200) {
                         throw response.data;
@@ -178,7 +205,7 @@ use API\Controller\Config;
                 .catch(error => {
                     Swal.fire({
                         title: 'Tivemos um problema!',
-                        text: 'Tivemos um problema ao alterar a role do usuário. (STATUS: ' + error.status + ')',
+                        text: 'Tivemos um problema ao remover campo. Talvez ele já esteja em uso. (STATUS: ' + error.status + ')',
                         icon: 'error',
                         showCancelButton: false,
                         confirmButtonColor: '#1f8cd4',
