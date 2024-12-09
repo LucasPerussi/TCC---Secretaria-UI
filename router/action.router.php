@@ -125,7 +125,7 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("patch", "/change-role", function ($args) use ($obj) {
             $obj->changeRole();
         });
-        $this->addRoute("post", "/change-is", function ($args) use ($obj) {
+        $this->addRoute("patch", "/change-is", function ($args) use ($obj) {
             $obj->changeIS();
         });
         $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
