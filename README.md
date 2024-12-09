@@ -53,9 +53,8 @@ class Config
     const DOMINIO = "/tcc-ui/";
 
     // Caso esteja usando a API localmente
-    // const API_URL = "localhost:3000/";
-    // Caso esteja usando a API online
-    const API_URL = "https://tcc-secretaria-api-zs8ke.ondigitalocean.app/";
+    const API_URL = "localhost:3000/";
+
 
     const LOGIN_PAGE = self::BASE_URL . "login";
     const BASE_ACTION_URL = self::BASE_URL . "action";
