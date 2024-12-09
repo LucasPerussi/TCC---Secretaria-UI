@@ -88,19 +88,17 @@ use const Siler\Config\CONFIG; ?>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
                                 <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Tipos de processos</li>
+                                <li class="breadcrumb-item active">Horas Formativas Pendentes</li>
                             </ol>
                         </div>
                     </div>
                     <h1 style="font-weight:500; ">Horas Formativas Pendentes</h1>
+                    <h6>Horas formativas enviadas por alunos, mas pendentes de aprovação</h6>
                 </div>
 
             </div>
             <!-- <div class="content-header row"> </div> -->
             <div class="content-body">
-
-                <h6>Horas formativas enviadas por alunos, mas pendentes de aprovação</h6>
-                <br />
 
                 <?php foreach ($hours as $hour) { ?>
                     <?php if (($hour["usuario_horas_formativas_alunoTousuario"]["foto"] != "") && ($hour["usuario_horas_formativas_alunoTousuario"]["foto"] != null)) {
@@ -113,7 +111,13 @@ use const Siler\Config\CONFIG; ?>
                             <div style="margin-bottom:10px;">
                                 <img src="<?= Config::BASE_URL . $foto ?>" style="height:40px; border-radius:25px;" alt="foto">
                                 <span style="margin-left:10px;"><?= $hour["usuario_horas_formativas_alunoTousuario"]["nome"] . " " . $hour["usuario_horas_formativas_alunoTousuario"]["sobrenome"] ?> </span>
-                                <span class="badge rounded-pill bg-light-secondary" style="font-size:12px; float:right;background-color: <?= $hour["tipoInfo"]["cor"]?>30 !important; color: <?= $hour["tipoInfo"]["cor"]?> !important; ">
+                                <a href="<?= Config::BASE_URL . "formative-validate/" . $hour['id']; ?>"><span class="badge rounded-pill bg-dark" style="font-size:12px; float:right;margin-top:10px; ">
+                                    Avaliar
+                                </span>
+                                <span class="badge rounded-pill bg-light-primary" style="font-size:12px; float:right; margin-right:10px;margin-top:10px;">
+                                    <?= $hour["horas_solicitadas"] ?> hrs
+                                </span>
+                                <span class="badge rounded-pill bg-light-secondary" style="font-size:12px; margin-right:10px;margin-top:10px; float:right;background-color: <?= $hour["tipoInfo"]["cor"]?>30 !important; color: <?= $hour["tipoInfo"]["cor"]?> !important; ">
                                     <?= strlen($hour["tipoInfo"]["nome"]) > 20
                                         ? substr($hour["tipoInfo"]["nome"], 0, 20) . '...'
                                         : $hour["tipoInfo"]["nome"] ?>

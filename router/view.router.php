@@ -24,6 +24,7 @@ use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getDefaultStages;
+use function API\Fetch\getFormativeHourId;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursTotalUserPercentage;
 use function API\Fetch\getHoursUser;
@@ -117,6 +118,10 @@ class Route extends \API\Router\DefaultRouter
                 $myteacherRequests = getMytickersAsTeacher();
                 require __DIR__ . "/../view/teacher/dashboard.view.php";
             } elseif ($_SESSION['user_role'] == "Servidor") {
+                $hours = getAllPendingHours();
+                $contHoursPending = 0;
+                foreach ($hours as $hour) {$contHoursPending++; };
+
                 $myServerRequests = getMyticketsAsServer();
                 $allRequestsWithoutServer = getAllRequestsWithoutServer();
                 $last50Logs = getLast50Logs();
@@ -367,10 +372,12 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/entity-list.php";
         });
 
-        $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
+        $this->addRoute("get", "/formative-validate/{id}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/formative-validate.view.php";
+            $obj->verifyServer();
+            $hour = getFormativeHourId($args["id"]);
+            require __DIR__ . "/../view/server/formative-validate.view.php";
         });
 
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {

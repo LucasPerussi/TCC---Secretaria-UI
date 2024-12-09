@@ -80,3 +80,13 @@ function getStageTypes()
     Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $response["message"], "getStageTypes", "error");
     return $response;
 }
+
+function getFormativeHourId($id)
+{
+    $response = APIRequest::getRequest("hours/id/" . $id);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar tipos de stages. Error: " . $response["message"], "getFormativeHourId", "error");
+    return $response;
+}

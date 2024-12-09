@@ -98,6 +98,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-course", function ($args) use ($obj) {
             $obj->newCourse();
         });
+        $this->addRoute("post", "/validate-hours", function ($args) use ($obj) {
+            $obj->validateHours();
+        });
         $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
             $obj->newStageDefault();
         });
@@ -273,6 +276,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["id_estagio", "status"], $body, false);
 
         echo json_encode($this->internshipController->changeIS($body["id_estagio"], $body["status"]));
+    }
+    public function validateHours()
+    {
+        $body = $this->getBody();
+        fields(["justificativa", "horas_concedidas", "identificador"], $body, false);
+
+        echo json_encode($this->trainingController->validateHours($body["justificativa"], $body["horas_concedidas"], $body["identificador"]));
     }
     public function newComment()
     {
