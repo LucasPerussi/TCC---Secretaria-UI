@@ -97,6 +97,12 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/auth/password-recovery.view.php";
         });
 
+        $this->addRoute("get", "/change-password-recovery", function ($args) use ($obj) {
+            if (isset($_GET["validate"])){
+                require __DIR__ . "/../view/auth/change-password-validate.view.php";
+            }
+        });
+
         $this->addRoute("get", "/verify-email", function ($args) use ($obj) {
             require __DIR__ . "/../view/auth/verify-email.view.php";
         });

@@ -1,4 +1,5 @@
 <?php
+
 namespace API\Model;
 
 use API\Controller\Config;
@@ -40,6 +41,23 @@ class UserModel
         return APIRequest::handleResponse($result, 'login');
     }
 
+    public function passwordRecovery($email, $registro, $nascimento)
+    {
+        $email = Sanitize::clean($email, "email", "passwordRecovery");
+        $registro = Sanitize::clean($registro, "registro", "passwordRecovery");
+        $nascimento = Sanitize::clean($nascimento, "nascimento", "passwordRecovery");
+
+        $url = Config::API_URL . 'auth/check-recovery';
+
+        $data = [
+            'email' => $email,
+            'registro' => $registro,
+            'nascimento' => $nascimento,
+        ];
+
+        return APIRequest::postRequest($url, $data, 'login');
+    }
+
     public function updateUser($field, $endpoint)
     {
         $field = Sanitize::clean($field, "field", "updateUser - $endpoint");
@@ -54,7 +72,7 @@ class UserModel
 
         return APIRequest::patchRequest($url, $data, "updateUser");
     }
-    
+
     public function changePassword($password, $newPassword, $passwordConfirmation)
     {
         $password = Sanitize::clean($password, "password", "changePassword ");
@@ -73,7 +91,24 @@ class UserModel
         return APIRequest::patchRequest($url, $data, "changePassword");
     }
 
-    public function signup($name,$lastName,$birth,$registro,$email,$password)
+    public function changePasswordValidate($code, $newPassword, $passwordConfirmation)
+    {
+        $code = Sanitize::clean($code, "code", "changePasswordValidate ");
+        $newPassword = Sanitize::clean($newPassword, "newPassword", "changePasswordValidate ");
+        $passwordConfirmation = Sanitize::clean($passwordConfirmation, "passwordConfirmation", "changePasswordValidate ");
+
+        $url = Config::API_URL . "auth/change-password-validate";
+
+        $data = [
+            "codigo" => $code,
+            "senha" => $newPassword,
+            "confirmacaoSenha" => $passwordConfirmation
+        ];
+
+        return APIRequest::postRequest($url, $data, "changePasswordValidate");
+    }
+
+    public function signup($name, $lastName, $birth, $registro, $email, $password)
     {
         $email = Sanitize::clean($email, "email", "signup");
         $password = Sanitize::clean($password, "password", "signup");

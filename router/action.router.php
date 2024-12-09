@@ -84,6 +84,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-mural", function ($args) use ($obj) {
             $obj->newMural();
         });
+        $this->addRoute("post", "/recovery-password", function ($args) use ($obj) {
+            $obj->passwordRecovery();
+        });
         $this->addRoute("post", "/new-request", function ($args) use ($obj) {
             $obj->newRequest();
         });
@@ -119,6 +122,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
+        });
+        $this->addRoute("post", "/change-password-validate", function ($args) use ($obj) {
+            $obj->changePasswordValidate();
         });
         $this->addRoute("post", "/register-request", function ($args) use ($obj) {
             $obj->registerRequest();
@@ -258,6 +264,14 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
     }
 
+    public function changePasswordValidate()
+    {
+        $body = $this->getBody();
+        fields(["code", "new-password", "confirm-new-password"], $body, false);
+
+        echo json_encode($this->userController->changePasswordValidate($body["code"], $body["new-password"], $body["confirm-new-password"]));
+    }
+
     public function addoptTicket($ticket)
     {
         echo json_encode($this->systemController->addoptTicket($ticket));
@@ -276,6 +290,13 @@ class Route extends \API\Router\DefaultRouter
         fields(["user", "role"], $body, false);
 
         echo json_encode($this->entitiesController->changeRole($body["user"], $body["role"]));
+    }
+    public function passwordRecovery()
+    {
+        $body = $this->getBody();
+        fields(["email", "registro", "nascimento"], $body, false);
+
+        echo json_encode($this->userController->passwordRecovery($body["email"], $body["registro"], $body["nascimento"]));
     }
     public function changeIS()
     {

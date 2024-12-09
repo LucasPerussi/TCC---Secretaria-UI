@@ -45,6 +45,10 @@ class User extends DefaultController
     {
         return $this->userModel->changePassword($password, $newPassword, $passwordConfirmation);
     }
+    function changePasswordValidate($code, $newPassword, $passwordConfirmation)
+    {
+        return $this->userModel->changePasswordValidate($code, $newPassword, $passwordConfirmation);
+    }
 
     function signup ($name,$lastName,$birth,$registro,$email,$password, $passwordConfirmation)
     {
@@ -62,6 +66,11 @@ class User extends DefaultController
 
 
 
+    
+    public function passwordRecovery($email, $registro, $nascimento)
+    {
+        return $this->userModel->passwordRecovery($email, $registro, $nascimento);
+    }
     
     public function updateUserPicture($url)
     {

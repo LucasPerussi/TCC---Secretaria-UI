@@ -15,7 +15,7 @@ include "view/src/head.php"; ?>
 
     <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>Portal Professor</title>
+    <title>WeJourney - Nova Empresa</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -79,91 +79,71 @@ include "view/src/head.php"; ?>
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static   menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="">
 
+
+
     <!-- BEGIN: Content-->
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
-
+          
             <div class="content-body">
-                <?php if (!isset($_GET["email"])): ?>
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6 col-sm-12">
-                            <form>
-                                <h1 style="font-weight:500; ">Esqueceu a senha? </h1>
-                                <h6>Informe seu email para tentar realizar a redefinição da senha </h6>
-                                <br />
-                                <div class="card p-1">
-                                    <h6>Informe seu email:</h6>
-                                    <input type="email" name="email" class="form-control" placeholder="seu@email.com">
-                                    <br />
-                                    <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <h1>Alteração de Senha</h1>
+                        <h6>Atualize suas informações básicas</h6>
+                        <br />
+                        <div class="card" style="padding:20px;">
+                            <!-- form -->
+                            <form id="new-password" class="validate-form">
+                                <input type="text" hidden name="code" value="<?=$_GET["validate"]?>">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6 mb-1">
+                                        <label class="form-label" for="account-new-password"><?= __("internal_pw_reset.nova") ?></label>
+                                        <div class="input-group form-password-toggle input-group-merge">
+                                            <input required type="password" id="password" onkeyup="verificaForcaSenha()" name="new-password" class="form-control" placeholder="<?= __("internal_pw_reset.nova_ph") ?>" />
+                                            <div class="input-group-text cursor-pointer" id="toggleNewPassword">
+                                                <i data-feather="eye"></i>
+                                            </div>
+                                        </div>
+                                        <span style="font-size:10px;" id="password-status"></span>
+                                    </div>
+                                    <div class="col-12 col-sm-6 mb-1">
+                                        <label class="form-label" for="account-retype-new-password"><?= __("internal_pw_reset.confirmar") ?></label>
+                                        <div class="input-group form-password-toggle input-group-merge">
+                                            <input required type="password" onkeyup="check_pass()" class="form-control" id="confirm_password" name="confirm-new-password" placeholder="<?= __("internal_pw_reset.confirmar_ph") ?>" />
+                                            <div class="input-group-text cursor-pointer" id="toggleConfirmPassword">
+                                                <i data-feather="eye"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="fw-bolder"><?= __("internal_pw_reset.requisitos.titulo") ?></p>
+                                        <ul class="ps-1 ms-25">
+                                            <li class="mb-50"><?= __("internal_pw_reset.requisitos.1") ?></li>
+                                            <li class="mb-50"><?= __("internal_pw_reset.requisitos.2") ?></li>
+                                            <li><?= __("internal_pw_reset.requisitos.3") ?></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" id="submit" disabled class="btn btn-primary me-1 mt-1"><?= __("internal_pw_reset.salvar") ?></button>
+                                    </div>
                                 </div>
                             </form>
+                            <!--/ form -->
                         </div>
-                        <div class="col-md-3"></div>
+                      
+
+
+
+
+
                     </div>
-                <?php else: ?>
-                    <form id="allowChange">
-                        <h1 style="font-weight:500; ">Solicitar Alteração de Senha</h1>
-                        <h6>Preencha corretamente estas informações para solicitar sua senha </h6>
-                        <br />
-                        <div class="card p-1">
-                            <h6>Informe seu registro UFPR:</h6>
-                            <input type="text" name="registro" class="form-control" placeholder="GRR123456">
-                            <input type="email" hidden name="email" class="form-control" value="<?= $_GET["email"] ?>">
-                            <br />
-                            <h6>Data de nascimento:</h6>
-                            <input type="date" name="nascimento" class="form-control">
-                            <br />
-                            <button type="submit" class="btn btn-primary">Verificar</button>
+                    <div class="col-md-4 col-sm-12">
+                            <h1 style="font-size:250px; text-align:center;margin-top:50px;">🔐</h1>
                         </div>
-                    </form>
-                    <script>
-                        $("#allowChange").submit(function(f) {
-                            f.preventDefault();
-                            const data = new FormData(f.target);
-                            const object = Object.fromEntries(data.entries());
-                            axios.post('<?= Config::BASE_ACTION_URL ?>/recovery-password', object)
-                                .then(function(response) {
-                                    if (response.data != "sucesso!") {
-                                        throw response.data;
-                                    } else {
-                                        Swal.fire({
-                                            title: '<?= __("Feito!") ?>',
-                                            text: "<?= __("Sua senha foi alterada com sucesso! : )") ?>",
-                                            icon: 'success',
-                                            showCancelButton: false,
-                                            confirmButtonColor: '#1f8cd4',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: '<?= __("Legal!") ?>'
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                window.location.href = "<?= Config::BASE_URL . "login" ?>"
-                                            }
-                                        })
-                                    }
-                                })
-                                .catch(function(response) {
-                                    Swal.fire({
-                                        title: 'Erro ao Alterar senha!',
-                                        text: response,
-                                        icon: 'error',
-                                        showCancelButton: false,
-                                        confirmButtonColor: '#1f8cd4',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: '<?= __("OK") ?>'
-                                    })
-                                });
 
-                        });
-                    </script>
-                <?php endif; ?>
-
-
-
-
+                </div>
             </div>
         </div>
     </div>
@@ -174,7 +154,14 @@ include "view/src/head.php"; ?>
 
     <!-- BEGIN: Footer-->
 
-
+    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+    <!-- END: Footer-->
+    <script>
+        $(function() {
+            var valorDaDiv = $(".editor").text();
+            $("#body").val(valorDaDiv);
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
 
@@ -183,7 +170,13 @@ include "view/src/head.php"; ?>
 
     <!-- BEGIN: Vendor JS-->
     <script src="layout/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
 
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="layout/app-assets/vendors/js/editors/quill/katex.min.js"></script>
+    <script src="layout/app-assets/vendors/js/editors/quill/highlight.min.js"></script>
+    <script src="layout/app-assets/vendors/js/editors/quill/quill.min.js"></script>
+    <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
     <script src="layout/app-assets/js/core/app-menu.js"></script>
@@ -191,15 +184,18 @@ include "view/src/head.php"; ?>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <?php
     require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
     ?>
 
+
     <script src="<?= Config::BASE_URL ?>layout/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+
+
+
     <script src="https://unpkg.com/feather-icons"></script>
-
-
 
 </body>
 <!-- END: Body-->
