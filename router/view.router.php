@@ -45,6 +45,7 @@ use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
 use function API\Fetch\getMyticketsAsServer;
+use function API\Fetch\getStudentInternship;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
 use function API\Fetch\getReferenceTimelines;
@@ -290,6 +291,7 @@ class Route extends \API\Router\DefaultRouter
 
             require __DIR__ . "/../view/admin/process-type.view.php";
         });
+        
 
         $this->addRoute("get", "/proccess-stages/{proccessId}", function ($args) use ($obj) {
             $obj->setCookies();
@@ -414,13 +416,24 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();
             require __DIR__ . "/../view/member/new-internship-member.view.php";
-        });
+        });    
+        
 
-        $this->addRoute("get", "/internship-validate", function ($args) use ($obj) {
+        $this->addRoute("get", "/internship-validate/{id}", function ($args) use ($obj) {
             $obj->setCookies();
-            $obj->verifyLogged();
+            $obj->verifyLogged();                     
+            $internshipId = getInternshipById($args["id"]);    
+
             require __DIR__ . "/../view/admin/internship-validate.view.php";
         });
+
+    }
+
+    public function createSolicitation() {}
+
+    public function selectRoom()
+    {
+        require __DIR__ . "/../view/general/select-room-type.php";
     }
 
     public function verifyLogged()

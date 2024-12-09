@@ -14,6 +14,7 @@ function getInternshipById($id)
     return $response;    
 }
 
+
 function getStudentInternship($id)
 {
     $response = APIRequest::getRequest("internship/all/" . $id);
