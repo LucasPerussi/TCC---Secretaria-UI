@@ -68,7 +68,7 @@ use API\Controller\Config;
     function displayData() {
         const tableBody = document.getElementById('table-body');
         const noResultsMessage = document.getElementById('noResultsMessage');
-console.log(jsonData);
+        console.log(jsonData);
         // Filtrar dados com base na pesquisa
         const filteredData = jsonData.filter(item => {
             const matchesSearch = Object.values(item).some(value => {
@@ -133,16 +133,16 @@ console.log(jsonData);
         document.querySelectorAll('.change-user-role').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                const id = this.getAttribute("data-id");
+                const id = this.getAttribute('data-id');
                 Swal.fire({
                     title: 'Alterar a função do usuário',
-                    text:'Selecione a nova função do usuário',
+                    text: 'Selecione a nova função do usuário',
                     input: 'select',
                     inputOptions: {
                         "1": 'Aluno',
                         "2": 'Servidor',
                         "3": 'Professor',
-                        "4": 'Adiministrador'
+                        "9": 'Adiministrador'
                     },
                     inputPlaceholder: 'Selecione uma opção',
                     showCancelButton: true,
@@ -156,9 +156,9 @@ console.log(jsonData);
                 }).then((result) => {
                     if (result.isConfirmed) {
                         changeRole(id, result.value)
-                        
+
                     } else if (result.isDismissed) {
-                        
+
                         Swal.fire('Ação cancelada!');
                     }
                 });
@@ -168,25 +168,27 @@ console.log(jsonData);
 
 
         function changeRole(user, role) {
-            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', {user,role})
+            axios.patch('<?= Config::BASE_ACTION_URL ?>/change-role', {
+                    user,
+                    role
+                })
                 .then(response => {
                     if (response.data.status !== 200) {
                         throw response.data;
                     } else {
-                       Swal.fire({
-                        title: '',
-                        icon: 'success',
-                        text: 'Usuário alterado com sucesso'
-                       }).then(()=>{
-                        console.log("rodou")
-                        location.reload();
-                       })
+                        Swal.fire({
+                            title: '',
+                            icon: 'success',
+                            text: 'Usuário alterado com sucesso'
+                        }).then(() => {                           
+                            location.reload();
+                        })
                     }
                 })
                 .catch(error => {
                     Swal.fire({
                         title: 'Tivemos um problema!',
-                        text: 'Tivemos um problema ao remover campo. Talvez ele já esteja em uso. (STATUS: ' + error.status + ')',
+                        text: 'Tivemos um problema ao trocar a função do usuario (STATUS: ' + error.status + ')',
                         icon: 'error',
                         showCancelButton: false,
                         confirmButtonColor: '#1f8cd4',
@@ -238,19 +240,31 @@ console.log(jsonData);
             confirmButtonText: 'Sim, excluir!',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
-            if (result.isConfirmed) {
-                // Remover o usuário de jsonData
-                jsonData = jsonData.filter(item => item.id != id);
-                // Atualizar a exibição
-                location.reload();
-                Swal.fire(
-                    'Excluído!',
-                    'O usuário foi excluído.',
-                    'success'
-                )
+            if (result.value) {
+                axios.delete(<?= Config::BASE_ACTION_URL ?> $ { //endpoint a adicionar
+                        id
+                    })
+                    .then(function(response) {
+                        if (response.data != "sucesso!") {
+                            throw response.data;
+                        } else {
+                            window.location.href = "<?= Config::BASE_URL . "" ?>"
+                        }
+                    })
+                    .catch(function(error) {
+                        Swal.fire({
+                            title: '<?= __("Error!") ?>',
+                            text: "error",
+                            icon: 'error',
+                            showCancelButton: false,
+                            confirmButtonColor: '#1f8cd4',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '<?= __("OK") ?>'
+                        })
+                    });
             }
         })
-    }
+    };
 
 
     // Função para alterar o número de itens por página

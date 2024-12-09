@@ -113,7 +113,7 @@ use const Siler\Config\CONFIG; ?>
             <!-- Main JS -->
             <script src="test/assets/js/main.js"></script>
 
-            <!-- <script src="<?=// Config::BASE_URL ?>layout/app-assets/js/scripts/my-department.js"></script> -->
+            <!-- <script src="<?= Config::BASE_URL ?>layout/app-assets/js/scripts/my-department.js"></script> -->
             <?php include "view/src/footer.php"; ?>
             <style>
                 .owl-stage-outer {
@@ -127,7 +127,7 @@ use const Siler\Config\CONFIG; ?>
             </style>
 
             <?php
-            //require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+            require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
             ?>
 </body>
 
