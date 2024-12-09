@@ -46,5 +46,13 @@ class InternshipModel
 
         return APIRequest::patchRequest($url, $data, "changeIS");
     }
+    public function removeInternship($internshipId)
+    {
+        $internship = Sanitize::clean($internshipId, "internshipId", "removeInternship");
+
+        $url = Config::API_URL . "internship/id/" . $internship ;
+
+        return APIRequest::deleteRequest($url, "removeInternship");
+    }
 
 }

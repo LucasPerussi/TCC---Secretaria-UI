@@ -97,7 +97,7 @@ use const Siler\Config\CONFIG; ?>
                             <br />
                             <a href="<?= Config::BASE_URL ?>new-request" class="btn btn-dark" id="" style="padding:15px;width:100%;margin-bottom:15px;">Abrir chamado</a>
                             <a href="<?= Config::BASE_URL ?>formative-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Horas Formativas</a>
-                            <a href="<?= Config::BASE_URL ?>new-internship-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Estágio</a>
+                            <a href="<?= Config::BASE_URL ?>internship-member" class="btn secondaryButton" id="" style="padding:15px;width:100%;margin-bottom:15px;">Estágio</a>
                             <a href="<?= Config::BASE_URL ?>news-board" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Mural</a>
                             <a href="<?= Config::BASE_URL ?>settings" class="btn secondaryButton" style="padding:15px;width:100%;margin-bottom:15px;">Configurações</a>
                         </div>

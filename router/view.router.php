@@ -46,6 +46,7 @@ use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
 use function API\Fetch\getMyticketsAsServer;
+use function API\Fetch\getLatestInternship;
 use function API\Fetch\getStudentInternship;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
@@ -411,15 +412,6 @@ class Route extends \API\Router\DefaultRouter
             $teachers = listTeachers();
 
             require __DIR__ . "/../view/admin/courses-management.view.php";
-        });
-
-        $this->addRoute("get", "/internships", function ($args) use ($obj) {
-            $obj->setCookies();
-            $obj->verifyLogged();
-            $obj->verifyServer();
-
-            $internships = getAllInternship();
-            require __DIR__ . "/../view/server/internships.view.php";
         });
 
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
