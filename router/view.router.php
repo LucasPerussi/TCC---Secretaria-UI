@@ -375,6 +375,13 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/courses-management.view.php";
         });
 
+        $this->addRoute("get", "/internship-member", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $internships = getStudentInternship($_SESSION["user_id"]);
+            require __DIR__ . "/../view/member/internship-member.view.php";
+        });
+
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
