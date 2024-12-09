@@ -15,7 +15,7 @@ include "view/src/head.php"; ?>
 
     <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>WeJourney - Nova Empresa</title>
+    <title>Validar Hora Formativa</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -99,7 +99,7 @@ include "view/src/head.php"; ?>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb ps-0">
                                 <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'dashboard' ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Conurações de Usuário</li>
+                                <li class="breadcrumb-item active">Validar Horas Formativas</li>
                             </ol>
                         </div>
                     </div>
@@ -120,107 +120,39 @@ include "view/src/head.php"; ?>
                         </div>
 
                         <div class="card p-1 ">
+                            <h5 class="col-label" for="email-icon">Comprovante de Participação (link) <a href="<?= $hour["comprovante"] ?>" class="btn btn-primary" style="float:right;">Ver Arquivo</a></h5>
+                        </div>
 
 
+                        <h3>Validar</h3>
+                        <br />
+                        <div class="card" style="padding:20px;">
+                            <form id="validateFH">
 
-                            <div class="row">
-                                <div class="col-sm-7">
-
-                                    <label class="col-form-label" required for="email-icon">Tipo de evento:</label>
-
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control" id="justificativa" name="justificativa" rows="3" placeholder="Justificativa" required></textarea>
+                                    </div>
                                 </div>
-
-
-                            </div>
-
-
-
-
-                            <div class=" row">
-                                <div class="col-sm-7">
-                                    <label class="col-label" for="email-icon">Comprovante de Participação (link)</label>
+                                <div class="mb-1 row">
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label" for="email-icon">Horas Concedidas</label>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="input-group input-group-merge">
+                                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                            <input type="number" id="name-icon" class="form-control" name="horas_concedidas" placeholder="30" />
+                                            <input type="number" hidden id="name-icon"  class="form-control" value="<?=$args["id"]?>" name="identificador" placeholder="30" />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary" style="float:right;">Ver Arquivo</button>
+                                        <button type="submit" class="btn btn-primary" style="float:right;">Confirmar</button>
                                     </div>
                                 </div>
-                            </div>
-
-
-                        </div>
-
-
-                        <br />
-                        <div class="card" style="padding:20px;">
-                            <h3>Conclusão</h3>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Professor</label>
-                                </div>
-
-                                <div class="custom-select-container">
-                                    <form id="hoursTeacher">
-                                        <select required name="professor" class="form-control select2">
-                                            <option value="" disabled selected><?= __("request_request.settings-teacher.select") ?></option>
-                                            <?php foreach ($teachers as $teacher) { ?>
-                                                <option <?php if ($request["professor_avaliador"] == $teacher["id"]) {
-                                                            echo "selected";
-                                                        } ?> value="<?= $teacher["id"] ?>"><?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Status</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="settings-radio-group">
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="deferido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-deferido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="indeferido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-indeferido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="concluido">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-concluido") ?></span>
-                                        </label>
-                                        <label class="settings-radio-option">
-                                            <input type="radio" class="settings-radio-option-2" name="conclusion-status" value="cancelado">
-                                            <span class="settings-radio-label"><?= __("request_request.settings-conclude.option-cancelado") ?></span>
-                                        </label>
-                                    </div>
-                                    <br>
-                                </div>
-
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" id="justificativa" name="justificativa" rows="3" placeholder="Justificativa" required></textarea>
-                                </div>
-                            </div>
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Horas Concedidas</label>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                        <input type="number" id="name-icon" class="form-control" name="horas_concedidas" placeholder="30" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary" style="float:right;">Confirmar</button>
-                                </div>
-                            </div>
-
+                            </form>
 
 
                         </div>
@@ -265,29 +197,52 @@ include "view/src/head.php"; ?>
                             }
                         </style>
                         <div class="card p-2">
-                            <p><strong>Chamado ID:</strong> #12345</p>
-                            <p><strong>Status:</strong> Em andamento</p>
-                            <p><strong>Responsável</strong> Fulano de Tal</p>
-                            <p><strong>Data de Abertura:</strong> 23/11/2024</p>
-                            <p><strong>Última Atualização:</strong> 24/11/2024</p>
+                            <h5>Descrição</h5>
+
+                            <div class="card p-1 PB-0" id="bodyRequestDash">
+                                <p><?= $hour["descricao"] ?></p>
+                            </div>
+                            <div class="card p-1 " id="bodyRequestDash">
+                                <span><?= $hour["tipoInfo"]["nome"] ?></span>
+                                <h6>
+                                    <span class="badge rounded-pill bg-light-secondary" style="font-size:12px; margin-right:10px;margin-top:10px; background-color: <?= $hour["tipoInfo"]["cor"] ?>30 !important; color: <?= $hour["tipoInfo"]["cor"] ?> !important; ">
+                                        <?= $hour["tipoInfo"]["maxHoras"] ?> max. de horas
+                                    </span>
+                                </h6>
+
+
+                            </div>
+                            <span><strong>Data Evento:</strong> <?php $date = new DateTime($hour["data_evento"]);
+                                                                echo $date->format('d/m/Y'); ?></span>
+                            <span><strong>Horas Solicitadas:</strong> <?= $hour["horas_solicitadas"] ?> Horas</span>
+                            <span><strong>Data de Envio:</strong> <?php $date = new DateTime($hour["data_envioo"]);
+                                                                    echo $date->format('d/m/Y'); ?> </span>
+
 
                         </div>
                         <div class="card p-2">
+                            <?php if (($hour["usuario_horas_formativas_alunoTousuario"]["foto"] != "") && ($hour["usuario_horas_formativas_alunoTousuario"]["foto"] != null)) {
+                                $foto = $hour["usuario_horas_formativas_alunoTousuario"]["foto"];
+                            } else {
+                                $foto = "src/img/avatars/generic.webp";
+                            } ?>
+
                             <div class="card p-2" style="text-align:center !important;" id="bodyRequestDash">
                                 <div class="row">
                                     <div class="col-md-5 col-sm-12">
                                         <img id="preview"
-                                            src="<?= isset($_SESSION['user_picture']) ? $_SESSION['user_picture'] : 'placeholder.jpg' ?>"
+                                            style="width:90%;margin:5%;"
+                                            src="<?= Config::BASE_URL . $foto ?>"
                                             alt="Profile Picture"
                                             class="img-fluid rounded mb-0">
                                     </div>
-                                    <div class="col-md-5 col-sm-12">
+                                    <div class="col-md-7 col-sm-12">
                                         <div style="text-align:left; margin-left:10px;margin-top:30px;">
 
-                                            <h2>
-                                                <?= $_SESSION['user_name'] ?>
-                                            </h2>
-                                            <span><?= $_SESSION['user_email'] ?></span>
+                                            <h3>
+                                                <?= $hour["usuario_horas_formativas_alunoTousuario"]["nome"] ?> <?= $hour["usuario_horas_formativas_alunoTousuario"]["sobrenome"] ?>
+                                            </h3>
+                                            <span><?= $hour["usuario_horas_formativas_alunoTousuario"]["email"] ?></span>
                                         </div>
                                     </div>
 
@@ -299,27 +254,6 @@ include "view/src/head.php"; ?>
                     </div>
 
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="profilePicModal" tabindex="-1" role="dialog" aria-labelledby="profilePicModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="profilePicModalLabel"><?= __("complete_profile.modais.selecione") ?></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <input type="file" id="uploadImage" accept="image/*" class="form-control mb-3">
-                                    <div class="text-center">
-                                        <img id="imageToCrop" src="" alt="Image to Crop" class="img-fluid d-none">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" id="cropImage" class="btn btn-primary d-none"><?= __("complete_profile.modais.cortar") ?></button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -329,7 +263,9 @@ include "view/src/head.php"; ?>
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
-    <!-- BEGIN: Footer-->
+    <!-- BEGIN: Footer-->   <?php
+    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
+    ?>
 
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
@@ -363,10 +299,40 @@ include "view/src/head.php"; ?>
     <!-- BEGIN: Page JS-->
     <script src="layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <?php
-    require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
-    ?>
+ 
+    <script>
+    // Certifique-se de que o DOM está carregado antes de executar
+$(document).ready(function () {
+    // Adiciona o evento submit ao formulário com ID validateFH
+    $("#validateFH").on("submit", function (e) {
+        e.preventDefault(); // Impede o envio padrão do formulário
+        
+        // Captura os dados do formulário
+        const data = new FormData(this); 
+        const object = Object.fromEntries(data.entries());
 
+        // Envia os dados usando Axios
+        axios.post('<?= Config::BASE_ACTION_URL ?>/validate-hours', object)
+            .then(function (response) {
+                if (response.data.status !== 200) {
+                    throw response.data;
+                } else {
+                    window.location.href = "<?= Config::BASE_URL ?>pending-formative-hours";
+                }
+            })
+            .catch(function (error) {
+                Swal.fire({
+                    title: 'Tivemos um problema!',
+                    text: 'Erro ao cadastrar solicitação (STATUS: ' + (error.response?.status || 'N/A') + ')',
+                    icon: 'error',
+                    confirmButtonColor: '#1f8cd4',
+                    confirmButtonText: '<?= __("event_schedule_js.ok") ?>'
+                });
+            });
+    });
+});
+
+</script>
 
 
 </body>

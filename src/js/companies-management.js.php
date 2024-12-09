@@ -3,21 +3,21 @@
 use API\Controller\Config;
 ?>
 <script>
-    $("#registerFH").submit(function(e) {
+    $("#registerCompany").submit(function(e) {
         e.preventDefault();
         const data = new FormData(e.target);
         const object = Object.fromEntries(data.entries());
-        axios.post('<?= Config::BASE_ACTION_URL ?>/register-fh', object)
+        axios.post('<?= Config::BASE_ACTION_URL ?>/register-company', object)
             .then(function(response) {
                 console.log(response)
                 if (response.data.status != 200) {
                     throw response.data;
                 } else {
-                    window.location.href = "<?= Config::BASE_URL ?>formative-member"
+                    location.reload();
                 }
             })
             .catch(function(error) {
-        
+
                 console.log(error.status)
                 Swal.fire({
                     title: 'Tivemos um problema!',
@@ -31,4 +31,3 @@ use API\Controller\Config;
             });
     });
 </script>
-

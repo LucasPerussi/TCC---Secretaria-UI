@@ -92,7 +92,7 @@ include "view/src/head.php"; ?>
             <div class="card p-1">
                 <div class="row">
                     <div class="col-md-4 col-sm-12">
-<h1 style="font-size: 200px; text-align: center">👨🏽‍💻</h1>
+                        <h1 style="font-size: 200px; text-align: center">👨🏽‍💻</h1>
                     </div>
                     <div class="col-md-8 col-sm-12">
                         <br />
@@ -108,7 +108,7 @@ include "view/src/head.php"; ?>
             </div>
             <div class="content-body">
                 <div class="row">
-                <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <h1><?= __("complete_profile.aparencia") ?> </h1>
                         <p><?= __("complete_profile.aparencia_desc") ?></p>
                         <br />
@@ -314,9 +314,16 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-7">
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text"><i class="bi bi-book"></i></span>
-
-                                            <input type="number" class="form-control" value="<?= htmlspecialchars($user["curso"]) ?>" name="curso" placeholder="Curso ID" />
+                                            <select class="form-control select2" value="<?= htmlspecialchars($user["curso"]) ?>" onchange="document.getElementById('saveCurso').hidden = false;" name="curso" placeholder="Curso ID">
+                                                <option value="0" disabled selected>Selecione seu curso.</option>
+                                                <?php foreach ($courses as $course) { ?>
+                                                    <option <?php if ($user["curso"] == $course["id"]) {
+                                                                echo "selected";
+                                                            } ?> value="<?= $course["id"] ?>"><?= $course["nome"] ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
+
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" style="font-size: 11px; padding: 10px; width: 90%; margin-left:10px; margin-top: 5px; max-width: 100px; float: right; min-width:60px;" id="saveCurso" hidden class="btn btn-info">
@@ -407,7 +414,7 @@ include "view/src/head.php"; ?>
 
                         <br />
                     </div>
-                    
+
 
 
                     <!-- Modal -->

@@ -15,7 +15,7 @@ include "view/src/head.php"; ?>
 
     <meta name="author" content="Vroom">
     <meta name='robots' content='noindex'>
-    <title>WeJourney - Nova Empresa</title>
+    <title>Validar Estágio</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
@@ -94,9 +94,13 @@ include "view/src/head.php"; ?>
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb ps-0">
+                                <li class="breadcrumb-item"><a href="<?= Config::BASE_URL . 'internships' ?>">Lista de estágios</a></li>
+                                <li class="breadcrumb-item active">Valida Estágio</li>
+                            </ol>
 
-
-
+                        </div>
                     </div>
                 </div>
 
@@ -114,35 +118,36 @@ include "view/src/head.php"; ?>
                             </div>
                         </div>
 
-                        <div class="card p-1">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <label class="col-form-label" for="email-icon">Dados do estágio</label>
-                                    <?php if (!empty($internshipId)): ?>
-                                        <p><strong>Área de Atuação:</strong> <?= htmlspecialchars($internshipId['area_atuacao']); ?></p>
-                                        <p><strong>Empresa:</strong> <?= htmlspecialchars($internshipId['empresa']); ?></p>
-                                        <p><strong>Data de Renovação:</strong> <?= htmlspecialchars($internshipId['data_renovacao']); ?></p>
-                                        <p><strong>Status:</strong> <?= htmlspecialchars($internshipId['status']); ?></p>
-                                        <p><strong>Professor orientador:</strong> <?= htmlspecialchars($internshipId['professor_orientador']); ?></p>
-
-                                    <?php else: ?>
-                                        <p class="text-danger">Erro ao carregar os dados do estágio.</p>
-                                    <?php endif; ?>
-                                </div>
+                        <div class="card p-2">
+                            <div class="card p-1" id="bodyRequestDash">
+                                <span style="font-weight:bold !important;"><?= $internshipId["area_atuacao"] ?></span>
+                                <span>Atuação</span>
                             </div>
+                            <span><strong>Código:</strong> <?= $internshipId["codigo_estagio"] ?></span>
+                            <span><strong>Data Inicio:</strong> <?php $date = new DateTime($internshipId["data_inicio"]);
+                                                                echo $date->format('d/m/Y'); ?></span>
+                            <span><strong>Data Renovação:</strong> <?php $date = new DateTime($internshipId["data_renovacao"]);
+                                                                    echo $date->format('d/m/Y'); ?></span>
+                            <p><strong>Status atual:</strong>
+                                <?php if ($internshipId["status"] == 1) { ?>
+                                    <span class="badge rounded-pill bg-light-success">Deferido </span>
+                                <?php } elseif ($internshipId["status"] == 2) {  ?>
+                                    <span class="badge rounded-pill bg-light-danger">Indeferido </span>
+                                <?php } elseif ($internshipId["status"] == 3) {  ?>
+                                    <span class="badge rounded-pill bg-light-secondary">Concluído </span>
+                                <?php } elseif ($internshipId["status"] == 4) {  ?>
+                                    <span class="badge rounded-pill bg-light-danger">Cancelado </span>
+                                <?php } else { ?>
+                                    <span class="badge rounded-pill bg-light-danger">Pendente </span>
+                                <?php } ?>
+                            </p>
+
+
                         </div>
 
+                        <h3>Conclusão</h3>
                         <br />
                         <div class="card" style="padding:20px;">
-                            <h3>Conclusão</h3>
-
-                            <div class="mb-1 row">
-                                <div class="col-sm-12">
-                                    <label class="col-form-label" for="email-icon">Professor</label>
-                                </div>
-
-
-                            </div>
                             <form id="changeIS">
                                 <div class="mb-1 row">
                                     <div class="col-sm-12">
@@ -152,26 +157,26 @@ include "view/src/head.php"; ?>
                                     <div class="col-sm-12">
                                         <div class="settings-radio-group">
                                             <label class="settings-radio-option">
-                                                <input type="radio" class="settings-radio-option-2" name="status" value="1">
+                                                <input type="radio" class="settings-radio-option-2" name="status" <?php if ($internshipId["status"] == 1) {echo "checked";} ?> value="1">
                                                 <span class="settings-radio-label">Deferido</span>
                                             </label>
-                                            <label class="settings-radio-option">
-                                                <input type="radio" class="settings-radio-option-2" name="status" value="2">
+                                            <label class="ms-1 settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" <?php if ($internshipId["status"] == 2) {echo "checked";} ?> value="2">
                                                 <span class="settings-radio-label">Indeferido</span>
                                             </label>
-                                            <label class="settings-radio-option">
-                                                <input type="radio" class="settings-radio-option-2" name="status" value="3">
+                                            <label class="ms-1 settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" <?php if ($internshipId["status"] == 3) {echo "checked";} ?> value="3">
                                                 <span class="settings-radio-label">Concluído</span>
                                             </label>
-                                            <label class="settings-radio-option">
-                                                <input type="radio" class="settings-radio-option-2" name="status" value="4">
+                                            <label class="ms-1 settings-radio-option">
+                                                <input type="radio" class="settings-radio-option-2" name="status" <?php if ($internshipId["status"] == 4) {echo "checked";} ?> value="4">
                                                 <span class="settings-radio-label">Cancelado</span>
                                             </label>
                                         </div>
                                         <br>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
 
 
@@ -222,33 +227,71 @@ include "view/src/head.php"; ?>
                                 border-top-right-radius: 20px !important;
                             }
                         </style>
-                        <div class="card p-2">
-                            <p><strong>Chamado ID:</strong> #12345</p>
-                            <p><strong>Status:</strong> Em andamento</p>
-                            <p><strong>Responsável</strong> Fulano de Tal</p>
-                            <p><strong>Data de Abertura:</strong> 23/11/2024</p>
-                            <p><strong>Última Atualização:</strong> 24/11/2024</p>
+
+
+                        <div class="card p-1">
+                            <h4><?= $internshipId["empresas"]["nome"] ?> <?php foreach ($companyType as $type) { ?>
+                                    <?php if ($internshipId["empresas"]["tipo"] == $type["id"]) { ?>
+                                        <span class="badge rounded-pill bg-light-success" style="font-size:10px; float:right;background-color: <?= $type["cor"] ?>30 !important; color: <?= $type["cor"] ?>!important;"><?= $type["nome"] ?> </span>
+                                    <?php } ?>
+                                <?php } ?>
+                            </h4>
+                            <span style="font-size: 11px;">Empresa</span>
+                            <br />
+                            <span style="font-size: 13px;">CNPJ: <?= $internshipId["empresas"]["cnpj"] ?></span>
+                            <span style="font-size: 13px;">Email: <?= $internshipId["empresas"]["email_contato"] ?></span>
+
+
 
                         </div>
-                        <div class="card p-2">
+                        <div class="card p-1" style="text-align:center;">
+                            <?php foreach ($teachers as $teacher) {?>
+                            <?php if ($teacher["id"] == $internshipId["professor_orientador"]) {?>
+                            <div class="row">
+                                <div class="col-5">
+                                    <h6>
+                                        <img src="<?= Config::BASE_URL ?><?= $teacher["foto"] != "" ? $teacher["foto"] : "src/img/avatars/art-1.webp" ?>" alt="Foto Usuário" style="width:90px; width:90px; border-radius:60px; ">
+                                    </h6>
+                                </div>
+                                <div class="col-7" style="text-align:left;">
+                                    <h5>
+                                        <?= $teacher["nome"] . " " . $teacher["sobrenome"] ?>
+                                    </h5>
+                                    <h6>
+                                        <?= $teacher["email"] ?>
+                                    </h6>
+                                    <h6>
+                                        <span style="font-size:10px !important; margin-top:10px;" class="badge rounded-pill bg-light-secondary">Professor</span>
+                                    </h6>
+                                </div>
+                            </div>
+                            <?php }?>
+                            <?php }?>
+                        </div>
+                        <div class="card p-2 pb-0">
+                            <?php if (($internshipId["usuario_estagio_alunoTousuario"]["foto"] != "") && ($internshipId["usuario_estagio_alunoTousuario"]["foto"] != null)) {
+                                $foto = $internshipId["usuario_estagio_alunoTousuario"]["foto"];
+                            } else {
+                                $foto = "src/img/avatars/generic.webp";
+                            } ?>
+
                             <div class="card p-2" style="text-align:center !important;" id="bodyRequestDash">
                                 <div class="row">
                                     <div class="col-md-5 col-sm-12">
                                         <img id="preview"
-                                            src="<?= isset($_SESSION['user_picture']) ? $_SESSION['user_picture'] : 'placeholder.jpg' ?>"
+                                            style="width:90%;margin:5%;"
+                                            src="<?= Config::BASE_URL . $foto ?>"
                                             alt="Profile Picture"
                                             class="img-fluid rounded mb-0">
                                     </div>
-                                    <div class="col-md-5 col-sm-12">
+                                    <div class="col-md-7 col-sm-12">
                                         <div style="text-align:left; margin-left:10px;margin-top:30px;">
-
-                                            <h2>
-                                                <?= $_SESSION['user_name'] ?>
-                                            </h2>
-                                            <span><?= $_SESSION['user_email'] ?></span>
+                                            <h3>
+                                                <?= $internshipId["usuario_estagio_alunoTousuario"]["nome"] ?> <?= $internshipId["usuario_horas_formativas_alunoTousuario"]["sobrenome"] ?>
+                                            </h3>
+                                            <span><?= $internshipId["usuario_estagio_alunoTousuario"]["email"] ?></span>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
@@ -322,7 +365,7 @@ include "view/src/head.php"; ?>
     <script src="layout/app-assets/js/scripts/forms/form-quill-editor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <?php
-    require __DIR__ ."/../../src/js/internship-validate.view.js.php";
+    require __DIR__ . "/../../src/js/internship-validate.view.js.php";
     //require __DIR__ . "/../../" . Config::BASE_PATH_JS . str_replace(".view", ".js.php", basename(__FILE__, ".php"));
     ?>
 

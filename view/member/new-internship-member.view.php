@@ -67,8 +67,10 @@ include "view/src/head.php"; ?>
                                         <div class="col-sm-12">
                                             <div class="input-group input-group-merge">
                                                 <select class="form-select" name="professor_orientador" id="professor_orientador">
-                                                    <option value="25">Professor A</option>
-                                                    <option value="26">Professor B</option>
+                                                    <option value="0" disabled selected>Selecione o professor</option>
+                                                    <?php foreach ($teachers as $teacher) { ?>
+                                                        <option value="<?= $teacher["id"] ?>"><?= $teacher["nome"] ?> <?= $teacher["sobrenome"] ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -80,10 +82,18 @@ include "view/src/head.php"; ?>
                                         <div class="col-sm-12">
                                             <div class="input-group input-group-merge">
                                                 <select class="form-select" name="empresa" id="empresa">
-                                                    <option value="1">Empresa X</option>
-                                                    <option value="4">Empresa Y</option>
+                                                    <option value="0" disabled selected>Selecione a empresa, ou cadastre antes de prosseguir</option>
+                                                    <?php foreach ($companies as $company) { ?>
+                                                        <option value="<?= $company["id"] ?>"><?= $company["nome"] ?> </option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
+
+                                            <!-- Botão para abrir o modal -->
+                                             <h6 style="margin-top:10px;">Não encontrou sua empresa? <a type="button" data-bs-toggle="modal" data-bs-target="#registerCompanyModal" style="font-weight:bold; color:blueviolet !important;">
+                                             Cadatre antes de prosseguir
+                                            </a></h6>
+                                            
                                         </div>
                                     </div>
                                     <div class="mb-1 row">
@@ -137,6 +147,92 @@ include "view/src/head.php"; ?>
             </div>
         </div>
     </div>
+<style>
+
+    .modal .modal-content {
+        padding: 0px !important;
+        border-radius: 10px !important;
+    }
+    </style>
+    <!-- Modal -->
+    <div class="modal fade" id="registerCompanyModal" tabindex="-1" aria-labelledby="registerCompanyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg p-0">
+            <div class="modal-content p-0">
+                <div class="modal-header">
+                    <h4 id="registerCompanyModalLabel">Cadastrar Empresa</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-0 ">
+                    <h6>Cadastre uma nova empresa para estágio</h6>
+                    <br />
+                    <div class="card" style="padding:10px;">
+                        <form id="registerCompany">
+                            <div class="mb-1 row">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="name-icon">Nome</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                        <input type="text" id="name-icon" class="form-control" name="nome" placeholder="Ex: Apple" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-1 row">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="cnpj-icon">CNPJ</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bi bi-file-earmark-text"></i></span>
+                                        <input type="text" id="cnpj-icon" class="form-control" name="cnpj" placeholder="Ex: 23.000.000/0001-35" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-1 row">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="email-icon">Email de Contato</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" id="email-icon" class="form-control" name="emailContato" placeholder="Ex: perussilucas@apple.com" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-1 row">
+                                <div class="col-sm-12">
+                                    <label class="col-form-label" for="tipo-select">Tipo</label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text"><i class="bi bi-list"></i></span>
+                                        <select id="tipo-select" class="form-control" name="tipo" required>
+                                            <option value="" disabled selected>Selecione o tipo</option>
+                                            <!-- PHP Loop -->
+                                            <?php foreach ($types as $type) { ?>
+                                                <option value="<?= $type["id"] ?>"><?= $type["nome"] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary" style="float:right;">Cadastrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 

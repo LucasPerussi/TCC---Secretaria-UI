@@ -50,4 +50,24 @@ class TrainingModel
         return APIRequest::postRequest($url, $data, "registerFH");
     
     }
+
+    public function validateHours($justificativa, $horas_concedidas, $identificador)
+    {
+        $justificativa = Sanitize::clean($justificativa, "justificativa", "registerFH");
+        $horas_concedidas = Sanitize::clean($horas_concedidas, "horas_concedidas", "registerFH");
+        $identificador = Sanitize::clean($identificador, "identificador", "registerFH");
+        $validador = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "hours/validate";
+
+        $data = [
+            'justificativa' => $justificativa,
+            'horas_concedidas' => $horas_concedidas,
+            'validador' => $validador,
+            'identificador' => $identificador
+        ];
+
+        return APIRequest::postRequest($url, $data, "validateHours");
+
+    }
 }

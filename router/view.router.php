@@ -11,17 +11,23 @@ use API\Controller\Config;
 use Exception;
 
 use function API\Fetch\getAllFieldTypesDB;
+use function API\Fetch\getAllInternship;
+use function API\Fetch\getAllPendingHours;
 use function API\Fetch\getAllProcessComments;
 use function API\Fetch\getAllProcessResponses;
+use function API\Fetch\getAllRequestsWithoutServer;
 use function API\Fetch\getAllStagesUnified;
 use function API\Fetch\getAllStatusTypes;
 use function API\Fetch\getAlunos;
+use function API\Fetch\getCompanies;
+use function API\Fetch\getCompanyTypes;
 use function API\Fetch\getCourseById;
 use function API\Fetch\getCourseByStudent;
 use function API\Fetch\getServidores;
 use function API\Fetch\getCourses;
 use function API\Fetch\getDefaultFields;
 use function API\Fetch\getDefaultStages;
+use function API\Fetch\getFormativeHourId;
 use function API\Fetch\getFormativeHoursTypes;
 use function API\Fetch\getHoursTotalUserPercentage;
 use function API\Fetch\getHoursUser;
@@ -39,9 +45,12 @@ use function API\Fetch\getMyRequestsStudent;
 use function API\Fetch\getProccessFields;
 use function API\Fetch\getProccessIdentifier;
 use function API\Fetch\getInternshipById;
+use function API\Fetch\getMyticketsAsServer;
+use function API\Fetch\getLatestInternship;
 use function API\Fetch\getStudentInternship;
 use function API\Fetch\getProccessStages;
 use function API\Fetch\getProccessTypeId;
+use function API\Fetch\getReferenceTimelines;
 use function API\Fetch\getStageTypes;
 use function API\Fetch\getUnifiedStages;
 use function API\Fetch\listAdmins;
@@ -88,6 +97,10 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/auth/verify-email.view.php";
         });
 
+        $this->addRoute("get", "/denied", function ($args) use ($obj) {
+            require __DIR__ . "/../view/general/noPermission.php";
+        });
+
         $this->addRoute("get", "/logout", function ($args) use ($obj) {
             $obj->deleteCookies();
             require __DIR__ . "/../view/auth/logout.view.php";
@@ -110,6 +123,12 @@ class Route extends \API\Router\DefaultRouter
                 $myteacherRequests = getMytickersAsTeacher();
                 require __DIR__ . "/../view/teacher/dashboard.view.php";
             } elseif ($_SESSION['user_role'] == "Servidor") {
+                $hours = getAllPendingHours();
+                $contHoursPending = 0;
+                foreach ($hours as $hour) {$contHoursPending++; };
+
+                $myServerRequests = getMyticketsAsServer();
+                $allRequestsWithoutServer = getAllRequestsWithoutServer();
                 $last50Logs = getLast50Logs();
                 require __DIR__ . "/../view/server/dashboard.view.php";
             } elseif ($_SESSION['user_role'] == "Admin") {
@@ -130,6 +149,7 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyLogged();
             $timelines = getUserTimelines($_SESSION['user_id']);
             $user = getUser($_SESSION['user_id']);
+            $courses = getCourses();
             require __DIR__ . "/../view/register/onboarding.view.php";
         });
 
@@ -158,6 +178,7 @@ class Route extends \API\Router\DefaultRouter
             $proccessFields = getProccessFields($request['tipo_solicitacao']);
             $defaultFields = getDefaultFields($request['tipo_solicitacao']);
             $fieldtypesDb = getAllFieldTypesDB();
+            $timelines = getReferenceTimelines($request['id']);
 
             $proccessStages = getProccessStages($request['tipo_solicitacao']);
             $allStageTypes = getAllStagesUnified();
@@ -180,6 +201,13 @@ class Route extends \API\Router\DefaultRouter
             $obj->verifyAdmin();
             $murais = getMurais();
             require __DIR__ . "/../view/admin/news-board-admin.view.php";
+        });
+
+        $this->addRoute("get", "/pending-formative-hours", function ($args) use ($obj) {
+            $obj->verifyLogged();
+            $obj->verifyServer();
+            $hours = getAllPendingHours();
+            require __DIR__ . "/../view/server/pending-formative-hours.view.php";
         });
 
         $this->addRoute("get", "/news-board-new", function ($args) use ($obj) {
@@ -350,10 +378,21 @@ class Route extends \API\Router\DefaultRouter
             require __DIR__ . "/../view/admin/entity-list.php";
         });
 
-        $this->addRoute("get", "/formative-validate", function ($args) use ($obj) {
+        $this->addRoute("get", "/formative-validate/{id}", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
-            require __DIR__ . "/../view/admin/formative-validate.view.php";
+            $obj->verifyServer();
+            $hour = getFormativeHourId($args["id"]);
+            require __DIR__ . "/../view/server/formative-validate.view.php";
+        });
+
+        $this->addRoute("get", "/companies", function ($args) use ($obj) {
+            $obj->setCookies();
+            $obj->verifyLogged();
+            $obj->verifyServer();
+            $types = getCompanyTypes();
+            $companies = getCompanies();
+            require __DIR__ . "/../view/server/companies-management.view.php";
         });
 
         $this->addRoute("get", "/proccess-management", function ($args) use ($obj) {
@@ -378,6 +417,11 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("get", "/new-internship-member", function ($args) use ($obj) {
             $obj->setCookies();
             $obj->verifyLogged();
+            $teachers = listTeachers();
+            $companies = getCompanies();
+            $types = getCompanyTypes();
+
+
             require __DIR__ . "/../view/member/new-internship-member.view.php";
         });    
         
@@ -386,6 +430,9 @@ class Route extends \API\Router\DefaultRouter
             $obj->setCookies();
             $obj->verifyLogged();                     
             $internshipId = getInternshipById($args["id"]);    
+            $companyType = getCompanyTypes();  
+            $teachers = listTeachers();
+
 
             require __DIR__ . "/../view/admin/internship-validate.view.php";
         });

@@ -30,6 +30,16 @@ function getUserTimelines($user)
     return $response;
 }
 
+function getReferenceTimelines($reference)
+{
+    $response = APIRequest::getRequest("system/timelines-proccess/" . $reference);
+    if (!isset($response["error"])){
+        return $response;
+    }; 
+    Logger::log($_SESSION["user_id"], "Erro ao listar horas formativas de referencia $reference. Error: " . $response["message"], "getHoursUser", "error");
+    return $response;
+}
+
 function listStudents()
 {
     $response = APIRequest::getRequest("users/all-students");

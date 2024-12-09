@@ -292,6 +292,26 @@ class SystemModel
         return APIRequest::postRequest($url, $data, "closeTicket");
     }
 
+    public function registerCompany($nome, $cnpj, $emailContato, $tipo)
+    {
+        $nome = Sanitize::clean($nome, "nome", "registerCompany");
+        $cnpj = Sanitize::clean($cnpj, "cnpj", "registerCompany");
+        $emailContato = Sanitize::clean($emailContato, "emailContato", "registerCompany");
+        $tipo = Sanitize::clean($tipo, "tipo", "registerCompany");
+        
+
+        $url = Config::API_URL . "companies/new";
+
+        $data = [
+            'nome' => $nome,
+            'cnpj' => $cnpj,
+            'emailContato' => $emailContato,
+            'tipo' => $tipo
+        ];
+
+        return APIRequest::postRequest($url, $data, "closeTicket");
+    }
+
     public function removeField($fieldId)
     {
         $field = Sanitize::clean($fieldId, "fieldId", "removeField");
@@ -299,5 +319,20 @@ class SystemModel
         $url = Config::API_URL . "fields/type/" . $field ;
 
         return APIRequest::deleteRequest($url, "removeField");
+    }
+
+    public function addoptTicket($ticket)
+    {
+        $ticket = Sanitize::clean($ticket, "ticket", "addoptTicket");
+        $server = $_SESSION["user_id"];
+
+        $url = Config::API_URL . "requests/add-server";
+
+        $data = [
+            'identificador' => $ticket,
+            'servidor' => $server
+        ];
+
+        return APIRequest::patchRequest($url, $data, "newCourse");
     }
 }

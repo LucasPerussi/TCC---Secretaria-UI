@@ -98,6 +98,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/new-course", function ($args) use ($obj) {
             $obj->newCourse();
         });
+        $this->addRoute("post", "/validate-hours", function ($args) use ($obj) {
+            $obj->validateHours();
+        });
         $this->addRoute("post", "/new-stage-default", function ($args) use ($obj) {
             $obj->newStageDefault();
         });
@@ -109,6 +112,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/updateUser/{endpoint}", function ($args) use ($obj) {
             $obj->updateUser($args['endpoint']);
+        });
+        $this->addRoute("post", "/addopt-request/{request}", function ($args) use ($obj) {
+            $obj->addoptTicket($args['request']);
         });
         $this->addRoute("post", "/change-password", function ($args) use ($obj) {
             $obj->changePassword();
@@ -131,6 +137,9 @@ class Route extends \API\Router\DefaultRouter
         $this->addRoute("post", "/register-internship", function ($args) use ($obj) {
             $obj->registerInternship();
         });
+        $this->addRoute("post", "/register-company", function ($args) use ($obj) {
+            $obj->registerCompany();
+        });
         // proccess
         $this->addRoute("post", "/add-field-proccess/{proccessId}/{fieldId}", function ($args) use ($obj) {
             $obj->addFieldToProccess($args["proccessId"], $args["fieldId"]);
@@ -140,6 +149,9 @@ class Route extends \API\Router\DefaultRouter
         });
         $this->addRoute("post", "/remove-field/{fieldId}", function ($args) use ($obj) {
             $obj->removeField($args["fieldId"]);
+        });
+        $this->addRoute("post", "/remove-internship/{internshipId}", function ($args) use ($obj) {
+            $obj->removeInternship($args["internshipId"]);
         });
         $this->addRoute("post", "/add-teacher", function ($args) use ($obj) {
             $obj->addTeacher();
@@ -245,6 +257,11 @@ class Route extends \API\Router\DefaultRouter
         echo json_encode($this->userController->changePassword($body["password"], $body["new-password"], $body["confirm-new-password"]));
     }
 
+    public function addoptTicket($ticket)
+    {
+        echo json_encode($this->systemController->addoptTicket($ticket));
+    }
+
     public function changeStage()
     {
         $body = $this->getBody();
@@ -266,6 +283,21 @@ class Route extends \API\Router\DefaultRouter
 
         echo json_encode($this->internshipController->changeIS($body["id_estagio"], $body["status"]));
     }
+    public function validateHours()
+    {
+        $body = $this->getBody();
+        fields(["justificativa", "horas_concedidas", "identificador"], $body, false);
+
+        echo json_encode($this->trainingController->validateHours($body["justificativa"], $body["horas_concedidas"], $body["identificador"]));
+    }
+    public function registerCompany()
+    {
+        $body = $this->getBody();
+        fields(["nome", "cnpj", "emailContato", "tipo"], $body, false);
+
+        echo json_encode($this->systemController->registerCompany($body["nome"], $body["cnpj"], $body["emailContato"], $body["tipo"]));
+    }
+   
     public function newComment()
     {
         $body = $this->getBody();
@@ -292,6 +324,11 @@ class Route extends \API\Router\DefaultRouter
     public function removeField($fieldId)
     {
         echo json_encode($this->systemController->removeField($fieldId));
+    }
+
+    public function removeInternship($internshipId)
+    {
+        echo json_encode($this->internshipController->removeInternship($internshipId));
     }
 
     public function addStageToProccess($proccessId, $stage)
